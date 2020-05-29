@@ -1,0 +1,518 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		
+
+
+
+		<title>Linux kernel module beginning (I)</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../../../../assets/css/main.css" />
+		<link rel="stylesheet" href="../../../../assets/css/syntax.css">
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="../../../../index.html" class="logo"><strong>Follow Jietang</strong> with:</a>
+									<ul class="icons">
+										<li><a href="mailto:alvin.tang6@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+										
+										<!--<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li> -->
+										<li><a href="https://github.com/Alvintang6" class="icon brands fa-github-square"><span class="label">Github</span></a></li>
+										<li><a href="https://www.instagram.com/tang12y/?hl=en" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="https://www.linkedin.com/in/jie-tang-55070b148/" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a></li>
+										<li><a href="../../../../resume_jietang.pdf" class="logo"><i class="fas fa-file-invoice"></i>CV</a></li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Linux kernel module beginning (I)</h1>
+									</header>
+
+									<h2 id="1envirnoment-prepare--module-insert">(1).Envirnoment prepare &amp; module insert</h2>
+
+<p>Linux concerns kernel module version critically and it refuses to load kernel drivers that do not match. So at least the Minor version we use to do cross-compiling should match with the target platform. The download address can be find <a href="https://www.kernel.org/">linux kernel download</a>. Or using following command to get history version</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-x.x.xx.tar.xz
+</code></pre></div></div>
+
+<p>To cross-compile linux kernel, some configurations should be done first. The gui menu can be used by</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make menuconfig
+</code></pre></div></div>
+<p>This simply gui can add the kernel module support for our kernel and customize the kernel.
+Using load from linux-x.x.xx/arch/arm/configs can some default platforms. When finish loading and modifying ‘config’ file save it to linux-x.x.xx/.config path. Later the makefile will call the configuration file when doing ‘make’.</p>
+
+<p>Before using the following make command to compile the kernel, making sure the gcc-gnueabinf installed.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make ARCH=arm -j8 CROSS_COMPILE=arm-linux-gnueabihf-
+</code></pre></div></div>
+
+<p>A kernel zImage is generated in <code class="highlighter-rouge">arch/boot</code>, also now we can using the header file in <code class="highlighter-rouge">linux-x.x.xx/include</code> to make our kernel modules.</p>
+
+<p>In our customized kernel module, ‘makefile’ will call the phony command <code class="highlighter-rouge">make modules</code> in makefile under <code class="highlighter-rouge">linux-x.x.xx</code> which help us compile and link the corresponding linux kernel library.</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">KERNEL_DIR</span><span class="o">=</span>/home/<span class="err">$</span><span class="o">(</span>your_linux-x.x.xx<span class="o">)</span>
+<span class="nv">obj-m</span> <span class="o">:=</span> helloworld.o
+<span class="nl">all</span><span class="o">:</span>
+<span class="err">$(MAKE)</span> <span class="err">-C</span> <span class="err">$(KERNEL_DIR)</span> <span class="nv">M</span><span class="o">=</span><span class="nv">$(CURDIR)</span> modules
+<span class="nl">clean</span><span class="o">:</span>
+<span class="err">$(MAKE)</span> <span class="err">-C</span> <span class="err">$(KERNEL_DIR)</span> <span class="nv">M</span><span class="o">=</span><span class="nv">$(CURDIR)</span> clean
+</code></pre></div></div>
+
+<p>With the command insmod, the module will be inserted into the kernel (Tips: printk function may not print in the terminal, in that case, <code class="highlighter-rouge">etho 8 &gt; /proc/sys/kernel/printk </code>):</p>
+
+<p><img src="/blog_photos/MCU&amp;MPU/ismod.png" alt="AltText-w150" height="50%" width="50%" /></p>
+
+<h2 id="2-register-the-character-device-into-kernel">(2) register the character device into kernel</h2>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">100</span><span class="o">&gt;</span><span class="p">){</span>
+
+
+<span class="p">}</span>
+
+
+</code></pre></div></div>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre>    <span class="k">def</span> <span class="nf">foo</span>
+      <span class="nb">puts</span> <span class="s1">'foo'</span>
+    <span class="k">end</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>device</p>
+
+
+
+									<h3><i class="fas fa-tags"></i>Post Tags</h3>
+									
+									<a href=" ../../../../tag/linux/index.html" >Linux</a>
+									
+									<a href=" ../../../../tag/kernel/index.html" >kernel</a>
+									
+									<a href=" ../../../../tag/dirver/index.html" >Dirver</a>
+									
+									<head>
+<script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
+</head>
+
+<div id="vcomments"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '9CvJWlMvXQsUUkjcCF0nbtSS-MdYXbMMI',
+        appKey: 'KQFufTHJeHucASskKMC6xtLG',
+        avatar: 'retro',
+        meta: ['nick', 'mail'],
+        lang: 'en',
+        visitor: true,
+        enableQQ:true,
+        placeholder: 'Message here.\n (Tips: To make a anonymous comment, nickname and email are not necessary.\n Please entry nickname and email, if you want to show your nickname and get reminder of reply by email. )\n(输入nickname和email，可显示网络名并得到邮件回复提醒。)'
+    })
+</script>
+
+								</section>
+								
+								
+
+								
+
+							</div>
+						</div>
+								
+
+								
+								
+								
+
+				<!-- Sidebar -->
+
+
+
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+
+
+
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+									<li><a href="../../../../index.html">About me</a></li>
+									<li>
+
+
+											<span class="opener">Photograph</span>
+											<ul>
+												
+
+												<li><a href="../../../../photos/toronto/index.html">toronto</a></li>
+												
+
+												<li><a href="../../../../photos/windsor/index.html">windsor</a></li>
+												
+											</ul>
+									</li>	
+									</ul>
+									<br/>
+										
+									<header class="major">
+									<h2>Tech Blogs</h2>
+									</header>	
+									<ul>
+										
+										
+										
+										
+										
+										
+
+										<li>
+											<a href="/2020/05/12/robotics.html">Robotics</a><span class="opener" style="font-size: 0.1;"></span>
+											<ul>
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+																						
+
+												<li><a href="/2020/05/12/third.html">Robotics Page!</a></li>
+								
+												
+												
+												
+																						
+
+												<li><a href="/2020/05/12/welcome-to-jekyll.html">First robotics</a></li>
+								
+												
+												
+												
+												
+												
+												
+												
+												
+												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
+											</ul>
+										</li>
+										
+										
+										
+										
+
+										<li>
+											<a href="/2020/05/12/mcu.html">Mcu&Mpu</a><span class="opener" style="font-size: 0.1;"></span>
+											<ul>
+												
+												
+																						
+
+												<li><a href="/2020/05/25/kernel.html">Linux kernel module beginning (I)</a></li>
+								
+												
+												
+												
+																						
+
+												<li><a href="/2020/05/22/interrupt.html">Interrupt of ARM A7</a></li>
+								
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
+											</ul>
+										</li>
+										
+										
+										
+										
+
+										<li>
+											<a href="/2020/05/12/Machine-Vision.html">Machine Vision</a><span class="opener" style="font-size: 0.1;"></span>
+											<ul>
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
+											</ul>
+										</li>
+										
+										
+										
+										
+										
+										
+										
+										
+
+										<li>
+											<a href="/2018/05/22/technotes.html">Notes</a><span class="opener" style="font-size: 0.1;"></span>
+											<ul>
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
+											</ul>
+										</li>
+										
+										
+										
+										
+										
+										<br/>
+										<!--<li><a href="elements.html">Elements</a></li>-->
+										<!--<li><a href="elements.html">Elements</a></li>-->
+										
+										
+									</ul>
+
+									<div>
+										<h3><a href=" "><i class="fas fa-tags"></i>Tags</h3></a>
+									</div>
+									
+									
+									
+									
+									
+
+									
+									  
+									  
+									  
+									  
+									  
+
+									  <a href=" ../../../../tag/robotics/index.html" style="font-size: 18pt; color: #000;">Robotics</a>
+									
+									  
+									  
+									  
+									  
+									  
+
+									  <a href=" ../../../../tag/arm/index.html" style="font-size: 9pt; color: #999;">ARM</a>
+									
+									  
+									  
+									  
+									  
+									  
+
+									  <a href=" ../../../../tag/interrupt/index.html" style="font-size: 9pt; color: #999;">interrupt</a>
+									
+									  
+									  
+									  
+									  
+									  
+
+									  <a href=" ../../../../tag/bare-metal/index.html" style="font-size: 9pt; color: #999;">bare-metal</a>
+									
+									  
+									  
+									  
+									  
+									  
+
+									  <a href=" ../../../../tag/linux/index.html" style="font-size: 9pt; color: #999;">Linux</a>
+									
+									  
+									  
+									  
+									  
+									  
+
+									  <a href=" ../../../../tag/kernel/index.html" style="font-size: 9pt; color: #999;">kernel</a>
+									
+									  
+									  
+									  
+									  
+									  
+
+									  <a href=" ../../../../tag/dirver/index.html" style="font-size: 9pt; color: #999;">Dirver</a>
+									
+									
+
+								</nav>
+
+
+								<!-- 
+								
+
+								
+								 
+								  
+								    <a href="/2020/05/22/interrupt.html">ARM</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/05/25/kernel.html">Dirver</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/05/25/kernel.html">Linux</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/05/12/third.html">Robotics</a>
+								  
+								    <a href="/2020/05/12/welcome-to-jekyll.html">Robotics</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/05/22/interrupt.html">bare-metal</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/05/22/interrupt.html">interrupt</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/05/25/kernel.html">kernel</a>
+								  
+								  
+								 -->
+							
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; Jietang. All rights reserved.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../../../assets/js/jquery.min.js"></script>
+			<script src="../../../../assets/js/browser.min.js"></script>
+			<script src="../../../../assets/js/breakpoints.min.js"></script>
+			<script src="../../../../assets/js/util.js"></script>
+			<script src="../../../../assets/js/main.js"></script>
+
+	</body>
+</html>

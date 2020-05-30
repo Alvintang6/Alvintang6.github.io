@@ -73,30 +73,79 @@ Using load from linux-x.x.xx/arch/arm/configs can some default platforms. When f
 <span class="err">$(MAKE)</span> <span class="err">-C</span> <span class="err">$(KERNEL_DIR)</span> <span class="nv">M</span><span class="o">=</span><span class="nv">$(CURDIR)</span> clean
 </code></pre></div></div>
 
-<p>With the command insmod, the module will be inserted into the kernel (Tips: printk function may not print in the terminal, in that case, <code class="highlighter-rouge">etho 8 &gt; /proc/sys/kernel/printk </code>):</p>
+<p>With the command insmod, the module will be inserted into the kernel (Tips: printk function may not print in the terminal, in that case, <code class="highlighter-rouge">echo 8 &gt; /proc/sys/kernel/printk </code>):</p>
 
 <p><img src="/blog_photos/MCU&amp;MPU/ismod.png" alt="AltText-w150" height="50%" width="50%" /></p>
 
 <h2 id="2-register-the-character-device-into-kernel">(2) register the character device into kernel</h2>
+<p>A typical character device driver may include following components.</p>
+<ol>
+  <li>initial &amp; exit function (initial and delete driver module)</li>
+  <li>register &amp; unregister function (inside initial, exit function and used for configurating operations of drivers)</li>
+  <li>file_operation structure (include basic operation accept by drives like: open,read,write and etc..)</li>
+</ol>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">100</span><span class="o">&gt;</span><span class="p">){</span>
+<ul>
+  <li>A basic initial and exit function is shown below:</li>
+</ul>
 
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define CHRDEVTEST_MAJOR 200
+#define CHRDEVTEST_NAME "chrdevtest"
+</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="n">__init</span> <span class="nf">chrdevtest_init</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">ret</span><span class="p">;</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">register_chrdev</span><span class="p">(</span> <span class="n">CHRDEVTEST_MAJOR</span><span class="p">,</span> <span class="n">CHRDEVTEST_NAME</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">chrdevtest_fops</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">ret</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">){</span>
+        <span class="n">printk</span><span class="p">(</span><span class="s">"chrdevtest_init failed </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span> 
 
+<span class="k">static</span> <span class="kt">void</span> <span class="n">__exit</span> <span class="nf">chrdevtest_exit</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+
+    <span class="n">unregister_chrdev</span><span class="p">(</span> <span class="n">CHRDEVTEST_MAJOR</span><span class="p">,</span> <span class="n">CHRDEVTEST_NAME</span><span class="p">);</span>
 <span class="p">}</span>
-
-
 </code></pre></div></div>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="code"><pre>    <span class="k">def</span> <span class="nf">foo</span>
-      <span class="nb">puts</span> <span class="s1">'foo'</span>
-    <span class="k">end</span>
-</pre></td></tr></tbody></table></code></pre></figure>
+<ul>
+  <li>Here, the chrdevtest_fops is a realization of file_operation structure.
+Inside the structure, the corresponding operations can be configured by using function pointer:</li>
+</ul>
 
-<p>device</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="k">struct</span> <span class="n">file_operations</span> <span class="n">chrdevtest_fops</span><span class="o">=</span><span class="p">{</span>
+    <span class="p">.</span><span class="n">owner</span> <span class="o">=</span> <span class="n">THIS_MODULE</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">open</span> <span class="o">=</span> <span class="n">chrdevtest_open</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">release</span> <span class="o">=</span> <span class="n">chrdevtest_release</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">read</span> <span class="o">=</span> <span class="n">chrdevtest_read</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">write</span> <span class="o">=</span> <span class="n">chrdevtest_write</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div></div>
+<ul>
+  <li>Some simple example of operation function is shown below:</li>
+</ul>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">int</span> <span class="nf">chrdevtest_open</span><span class="p">(</span><span class="k">struct</span> <span class="nc">inode</span> <span class="o">*</span><span class="n">inode</span><span class="p">,</span> <span class="k">struct</span> <span class="nc">file</span> <span class="o">*</span><span class="n">filp</span><span class="p">){</span>
+    <span class="n">printk</span><span class="p">(</span><span class="s">"chrdevtest_open </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">int</span> <span class="nf">chrdevtest_release</span><span class="p">(</span><span class="k">struct</span> <span class="nc">inode</span> <span class="o">*</span><span class="n">inode</span><span class="p">,</span> <span class="k">struct</span> <span class="nc">file</span> <span class="o">*</span><span class="n">filp</span><span class="p">){</span>
+    <span class="n">printk</span><span class="p">(</span><span class="s">"chrdevtest_release </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">ssize_t</span> <span class="nf">chrdevtest_read</span><span class="p">(</span><span class="k">struct</span> <span class="nc">file</span> <span class="o">*</span><span class="n">filp</span><span class="p">,</span> <span class="kt">char</span> <span class="n">__user</span> <span class="o">*</span> <span class="n">buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">count</span><span class="p">,</span> <span class="n">loff_t</span> <span class="o">*</span><span class="n">ppos</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">printk</span><span class="p">(</span><span class="s">"chrdevtest_read </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">ssize_t</span> <span class="nf">chrdevtest_write</span><span class="p">(</span><span class="k">struct</span> <span class="nc">file</span> <span class="o">*</span><span class="n">filp</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">__user</span> <span class="o">*</span> <span class="n">buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">count</span><span class="p">,</span> <span class="n">loff_t</span> <span class="o">*</span><span class="n">ppos</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">printk</span><span class="p">(</span><span class="s">"chrdevtest_write </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="p">}</span>
+</code></pre></div></div>
 
 
 
@@ -216,7 +265,7 @@ Using load from linux-x.x.xx/arch/arm/configs can some default platforms. When f
 												
 																						
 
-												<li><a href="/2020/05/12/third.html">Robotics Page!</a></li>
+												<li><a href="/2020/05/12/QRcode.html">Usage of QR code in ROS(ar_track_alvar)</a></li>
 								
 												
 												
@@ -401,6 +450,22 @@ Using load from linux-x.x.xx/arch/arm/configs can some default platforms. When f
 									  
 									  
 
+									  <a href=" ../../../../tag/qrcode/index.html" style="font-size: 9pt; color: #999;">QRcode</a>
+									
+									  
+									  
+									  
+									  
+									  
+
+									  <a href=" ../../../../tag/vision/index.html" style="font-size: 9pt; color: #999;">vision</a>
+									
+									  
+									  
+									  
+									  
+									  
+
 									  <a href=" ../../../../tag/arm/index.html" style="font-size: 9pt; color: #999;">ARM</a>
 									
 									  
@@ -472,7 +537,13 @@ Using load from linux-x.x.xx/arch/arm/configs can some default platforms. When f
 								
 								 
 								  
-								    <a href="/2020/05/12/third.html">Robotics</a>
+								    <a href="/2020/05/12/QRcode.html">QRcode</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/05/12/QRcode.html">Robotics</a>
 								  
 								    <a href="/2020/05/12/welcome-to-jekyll.html">Robotics</a>
 								  
@@ -493,6 +564,12 @@ Using load from linux-x.x.xx/arch/arm/configs can some default platforms. When f
 								 
 								  
 								    <a href="/2020/05/25/kernel.html">kernel</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/05/12/QRcode.html">vision</a>
 								  
 								  
 								 -->

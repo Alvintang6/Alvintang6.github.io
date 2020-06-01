@@ -10,7 +10,7 @@
 
 
 
-		<title>Usage of QR code in ROS(ar_track_alvar)</title>
+		<title>Usage of QR code in ROS</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="../../../../assets/css/main.css" />
@@ -26,7 +26,19 @@
 						<div class="inner">
 
 							<!-- Header -->
+																  <script type="text/x-mathjax-config">
+								    MathJax.Hub.Config({
+								      tex2jax: {
+								        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+								        inlineMath: [['$','$']]
+								      }
+								    });
+								  </script>
+								  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
 								<header id="header">
+									<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 									<a href="../../../../index.html" class="logo"><strong>Follow Jietang</strong> with:</a>
 									<ul class="icons">
 										<li><a href="mailto:alvin.tang6@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
@@ -35,17 +47,177 @@
 										<li><a href="https://github.com/Alvintang6" class="icon brands fa-github-square"><span class="label">Github</span></a></li>
 										<li><a href="https://www.instagram.com/tang12y/?hl=en" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 										<li><a href="https://www.linkedin.com/in/jie-tang-55070b148/" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a></li>
-										<li><a href="../../../../resume_jietang.pdf" class="logo"><i class="fas fa-file-invoice"></i>CV</a></li>
+										<li><a href="resume_jietang.pdf" class="logo"><i class="fas fa-file-invoice"></i>CV</a></li>
 									</ul>
 								</header>
+
+
+							
+
+
+								
 
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h1>Usage of QR code in ROS(ar_track_alvar)</h1>
+										<h1>Usage of QR code in ROS</h1>
 									</header>
 
-									<p>Second post</p>
+									<h2 id="table-of-content">Table of Content</h2>
+<ul id="markdown-toc">
+  <li><a href="#table-of-content" id="markdown-toc-table-of-content">Table of Content</a></li>
+  <li><a href="#1-pose-estimation-and-camera-model" id="markdown-toc-1-pose-estimation-and-camera-model">1. Pose estimation and camera model</a>    <ul>
+      <li><a href="#intrinsic-model" id="markdown-toc-intrinsic-model">Intrinsic model</a></li>
+      <li><a href="#extrinsic-modelpose-estimation" id="markdown-toc-extrinsic-modelpose-estimation">Extrinsic model(Pose estimation)</a></li>
+    </ul>
+  </li>
+  <li><a href="#2-ar_track_alvar-a-qrcode-package-in-ros" id="markdown-toc-2-ar_track_alvar-a-qrcode-package-in-ros">2. Ar_track_alvar (A QRcode package in ROS)</a>    <ul>
+      <li><a href="#introduction-of-ar_track_alvar" id="markdown-toc-introduction-of-ar_track_alvar">Introduction of Ar_track_alvar</a></li>
+      <li><a href="#launch-file" id="markdown-toc-launch-file">Launch File</a></li>
+      <li><a href="#predefined-ar_track_alvar-message-header" id="markdown-toc-predefined-ar_track_alvar-message-header">Predefined Ar_track_alvar Message header</a></li>
+      <li><a href="#example-code-in-c" id="markdown-toc-example-code-in-c">Example code in C++</a></li>
+    </ul>
+  </li>
+  <li><a href="#reference" id="markdown-toc-reference">reference</a></li>
+</ul>
+
+<p>Using vision to do the indoor localization is one of the most feasible and general way currently. Especially in robotics, AR tag, which is a kind of QR code liked marker, is widely used in ROS,Robotic operation system.</p>
+
+<h2 id="1-pose-estimation-and-camera-model">1. Pose estimation and camera model</h2>
+<p>A camera model can be described by intrinsic model and extrinsic model. Intrinsic model includes those inherent features of one camera, like distortion, focal length, and pixel size. Extrinsic model indicate the pose of a camera inside a world frame.</p>
+
+<h3 id="intrinsic-model">Intrinsic model</h3>
+<p>The camera model can characterize transformations from a 3D world frame to a 2D
+image plane. Here using K to represent the intrinsic matrix<a href="#refer-anchor-1"><sup>1</sup></a>. $[P_x,P_y]$ is a translation vector indicating the offset of 2D points in a image plane. Where $[x_{pix},\  y_{pix}]^T$ represents a point in camera image planes (pixel coordinates), $[X_{c},\  Y_{c},\  Z_{c}]^T$ represents a point in 3D camera coordinates.</p>
+
+\[(1). 
+ \left[\begin{array}{c}{x_{p i x}} \\ {y_{p i x}} \\ {1}\end{array}\right]=\textbf{K}
+ \left[\begin{array}{c}{X_{c}} \\ {Y_{c}} \\ {Z_{c}}\end{array}\right],Where\ \textbf{K}=\underbrace{\left[\begin{array}{ccc}{f_{x}} &amp; 0 &amp; {p_{x}} \\ {0} &amp; {f_{y}} &amp; {p_{y}}  \\ {0} &amp; {0} &amp; {1} \end{array}\right]}_{intrinsic\ matrix}\]
+
+<p>Distortion caused by optical components in the camera is another problem in real world image systems. The distortion of an image can be characterized by using a mapping function $\textbf{D}$, $[x_{distorted},\  y_{distorted}]^T=D([x_{ideal},\  y_{ideal}]^T)$ :</p>
+
+\[(2). 
+ \begin{array}{l}{x_{\text {distorted }}=x_{\text {ideal}}\left(1+k_{1}^{\star} r^{2}+k_{2}^{\star} r^{4}+k_{3}^{\star} r^{6}\right)} \\ {y_{\text {distorted }}=y_{\text {ideal}}\left(1+k_{1}^{\star} r^{2}+k_{2}^{\star} r^{4}+k_{3}^{\star} r^{6}\right)}\end{array}\]
+
+<p>Where $[x_{distorted},\  y_{distorted}]^T$ represents the point in distorted images, $[x_{ideal},\  y_{ideal}]^T$ means the point in ideal images. $\textbf{r}$ expresses the distance to the image center, $k_1,k_2,k_3$ are distortion factors, which respect to different camera and lens.</p>
+
+<div align="center"><img width="50%" height="50%" src="/blog_photos/Machine_Vision/camera_3D2D.jpg" /><p>Figure. Camera model transform point from 3D to 2D</p>
+
+<img width="28%" height="28%" src="/blog_photos/Machine_Vision/distortion_image.jpg" />
+<p>Figure. Distortion transfer</p>
+</div>
+
+<h3 id="extrinsic-modelpose-estimation">Extrinsic model(Pose estimation)</h3>
+<p>Extrinsic parameters indicate the pose of cameras related to the world frames, which is represented by the rotation matrix $\mathbf{R}$ and translation vector $\mathbf{t}$. The transformation from world frames $\mathbf{P_{w}}$ to camera coordinates $\mathbf{P_{c}}$ is showing below, in equation (3).</p>
+
+\[(3). \mathbf{P_{c}} = [\mathbf{R} | \mathbf{t}] \mathbf{P_{w}}\]
+
+<div align="center"><img width="50%" height="50%" src="/blog_photos/Machine_Vision/Transfomation_matrix.jpg" /><p>Figure. The transformation from world frame to camera coordinate</p>
+</div>
+
+<p>Combining the equation(1), (2), and (3), the transformation from world coordinates to image planes can be established in equation (4).</p>
+
+\[(4).
+{	\left[ \begin{array}{c} {x_{pix}}\\y_{pix}\\{1}\end{array}\right ]}{
+	=\textbf{D}(
+	{
+		\textbf{K}\left[ \begin{array}{c}
+		x_c\\
+		y_c\\
+		z_c
+		\end{array} 
+		\right ]}
+	)}
+{
+	=\underbrace{ \textbf{D}(
+	\underbrace{\textbf{K}\underbrace{[\textbf{R}|\textbf{t}]
+	{
+		\left[ \begin{array}{c}	X_w\\Y_w\\Z_w\\1\end{array}\right ]}
+	)}_{world\ coords\ to\ camera\ coords}}_{camera\ coords\ to\ film\ coords}}_{film\
+coords\ to\ pixel\ coords}}\]
+
+<p>In (4), the intrinsic parameters, $\textbf{D}$, and $\textbf{K}$ can be identified by doing camera calibration and the $\mathbf{P_w}$ can be known by using prior designed artificial features. Finally, $\textbf{R}$ and $\textbf{t}$ can be retrieved By solving (4).</p>
+
+<h2 id="2-ar_track_alvar-a-qrcode-package-in-ros">2. Ar_track_alvar (A QRcode package in ROS)</h2>
+
+<h3 id="introduction-of-ar_track_alvar">Introduction of Ar_track_alvar</h3>
+<p>Ar_track_alvar is a package in ROS based on ALVAR library. ALVAR is a
+suite of SDKs and products that help researchers and engineers to create augmented
+reality applications. In Ar_track_alvar, it provides the fast object recognition
+and tracking through fiducials. The fiducials or markers can be also generated with
+Ar_track_alvar, which looks like QR-code. The markers with several features help
+to be detected, such as clear border and unique pattern. Combined with the prior
+knowledge, the size of markers and camera intrinsic matrix, the 2D image plane will
+be transformed to 3D world frame. Here is the official website of <a href="http://wiki.ros.org/ar_track_alvar">Ar_track_alvar</a>.</p>
+
+<h3 id="launch-file">Launch File</h3>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nt">&lt;launch&gt;</span>
+   <span class="nt">&lt;node</span> <span class="na">name=</span><span class="s">"usb_cam"</span> <span class="na">pkg=</span><span class="s">"usb_cam"</span> <span class="na">type=</span><span class="s">"usb_cam_node"</span> <span class="na">output=</span><span class="s">"screen"</span> <span class="nt">&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"video_device"</span> <span class="na">value=</span><span class="s">"/dev/video1"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"image_width"</span> <span class="na">value=</span><span class="s">"1280"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"image_height"</span> <span class="na">value=</span><span class="s">"720"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"pixel_format"</span> <span class="na">value=</span><span class="s">"yuyv"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"camera_frame_id"</span> <span class="na">value=</span><span class="s">"usb_cam"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"io_method"</span> <span class="na">value=</span><span class="s">"mmap"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"camera_info_url"</span> <span class="na">type=</span><span class="s">"string"</span> <span class="na">value=</span><span class="s">"file://$(find robot_vision)/launch/calib170/white.yaml"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/node&gt;</span>
+
+    <span class="nt">&lt;node</span> <span class="na">pkg=</span><span class="s">"tf"</span> <span class="na">type=</span><span class="s">"static_transform_publisher"</span> <span class="na">name=</span><span class="s">"world_to_cam"</span> 
+          <span class="na">args=</span><span class="s">"0 0 0.5 1.04 0 -1.57 /map usb_cam 10"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">"marker_size"</span> <span class="na">default=</span><span class="s">"4.5"</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">"max_new_marker_error"</span> <span class="na">default=</span><span class="s">"0.08"</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">"max_track_error"</span> <span class="na">default=</span><span class="s">"0.2"</span> <span class="nt">/&gt;</span>
+	
+	<span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">"cam_image_topic"</span> <span class="na">default=</span><span class="s">"/usb_cam/image_raw"</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">"cam_info_topic"</span> <span class="na">default=</span><span class="s">"/usb_cam/camera_info"</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">"output_frame"</span> <span class="na">default=</span><span class="s">"usb_cam"</span> <span class="nt">/&gt;</span>
+
+
+
+	<span class="nt">&lt;node</span> <span class="na">name=</span><span class="s">"ar_track_alvar"</span> <span class="na">pkg=</span><span class="s">"ar_track_alvar"</span> <span class="na">type=</span><span class="s">"individualMarkersNoKinect"</span> <span class="na">respawn=</span><span class="s">"false"</span> <span class="na">output=</span><span class="s">"screen"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"marker_size"</span>           <span class="na">type=</span><span class="s">"double"</span> <span class="na">value=</span><span class="s">"$(arg marker_size)"</span> <span class="nt">/&gt;</span>
+		<span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"max_new_marker_error"</span>  <span class="na">type=</span><span class="s">"double"</span> <span class="na">value=</span><span class="s">"$(arg max_new_marker_error)"</span> <span class="nt">/&gt;</span>
+		<span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"max_track_error"</span>       <span class="na">type=</span><span class="s">"double"</span> <span class="na">value=</span><span class="s">"$(arg max_track_error)"</span> <span class="nt">/&gt;</span>
+		<span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"output_frame"</span>          <span class="na">type=</span><span class="s">"string"</span> <span class="na">value=</span><span class="s">"$(arg output_frame)"</span> <span class="nt">/&gt;</span>
+
+		<span class="nt">&lt;remap</span> <span class="na">from=</span><span class="s">"camera_image"</span>  <span class="na">to=</span><span class="s">"$(arg cam_image_topic)"</span> <span class="nt">/&gt;</span>
+		<span class="nt">&lt;remap</span> <span class="na">from=</span><span class="s">"camera_info"</span>   <span class="na">to=</span><span class="s">"$(arg cam_info_topic)"</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;/node&gt;</span>
+
+<span class="nt">&lt;/launch&gt;</span>
+
+</code></pre></div></div>
+
+<h3 id="predefined-ar_track_alvar-message-header">Predefined Ar_track_alvar Message header</h3>
+
+<p>The information shared between ROS nodes, processes, is packaged in ‘messages’. A predefined <a href="http://docs.ros.org/melodic/api/ar_track_alvar_msgs/html/msg/AlvarMarkers.html">Ar_track_alvar message</a> is shown:</p>
+
+<p><strong>AlvarMarkers message:</strong></p>
+
+<p>One AlvarMarker<strong>s</strong> message may includes several ‘AlvarMarker’ message, the number of ‘AlvarMarker’ message depends on how many marks are found by camera.</p>
+
+<div align="center"><img width="100%" height="100%" src="/blog_photos/Machine_Vision/AR_track_alvar_msgs.png" />
+</div>
+
+<p><strong>AlvarMarker message:</strong></p>
+
+<p>AlvarMarker message contains the 6 degrees of freedom pose information.</p>
+
+<div align="center"><img width="100%" height="100%" src="/blog_photos/Machine_Vision/AR_track_alvar_msg1.png" />
+</div>
+
+<h3 id="example-code-in-c">Example code in C++</h3>
+
+<h2 id="reference">reference</h2>
+
+<div id="refer-anchor-1"></div>
+<ul>
+  <li>[1] <a href="https://nl.mathworks.com/help/vision/ug/camera-
+calibration.html.">What is camera calibration.</a></li>
+</ul>
+
 
 
 
@@ -55,7 +227,9 @@
 									
 									<a href=" ../../../../tag/qrcode/index.html" >QRcode</a>
 									
-									<a href=" ../../../../tag/vision/index.html" >vision</a>
+									<a href=" ../../../../tag/camera-model/index.html" >Camera-model</a>
+									
+									<a href=" ../../../../tag/localization/index.html" >Localization</a>
 									
 									<head>
 <script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
@@ -163,10 +337,6 @@
 												
 												
 												
-																						
-
-												<li><a href="/2020/05/12/QRcode.html">Usage of QR code in ROS(ar_track_alvar)</a></li>
-								
 												
 												
 												
@@ -257,6 +427,10 @@
 												
 												
 												
+																						
+
+												<li><a href="/2020/05/12/QRcode.html">Usage of QR code in ROS</a></li>
+								
 												
 												
 												
@@ -358,7 +532,15 @@
 									  
 									  
 
-									  <a href=" ../../../../tag/vision/index.html" style="font-size: 9pt; color: #999;">vision</a>
+									  <a href=" ../../../../tag/camera-model/index.html" style="font-size: 9pt; color: #999;">Camera-model</a>
+									
+									  
+									  
+									  
+									  
+									  
+
+									  <a href=" ../../../../tag/localization/index.html" style="font-size: 9pt; color: #999;">Localization</a>
 									
 									  
 									  
@@ -425,6 +607,12 @@
 								
 								 
 								  
+								    <a href="/2020/05/12/QRcode.html">Camera-model</a>
+								  
+								  
+								
+								 
+								  
 								    <a href="/2020/05/25/kernel.html">Dirver</a>
 								  
 								  
@@ -432,6 +620,12 @@
 								 
 								  
 								    <a href="/2020/05/25/kernel.html">Linux</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/05/12/QRcode.html">Localization</a>
 								  
 								  
 								
@@ -464,12 +658,6 @@
 								 
 								  
 								    <a href="/2020/05/25/kernel.html">kernel</a>
-								  
-								  
-								
-								 
-								  
-								    <a href="/2020/05/12/QRcode.html">vision</a>
 								  
 								  
 								 -->

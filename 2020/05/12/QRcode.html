@@ -67,15 +67,15 @@
 <ul id="markdown-toc">
   <li><a href="#table-of-content" id="markdown-toc-table-of-content">Table of Content</a></li>
   <li><a href="#1-pose-estimation-and-camera-model" id="markdown-toc-1-pose-estimation-and-camera-model">1. Pose estimation and camera model</a>    <ul>
-      <li><a href="#intrinsic-model" id="markdown-toc-intrinsic-model">Intrinsic model</a></li>
-      <li><a href="#extrinsic-modelpose-estimation" id="markdown-toc-extrinsic-modelpose-estimation">Extrinsic model(Pose estimation)</a></li>
+      <li><a href="#11-intrinsic-model" id="markdown-toc-11-intrinsic-model">1.1 Intrinsic model</a></li>
+      <li><a href="#12-extrinsic-modelpose-estimation" id="markdown-toc-12-extrinsic-modelpose-estimation">1.2 Extrinsic model(Pose estimation)</a></li>
     </ul>
   </li>
   <li><a href="#2-ar_track_alvar-a-qrcode-package-in-ros" id="markdown-toc-2-ar_track_alvar-a-qrcode-package-in-ros">2. Ar_track_alvar (A QRcode package in ROS)</a>    <ul>
-      <li><a href="#introduction-of-ar_track_alvar" id="markdown-toc-introduction-of-ar_track_alvar">Introduction of Ar_track_alvar</a></li>
-      <li><a href="#launch-file" id="markdown-toc-launch-file">Launch File</a></li>
-      <li><a href="#predefined-ar_track_alvar-message-header" id="markdown-toc-predefined-ar_track_alvar-message-header">Predefined Ar_track_alvar Message header</a></li>
-      <li><a href="#example-code-in-c" id="markdown-toc-example-code-in-c">Example code in C++</a></li>
+      <li><a href="#21-introduction-of-ar_track_alvar" id="markdown-toc-21-introduction-of-ar_track_alvar">2.1 Introduction of Ar_track_alvar</a></li>
+      <li><a href="#22-launch-file" id="markdown-toc-22-launch-file">2.2 Launch File</a></li>
+      <li><a href="#23-predefined-ar_track_alvar-message-header" id="markdown-toc-23-predefined-ar_track_alvar-message-header">2.3 Predefined Ar_track_alvar Message header</a></li>
+      <li><a href="#24-example-code-in-c" id="markdown-toc-24-example-code-in-c">2.4 Example code in C++</a></li>
     </ul>
   </li>
   <li><a href="#reference" id="markdown-toc-reference">reference</a></li>
@@ -86,7 +86,7 @@
 <h2 id="1-pose-estimation-and-camera-model">1. Pose estimation and camera model</h2>
 <p>A camera model can be described by intrinsic model and extrinsic model. Intrinsic model includes those inherent features of one camera, like distortion, focal length, and pixel size. Extrinsic model indicate the pose of a camera inside a world frame.</p>
 
-<h3 id="intrinsic-model">Intrinsic model</h3>
+<h3 id="11-intrinsic-model">1.1 Intrinsic model</h3>
 <p>The camera model can characterize transformations from a 3D world frame to a 2D
 image plane. Here using K to represent the intrinsic matrix<a href="#refer-anchor-1"><sup>1</sup></a>. $[P_x,P_y]$ is a translation vector indicating the offset of 2D points in a image plane. Where $[x_{pix},\  y_{pix}]^T$ represents a point in camera image planes (pixel coordinates), $[X_{c},\  Y_{c},\  Z_{c}]^T$ represents a point in 3D camera coordinates.</p>
 
@@ -107,7 +107,7 @@ image plane. Here using K to represent the intrinsic matrix<a href="#refer-ancho
 <p>Figure. Distortion transfer</p>
 </div>
 
-<h3 id="extrinsic-modelpose-estimation">Extrinsic model(Pose estimation)</h3>
+<h3 id="12-extrinsic-modelpose-estimation">1.2 Extrinsic model(Pose estimation)</h3>
 <p>Extrinsic parameters indicate the pose of cameras related to the world frames, which is represented by the rotation matrix $\mathbf{R}$ and translation vector $\mathbf{t}$. The transformation from world frames $\mathbf{P_{w}}$ to camera coordinates $\mathbf{P_{c}}$ is showing below, in equation (3).</p>
 
 \[(3). \mathbf{P_{c}} = [\mathbf{R} | \mathbf{t}] \mathbf{P_{w}}\]
@@ -140,7 +140,7 @@ coords\ to\ pixel\ coords}}\]
 
 <h2 id="2-ar_track_alvar-a-qrcode-package-in-ros">2. Ar_track_alvar (A QRcode package in ROS)</h2>
 
-<h3 id="introduction-of-ar_track_alvar">Introduction of Ar_track_alvar</h3>
+<h3 id="21-introduction-of-ar_track_alvar">2.1 Introduction of Ar_track_alvar</h3>
 <p>Ar_track_alvar is a package in ROS based on ALVAR library. ALVAR is a
 suite of SDKs and products that help researchers and engineers to create augmented
 reality applications. In Ar_track_alvar, it provides the fast object recognition
@@ -150,7 +150,7 @@ to be detected, such as clear border and unique pattern. Combined with the prior
 knowledge, the size of markers and camera intrinsic matrix, the 2D image plane will
 be transformed to 3D world frame. Here is the official website of <a href="http://wiki.ros.org/ar_track_alvar">Ar_track_alvar</a>.</p>
 
-<h3 id="launch-file">Launch File</h3>
+<h3 id="22-launch-file">2.2 Launch File</h3>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="nt">&lt;launch&gt;</span>
@@ -190,7 +190,7 @@ be transformed to 3D world frame. Here is the official website of <a href="http:
 
 </code></pre></div></div>
 
-<h3 id="predefined-ar_track_alvar-message-header">Predefined Ar_track_alvar Message header</h3>
+<h3 id="23-predefined-ar_track_alvar-message-header">2.3 Predefined Ar_track_alvar Message header</h3>
 
 <p>The information shared between ROS nodes, processes, is packaged in ‘messages’. A predefined <a href="http://docs.ros.org/melodic/api/ar_track_alvar_msgs/html/msg/AlvarMarkers.html">Ar_track_alvar message</a> is shown:</p>
 
@@ -208,7 +208,8 @@ be transformed to 3D world frame. Here is the official website of <a href="http:
 <div align="center"><img width="100%" height="100%" src="/blog_photos/Machine_Vision/AR_track_alvar_msg1.png" />
 </div>
 
-<h3 id="example-code-in-c">Example code in C++</h3>
+<h3 id="24-example-code-in-c">2.4 Example code in C++</h3>
+<p>//TODO//</p>
 
 <h2 id="reference">reference</h2>
 
@@ -316,10 +317,21 @@ calibration.html.">What is camera calibration.</a></li>
 										
 										
 										
+										
+										
 
 										<li>
 											<a href="/2020/05/12/robotics.html">Robotics</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+												
+												
+												
+												
+												
+												
 												
 												
 												
@@ -361,8 +373,63 @@ calibration.html.">What is camera calibration.</a></li>
 										
 
 										<li>
+											<a href="/2020/05/12/programming.html">Programming</a><span class="opener" style="font-size: 0.1;"></span>
+											<ul>
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
+											</ul>
+										</li>
+										
+										
+										
+										
+
+										<li>
 											<a href="/2020/05/12/mcu.html">Mcu&Mpu</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+																						
+
+												<li><a href="/2020/05/25/kernel-2.html">Linux DTB -- device tree</a></li>
+								
+												
 												
 												
 																						
@@ -376,6 +443,12 @@ calibration.html.">What is camera calibration.</a></li>
 
 												<li><a href="/2020/05/22/interrupt.html">Interrupt of ARM A7</a></li>
 								
+												
+												
+												
+												
+												
+												
 												
 												
 												
@@ -427,6 +500,12 @@ calibration.html.">What is camera calibration.</a></li>
 												
 												
 												
+												
+												
+												
+												
+												
+												
 																						
 
 												<li><a href="/2020/05/12/QRcode.html">Usage of QR code in ROS</a></li>
@@ -442,9 +521,14 @@ calibration.html.">What is camera calibration.</a></li>
 												
 												
 												
+												
+												
+												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
+										
+										
 										
 										
 										
@@ -474,6 +558,19 @@ calibration.html.">What is camera calibration.</a></li>
 												
 												
 												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+																						
+
+												<li><a href="/2020/05/12/Cricuit.html">Circuit</a></li>
+								
 												
 												
 												
@@ -517,6 +614,30 @@ calibration.html.">What is camera calibration.</a></li>
 									  
 
 									  <a href=" ../../../../tag/robotics/index.html" style="font-size: 18pt; color: #000;">Robotics</a>
+									
+									  
+									  
+									  
+									  
+									  
+
+									  <a href=" ../../../../tag/analog/index.html" style="font-size: 9pt; color: #999;">Analog</a>
+									
+									  
+									  
+									  
+									  
+									  
+
+									  <a href=" ../../../../tag/digital/index.html" style="font-size: 9pt; color: #999;">Digital</a>
+									
+									  
+									  
+									  
+									  
+									  
+
+									  <a href=" ../../../../tag/circuit/index.html" style="font-size: 9pt; color: #999;">Circuit</a>
 									
 									  
 									  
@@ -572,7 +693,7 @@ calibration.html.">What is camera calibration.</a></li>
 									  
 									  
 
-									  <a href=" ../../../../tag/linux/index.html" style="font-size: 9pt; color: #999;">Linux</a>
+									  <a href=" ../../../../tag/linux/index.html" style="font-size: 18pt; color: #000;">Linux</a>
 									
 									  
 									  
@@ -580,7 +701,7 @@ calibration.html.">What is camera calibration.</a></li>
 									  
 									  
 
-									  <a href=" ../../../../tag/kernel/index.html" style="font-size: 9pt; color: #999;">kernel</a>
+									  <a href=" ../../../../tag/kernel/index.html" style="font-size: 18pt; color: #000;">kernel</a>
 									
 									  
 									  
@@ -589,6 +710,14 @@ calibration.html.">What is camera calibration.</a></li>
 									  
 
 									  <a href=" ../../../../tag/dirver/index.html" style="font-size: 9pt; color: #999;">Dirver</a>
+									
+									  
+									  
+									  
+									  
+									  
+
+									  <a href=" ../../../../tag/device-tree/index.html" style="font-size: 9pt; color: #999;">Device-tree</a>
 									
 									
 
@@ -607,7 +736,31 @@ calibration.html.">What is camera calibration.</a></li>
 								
 								 
 								  
+								    <a href="/2020/05/12/Cricuit.html">Analog</a>
+								  
+								  
+								
+								 
+								  
 								    <a href="/2020/05/12/QRcode.html">Camera-model</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/05/12/Cricuit.html">Circuit</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/05/25/kernel-2.html">Device-tree</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/05/12/Cricuit.html">Digital</a>
 								  
 								  
 								
@@ -618,6 +771,8 @@ calibration.html.">What is camera calibration.</a></li>
 								  
 								
 								 
+								  
+								    <a href="/2020/05/25/kernel-2.html">Linux</a>
 								  
 								    <a href="/2020/05/25/kernel.html">Linux</a>
 								  
@@ -656,6 +811,8 @@ calibration.html.">What is camera calibration.</a></li>
 								  
 								
 								 
+								  
+								    <a href="/2020/05/25/kernel-2.html">kernel</a>
 								  
 								    <a href="/2020/05/25/kernel.html">kernel</a>
 								  

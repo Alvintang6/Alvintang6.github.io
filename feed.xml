@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-05-31T23:19:57-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jie Tang’s website</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Linux kernel module beginning (I)</title><link href="http://localhost:4000/2020/05/25/kernel.html" rel="alternate" type="text/html" title="Linux kernel module beginning (I)" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/kernel</id><content type="html" xml:base="http://localhost:4000/2020/05/25/kernel.html">&lt;h2 id=&quot;1envirnoment-prepare--module-insert&quot;&gt;(1).Envirnoment prepare &amp;amp; module insert&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-06-05T10:49:43-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jie Tang’s website</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Linux kernel module beginning (I)</title><link href="http://localhost:4000/2020/05/25/kernel.html" rel="alternate" type="text/html" title="Linux kernel module beginning (I)" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/kernel</id><content type="html" xml:base="http://localhost:4000/2020/05/25/kernel.html">&lt;h2 id=&quot;1envirnoment-prepare--module-insert&quot;&gt;(1).Envirnoment prepare &amp;amp; module insert&lt;/h2&gt;
 
 &lt;p&gt;Linux concerns kernel module version critically and it refuses to load kernel drivers that do not match. So at least the Minor version we use to do cross-compiling should match with the target platform. The download address can be find &lt;a href=&quot;https://www.kernel.org/&quot;&gt;linux kernel download&lt;/a&gt;. Or using following command to get history version&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-x.x.xx.tar.xz
@@ -98,19 +98,247 @@ Inside the structure, the corresponding operations can be configured by using fu
     &lt;span class=&quot;n&quot;&gt;printk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;chrdevtest_write &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="Linux" /><category term="kernel" /><category term="Dirver" /><summary type="html">(1).Envirnoment prepare &amp;amp; module insert</summary></entry><entry><title type="html">Interrupt of ARM A7</title><link href="http://localhost:4000/2020/05/22/interrupt.html" rel="alternate" type="text/html" title="Interrupt of ARM A7" /><published>2020-05-22T10:51:36-04:00</published><updated>2020-05-22T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/22/interrupt</id><content type="html" xml:base="http://localhost:4000/2020/05/22/interrupt.html">&lt;p&gt;Second post&lt;/p&gt;</content><author><name></name></author><category term="ARM" /><category term="interrupt" /><category term="bare-metal" /><summary type="html">Second post</summary></entry><entry><title type="html">Machine Vision</title><link href="http://localhost:4000/2020/05/12/Machine-Vision.html" rel="alternate" type="text/html" title="Machine Vision" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/Machine%20Vision</id><content type="html" xml:base="http://localhost:4000/2020/05/12/Machine-Vision.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">MCU&amp;amp;MPU</title><link href="http://localhost:4000/2020/05/12/mcu.html" rel="alternate" type="text/html" title="MCU&amp;MPU" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/mcu</id><content type="html" xml:base="http://localhost:4000/2020/05/12/mcu.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Robotics</title><link href="http://localhost:4000/2020/05/12/robotics.html" rel="alternate" type="text/html" title="Robotics" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/robotics</id><content type="html" xml:base="http://localhost:4000/2020/05/12/robotics.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Usage of QR code in ROS</title><link href="http://localhost:4000/2020/05/12/QRcode.html" rel="alternate" type="text/html" title="Usage of QR code in ROS" /><published>2020-05-12T10:51:36-04:00</published><updated>2020-05-12T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/QRcode</id><content type="html" xml:base="http://localhost:4000/2020/05/12/QRcode.html">&lt;h2 id=&quot;table-of-content&quot;&gt;Table of Content&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="Linux" /><category term="kernel" /><category term="Dirver" /><summary type="html">(1).Envirnoment prepare &amp;amp; module insert</summary></entry><entry><title type="html">Linux DTB – device tree</title><link href="http://localhost:4000/2020/05/25/kernel-2.html" rel="alternate" type="text/html" title="Linux DTB -- device tree" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/kernel%202</id><content type="html" xml:base="http://localhost:4000/2020/05/25/kernel-2.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#1-device-build&quot; id=&quot;markdown-toc-1-device-build&quot;&gt;1. Device Build&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#2-device-tree-grammar&quot; id=&quot;markdown-toc-2-device-tree-grammar&quot;&gt;2. Device tree grammar&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#3-some-specical-node&quot; id=&quot;markdown-toc-3-some-specical-node&quot;&gt;3. Some specical node&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#4-property&quot; id=&quot;markdown-toc-4-property&quot;&gt;4. Property&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#5-of-function&quot; id=&quot;markdown-toc-5-of-function&quot;&gt;5. “of” function&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;1-device-build&quot;&gt;1. Device Build&lt;/h2&gt;
+
+&lt;p&gt;At &lt;code class=&quot;highlighter-rouge&quot;&gt;/linux-x.x.xx&lt;/code&gt; file path using &lt;code class=&quot;highlighter-rouge&quot;&gt;make xxx.dtb&lt;/code&gt; to compile device tree binary only.&lt;br /&gt;
+To build customized dts adding the corresponding name in &lt;code class=&quot;highlighter-rouge&quot;&gt;/linux-x.x.xx/arch/arm/boot/dts/Makefile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;2-device-tree-grammar&quot;&gt;2. Device tree grammar&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;dts beginning from &lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;dts may include header &lt;code class=&quot;highlighter-rouge&quot;&gt;dtsi&lt;/code&gt; which means some common device feature shared with certain SOC.&lt;/li&gt;
+  &lt;li&gt;Using &lt;code class=&quot;highlighter-rouge&quot;&gt;$&lt;/code&gt; symbol to append device in configured dts file.&lt;/li&gt;
+  &lt;li&gt;node defination format: 
+label: node-name@reg-address 
+  we can use &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;amp;label &lt;/code&gt; to quick acess the node to append some devices.
+  Most of the time the reg-address is the start address of register. It might also be device nums or some thing also, etc: like i2c device number:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i2c1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;clock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;frequency&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;pinctrl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;names&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;default&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;pinctrl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pinctrl_i2c1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;status&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;okay&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+	&lt;span class=&quot;n&quot;&gt;mag3110&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;compatible&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;fsl,mag3110&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;reg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+	&lt;span class=&quot;n&quot;&gt;fxls8471&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;compatible&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;fsl,fxls8471&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;reg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x1e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;interrupt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gpio5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;interrupts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;3-some-specical-node&quot;&gt;3. Some specical node&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;aliases&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;chosen
+ Uboot bootargs&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;4-property&quot;&gt;4. Property&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;compatible: The compatible board module can use
+&lt;code class=&quot;highlighter-rouge&quot;&gt;compatible&lt;/code&gt; will compare the property with ‘arch/xxx/mash-xxx’
+and see if any label match with DT_MACHINE_START().&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imx53_dt_board_compat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__initconst&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;fsl,imx53&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;DT_MACHINE_START&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IMX53_DT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Freescale i.MX53 (Device Tree Support)&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init_early&lt;/span&gt;	&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imx53_init_early&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init_machine&lt;/span&gt;	&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imx53_dt_init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init_late&lt;/span&gt;	&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imx53_init_late&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dt_compat&lt;/span&gt;	&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imx53_dt_board_compat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;MACHINE_END&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;model: exactly name of the module&lt;/li&gt;
+  &lt;li&gt;#address-cells  &amp;amp; #size-cells 
+This two properties will influence the format of &lt;reg&gt; in subnodes:
+For example:&lt;/reg&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;n&quot;&gt;spi4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;cp&quot;&gt;#address-cells = &amp;lt;1&amp;gt;; 
+&lt;/span&gt;	&lt;span class=&quot;cp&quot;&gt;#size-cells = &amp;lt;1&amp;gt;;
+&lt;/span&gt;	
+	&lt;span class=&quot;n&quot;&gt;xxx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;reg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x10000000&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x1000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;i2c4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;cp&quot;&gt;#address-cells = &amp;lt;1&amp;gt;; 
+&lt;/span&gt;	&lt;span class=&quot;cp&quot;&gt;#size-cells = &amp;lt;0&amp;gt;;
+&lt;/span&gt;	
+	&lt;span class=&quot;n&quot;&gt;mag3110&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;reg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x1e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;ranges: address mapping
+blank when there is no address mapping from child-bus-address to parent-bus-address
+For example:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;n&quot;&gt;soc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;ranges&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x0&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0xe0000000&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x00100000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+
+	&lt;span class=&quot;n&quot;&gt;serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;reg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x4600&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x100&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;With this mapping serial device node would be remapped at address 0xe0004600.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;name:&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;device_type: mostly in “cpu”,”mem”&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Tips: Reference document: 
+Document/devicetree/bindings/xxx&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;5-of-function&quot;&gt;5. “of” function&lt;/h2&gt;
+
+&lt;p&gt;“of” function are used to obtain the contain information in the node.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;struct device_node *of_find_node_by_path(const char *path);&lt;/li&gt;
+  &lt;li&gt;struct device_node *of_find_node_by_name(struct device_node *from,const char *name);&lt;/li&gt;
+  &lt;li&gt;struct device_node *of_find_node_by_type(struct device_node *from,const char *type);
+……&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The return structure &lt;code class=&quot;highlighter-rouge&quot;&gt;device_node&lt;/code&gt; is defined in the following:&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;device_node&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// node name&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// device type&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;phandle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;phandle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;full_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// full name&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fwnode_handle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fwnode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;properties&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// property&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;deadprops&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;    &lt;span class=&quot;cm&quot;&gt;/* removed properties */&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;device_node&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// parent node &lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;device_node&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;child&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// child node&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;device_node&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sibling&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#if defined(CONFIG_OF_KOBJ)
+&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;kobject&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kobj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#endif
+&lt;/span&gt;    &lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_flags&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#if defined(CONFIG_SPARC)
+&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path_component_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;unique_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;of_irq_controller&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;irq_trans&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#endif
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;struct property *of_find_property(const struct device_node *np,const char *name,int *lenp)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Properties node is listed :&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//属性名&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;//属性长度&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//属性值&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//下一个属性&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#if defined(CONFIG_OF_DYNAMIC) || defined(CONFIG_SPARC)
+&lt;/span&gt;    &lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_flags&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#endif
+#if defined(CONFIG_OF_PROMTREE)
+&lt;/span&gt;    &lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;unique_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#endif
+#if defined(CONFIG_OF_KOBJ)
+&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bin_attribute&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#endif
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;For reading the properties linux provide the function:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;if the property is a array:&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;int of_property_read_uXX_array(const struct device_node *np, const char *propname, u32 *out_values, size_t sz) (XX = 8 16 32 64)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;if the property is int:&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;int of_property_read_uXX (const struct device_node *np, const char *propname,u8 *out_values)(XX = 8 16 32 64)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;if the string:&lt;/li&gt;
+  &lt;li&gt;int of_property_read_string(const struct device_node *np,const char *propname, const char **out_string)&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="Linux" /><category term="kernel" /><category term="Device-tree" /></entry><entry><title type="html">Interrupt of ARM A7</title><link href="http://localhost:4000/2020/05/22/interrupt.html" rel="alternate" type="text/html" title="Interrupt of ARM A7" /><published>2020-05-22T10:51:36-04:00</published><updated>2020-05-22T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/22/interrupt</id><content type="html" xml:base="http://localhost:4000/2020/05/22/interrupt.html">&lt;p&gt;Second post&lt;/p&gt;</content><author><name></name></author><category term="ARM" /><category term="interrupt" /><category term="bare-metal" /><summary type="html">Second post</summary></entry><entry><title type="html">Machine Vision</title><link href="http://localhost:4000/2020/05/12/Machine-Vision.html" rel="alternate" type="text/html" title="Machine Vision" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/Machine%20Vision</id><content type="html" xml:base="http://localhost:4000/2020/05/12/Machine-Vision.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">MCU&amp;amp;MPU</title><link href="http://localhost:4000/2020/05/12/mcu.html" rel="alternate" type="text/html" title="MCU&amp;MPU" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/mcu</id><content type="html" xml:base="http://localhost:4000/2020/05/12/mcu.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Programming Notes</title><link href="http://localhost:4000/2020/05/12/programming.html" rel="alternate" type="text/html" title="Programming Notes" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/programming</id><content type="html" xml:base="http://localhost:4000/2020/05/12/programming.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Robotics</title><link href="http://localhost:4000/2020/05/12/robotics.html" rel="alternate" type="text/html" title="Robotics" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/robotics</id><content type="html" xml:base="http://localhost:4000/2020/05/12/robotics.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Circuit</title><link href="http://localhost:4000/2020/05/12/Cricuit.html" rel="alternate" type="text/html" title="Circuit" /><published>2020-05-12T10:51:36-04:00</published><updated>2020-05-12T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/Cricuit</id><content type="html" xml:base="http://localhost:4000/2020/05/12/Cricuit.html">&lt;h2 id=&quot;table-of-content&quot;&gt;Table of Content&lt;/h2&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#table-of-content&quot; id=&quot;markdown-toc-table-of-content&quot;&gt;Table of Content&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#push-pull-output-推挽输出&quot; id=&quot;markdown-toc-push-pull-output-推挽输出&quot;&gt;Push-Pull Output (推挽输出)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#open-drain-output开漏输出&quot; id=&quot;markdown-toc-open-drain-output开漏输出&quot;&gt;Open Drain Output(开漏输出)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;push-pull-output-推挽输出&quot;&gt;Push-Pull Output (推挽输出)&lt;/h2&gt;
+&lt;p&gt;https://zhuanlan.zhihu.com/p/41942876&lt;/p&gt;
+
+&lt;h2 id=&quot;open-drain-output开漏输出&quot;&gt;Open Drain Output(开漏输出)&lt;/h2&gt;</content><author><name></name></author><category term="Analog" /><category term="Digital" /><category term="Circuit" /><summary type="html">Table of Content Table of Content</summary></entry><entry><title type="html">Usage of QR code in ROS</title><link href="http://localhost:4000/2020/05/12/QRcode.html" rel="alternate" type="text/html" title="Usage of QR code in ROS" /><published>2020-05-12T10:51:36-04:00</published><updated>2020-05-12T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/QRcode</id><content type="html" xml:base="http://localhost:4000/2020/05/12/QRcode.html">&lt;h2 id=&quot;table-of-content&quot;&gt;Table of Content&lt;/h2&gt;
 &lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#table-of-content&quot; id=&quot;markdown-toc-table-of-content&quot;&gt;Table of Content&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#1-pose-estimation-and-camera-model&quot; id=&quot;markdown-toc-1-pose-estimation-and-camera-model&quot;&gt;1. Pose estimation and camera model&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#intrinsic-model&quot; id=&quot;markdown-toc-intrinsic-model&quot;&gt;Intrinsic model&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#extrinsic-modelpose-estimation&quot; id=&quot;markdown-toc-extrinsic-modelpose-estimation&quot;&gt;Extrinsic model(Pose estimation)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#11-intrinsic-model&quot; id=&quot;markdown-toc-11-intrinsic-model&quot;&gt;1.1 Intrinsic model&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#12-extrinsic-modelpose-estimation&quot; id=&quot;markdown-toc-12-extrinsic-modelpose-estimation&quot;&gt;1.2 Extrinsic model(Pose estimation)&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#2-ar_track_alvar-a-qrcode-package-in-ros&quot; id=&quot;markdown-toc-2-ar_track_alvar-a-qrcode-package-in-ros&quot;&gt;2. Ar_track_alvar (A QRcode package in ROS)&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#introduction-of-ar_track_alvar&quot; id=&quot;markdown-toc-introduction-of-ar_track_alvar&quot;&gt;Introduction of Ar_track_alvar&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#launch-file&quot; id=&quot;markdown-toc-launch-file&quot;&gt;Launch File&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#predefined-ar_track_alvar-message-header&quot; id=&quot;markdown-toc-predefined-ar_track_alvar-message-header&quot;&gt;Predefined Ar_track_alvar Message header&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#example-code-in-c&quot; id=&quot;markdown-toc-example-code-in-c&quot;&gt;Example code in C++&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#21-introduction-of-ar_track_alvar&quot; id=&quot;markdown-toc-21-introduction-of-ar_track_alvar&quot;&gt;2.1 Introduction of Ar_track_alvar&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#22-launch-file&quot; id=&quot;markdown-toc-22-launch-file&quot;&gt;2.2 Launch File&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#23-predefined-ar_track_alvar-message-header&quot; id=&quot;markdown-toc-23-predefined-ar_track_alvar-message-header&quot;&gt;2.3 Predefined Ar_track_alvar Message header&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#24-example-code-in-c&quot; id=&quot;markdown-toc-24-example-code-in-c&quot;&gt;2.4 Example code in C++&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#reference&quot; id=&quot;markdown-toc-reference&quot;&gt;reference&lt;/a&gt;&lt;/li&gt;
@@ -121,7 +349,7 @@ Inside the structure, the corresponding operations can be configured by using fu
 &lt;h2 id=&quot;1-pose-estimation-and-camera-model&quot;&gt;1. Pose estimation and camera model&lt;/h2&gt;
 &lt;p&gt;A camera model can be described by intrinsic model and extrinsic model. Intrinsic model includes those inherent features of one camera, like distortion, focal length, and pixel size. Extrinsic model indicate the pose of a camera inside a world frame.&lt;/p&gt;
 
-&lt;h3 id=&quot;intrinsic-model&quot;&gt;Intrinsic model&lt;/h3&gt;
+&lt;h3 id=&quot;11-intrinsic-model&quot;&gt;1.1 Intrinsic model&lt;/h3&gt;
 &lt;p&gt;The camera model can characterize transformations from a 3D world frame to a 2D
 image plane. Here using K to represent the intrinsic matrix&lt;a href=&quot;#refer-anchor-1&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;. $[P_x,P_y]$ is a translation vector indicating the offset of 2D points in a image plane. Where $[x_{pix},\  y_{pix}]^T$ represents a point in camera image planes (pixel coordinates), $[X_{c},\  Y_{c},\  Z_{c}]^T$ represents a point in 3D camera coordinates.&lt;/p&gt;
 
@@ -142,7 +370,7 @@ image plane. Here using K to represent the intrinsic matrix&lt;a href=&quot;#ref
 &lt;p&gt;Figure. Distortion transfer&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;h3 id=&quot;extrinsic-modelpose-estimation&quot;&gt;Extrinsic model(Pose estimation)&lt;/h3&gt;
+&lt;h3 id=&quot;12-extrinsic-modelpose-estimation&quot;&gt;1.2 Extrinsic model(Pose estimation)&lt;/h3&gt;
 &lt;p&gt;Extrinsic parameters indicate the pose of cameras related to the world frames, which is represented by the rotation matrix $\mathbf{R}$ and translation vector $\mathbf{t}$. The transformation from world frames $\mathbf{P_{w}}$ to camera coordinates $\mathbf{P_{c}}$ is showing below, in equation (3).&lt;/p&gt;
 
 \[(3). \mathbf{P_{c}} = [\mathbf{R} | \mathbf{t}] \mathbf{P_{w}}\]
@@ -175,7 +403,7 @@ coords\ to\ pixel\ coords}}\]
 
 &lt;h2 id=&quot;2-ar_track_alvar-a-qrcode-package-in-ros&quot;&gt;2. Ar_track_alvar (A QRcode package in ROS)&lt;/h2&gt;
 
-&lt;h3 id=&quot;introduction-of-ar_track_alvar&quot;&gt;Introduction of Ar_track_alvar&lt;/h3&gt;
+&lt;h3 id=&quot;21-introduction-of-ar_track_alvar&quot;&gt;2.1 Introduction of Ar_track_alvar&lt;/h3&gt;
 &lt;p&gt;Ar_track_alvar is a package in ROS based on ALVAR library. ALVAR is a
 suite of SDKs and products that help researchers and engineers to create augmented
 reality applications. In Ar_track_alvar, it provides the fast object recognition
@@ -185,7 +413,7 @@ to be detected, such as clear border and unique pattern. Combined with the prior
 knowledge, the size of markers and camera intrinsic matrix, the 2D image plane will
 be transformed to 3D world frame. Here is the official website of &lt;a href=&quot;http://wiki.ros.org/ar_track_alvar&quot;&gt;Ar_track_alvar&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h3 id=&quot;launch-file&quot;&gt;Launch File&lt;/h3&gt;
+&lt;h3 id=&quot;22-launch-file&quot;&gt;2.2 Launch File&lt;/h3&gt;
 
 &lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;launch&amp;gt;&lt;/span&gt;
@@ -225,7 +453,7 @@ be transformed to 3D world frame. Here is the official website of &lt;a href=&qu
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;predefined-ar_track_alvar-message-header&quot;&gt;Predefined Ar_track_alvar Message header&lt;/h3&gt;
+&lt;h3 id=&quot;23-predefined-ar_track_alvar-message-header&quot;&gt;2.3 Predefined Ar_track_alvar Message header&lt;/h3&gt;
 
 &lt;p&gt;The information shared between ROS nodes, processes, is packaged in ‘messages’. A predefined &lt;a href=&quot;http://docs.ros.org/melodic/api/ar_track_alvar_msgs/html/msg/AlvarMarkers.html&quot;&gt;Ar_track_alvar message&lt;/a&gt; is shown:&lt;/p&gt;
 
@@ -243,7 +471,8 @@ be transformed to 3D world frame. Here is the official website of &lt;a href=&qu
 &lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;100%&quot; height=&quot;100%&quot; src=&quot;/blog_photos/Machine_Vision/AR_track_alvar_msg1.png&quot; /&gt;
 &lt;/div&gt;
 
-&lt;h3 id=&quot;example-code-in-c&quot;&gt;Example code in C++&lt;/h3&gt;
+&lt;h3 id=&quot;24-example-code-in-c&quot;&gt;2.4 Example code in C++&lt;/h3&gt;
+&lt;p&gt;//TODO//&lt;/p&gt;
 
 &lt;h2 id=&quot;reference&quot;&gt;reference&lt;/h2&gt;
 
@@ -251,29 +480,4 @@ be transformed to 3D world frame. Here is the official website of &lt;a href=&qu
 &lt;ul&gt;
   &lt;li&gt;[1] &lt;a href=&quot;https://nl.mathworks.com/help/vision/ug/camera-
 calibration.html.&quot;&gt;What is camera calibration.&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><category term="Robotics" /><category term="QRcode" /><category term="Camera-model" /><category term="Localization" /><summary type="html">Table of Content Table of Content</summary></entry><entry><title type="html">First robotics</title><link href="http://localhost:4000/2020/05/12/welcome-to-jekyll.html" rel="alternate" type="text/html" title="First robotics" /><published>2020-05-12T00:00:00-04:00</published><updated>2020-05-12T00:00:00-04:00</updated><id>http://localhost:4000/2020/05/12/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/2020/05/12/welcome-to-jekyll.html">&lt;p&gt;First robotics&lt;/p&gt;</content><author><name></name></author><category term="Robotics" /><summary type="html">First robotics</summary></entry><entry><title type="html">Notes for presonal use</title><link href="http://localhost:4000/2018/05/22/technotes.html" rel="alternate" type="text/html" title="Notes for presonal use" /><published>2018-05-22T17:51:36-04:00</published><updated>2018-05-22T17:51:36-04:00</updated><id>http://localhost:4000/2018/05/22/technotes</id><content type="html" xml:base="http://localhost:4000/2018/05/22/technotes.html">&lt;script language=&quot;JavaScript&quot;&gt;
-            function password() 
-            {
-                var testV = 1;
-                var pass1 = prompt('press password:','');
-                while (testV &lt; 3) 
-                {
-                    if (!pass1)
-                    history.go(-1);
-                    if (pass1 == &quot;7654321&quot;) 
-                    {
-                        alert('right!');
-                        break;
-                    }
-                    testV+=1;
-                    var pass1 =
-                    prompt('wrong:');
-                }
-                if (pass1!=&quot;password&quot; &amp; testV ==3)
-                history.go(-1);
-                return &quot; &quot;;
-            }
-            document.write(password());
-        &lt;/script&gt;
-
-&lt;p&gt;个人在线笔记&lt;/p&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">All blogs!</title><link href="http://localhost:4000/all_blog.html" rel="alternate" type="text/html" title="All blogs!" /><published>2018-05-12T10:51:36-04:00</published><updated>2018-05-12T10:51:36-04:00</updated><id>http://localhost:4000/all_blog_catelogue</id><content type="html" xml:base="http://localhost:4000/all_blog.html">&lt;p&gt;Second post&lt;/p&gt;</content><author><name></name></author><summary type="html">Second post</summary></entry></feed>
+&lt;/ul&gt;</content><author><name></name></author><category term="Robotics" /><category term="QRcode" /><category term="Camera-model" /><category term="Localization" /><summary type="html">Table of Content Table of Content</summary></entry><entry><title type="html">First robotics</title><link href="http://localhost:4000/2020/05/12/welcome-to-jekyll.html" rel="alternate" type="text/html" title="First robotics" /><published>2020-05-12T00:00:00-04:00</published><updated>2020-05-12T00:00:00-04:00</updated><id>http://localhost:4000/2020/05/12/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/2020/05/12/welcome-to-jekyll.html">&lt;p&gt;First robotics&lt;/p&gt;</content><author><name></name></author><category term="Robotics" /><summary type="html">First robotics</summary></entry></feed>

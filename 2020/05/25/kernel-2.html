@@ -10,7 +10,7 @@
 
 
 
-		<title>Linux kernel module beginning (I)</title>
+		<title>Linux DTB -- device tree</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="../../../../assets/css/main.css" />
@@ -60,110 +60,229 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h1>Linux kernel module beginning (I)</h1>
+										<h1>Linux DTB -- device tree</h1>
 									</header>
 
-									<h2 id="1envirnoment-prepare--module-insert">(1).Envirnoment prepare &amp; module insert</h2>
-
-<p>Linux concerns kernel module version critically and it refuses to load kernel drivers that do not match. So at least the Minor version we use to do cross-compiling should match with the target platform. The download address can be find <a href="https://www.kernel.org/">linux kernel download</a>. Or using following command to get history version</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-x.x.xx.tar.xz
-</code></pre></div></div>
-
-<p>To cross-compile linux kernel, some configurations should be done first. The gui menu can be used by</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make menuconfig
-</code></pre></div></div>
-<p>This simply gui can add the kernel module support for our kernel and customize the kernel.
-Using load from linux-x.x.xx/arch/arm/configs can some default platforms. When finish loading and modifying ‘config’ file save it to linux-x.x.xx/.config path. Later the makefile will call the configuration file when doing ‘make’.</p>
-
-<p>Before using the following make command to compile the kernel, making sure the gcc-gnueabinf installed.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make ARCH=arm -j8 CROSS_COMPILE=arm-linux-gnueabihf-
-</code></pre></div></div>
-
-<p>A kernel zImage is generated in <code class="highlighter-rouge">arch/boot</code>, also now we can using the header file in <code class="highlighter-rouge">linux-x.x.xx/include</code> to make our kernel modules.</p>
-
-<p>In our customized kernel module, ‘makefile’ will call the phony command <code class="highlighter-rouge">make modules</code> in makefile under <code class="highlighter-rouge">linux-x.x.xx</code> which help us compile and link the corresponding linux kernel library.</p>
-
-<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">KERNEL_DIR</span><span class="o">=</span>/home/<span class="err">$</span><span class="o">(</span>your_linux-x.x.xx<span class="o">)</span>
-<span class="nv">obj-m</span> <span class="o">:=</span> helloworld.o
-<span class="nl">all</span><span class="o">:</span>
-<span class="err">$(MAKE)</span> <span class="err">-C</span> <span class="err">$(KERNEL_DIR)</span> <span class="nv">M</span><span class="o">=</span><span class="nv">$(CURDIR)</span> modules
-<span class="nl">clean</span><span class="o">:</span>
-<span class="err">$(MAKE)</span> <span class="err">-C</span> <span class="err">$(KERNEL_DIR)</span> <span class="nv">M</span><span class="o">=</span><span class="nv">$(CURDIR)</span> clean
-</code></pre></div></div>
-
-<p>With the command insmod, the module will be inserted into the kernel (Tips: printk function may not print in the terminal, in that case, <code class="highlighter-rouge">echo 8 &gt; /proc/sys/kernel/printk </code>):</p>
-
-<p><img src="/blog_photos/MCU&amp;MPU/ismod.png" alt="AltText-w150" height="50%" width="50%" /></p>
-
-<h2 id="2-register-the-character-device-into-kernel">(2) register the character device into kernel</h2>
-<p>A typical character device driver may include following components.</p>
-<ol>
-  <li>initial &amp; exit function (initial and delete driver module)</li>
-  <li>register &amp; unregister function (inside initial, exit function and used for configurating operations of drivers)</li>
-  <li>file_operation structure (include basic operation accept by drives like: open,read,write and etc..)</li>
-</ol>
-
-<ul>
-  <li>A basic initial and exit function is shown below:</li>
+									<ul id="markdown-toc">
+  <li><a href="#1-device-build" id="markdown-toc-1-device-build">1. Device Build</a></li>
+  <li><a href="#2-device-tree-grammar" id="markdown-toc-2-device-tree-grammar">2. Device tree grammar</a></li>
+  <li><a href="#3-some-specical-node" id="markdown-toc-3-some-specical-node">3. Some specical node</a></li>
+  <li><a href="#4-property" id="markdown-toc-4-property">4. Property</a></li>
+  <li><a href="#5-of-function" id="markdown-toc-5-of-function">5. “of” function</a></li>
 </ul>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define CHRDEVTEST_MAJOR 200
-#define CHRDEVTEST_NAME "chrdevtest"
-</span>
-<span class="k">static</span> <span class="kt">int</span> <span class="n">__init</span> <span class="nf">chrdevtest_init</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-    <span class="kt">int</span> <span class="n">ret</span><span class="p">;</span>
-    <span class="n">ret</span> <span class="o">=</span> <span class="n">register_chrdev</span><span class="p">(</span> <span class="n">CHRDEVTEST_MAJOR</span><span class="p">,</span> <span class="n">CHRDEVTEST_NAME</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">chrdevtest_fops</span><span class="p">);</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">ret</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">){</span>
-        <span class="n">printk</span><span class="p">(</span><span class="s">"chrdevtest_init failed </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span> 
+<h2 id="1-device-build">1. Device Build</h2>
 
-<span class="k">static</span> <span class="kt">void</span> <span class="n">__exit</span> <span class="nf">chrdevtest_exit</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+<p>At <code class="highlighter-rouge">/linux-x.x.xx</code> file path using <code class="highlighter-rouge">make xxx.dtb</code> to compile device tree binary only.<br />
+To build customized dts adding the corresponding name in <code class="highlighter-rouge">/linux-x.x.xx/arch/arm/boot/dts/Makefile</code>.</p>
 
-    <span class="n">unregister_chrdev</span><span class="p">(</span> <span class="n">CHRDEVTEST_MAJOR</span><span class="p">,</span> <span class="n">CHRDEVTEST_NAME</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
+<h2 id="2-device-tree-grammar">2. Device tree grammar</h2>
 
 <ul>
-  <li>Here, the chrdevtest_fops is a realization of file_operation structure.
-Inside the structure, the corresponding operations can be configured by using function pointer:</li>
+  <li>dts beginning from <code class="highlighter-rouge">/</code>.</li>
+  <li>dts may include header <code class="highlighter-rouge">dtsi</code> which means some common device feature shared with certain SOC.</li>
+  <li>Using <code class="highlighter-rouge">$</code> symbol to append device in configured dts file.</li>
+  <li>node defination format: 
+label: node-name@reg-address 
+  we can use <code class="highlighter-rouge">&amp;label </code> to quick acess the node to append some devices.
+  Most of the time the reg-address is the start address of register. It might also be device nums or some thing also, etc: like i2c device number:</li>
 </ul>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="k">struct</span> <span class="n">file_operations</span> <span class="n">chrdevtest_fops</span><span class="o">=</span><span class="p">{</span>
-    <span class="p">.</span><span class="n">owner</span> <span class="o">=</span> <span class="n">THIS_MODULE</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">open</span> <span class="o">=</span> <span class="n">chrdevtest_open</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">release</span> <span class="o">=</span> <span class="n">chrdevtest_release</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">read</span> <span class="o">=</span> <span class="n">chrdevtest_read</span><span class="p">,</span>
-    <span class="p">.</span><span class="n">write</span> <span class="o">=</span> <span class="n">chrdevtest_write</span><span class="p">,</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="o">&amp;</span><span class="n">i2c1</span> <span class="p">{</span>
+	<span class="n">clock</span><span class="o">-</span><span class="n">frequency</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">100000</span><span class="o">&gt;</span><span class="p">;</span>
+	<span class="n">pinctrl</span><span class="o">-</span><span class="n">names</span> <span class="o">=</span> <span class="s">"default"</span><span class="p">;</span>
+	<span class="n">pinctrl</span><span class="o">-</span><span class="mi">0</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">pinctrl_i2c1</span><span class="o">&gt;</span><span class="p">;</span>
+	<span class="n">status</span> <span class="o">=</span> <span class="s">"okay"</span><span class="p">;</span>
+
+	<span class="n">mag3110</span><span class="err">@</span><span class="n">e</span> <span class="p">{</span>
+		<span class="n">compatible</span> <span class="o">=</span> <span class="s">"fsl,mag3110"</span><span class="p">;</span>
+		<span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0xe</span><span class="o">&gt;</span><span class="p">;</span>
+		<span class="n">position</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span><span class="p">;</span>
+	<span class="p">};</span>
+
+	<span class="n">fxls8471</span><span class="err">@</span><span class="mi">1</span><span class="n">e</span> <span class="p">{</span>
+		<span class="n">compatible</span> <span class="o">=</span> <span class="s">"fsl,fxls8471"</span><span class="p">;</span>
+		<span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x1e</span><span class="o">&gt;</span><span class="p">;</span>
+		<span class="n">position</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">;</span>
+		<span class="n">interrupt</span><span class="o">-</span><span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">gpio5</span><span class="o">&gt;</span><span class="p">;</span>
+		<span class="n">interrupts</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mi">0</span> <span class="mi">8</span><span class="o">&gt;</span><span class="p">;</span>
+	<span class="p">};</span>
 <span class="p">};</span>
+
 </code></pre></div></div>
+
+<h2 id="3-some-specical-node">3. Some specical node</h2>
 <ul>
-  <li>Some simple example of operation function is shown below:</li>
+  <li>
+    <p>aliases</p>
+  </li>
+  <li>
+    <p>chosen
+ Uboot bootargs</p>
+  </li>
 </ul>
 
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">int</span> <span class="nf">chrdevtest_open</span><span class="p">(</span><span class="k">struct</span> <span class="nc">inode</span> <span class="o">*</span><span class="n">inode</span><span class="p">,</span> <span class="k">struct</span> <span class="nc">file</span> <span class="o">*</span><span class="n">filp</span><span class="p">){</span>
-    <span class="n">printk</span><span class="p">(</span><span class="s">"chrdevtest_open </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+<h2 id="4-property">4. Property</h2>
 
-<span class="k">static</span> <span class="kt">int</span> <span class="nf">chrdevtest_release</span><span class="p">(</span><span class="k">struct</span> <span class="nc">inode</span> <span class="o">*</span><span class="n">inode</span><span class="p">,</span> <span class="k">struct</span> <span class="nc">file</span> <span class="o">*</span><span class="n">filp</span><span class="p">){</span>
-    <span class="n">printk</span><span class="p">(</span><span class="s">"chrdevtest_release </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+<ul>
+  <li>compatible: The compatible board module can use
+<code class="highlighter-rouge">compatible</code> will compare the property with ‘arch/xxx/mash-xxx’
+and see if any label match with DT_MACHINE_START().</li>
+</ul>
 
-<span class="k">static</span> <span class="kt">ssize_t</span> <span class="nf">chrdevtest_read</span><span class="p">(</span><span class="k">struct</span> <span class="nc">file</span> <span class="o">*</span><span class="n">filp</span><span class="p">,</span> <span class="kt">char</span> <span class="n">__user</span> <span class="o">*</span> <span class="n">buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">count</span><span class="p">,</span> <span class="n">loff_t</span> <span class="o">*</span><span class="n">ppos</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">printk</span><span class="p">(</span><span class="s">"chrdevtest_read </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
- <span class="p">}</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">static</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="k">const</span> <span class="n">imx53_dt_board_compat</span><span class="p">[]</span> <span class="n">__initconst</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="s">"fsl,imx53"</span><span class="p">,</span>
+	<span class="nb">NULL</span>
+<span class="p">};</span>
 
-<span class="k">static</span> <span class="kt">ssize_t</span> <span class="nf">chrdevtest_write</span><span class="p">(</span><span class="k">struct</span> <span class="nc">file</span> <span class="o">*</span><span class="n">filp</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">__user</span> <span class="o">*</span> <span class="n">buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">count</span><span class="p">,</span> <span class="n">loff_t</span> <span class="o">*</span><span class="n">ppos</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">printk</span><span class="p">(</span><span class="s">"chrdevtest_write </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
- <span class="p">}</span>
+<span class="n">DT_MACHINE_START</span><span class="p">(</span><span class="n">IMX53_DT</span><span class="p">,</span> <span class="s">"Freescale i.MX53 (Device Tree Support)"</span><span class="p">)</span>
+	<span class="p">.</span><span class="n">init_early</span>	<span class="o">=</span> <span class="n">imx53_init_early</span><span class="p">,</span>
+	<span class="p">.</span><span class="n">init_machine</span>	<span class="o">=</span> <span class="n">imx53_dt_init</span><span class="p">,</span>
+	<span class="p">.</span><span class="n">init_late</span>	<span class="o">=</span> <span class="n">imx53_init_late</span><span class="p">,</span>
+	<span class="p">.</span><span class="n">dt_compat</span>	<span class="o">=</span> <span class="n">imx53_dt_board_compat</span><span class="p">,</span>
+<span class="n">MACHINE_END</span>
+
 </code></pre></div></div>
+
+<ul>
+  <li>model: exactly name of the module</li>
+  <li>#address-cells  &amp; #size-cells 
+This two properties will influence the format of <reg> in subnodes:
+For example:</reg></li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">spi4</span><span class="p">{</span>
+	<span class="cp">#address-cells = &lt;1&gt;; 
+</span>	<span class="cp">#size-cells = &lt;1&gt;;
+</span>	
+	<span class="n">xxx</span><span class="p">{</span>
+		<span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x10000000</span> <span class="mh">0x1000</span><span class="o">&gt;</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">i2c4</span><span class="p">{</span>
+	<span class="cp">#address-cells = &lt;1&gt;; 
+</span>	<span class="cp">#size-cells = &lt;0&gt;;
+</span>	
+	<span class="n">mag3110</span><span class="err">@</span><span class="n">e</span><span class="p">{</span>
+		<span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x1e</span><span class="o">&gt;</span><span class="p">;</span> 
+	<span class="p">}</span> 
+<span class="p">}</span>
+
+</code></pre></div></div>
+<ul>
+  <li>ranges: address mapping
+blank when there is no address mapping from child-bus-address to parent-bus-address
+For example:</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">soc</span><span class="p">{</span>
+	<span class="p">...</span>
+	<span class="n">ranges</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x0</span> <span class="mh">0xe0000000</span> <span class="mh">0x00100000</span><span class="o">&gt;</span><span class="p">;</span>
+
+
+	<span class="n">serial</span><span class="p">{</span>
+		<span class="p">...</span>
+		<span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x4600</span> <span class="mh">0x100</span><span class="o">&gt;</span><span class="p">;</span>
+		<span class="p">...</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+<p>With this mapping serial device node would be remapped at address 0xe0004600.</p>
+
+<ul>
+  <li>name:</li>
+  <li>
+    <p>device_type: mostly in “cpu”,”mem”</p>
+  </li>
+  <li>Tips: Reference document: 
+Document/devicetree/bindings/xxx</li>
+</ul>
+
+<h2 id="5-of-function">5. “of” function</h2>
+
+<p>“of” function are used to obtain the contain information in the node.</p>
+
+<ul>
+  <li>struct device_node *of_find_node_by_path(const char *path);</li>
+  <li>struct device_node *of_find_node_by_name(struct device_node *from,const char *name);</li>
+  <li>struct device_node *of_find_node_by_type(struct device_node *from,const char *type);
+……</li>
+</ul>
+
+<p>The return structure <code class="highlighter-rouge">device_node</code> is defined in the following:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">device_node</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>  <span class="c1">// node name</span>
+    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">type</span><span class="p">;</span>  <span class="c1">// device type</span>
+    <span class="n">phandle</span> <span class="n">phandle</span><span class="p">;</span>
+    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">full_name</span><span class="p">;</span> <span class="c1">// full name</span>
+    <span class="k">struct</span> <span class="n">fwnode_handle</span> <span class="n">fwnode</span><span class="p">;</span>
+
+    <span class="k">struct</span>  <span class="n">property</span> <span class="o">*</span><span class="n">properties</span><span class="p">;</span> <span class="c1">// property</span>
+    <span class="k">struct</span>  <span class="n">property</span> <span class="o">*</span><span class="n">deadprops</span><span class="p">;</span>    <span class="cm">/* removed properties */</span>
+    <span class="k">struct</span>  <span class="n">device_node</span> <span class="o">*</span><span class="n">parent</span><span class="p">;</span> <span class="c1">// parent node </span>
+    <span class="k">struct</span>  <span class="n">device_node</span> <span class="o">*</span><span class="n">child</span><span class="p">;</span>  <span class="c1">// child node</span>
+    <span class="k">struct</span>  <span class="n">device_node</span> <span class="o">*</span><span class="n">sibling</span><span class="p">;</span>
+<span class="cp">#if defined(CONFIG_OF_KOBJ)
+</span>    <span class="k">struct</span>  <span class="n">kobject</span> <span class="n">kobj</span><span class="p">;</span>
+<span class="cp">#endif
+</span>    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">_flags</span><span class="p">;</span>
+    <span class="kt">void</span>    <span class="o">*</span><span class="n">data</span><span class="p">;</span>
+<span class="cp">#if defined(CONFIG_SPARC)
+</span>    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">path_component_name</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">unique_id</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">of_irq_controller</span> <span class="o">*</span><span class="n">irq_trans</span><span class="p">;</span>
+<span class="cp">#endif
+</span><span class="p">};</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>struct property *of_find_property(const struct device_node *np,const char *name,int *lenp)</li>
+</ul>
+
+<p>Properties node is listed :</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">struct</span> <span class="n">property</span> <span class="p">{</span>
+    <span class="kt">char</span>    <span class="o">*</span><span class="n">name</span><span class="p">;</span>  <span class="c1">//属性名</span>
+    <span class="kt">int</span>     <span class="n">length</span><span class="p">;</span>     <span class="c1">//属性长度</span>
+    <span class="kt">void</span>    <span class="o">*</span><span class="n">value</span><span class="p">;</span> <span class="c1">//属性值</span>
+    <span class="k">struct</span> <span class="n">property</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span> <span class="c1">//下一个属性</span>
+<span class="cp">#if defined(CONFIG_OF_DYNAMIC) || defined(CONFIG_SPARC)
+</span>    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">_flags</span><span class="p">;</span>
+<span class="cp">#endif
+#if defined(CONFIG_OF_PROMTREE)
+</span>    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">unique_id</span><span class="p">;</span>
+<span class="cp">#endif
+#if defined(CONFIG_OF_KOBJ)
+</span>    <span class="k">struct</span> <span class="n">bin_attribute</span> <span class="n">attr</span><span class="p">;</span>
+<span class="cp">#endif
+</span><span class="p">};</span>
+
+</code></pre></div></div>
+
+<p>For reading the properties linux provide the function:</p>
+
+<ul>
+  <li>if the property is a array:</li>
+  <li>
+    <p>int of_property_read_uXX_array(const struct device_node *np, const char *propname, u32 *out_values, size_t sz) (XX = 8 16 32 64)</p>
+  </li>
+  <li>if the property is int:</li>
+  <li>
+    <p>int of_property_read_uXX (const struct device_node *np, const char *propname,u8 *out_values)(XX = 8 16 32 64)</p>
+  </li>
+  <li>if the string:</li>
+  <li>int of_property_read_string(const struct device_node *np,const char *propname, const char **out_string)</li>
+</ul>
+
 
 
 
@@ -173,7 +292,7 @@ Inside the structure, the corresponding operations can be configured by using fu
 									
 									<a href=" ../../../../tag/kernel/index.html" >kernel</a>
 									
-									<a href=" ../../../../tag/dirver/index.html" >Dirver</a>
+									<a href=" ../../../../tag/device-tree/index.html" >Device-tree</a>
 									
 									<head>
 <script src='https://unpkg.com/valine/dist/Valine.min.js'></script>

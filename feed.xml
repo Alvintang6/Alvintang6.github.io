@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-06-05T14:50:29-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jie Tang’s website</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Linux kernel module beginning (I)</title><link href="http://localhost:4000/2020/05/25/kernel.html" rel="alternate" type="text/html" title="Linux kernel module beginning (I)" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/kernel</id><content type="html" xml:base="http://localhost:4000/2020/05/25/kernel.html">&lt;h2 id=&quot;1envirnoment-prepare--module-insert&quot;&gt;(1).Envirnoment prepare &amp;amp; module insert&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-06-09T10:49:21-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jie Tang’s website</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Embedded linux system architecture</title><link href="http://localhost:4000/2020/05/25/embedded_linux.html" rel="alternate" type="text/html" title="Embedded linux system architecture" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/embedded_linux</id><content type="html" xml:base="http://localhost:4000/2020/05/25/embedded_linux.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#1-u-boot&quot; id=&quot;markdown-toc-1-u-boot&quot;&gt;1. U-boot&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#11-source-of-uboot&quot; id=&quot;markdown-toc-11-source-of-uboot&quot;&gt;1.1 source of uboot&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;U-boot(bootloader), Linux Kernel and Rootsf are three key components of a embedded linux system.&lt;/p&gt;
+
+&lt;h2 id=&quot;1-u-boot&quot;&gt;1. U-boot&lt;/h2&gt;
+&lt;p&gt;U-boot is the abbreviation and shorten of ‘Universal Boot Loader’, which support multiple architectures like ARM, MIPS, RISC-V and x86.&lt;/p&gt;
+
+&lt;h3 id=&quot;11-source-of-uboot&quot;&gt;1.1 source of uboot&lt;/h3&gt;</content><author><name></name></author><category term="Linux" /><category term="Uboot" /><category term="Dirver" /></entry><entry><title type="html">Linux kernel module beginning (I)</title><link href="http://localhost:4000/2020/05/25/kernel.html" rel="alternate" type="text/html" title="Linux kernel module beginning (I)" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/kernel</id><content type="html" xml:base="http://localhost:4000/2020/05/25/kernel.html">&lt;h2 id=&quot;1envirnoment-prepare--module-insert&quot;&gt;(1).Envirnoment prepare &amp;amp; module insert&lt;/h2&gt;
 
 &lt;p&gt;Linux concerns kernel module version critically and it refuses to load kernel drivers that do not match. So at least the Minor version we use to do cross-compiling should match with the target platform. The download address can be find &lt;a href=&quot;https://www.kernel.org/&quot;&gt;linux kernel download&lt;/a&gt;. Or using following command to get history version&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-x.x.xx.tar.xz
@@ -98,12 +110,18 @@ Inside the structure, the corresponding operations can be configured by using fu
     &lt;span class=&quot;n&quot;&gt;printk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;chrdevtest_write &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="Linux" /><category term="kernel" /><category term="Dirver" /><summary type="html">(1).Envirnoment prepare &amp;amp; module insert</summary></entry><entry><title type="html">Linux DTB – device tree</title><link href="http://localhost:4000/2020/05/25/kernel-2.html" rel="alternate" type="text/html" title="Linux DTB -- device tree" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/kernel%202</id><content type="html" xml:base="http://localhost:4000/2020/05/25/kernel-2.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="Linux" /><category term="kernel" /><category term="Dirver" /><summary type="html">(1).Envirnoment prepare &amp;amp; module insert</summary></entry><entry><title type="html">Linux DTB – device tree</title><link href="http://localhost:4000/2020/05/25/kernel-dts.html" rel="alternate" type="text/html" title="Linux DTB -- device tree" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/kernel-dts</id><content type="html" xml:base="http://localhost:4000/2020/05/25/kernel-dts.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#1-device-build&quot; id=&quot;markdown-toc-1-device-build&quot;&gt;1. Device Build&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#2-device-tree-grammar&quot; id=&quot;markdown-toc-2-device-tree-grammar&quot;&gt;2. Device tree grammar&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#3-some-specical-node&quot; id=&quot;markdown-toc-3-some-specical-node&quot;&gt;3. Some specical node&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#4-property&quot; id=&quot;markdown-toc-4-property&quot;&gt;4. Property&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#5-of-function&quot; id=&quot;markdown-toc-5-of-function&quot;&gt;5. “of” function&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#6-pinctrl--giop-subsystem&quot; id=&quot;markdown-toc-6-pinctrl--giop-subsystem&quot;&gt;6. Pinctrl &amp;amp; GIOP subsystem&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#61-pinctrl&quot; id=&quot;markdown-toc-61-pinctrl&quot;&gt;6.1. Pinctrl:&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#62-pinctrl-driver&quot; id=&quot;markdown-toc-62-pinctrl-driver&quot;&gt;6.2 pinctrl driver:&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#63-gpio-subsystem&quot; id=&quot;markdown-toc-63-gpio-subsystem&quot;&gt;6.3. GPIO subsystem&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;1-device-build&quot;&gt;1. Device Build&lt;/h2&gt;
@@ -286,10 +304,10 @@ Document/devicetree/bindings/xxx&lt;/li&gt;
 
 &lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//属性名&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;//属性长度&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//属性值&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//下一个属性&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// property name&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// property length&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// property value&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
 &lt;span class=&quot;cp&quot;&gt;#if defined(CONFIG_OF_DYNAMIC) || defined(CONFIG_SPARC)
 &lt;/span&gt;    &lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_flags&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;cp&quot;&gt;#endif
@@ -316,7 +334,130 @@ Document/devicetree/bindings/xxx&lt;/li&gt;
   &lt;/li&gt;
   &lt;li&gt;if the string:&lt;/li&gt;
   &lt;li&gt;int of_property_read_string(const struct device_node *np,const char *propname, const char **out_string)&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><category term="Linux" /><category term="kernel" /><category term="Device-tree" /></entry><entry><title type="html">Interrupt of ARM A7</title><link href="http://localhost:4000/2020/05/22/interrupt.html" rel="alternate" type="text/html" title="Interrupt of ARM A7" /><published>2020-05-22T10:51:36-04:00</published><updated>2020-05-22T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/22/interrupt</id><content type="html" xml:base="http://localhost:4000/2020/05/22/interrupt.html">&lt;p&gt;Second post&lt;/p&gt;</content><author><name></name></author><category term="ARM" /><category term="interrupt" /><category term="bare-metal" /><summary type="html">Second post</summary></entry><entry><title type="html">Machine Vision</title><link href="http://localhost:4000/2020/05/12/Machine-Vision.html" rel="alternate" type="text/html" title="Machine Vision" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/Machine%20Vision</id><content type="html" xml:base="http://localhost:4000/2020/05/12/Machine-Vision.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">MCU&amp;amp;MPU</title><link href="http://localhost:4000/2020/05/12/mcu.html" rel="alternate" type="text/html" title="MCU&amp;MPU" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/mcu</id><content type="html" xml:base="http://localhost:4000/2020/05/12/mcu.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Programming Notes</title><link href="http://localhost:4000/2020/05/12/programming.html" rel="alternate" type="text/html" title="Programming Notes" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/programming</id><content type="html" xml:base="http://localhost:4000/2020/05/12/programming.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Robotics</title><link href="http://localhost:4000/2020/05/12/robotics.html" rel="alternate" type="text/html" title="Robotics" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/robotics</id><content type="html" xml:base="http://localhost:4000/2020/05/12/robotics.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Circuit</title><link href="http://localhost:4000/2020/05/12/Cricuit.html" rel="alternate" type="text/html" title="Circuit" /><published>2020-05-12T10:51:36-04:00</published><updated>2020-05-12T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/Cricuit</id><content type="html" xml:base="http://localhost:4000/2020/05/12/Cricuit.html">&lt;h2 id=&quot;table-of-content&quot;&gt;Table of Content&lt;/h2&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;6-pinctrl--giop-subsystem&quot;&gt;6. Pinctrl &amp;amp; GIOP subsystem&lt;/h2&gt;
+
+&lt;h3 id=&quot;61-pinctrl&quot;&gt;6.1. Pinctrl:&lt;/h3&gt;
+
+&lt;p&gt;Pinctrl system is just other device tree nodes but under iomuxc node.&lt;/p&gt;
+
+&lt;p&gt;For example create a rgb led device tree using GPIO1_IO04, GPIO4_IO20, GPIO4_IO19:&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iomuxc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;pinctrl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;names&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;default&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;pinctrl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pinctrl_hog_1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;nl&quot;&gt;pinctrl_rgb_led:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rgb_led&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;fsl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pins&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;
+                            &lt;span class=&quot;n&quot;&gt;MX6UL_PAD_GPIO1_IO04__GPIO1_IO04&lt;/span&gt;        &lt;span class=&quot;mh&quot;&gt;0x000010B1&lt;/span&gt;
+                            &lt;span class=&quot;n&quot;&gt;MX6UL_PAD_CSI_HSYNC__GPIO4_IO20&lt;/span&gt;         &lt;span class=&quot;mh&quot;&gt;0x000010B1&lt;/span&gt;
+                            &lt;span class=&quot;n&quot;&gt;MX6UL_PAD_CSI_VSYNC__GPIO4_IO19&lt;/span&gt;         &lt;span class=&quot;mh&quot;&gt;0x000010B1&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Here the &lt;code class=&quot;highlighter-rouge&quot;&gt;MX6UL_PAD_GPIO1_IO04__GPIO1_IO04&lt;/code&gt; refers the register(MUX,PAD,INPUT) address related with GPIO1_IO04&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Macro definition of Pin property:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Some marco definition of IO-Pin property can be find in &lt;code class=&quot;highlighter-rouge&quot;&gt;/arch/arm/boot/dts/xxx-pinfun.h&lt;/code&gt; 
+ For example:&lt;/p&gt;
+
+&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;cm&quot;&gt;/*
+ * The pin function ID is a tuple of
+ * &amp;lt;mux_reg conf_reg input_reg mux_mode input_val&amp;gt;
+ */&lt;/span&gt;
+
+ &lt;span class=&quot;cp&quot;&gt;#define MX6UL_PAD_GPIO1_IO04__ENET1_REF_CLK1		0x006c 0x02f8 0x0574 0 1
+&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#define MX6UL_PAD_GPIO1_IO04__PWM3_OUT			    0x006c 0x02f8 0x0000 1 0
+&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#define MX6UL_PAD_GPIO1_IO04__USB_OTG1_PWR		    0x006c 0x02f8 0x0000 2 0
+&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#define MX6UL_PAD_GPIO1_IO04__REF_CLK_24M		    0x006c 0x02f8 0x0000 3 0
+&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#define MX6UL_PAD_GPIO1_IO04__USDHC1_RESET_B		0x006c 0x02f8 0x0000 4 0
+&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#define MX6UL_PAD_GPIO1_IO04__GPIO1_IO04		    0x006c 0x02f8 0x0000 5 0
+&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#define MX6UL_PAD_GPIO1_IO04__ENET2_1588_EVENT0_IN	0x006c 0x02f8 0x0000 6 0
+&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#define MX6UL_PAD_GPIO1_IO04__UART5_DCE_TX		    0x006c 0x02f8 0x0000 8 0
+&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#define MX6UL_PAD_GPIO1_IO04__UART5_DTE_RX		    0x006c 0x02f8 0x0644 8 2
+&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Combining the iomuxc root node inside the &lt;code class=&quot;highlighter-rouge&quot;&gt;xxxx.dtsi&lt;/code&gt; in the following:&lt;/p&gt;
+
+&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+	&lt;span class=&quot;n&quot;&gt;iomuxc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iomuxc&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;20e0000&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+				&lt;span class=&quot;n&quot;&gt;compatible&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;fsl,imx6ul-iomuxc&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+				&lt;span class=&quot;n&quot;&gt;reg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x20e0000&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x4000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+			&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;The explanation of following field: &lt;br /&gt;
+ &amp;lt;mux_reg conf_reg input_reg mux_mode input_val&amp;gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;mux_reg:
+This field indicated the offset of SW_MUX_CTL Register (multiplexer)&lt;br /&gt;
+Address: 20E_0000h base + 6Ch offset = 20E_006Ch&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;conf_reg:
+This field indicated the offset of SW_PAD_CTL Register (pads)&lt;br /&gt;
+Address: 20E_0000h base + 2F8h offset = 20E_02F8h&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;input_reg:
+This field indicated the offset of DATA_SELECT_INPUT DAISY Register.&lt;br /&gt;
+Take UART5_DTE_RX for example:
+Address: 20E_0000h base + 644h offset = 20E_0644h&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;mux_mode:
+the value configured in MUX_CTL register 
+0101 ALT5 — Select mux mode: ALT5 mux port: GPIO1_IO04 of instance: gpio&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;input_val:
+the value will be written into input_reg.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;62-pinctrl-driver&quot;&gt;6.2 pinctrl driver:&lt;/h3&gt;
+
+&lt;p&gt;When pinctrl node compatible property match with the compatible member of platform device structure `  const struct of_device_id ` the .probe function which inside platform_device will be executed.&lt;/p&gt;
+
+&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+	&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;of_device_id&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imx6ul_pinctrl_of_match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compatible&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;fsl,imx6ul-iomuxc&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imx6ul_pinctrl_info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compatible&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;fsl,imx6ull-iomuxc-snvs&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imx6ull_snvs_pinctrl_info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* sentinel */&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+
+   &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;platform_driver&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imx6ul_pinctrl_driver&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	 &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;driver&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;imx6ul-pinctrl&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;of_match_table&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;of_match_ptr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imx6ul_pinctrl_of_match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+	 &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+	 &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;probe&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imx6ul_pinctrl_probe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;inside &lt;code class=&quot;highlighter-rouge&quot;&gt;imx_pinctrl_probe&lt;/code&gt; a pinctrl_register function will register a pinctrl_desc structure.
+ The pinctrl_desc contains all operations to configure the properties of ‘cpu’ or ‘mpu’ chips.
+ like :&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;pinconf_set : set the Pads of pins.&lt;/li&gt;
+  &lt;li&gt;pmx_set : set the multiplex of pins.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;63-gpio-subsystem&quot;&gt;6.3. GPIO subsystem&lt;/h3&gt;
+
+&lt;p&gt;After we configured the pins as GPIO. The next step is setting some properties of our GPIO pins. Here the GPIO subsystem can be used to do this work.&lt;/p&gt;
+
+&lt;p&gt;&lt;span style=&quot;color:red;&quot;&gt;Tips:&lt;/span&gt;&lt;/p&gt;</content><author><name></name></author><category term="Linux" /><category term="kernel" /><category term="Device-tree" /></entry><entry><title type="html">Interrupt of ARM A7</title><link href="http://localhost:4000/2020/05/22/interrupt.html" rel="alternate" type="text/html" title="Interrupt of ARM A7" /><published>2020-05-22T10:51:36-04:00</published><updated>2020-05-22T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/22/interrupt</id><content type="html" xml:base="http://localhost:4000/2020/05/22/interrupt.html">&lt;p&gt;Second post&lt;/p&gt;</content><author><name></name></author><category term="ARM" /><category term="interrupt" /><category term="bare-metal" /><summary type="html">Second post</summary></entry><entry><title type="html">Machine Vision</title><link href="http://localhost:4000/2020/05/12/Machine-Vision.html" rel="alternate" type="text/html" title="Machine Vision" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/Machine%20Vision</id><content type="html" xml:base="http://localhost:4000/2020/05/12/Machine-Vision.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">MCU&amp;amp;MPU</title><link href="http://localhost:4000/2020/05/12/mcu.html" rel="alternate" type="text/html" title="MCU&amp;MPU" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/mcu</id><content type="html" xml:base="http://localhost:4000/2020/05/12/mcu.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Programming Notes</title><link href="http://localhost:4000/2020/05/12/programming.html" rel="alternate" type="text/html" title="Programming Notes" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/programming</id><content type="html" xml:base="http://localhost:4000/2020/05/12/programming.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Robotics</title><link href="http://localhost:4000/2020/05/12/robotics.html" rel="alternate" type="text/html" title="Robotics" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/robotics</id><content type="html" xml:base="http://localhost:4000/2020/05/12/robotics.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Circuit</title><link href="http://localhost:4000/2020/05/12/Cricuit.html" rel="alternate" type="text/html" title="Circuit" /><published>2020-05-12T10:51:36-04:00</published><updated>2020-05-12T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/Cricuit</id><content type="html" xml:base="http://localhost:4000/2020/05/12/Cricuit.html">&lt;h2 id=&quot;table-of-content&quot;&gt;Table of Content&lt;/h2&gt;
 &lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#table-of-content&quot; id=&quot;markdown-toc-table-of-content&quot;&gt;Table of Content&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#push-pull-output-推挽输出&quot; id=&quot;markdown-toc-push-pull-output-推挽输出&quot;&gt;Push-Pull Output (推挽输出)&lt;/a&gt;&lt;/li&gt;
@@ -326,158 +467,4 @@ Document/devicetree/bindings/xxx&lt;/li&gt;
 &lt;h2 id=&quot;push-pull-output-推挽输出&quot;&gt;Push-Pull Output (推挽输出)&lt;/h2&gt;
 &lt;p&gt;https://zhuanlan.zhihu.com/p/41942876&lt;/p&gt;
 
-&lt;h2 id=&quot;open-drain-output开漏输出&quot;&gt;Open Drain Output(开漏输出)&lt;/h2&gt;</content><author><name></name></author><category term="Analog" /><category term="Digital" /><category term="Circuit" /><summary type="html">Table of Content Table of Content</summary></entry><entry><title type="html">Usage of QR code in ROS</title><link href="http://localhost:4000/2020/05/12/QRcode.html" rel="alternate" type="text/html" title="Usage of QR code in ROS" /><published>2020-05-12T10:51:36-04:00</published><updated>2020-05-12T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/QRcode</id><content type="html" xml:base="http://localhost:4000/2020/05/12/QRcode.html">&lt;h2 id=&quot;table-of-content&quot;&gt;Table of Content&lt;/h2&gt;
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#table-of-content&quot; id=&quot;markdown-toc-table-of-content&quot;&gt;Table of Content&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#1-pose-estimation-and-camera-model&quot; id=&quot;markdown-toc-1-pose-estimation-and-camera-model&quot;&gt;1. Pose estimation and camera model&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#11-intrinsic-model&quot; id=&quot;markdown-toc-11-intrinsic-model&quot;&gt;1.1 Intrinsic model&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#12-extrinsic-modelpose-estimation&quot; id=&quot;markdown-toc-12-extrinsic-modelpose-estimation&quot;&gt;1.2 Extrinsic model(Pose estimation)&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#2-ar_track_alvar-a-qrcode-package-in-ros&quot; id=&quot;markdown-toc-2-ar_track_alvar-a-qrcode-package-in-ros&quot;&gt;2. Ar_track_alvar (A QRcode package in ROS)&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#21-introduction-of-ar_track_alvar&quot; id=&quot;markdown-toc-21-introduction-of-ar_track_alvar&quot;&gt;2.1 Introduction of Ar_track_alvar&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#22-launch-file&quot; id=&quot;markdown-toc-22-launch-file&quot;&gt;2.2 Launch File&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#23-predefined-ar_track_alvar-message-header&quot; id=&quot;markdown-toc-23-predefined-ar_track_alvar-message-header&quot;&gt;2.3 Predefined Ar_track_alvar Message header&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#24-example-code-in-c&quot; id=&quot;markdown-toc-24-example-code-in-c&quot;&gt;2.4 Example code in C++&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#reference&quot; id=&quot;markdown-toc-reference&quot;&gt;reference&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Using vision to do the indoor localization is one of the most feasible and general way currently. Especially in robotics, AR tag, which is a kind of QR code liked marker, is widely used in ROS,Robotic operation system.&lt;/p&gt;
-
-&lt;h2 id=&quot;1-pose-estimation-and-camera-model&quot;&gt;1. Pose estimation and camera model&lt;/h2&gt;
-&lt;p&gt;A camera model can be described by intrinsic model and extrinsic model. Intrinsic model includes those inherent features of one camera, like distortion, focal length, and pixel size. Extrinsic model indicate the pose of a camera inside a world frame.&lt;/p&gt;
-
-&lt;h3 id=&quot;11-intrinsic-model&quot;&gt;1.1 Intrinsic model&lt;/h3&gt;
-&lt;p&gt;The camera model can characterize transformations from a 3D world frame to a 2D
-image plane. Here using K to represent the intrinsic matrix&lt;a href=&quot;#refer-anchor-1&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;. $[P_x,P_y]$ is a translation vector indicating the offset of 2D points in a image plane. Where $[x_{pix},\  y_{pix}]^T$ represents a point in camera image planes (pixel coordinates), $[X_{c},\  Y_{c},\  Z_{c}]^T$ represents a point in 3D camera coordinates.&lt;/p&gt;
-
-\[(1). 
- \left[\begin{array}{c}{x_{p i x}} \\ {y_{p i x}} \\ {1}\end{array}\right]=\textbf{K}
- \left[\begin{array}{c}{X_{c}} \\ {Y_{c}} \\ {Z_{c}}\end{array}\right],Where\ \textbf{K}=\underbrace{\left[\begin{array}{ccc}{f_{x}} &amp;amp; 0 &amp;amp; {p_{x}} \\ {0} &amp;amp; {f_{y}} &amp;amp; {p_{y}}  \\ {0} &amp;amp; {0} &amp;amp; {1} \end{array}\right]}_{intrinsic\ matrix}\]
-
-&lt;p&gt;Distortion caused by optical components in the camera is another problem in real world image systems. The distortion of an image can be characterized by using a mapping function $\textbf{D}$, $[x_{distorted},\  y_{distorted}]^T=D([x_{ideal},\  y_{ideal}]^T)$ :&lt;/p&gt;
-
-\[(2). 
- \begin{array}{l}{x_{\text {distorted }}=x_{\text {ideal}}\left(1+k_{1}^{\star} r^{2}+k_{2}^{\star} r^{4}+k_{3}^{\star} r^{6}\right)} \\ {y_{\text {distorted }}=y_{\text {ideal}}\left(1+k_{1}^{\star} r^{2}+k_{2}^{\star} r^{4}+k_{3}^{\star} r^{6}\right)}\end{array}\]
-
-&lt;p&gt;Where $[x_{distorted},\  y_{distorted}]^T$ represents the point in distorted images, $[x_{ideal},\  y_{ideal}]^T$ means the point in ideal images. $\textbf{r}$ expresses the distance to the image center, $k_1,k_2,k_3$ are distortion factors, which respect to different camera and lens.&lt;/p&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;50%&quot; height=&quot;50%&quot; src=&quot;/blog_photos/Machine_Vision/camera_3D2D.jpg&quot; /&gt;&lt;p&gt;Figure. Camera model transform point from 3D to 2D&lt;/p&gt;
-
-&lt;img width=&quot;28%&quot; height=&quot;28%&quot; src=&quot;/blog_photos/Machine_Vision/distortion_image.jpg&quot; /&gt;
-&lt;p&gt;Figure. Distortion transfer&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;12-extrinsic-modelpose-estimation&quot;&gt;1.2 Extrinsic model(Pose estimation)&lt;/h3&gt;
-&lt;p&gt;Extrinsic parameters indicate the pose of cameras related to the world frames, which is represented by the rotation matrix $\mathbf{R}$ and translation vector $\mathbf{t}$. The transformation from world frames $\mathbf{P_{w}}$ to camera coordinates $\mathbf{P_{c}}$ is showing below, in equation (3).&lt;/p&gt;
-
-\[(3). \mathbf{P_{c}} = [\mathbf{R} | \mathbf{t}] \mathbf{P_{w}}\]
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;50%&quot; height=&quot;50%&quot; src=&quot;/blog_photos/Machine_Vision/Transfomation_matrix.jpg&quot; /&gt;&lt;p&gt;Figure. The transformation from world frame to camera coordinate&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Combining the equation(1), (2), and (3), the transformation from world coordinates to image planes can be established in equation (4).&lt;/p&gt;
-
-\[(4).
-{	\left[ \begin{array}{c} {x_{pix}}\\y_{pix}\\{1}\end{array}\right ]}{
-	=\textbf{D}(
-	{
-		\textbf{K}\left[ \begin{array}{c}
-		x_c\\
-		y_c\\
-		z_c
-		\end{array} 
-		\right ]}
-	)}
-{
-	=\underbrace{ \textbf{D}(
-	\underbrace{\textbf{K}\underbrace{[\textbf{R}|\textbf{t}]
-	{
-		\left[ \begin{array}{c}	X_w\\Y_w\\Z_w\\1\end{array}\right ]}
-	)}_{world\ coords\ to\ camera\ coords}}_{camera\ coords\ to\ film\ coords}}_{film\
-coords\ to\ pixel\ coords}}\]
-
-&lt;p&gt;In (4), the intrinsic parameters, $\textbf{D}$, and $\textbf{K}$ can be identified by doing camera calibration and the $\mathbf{P_w}$ can be known by using prior designed artificial features. Finally, $\textbf{R}$ and $\textbf{t}$ can be retrieved By solving (4).&lt;/p&gt;
-
-&lt;h2 id=&quot;2-ar_track_alvar-a-qrcode-package-in-ros&quot;&gt;2. Ar_track_alvar (A QRcode package in ROS)&lt;/h2&gt;
-
-&lt;h3 id=&quot;21-introduction-of-ar_track_alvar&quot;&gt;2.1 Introduction of Ar_track_alvar&lt;/h3&gt;
-&lt;p&gt;Ar_track_alvar is a package in ROS based on ALVAR library. ALVAR is a
-suite of SDKs and products that help researchers and engineers to create augmented
-reality applications. In Ar_track_alvar, it provides the fast object recognition
-and tracking through fiducials. The fiducials or markers can be also generated with
-Ar_track_alvar, which looks like QR-code. The markers with several features help
-to be detected, such as clear border and unique pattern. Combined with the prior
-knowledge, the size of markers and camera intrinsic matrix, the 2D image plane will
-be transformed to 3D world frame. Here is the official website of &lt;a href=&quot;http://wiki.ros.org/ar_track_alvar&quot;&gt;Ar_track_alvar&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;22-launch-file&quot;&gt;2.2 Launch File&lt;/h3&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;launch&amp;gt;&lt;/span&gt;
-   &lt;span class=&quot;nt&quot;&gt;&amp;lt;node&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;usb_cam&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;pkg=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;usb_cam&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;usb_cam_node&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;output=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;screen&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;param&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;video_device&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/dev/video1&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;param&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;image_width&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1280&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;param&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;image_height&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;720&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;param&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;pixel_format&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;yuyv&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;param&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;camera_frame_id&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;usb_cam&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;param&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;io_method&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;mmap&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;param&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;camera_info_url&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;string&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;file://$(find robot_vision)/launch/calib170/white.yaml&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/node&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;node&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;pkg=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tf&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;static_transform_publisher&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;world_to_cam&quot;&lt;/span&gt; 
-          &lt;span class=&quot;na&quot;&gt;args=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0 0 0.5 1.04 0 -1.57 /map usb_cam 10&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;arg&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;marker_size&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;default=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;4.5&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;arg&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;max_new_marker_error&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;default=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0.08&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;arg&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;max_track_error&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;default=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0.2&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;arg&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cam_image_topic&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;default=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/usb_cam/image_raw&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;arg&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cam_info_topic&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;default=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/usb_cam/camera_info&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;arg&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;output_frame&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;default=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;usb_cam&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-
-
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;node&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ar_track_alvar&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;pkg=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ar_track_alvar&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;individualMarkersNoKinect&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;respawn=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;output=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;screen&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;param&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;marker_size&quot;&lt;/span&gt;           &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;double&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;$(arg marker_size)&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;param&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;max_new_marker_error&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;double&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;$(arg max_new_marker_error)&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;param&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;max_track_error&quot;&lt;/span&gt;       &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;double&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;$(arg max_track_error)&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;param&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;output_frame&quot;&lt;/span&gt;          &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;string&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;$(arg output_frame)&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;remap&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;from=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;camera_image&quot;&lt;/span&gt;  &lt;span class=&quot;na&quot;&gt;to=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;$(arg cam_image_topic)&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;&amp;lt;remap&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;from=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;camera_info&quot;&lt;/span&gt;   &lt;span class=&quot;na&quot;&gt;to=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;$(arg cam_info_topic)&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-	&lt;span class=&quot;nt&quot;&gt;&amp;lt;/node&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/launch&amp;gt;&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;23-predefined-ar_track_alvar-message-header&quot;&gt;2.3 Predefined Ar_track_alvar Message header&lt;/h3&gt;
-
-&lt;p&gt;The information shared between ROS nodes, processes, is packaged in ‘messages’. A predefined &lt;a href=&quot;http://docs.ros.org/melodic/api/ar_track_alvar_msgs/html/msg/AlvarMarkers.html&quot;&gt;Ar_track_alvar message&lt;/a&gt; is shown:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;AlvarMarkers message:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;One AlvarMarker&lt;strong&gt;s&lt;/strong&gt; message may includes several ‘AlvarMarker’ message, the number of ‘AlvarMarker’ message depends on how many marks are found by camera.&lt;/p&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;100%&quot; height=&quot;100%&quot; src=&quot;/blog_photos/Machine_Vision/AR_track_alvar_msgs.png&quot; /&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;AlvarMarker message:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;AlvarMarker message contains the 6 degrees of freedom pose information.&lt;/p&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;100%&quot; height=&quot;100%&quot; src=&quot;/blog_photos/Machine_Vision/AR_track_alvar_msg1.png&quot; /&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;24-example-code-in-c&quot;&gt;2.4 Example code in C++&lt;/h3&gt;
-&lt;p&gt;//TODO//&lt;/p&gt;
-
-&lt;h2 id=&quot;reference&quot;&gt;reference&lt;/h2&gt;
-
-&lt;div id=&quot;refer-anchor-1&quot;&gt;&lt;/div&gt;
-&lt;ul&gt;
-  &lt;li&gt;[1] &lt;a href=&quot;https://nl.mathworks.com/help/vision/ug/camera-
-calibration.html.&quot;&gt;What is camera calibration.&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><category term="Robotics" /><category term="QRcode" /><category term="Camera-model" /><category term="Localization" /><summary type="html">Table of Content Table of Content</summary></entry><entry><title type="html">First robotics</title><link href="http://localhost:4000/2020/05/12/welcome-to-jekyll.html" rel="alternate" type="text/html" title="First robotics" /><published>2020-05-12T00:00:00-04:00</published><updated>2020-05-12T00:00:00-04:00</updated><id>http://localhost:4000/2020/05/12/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/2020/05/12/welcome-to-jekyll.html">&lt;p&gt;First robotics&lt;/p&gt;</content><author><name></name></author><category term="Robotics" /><summary type="html">First robotics</summary></entry></feed>
+&lt;h2 id=&quot;open-drain-output开漏输出&quot;&gt;Open Drain Output(开漏输出)&lt;/h2&gt;</content><author><name></name></author><category term="Analog" /><category term="Digital" /><category term="Circuit" /><summary type="html">Table of Content Table of Content</summary></entry><entry><title type="html">First robotics</title><link href="http://localhost:4000/2020/05/12/welcome-to-jekyll.html" rel="alternate" type="text/html" title="First robotics" /><published>2020-05-12T00:00:00-04:00</published><updated>2020-05-12T00:00:00-04:00</updated><id>http://localhost:4000/2020/05/12/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/2020/05/12/welcome-to-jekyll.html">&lt;p&gt;First robotics&lt;/p&gt;</content><author><name></name></author><category term="Robotics" /><summary type="html">First robotics</summary></entry></feed>

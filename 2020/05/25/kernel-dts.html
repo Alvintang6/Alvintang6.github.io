@@ -69,6 +69,12 @@
   <li><a href="#3-some-specical-node" id="markdown-toc-3-some-specical-node">3. Some specical node</a></li>
   <li><a href="#4-property" id="markdown-toc-4-property">4. Property</a></li>
   <li><a href="#5-of-function" id="markdown-toc-5-of-function">5. “of” function</a></li>
+  <li><a href="#6-pinctrl--giop-subsystem" id="markdown-toc-6-pinctrl--giop-subsystem">6. Pinctrl &amp; GIOP subsystem</a>    <ul>
+      <li><a href="#61-pinctrl" id="markdown-toc-61-pinctrl">6.1. Pinctrl:</a></li>
+      <li><a href="#62-pinctrl-driver" id="markdown-toc-62-pinctrl-driver">6.2 pinctrl driver:</a></li>
+      <li><a href="#63-gpio-subsystem" id="markdown-toc-63-gpio-subsystem">6.3. GPIO subsystem</a></li>
+    </ul>
+  </li>
 </ul>
 
 <h2 id="1-device-build">1. Device Build</h2>
@@ -251,10 +257,10 @@ Document/devicetree/bindings/xxx</li>
 
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="k">struct</span> <span class="n">property</span> <span class="p">{</span>
-    <span class="kt">char</span>    <span class="o">*</span><span class="n">name</span><span class="p">;</span>  <span class="c1">//属性名</span>
-    <span class="kt">int</span>     <span class="n">length</span><span class="p">;</span>     <span class="c1">//属性长度</span>
-    <span class="kt">void</span>    <span class="o">*</span><span class="n">value</span><span class="p">;</span> <span class="c1">//属性值</span>
-    <span class="k">struct</span> <span class="n">property</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span> <span class="c1">//下一个属性</span>
+    <span class="kt">char</span>    <span class="o">*</span><span class="n">name</span><span class="p">;</span>  <span class="c1">// property name</span>
+    <span class="kt">int</span>     <span class="n">length</span><span class="p">;</span>     <span class="c1">// property length</span>
+    <span class="kt">void</span>    <span class="o">*</span><span class="n">value</span><span class="p">;</span> <span class="c1">// property value</span>
+    <span class="k">struct</span> <span class="n">property</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span> 
 <span class="cp">#if defined(CONFIG_OF_DYNAMIC) || defined(CONFIG_SPARC)
 </span>    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">_flags</span><span class="p">;</span>
 <span class="cp">#endif
@@ -283,6 +289,128 @@ Document/devicetree/bindings/xxx</li>
   <li>int of_property_read_string(const struct device_node *np,const char *propname, const char **out_string)</li>
 </ul>
 
+<h2 id="6-pinctrl--giop-subsystem">6. Pinctrl &amp; GIOP subsystem</h2>
+
+<h3 id="61-pinctrl">6.1. Pinctrl:</h3>
+
+<p>Pinctrl system is just other device tree nodes but under iomuxc node.</p>
+
+<p>For example create a rgb led device tree using GPIO1_IO04, GPIO4_IO20, GPIO4_IO19:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="o">&amp;</span><span class="n">iomuxc</span> <span class="p">{</span>
+    <span class="n">pinctrl</span><span class="o">-</span><span class="n">names</span> <span class="o">=</span> <span class="s">"default"</span><span class="p">;</span>
+    <span class="n">pinctrl</span><span class="o">-</span><span class="mi">0</span> <span class="o">=</span> <span class="o">&lt;&amp;</span><span class="n">pinctrl_hog_1</span><span class="o">&gt;</span><span class="p">;</span>
+
+    <span class="nl">pinctrl_rgb_led:</span><span class="n">rgb_led</span><span class="p">{</span>
+                    <span class="n">fsl</span><span class="p">,</span><span class="n">pins</span> <span class="o">=</span> <span class="o">&lt;</span>
+                            <span class="n">MX6UL_PAD_GPIO1_IO04__GPIO1_IO04</span>        <span class="mh">0x000010B1</span>
+                            <span class="n">MX6UL_PAD_CSI_HSYNC__GPIO4_IO20</span>         <span class="mh">0x000010B1</span>
+                            <span class="n">MX6UL_PAD_CSI_VSYNC__GPIO4_IO19</span>         <span class="mh">0x000010B1</span>
+                    <span class="o">&gt;</span><span class="p">;</span>
+            <span class="p">};</span>
+
+</code></pre></div></div>
+<p>Here the <code class="highlighter-rouge">MX6UL_PAD_GPIO1_IO04__GPIO1_IO04</code> refers the register(MUX,PAD,INPUT) address related with GPIO1_IO04</p>
+
+<ul>
+  <li>Macro definition of Pin property:</li>
+</ul>
+
+<p>Some marco definition of IO-Pin property can be find in <code class="highlighter-rouge">/arch/arm/boot/dts/xxx-pinfun.h</code> 
+ For example:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="cm">/*
+ * The pin function ID is a tuple of
+ * &lt;mux_reg conf_reg input_reg mux_mode input_val&gt;
+ */</span>
+
+ <span class="cp">#define MX6UL_PAD_GPIO1_IO04__ENET1_REF_CLK1		0x006c 0x02f8 0x0574 0 1
+</span> <span class="cp">#define MX6UL_PAD_GPIO1_IO04__PWM3_OUT			    0x006c 0x02f8 0x0000 1 0
+</span> <span class="cp">#define MX6UL_PAD_GPIO1_IO04__USB_OTG1_PWR		    0x006c 0x02f8 0x0000 2 0
+</span> <span class="cp">#define MX6UL_PAD_GPIO1_IO04__REF_CLK_24M		    0x006c 0x02f8 0x0000 3 0
+</span> <span class="cp">#define MX6UL_PAD_GPIO1_IO04__USDHC1_RESET_B		0x006c 0x02f8 0x0000 4 0
+</span> <span class="cp">#define MX6UL_PAD_GPIO1_IO04__GPIO1_IO04		    0x006c 0x02f8 0x0000 5 0
+</span> <span class="cp">#define MX6UL_PAD_GPIO1_IO04__ENET2_1588_EVENT0_IN	0x006c 0x02f8 0x0000 6 0
+</span> <span class="cp">#define MX6UL_PAD_GPIO1_IO04__UART5_DCE_TX		    0x006c 0x02f8 0x0000 8 0
+</span> <span class="cp">#define MX6UL_PAD_GPIO1_IO04__UART5_DTE_RX		    0x006c 0x02f8 0x0644 8 2
+</span>
+</code></pre></div></div>
+
+<p>Combining the iomuxc root node inside the <code class="highlighter-rouge">xxxx.dtsi</code> in the following:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+	<span class="n">iomuxc</span><span class="o">:</span> <span class="n">iomuxc</span><span class="err">@</span><span class="mf">20e0000</span> <span class="p">{</span>
+				<span class="n">compatible</span> <span class="o">=</span> <span class="s">"fsl,imx6ul-iomuxc"</span><span class="p">;</span>
+				<span class="n">reg</span> <span class="o">=</span> <span class="o">&lt;</span><span class="mh">0x20e0000</span> <span class="mh">0x4000</span><span class="o">&gt;</span><span class="p">;</span>
+			<span class="p">};</span>
+
+</code></pre></div></div>
+<p>The explanation of following field: <br />
+ &lt;mux_reg conf_reg input_reg mux_mode input_val&gt;</p>
+<ul>
+  <li>
+    <p>mux_reg:
+This field indicated the offset of SW_MUX_CTL Register (multiplexer)<br />
+Address: 20E_0000h base + 6Ch offset = 20E_006Ch</p>
+  </li>
+  <li>
+    <p>conf_reg:
+This field indicated the offset of SW_PAD_CTL Register (pads)<br />
+Address: 20E_0000h base + 2F8h offset = 20E_02F8h</p>
+  </li>
+  <li>
+    <p>input_reg:
+This field indicated the offset of DATA_SELECT_INPUT DAISY Register.<br />
+Take UART5_DTE_RX for example:
+Address: 20E_0000h base + 644h offset = 20E_0644h</p>
+  </li>
+  <li>
+    <p>mux_mode:
+the value configured in MUX_CTL register 
+0101 ALT5 — Select mux mode: ALT5 mux port: GPIO1_IO04 of instance: gpio</p>
+  </li>
+  <li>
+    <p>input_val:
+the value will be written into input_reg.</p>
+  </li>
+</ul>
+
+<h3 id="62-pinctrl-driver">6.2 pinctrl driver:</h3>
+
+<p>When pinctrl node compatible property match with the compatible member of platform device structure `  const struct of_device_id ` the .probe function which inside platform_device will be executed.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+	<span class="k">static</span> <span class="k">const</span> <span class="k">struct</span> <span class="nc">of_device_id</span> <span class="n">imx6ul_pinctrl_of_match</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="p">{</span> <span class="p">.</span><span class="n">compatible</span> <span class="o">=</span> <span class="s">"fsl,imx6ul-iomuxc"</span><span class="p">,</span> <span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">imx6ul_pinctrl_info</span><span class="p">,</span> <span class="p">},</span>
+		<span class="p">{</span> <span class="p">.</span><span class="n">compatible</span> <span class="o">=</span> <span class="s">"fsl,imx6ull-iomuxc-snvs"</span><span class="p">,</span> <span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">imx6ull_snvs_pinctrl_info</span><span class="p">,</span> <span class="p">},</span>
+		<span class="p">{</span> <span class="cm">/* sentinel */</span> <span class="p">}</span>
+	<span class="p">};</span>
+
+
+   <span class="k">static</span> <span class="k">struct</span> <span class="nc">platform_driver</span> <span class="n">imx6ul_pinctrl_driver</span> <span class="o">=</span> <span class="p">{</span>
+	 <span class="p">.</span><span class="n">driver</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">"imx6ul-pinctrl"</span><span class="p">,</span>
+		<span class="p">.</span><span class="n">of_match_table</span> <span class="o">=</span> <span class="n">of_match_ptr</span><span class="p">(</span><span class="n">imx6ul_pinctrl_of_match</span><span class="p">),</span>
+	 <span class="p">},</span>
+	 <span class="p">.</span><span class="n">probe</span> <span class="o">=</span> <span class="n">imx6ul_pinctrl_probe</span><span class="p">,</span>
+   <span class="p">};</span>
+
+</code></pre></div></div>
+<p>inside <code class="highlighter-rouge">imx_pinctrl_probe</code> a pinctrl_register function will register a pinctrl_desc structure.
+ The pinctrl_desc contains all operations to configure the properties of ‘cpu’ or ‘mpu’ chips.
+ like :</p>
+<ul>
+  <li>pinconf_set : set the Pads of pins.</li>
+  <li>pmx_set : set the multiplex of pins.</li>
+</ul>
+
+<h3 id="63-gpio-subsystem">6.3. GPIO subsystem</h3>
+
+<p>After we configured the pins as GPIO. The next step is setting some properties of our GPIO pins. Here the GPIO subsystem can be used to do this work.</p>
+
+<p><span style="color:red;">Tips:</span></p>
 
 
 
@@ -381,6 +509,8 @@ Document/devicetree/bindings/xxx</li>
 										
 										
 										
+										
+										
 
 										<li>
 											<a href="/2020/05/12/robotics.html">Robotics</a><span class="opener" style="font-size: 0.1;"></span>
@@ -418,6 +548,9 @@ Document/devicetree/bindings/xxx</li>
 
 												<li><a href="/2020/05/12/welcome-to-jekyll.html">First robotics</a></li>
 								
+												
+												
+												
 												
 												
 												
@@ -474,6 +607,9 @@ Document/devicetree/bindings/xxx</li>
 												
 												
 												
+												
+												
+												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -489,7 +625,7 @@ Document/devicetree/bindings/xxx</li>
 												
 																						
 
-												<li><a href="/2020/05/25/kernel-2.html">Linux DTB -- device tree</a></li>
+												<li><a href="/2020/05/25/kernel-dts.html">Linux DTB -- device tree</a></li>
 								
 												
 												
@@ -497,6 +633,13 @@ Document/devicetree/bindings/xxx</li>
 																						
 
 												<li><a href="/2020/05/25/kernel.html">Linux kernel module beginning (I)</a></li>
+								
+												
+												
+												
+																						
+
+												<li><a href="/2020/05/25/embedded_linux.html">Embedded linux system architecture</a></li>
 								
 												
 												
@@ -568,16 +711,19 @@ Document/devicetree/bindings/xxx</li>
 												
 												
 												
+												
+												
+												
+												
+												
+												
+												
+												
+												
 																						
 
-												<li><a href="/2020/05/12/QRcode.html">Usage of QR code in ROS</a></li>
+												<li><a href="/2019/12/12/QRcode.html">Usage of QR code in ROS</a></li>
 								
-												
-												
-												
-												
-												
-												
 												
 												
 												
@@ -644,6 +790,9 @@ Document/devicetree/bindings/xxx</li>
 												
 												
 												
+												
+												
+												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -675,31 +824,7 @@ Document/devicetree/bindings/xxx</li>
 									  
 									  
 
-									  <a href=" ../../../../tag/robotics/index.html" style="font-size: 18pt; color: #000;">Robotics</a>
-									
-									  
-									  
-									  
-									  
-									  
-
-									  <a href=" ../../../../tag/analog/index.html" style="font-size: 9pt; color: #999;">Analog</a>
-									
-									  
-									  
-									  
-									  
-									  
-
-									  <a href=" ../../../../tag/digital/index.html" style="font-size: 9pt; color: #999;">Digital</a>
-									
-									  
-									  
-									  
-									  
-									  
-
-									  <a href=" ../../../../tag/circuit/index.html" style="font-size: 9pt; color: #999;">Circuit</a>
+									  <a href=" ../../../../tag/robotics/index.html" style="font-size: 13.5pt; color: #444;">Robotics</a>
 									
 									  
 									  
@@ -724,6 +849,30 @@ Document/devicetree/bindings/xxx</li>
 									  
 
 									  <a href=" ../../../../tag/localization/index.html" style="font-size: 9pt; color: #999;">Localization</a>
+									
+									  
+									  
+									  
+									  
+									  
+
+									  <a href=" ../../../../tag/analog/index.html" style="font-size: 9pt; color: #999;">Analog</a>
+									
+									  
+									  
+									  
+									  
+									  
+
+									  <a href=" ../../../../tag/digital/index.html" style="font-size: 9pt; color: #999;">Digital</a>
+									
+									  
+									  
+									  
+									  
+									  
+
+									  <a href=" ../../../../tag/circuit/index.html" style="font-size: 9pt; color: #999;">Circuit</a>
 									
 									  
 									  
@@ -763,7 +912,7 @@ Document/devicetree/bindings/xxx</li>
 									  
 									  
 
-									  <a href=" ../../../../tag/kernel/index.html" style="font-size: 18pt; color: #000;">kernel</a>
+									  <a href=" ../../../../tag/uboot/index.html" style="font-size: 9pt; color: #999;">Uboot</a>
 									
 									  
 									  
@@ -771,7 +920,15 @@ Document/devicetree/bindings/xxx</li>
 									  
 									  
 
-									  <a href=" ../../../../tag/dirver/index.html" style="font-size: 9pt; color: #999;">Dirver</a>
+									  <a href=" ../../../../tag/dirver/index.html" style="font-size: 13.5pt; color: #444;">Dirver</a>
+									
+									  
+									  
+									  
+									  
+									  
+
+									  <a href=" ../../../../tag/kernel/index.html" style="font-size: 13.5pt; color: #444;">kernel</a>
 									
 									  
 									  
@@ -804,7 +961,7 @@ Document/devicetree/bindings/xxx</li>
 								
 								 
 								  
-								    <a href="/2020/05/12/QRcode.html">Camera-model</a>
+								    <a href="/2019/12/12/QRcode.html">Camera-model</a>
 								  
 								  
 								
@@ -816,7 +973,7 @@ Document/devicetree/bindings/xxx</li>
 								
 								 
 								  
-								    <a href="/2020/05/25/kernel-2.html">Device-tree</a>
+								    <a href="/2020/05/25/kernel-dts.html">Device-tree</a>
 								  
 								  
 								
@@ -830,33 +987,43 @@ Document/devicetree/bindings/xxx</li>
 								  
 								    <a href="/2020/05/25/kernel.html">Dirver</a>
 								  
+								    <a href="/2020/05/25/embedded_linux.html">Dirver</a>
+								  
 								  
 								
 								 
 								  
-								    <a href="/2020/05/25/kernel-2.html">Linux</a>
+								    <a href="/2020/05/25/kernel-dts.html">Linux</a>
 								  
 								    <a href="/2020/05/25/kernel.html">Linux</a>
 								  
-								  
-								
-								 
-								  
-								    <a href="/2020/05/12/QRcode.html">Localization</a>
+								    <a href="/2020/05/25/embedded_linux.html">Linux</a>
 								  
 								  
 								
 								 
 								  
-								    <a href="/2020/05/12/QRcode.html">QRcode</a>
+								    <a href="/2019/12/12/QRcode.html">Localization</a>
 								  
 								  
 								
 								 
 								  
-								    <a href="/2020/05/12/QRcode.html">Robotics</a>
+								    <a href="/2019/12/12/QRcode.html">QRcode</a>
+								  
+								  
+								
+								 
 								  
 								    <a href="/2020/05/12/welcome-to-jekyll.html">Robotics</a>
+								  
+								    <a href="/2019/12/12/QRcode.html">Robotics</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/05/25/embedded_linux.html">Uboot</a>
 								  
 								  
 								
@@ -874,7 +1041,7 @@ Document/devicetree/bindings/xxx</li>
 								
 								 
 								  
-								    <a href="/2020/05/25/kernel-2.html">kernel</a>
+								    <a href="/2020/05/25/kernel-dts.html">kernel</a>
 								  
 								    <a href="/2020/05/25/kernel.html">kernel</a>
 								  

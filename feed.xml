@@ -1,16 +1,57 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-06-09T10:49:21-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jie Tang’s website</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Embedded linux system architecture</title><link href="http://localhost:4000/2020/05/25/embedded_linux.html" rel="alternate" type="text/html" title="Embedded linux system architecture" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/embedded_linux</id><content type="html" xml:base="http://localhost:4000/2020/05/25/embedded_linux.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-06-12T15:39:28-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jie Tang’s website</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Uboot porting with NXP MX serie</title><link href="http://localhost:4000/2020/06/12/Uboot.html" rel="alternate" type="text/html" title="Uboot porting with NXP MX serie" /><published>2020-06-12T10:51:36-04:00</published><updated>2020-06-12T10:51:36-04:00</updated><id>http://localhost:4000/2020/06/12/Uboot</id><content type="html" xml:base="http://localhost:4000/2020/06/12/Uboot.html">&lt;p&gt;Some previous knowledge about U-boot has been discussed in &lt;a href=&quot;../../../2020/05/25/embedded_linux.html&quot;&gt;another blog&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><category term="Linux" /><category term="Uboot" /></entry><entry><title type="html">Embedded linux system architecture</title><link href="http://localhost:4000/2020/05/25/embedded_linux.html" rel="alternate" type="text/html" title="Embedded linux system architecture" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/embedded_linux</id><content type="html" xml:base="http://localhost:4000/2020/05/25/embedded_linux.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#1-u-boot&quot; id=&quot;markdown-toc-1-u-boot&quot;&gt;1. U-boot&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#11-source-of-uboot&quot; id=&quot;markdown-toc-11-source-of-uboot&quot;&gt;1.1 source of uboot&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#11-basic-of-uboot-and-flashing&quot; id=&quot;markdown-toc-11-basic-of-uboot-and-flashing&quot;&gt;1.1 basic of uboot and flashing&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#12-porting-uboot-to-hardware&quot; id=&quot;markdown-toc-12-porting-uboot-to-hardware&quot;&gt;1.2 porting uboot to hardware&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#2-kernel&quot; id=&quot;markdown-toc-2-kernel&quot;&gt;2. kernel&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;U-boot(bootloader), Linux Kernel and Rootsf are three key components of a embedded linux system.&lt;/p&gt;
 
+&lt;p&gt;&lt;span style=&quot;color:red;&quot;&gt;Caution: The configurations and operations are mainly based on nxp i.mx series&lt;/span&gt;&lt;/p&gt;
+
 &lt;h2 id=&quot;1-u-boot&quot;&gt;1. U-boot&lt;/h2&gt;
 &lt;p&gt;U-boot is the abbreviation and shorten of ‘Universal Boot Loader’, which support multiple architectures like ARM, MIPS, RISC-V and x86.&lt;/p&gt;
 
-&lt;h3 id=&quot;11-source-of-uboot&quot;&gt;1.1 source of uboot&lt;/h3&gt;</content><author><name></name></author><category term="Linux" /><category term="Uboot" /><category term="Dirver" /></entry><entry><title type="html">Linux kernel module beginning (I)</title><link href="http://localhost:4000/2020/05/25/kernel.html" rel="alternate" type="text/html" title="Linux kernel module beginning (I)" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/kernel</id><content type="html" xml:base="http://localhost:4000/2020/05/25/kernel.html">&lt;h2 id=&quot;1envirnoment-prepare--module-insert&quot;&gt;(1).Envirnoment prepare &amp;amp; module insert&lt;/h2&gt;
+&lt;h3 id=&quot;11-basic-of-uboot-and-flashing&quot;&gt;1.1 basic of uboot and flashing&lt;/h3&gt;
+
+&lt;p&gt;The official Uboot source code can be found at &lt;a href=&quot;https://www.denx.de/wiki/U-Boot/SourceCode&quot;&gt;DENX-U-Boot&lt;/a&gt;, also most of the SOCs manufactures will give their customized U-boot configuration, for example we can find most of the configurations of &lt;a href=&quot;https://github.com/Freescale/u-boot-fslc&quot;&gt;NXP’s Socs here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Before make an Uboot for one board some configurations should be done first, 
+Using the following command makefile will create &lt;code class=&quot;highlighter-rouge&quot;&gt;.config&lt;/code&gt; under the fold.&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;make&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ARCH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arm&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clean&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;make&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ARCH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arm&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;XXXX_defconfig&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//make ARCH=arm mx6ull_14x14_evk_defconfig   ,   for freescale i.mx6u board SD card start&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//make ARCH=arm mx6ull_14x14_evk_ emmc _defconfig   &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Following command can make the corresponding U-boot file according to the &lt;code class=&quot;highlighter-rouge&quot;&gt;.config&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; make -j8 ARCH=arm CROSS_COMPILE=arm-none-eabi- `
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;We can see the U-boot as a big bare-metal program. So the way used to flash Uboot to SD card is same with bare-metal program. To flash the program some header information should be added to &lt;code class=&quot;highlighter-rouge&quot;&gt;U-boot.bin&lt;/code&gt; file, which 
+Here we use the &lt;code class=&quot;highlighter-rouge&quot;&gt;dd&lt;/code&gt; command to flash.&lt;/p&gt;
+
+&lt;p&gt;According to the official image vector table of nxp IVT, we need to flash the U-boot to the address offset 1kBytes.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo dd if=u-boot.imx of=/dev/sdb bs=512 seek=2 conv=fsync&lt;/code&gt;&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;80%&quot; height=&quot;80%&quot; src=&quot;/blog_photos/MPU/IVT_table.png&quot; /&gt;&lt;p&gt;Table. IVT of nxp i.mx6ull&lt;/p&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;12-porting-uboot-to-hardware&quot;&gt;1.2 porting uboot to hardware&lt;/h3&gt;
+
+&lt;p&gt;To adding support of our customized board, most of the time, we only need the modify the U-boot from soc manufacture. There are three important path we need modify(take imx6u as example, U-boot version&amp;gt;2018):&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/configs/&amp;lt;board_name&amp;gt;
+/include/configs/&amp;lt;board_name&amp;gt;
+/arch/arm/cpu/armv7/mash-imx/mx6/Kconfig   //adding config TARGET and source &quot;board/&amp;lt;vendor&amp;gt;/&amp;lt;board_name&amp;gt;
+/board/&amp;lt;vendor&amp;gt;/&amp;lt;board_name&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;The above configuration is the basic structure for a customized board. For the detailed configuration, I will write in &lt;a href=&quot;../../../2020/06/12/Uboot.html&quot;&gt;another blog&lt;/a&gt; about adding support of LCD, ethernet, and other devices.&lt;/p&gt;
+
+&lt;h3 id=&quot;2-kernel&quot;&gt;2. kernel&lt;/h3&gt;</content><author><name></name></author><category term="Linux" /><category term="Uboot" /><category term="Dirver" /></entry><entry><title type="html">Linux kernel module beginning (I)</title><link href="http://localhost:4000/2020/05/25/kernel.html" rel="alternate" type="text/html" title="Linux kernel module beginning (I)" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/kernel</id><content type="html" xml:base="http://localhost:4000/2020/05/25/kernel.html">&lt;h2 id=&quot;1envirnoment-prepare--module-insert&quot;&gt;(1).Envirnoment prepare &amp;amp; module insert&lt;/h2&gt;
 
 &lt;p&gt;Linux concerns kernel module version critically and it refuses to load kernel drivers that do not match. So at least the Minor version we use to do cross-compiling should match with the target platform. The download address can be find &lt;a href=&quot;https://www.kernel.org/&quot;&gt;linux kernel download&lt;/a&gt;. Or using following command to get history version&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-x.x.xx.tar.xz
@@ -358,7 +399,7 @@ Document/devicetree/bindings/xxx&lt;/li&gt;
             &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Here the &lt;code class=&quot;highlighter-rouge&quot;&gt;MX6UL_PAD_GPIO1_IO04__GPIO1_IO04&lt;/code&gt; refers the register(MUX,PAD,INPUT) address related with GPIO1_IO04&lt;/p&gt;
+&lt;p&gt;Here the &lt;code class=&quot;highlighter-rouge&quot;&gt;MX6UL_PAD_GPIO1_IO04__GPIO1_IO04&lt;/code&gt; refers the register(MUX,PAD,INPUT) address related with GPIO1_IO04, and 0x00010B1 is the value written into PAD_CTL register.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Macro definition of Pin property:&lt;/li&gt;
@@ -457,6 +498,12 @@ the value will be written into input_reg.&lt;/p&gt;
 
 &lt;p&gt;After we configured the pins as GPIO. The next step is setting some properties of our GPIO pins. Here the GPIO subsystem can be used to do this work.&lt;/p&gt;
 
+&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;p&gt;&lt;span style=&quot;color:red;&quot;&gt;Tips:&lt;/span&gt;&lt;/p&gt;</content><author><name></name></author><category term="Linux" /><category term="kernel" /><category term="Device-tree" /></entry><entry><title type="html">Interrupt of ARM A7</title><link href="http://localhost:4000/2020/05/22/interrupt.html" rel="alternate" type="text/html" title="Interrupt of ARM A7" /><published>2020-05-22T10:51:36-04:00</published><updated>2020-05-22T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/22/interrupt</id><content type="html" xml:base="http://localhost:4000/2020/05/22/interrupt.html">&lt;p&gt;Second post&lt;/p&gt;</content><author><name></name></author><category term="ARM" /><category term="interrupt" /><category term="bare-metal" /><summary type="html">Second post</summary></entry><entry><title type="html">Machine Vision</title><link href="http://localhost:4000/2020/05/12/Machine-Vision.html" rel="alternate" type="text/html" title="Machine Vision" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/Machine%20Vision</id><content type="html" xml:base="http://localhost:4000/2020/05/12/Machine-Vision.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">MCU&amp;amp;MPU</title><link href="http://localhost:4000/2020/05/12/mcu.html" rel="alternate" type="text/html" title="MCU&amp;MPU" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/mcu</id><content type="html" xml:base="http://localhost:4000/2020/05/12/mcu.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Programming Notes</title><link href="http://localhost:4000/2020/05/12/programming.html" rel="alternate" type="text/html" title="Programming Notes" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/programming</id><content type="html" xml:base="http://localhost:4000/2020/05/12/programming.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Robotics</title><link href="http://localhost:4000/2020/05/12/robotics.html" rel="alternate" type="text/html" title="Robotics" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/robotics</id><content type="html" xml:base="http://localhost:4000/2020/05/12/robotics.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Circuit</title><link href="http://localhost:4000/2020/05/12/Cricuit.html" rel="alternate" type="text/html" title="Circuit" /><published>2020-05-12T10:51:36-04:00</published><updated>2020-05-12T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/Cricuit</id><content type="html" xml:base="http://localhost:4000/2020/05/12/Cricuit.html">&lt;h2 id=&quot;table-of-content&quot;&gt;Table of Content&lt;/h2&gt;
 &lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#table-of-content&quot; id=&quot;markdown-toc-table-of-content&quot;&gt;Table of Content&lt;/a&gt;&lt;/li&gt;
@@ -467,4 +514,4 @@ the value will be written into input_reg.&lt;/p&gt;
 &lt;h2 id=&quot;push-pull-output-推挽输出&quot;&gt;Push-Pull Output (推挽输出)&lt;/h2&gt;
 &lt;p&gt;https://zhuanlan.zhihu.com/p/41942876&lt;/p&gt;
 
-&lt;h2 id=&quot;open-drain-output开漏输出&quot;&gt;Open Drain Output(开漏输出)&lt;/h2&gt;</content><author><name></name></author><category term="Analog" /><category term="Digital" /><category term="Circuit" /><summary type="html">Table of Content Table of Content</summary></entry><entry><title type="html">First robotics</title><link href="http://localhost:4000/2020/05/12/welcome-to-jekyll.html" rel="alternate" type="text/html" title="First robotics" /><published>2020-05-12T00:00:00-04:00</published><updated>2020-05-12T00:00:00-04:00</updated><id>http://localhost:4000/2020/05/12/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/2020/05/12/welcome-to-jekyll.html">&lt;p&gt;First robotics&lt;/p&gt;</content><author><name></name></author><category term="Robotics" /><summary type="html">First robotics</summary></entry></feed>
+&lt;h2 id=&quot;open-drain-output开漏输出&quot;&gt;Open Drain Output(开漏输出)&lt;/h2&gt;</content><author><name></name></author><category term="Notes" /><summary type="html">Table of Content Table of Content</summary></entry></feed>

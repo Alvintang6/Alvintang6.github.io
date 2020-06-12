@@ -1,4 +1,4 @@
-<!}DOCTYPE HTML>
+<!DOCTYPE HTML>
 <!--
 	Editorial by HTML5 UP
 	html5up.net | @ajlkn
@@ -10,10 +10,11 @@
 
 
 
-		<title>Jie-Robotics</title>
+		<title> C/C++ Scope, Storage, and Linkage</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="../../../../assets/css/main.css" />
+		<link rel="stylesheet" href="../../../../assets/css/syntax.css">
 	</head>
 	<body class="is-preload">
 
@@ -25,7 +26,19 @@
 						<div class="inner">
 
 							<!-- Header -->
+																  <script type="text/x-mathjax-config">
+								    MathJax.Hub.Config({
+								      tex2jax: {
+								        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+								        inlineMath: [['$','$']]
+								      }
+								    });
+								  </script>
+								  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
 								<header id="header">
+									<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 									<a href="../../../../index.html" class="logo"><strong>Follow Jietang</strong> with:</a>
 									<ul class="icons">
 										<li><a href="mailto:alvin.tang6@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
@@ -34,64 +47,133 @@
 										<li><a href="https://github.com/Alvintang6" class="icon brands fa-github-square"><span class="label">Github</span></a></li>
 										<li><a href="https://www.instagram.com/tang12y/?hl=en" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 										<li><a href="https://www.linkedin.com/in/jie-tang-55070b148/" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a></li>
-										<li><a href="../../../../resume_jietang.pdf" class="logo"><i class="fas fa-file-invoice"></i>CV</a></li>
+										<li><a href="resume_jietang.pdf" class="logo"><i class="fas fa-file-invoice"></i>CV</a></li>
 									</ul>
 								</header>
+
+
+							
+
+
+								
 
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h1>Robotics</h1>
+										<h1> C/C++ Scope, Storage, and Linkage</h1>
+										<p>12 Dec 2019</p>
 									</header>
-
-
-										
-
-
-
 									
-										
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-												
-												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
-										
-										
-										
-							
+									<p style="float:right"><a href=" ../../../..//chinese/C_Cpp_scope.html" >中文连接</a></p>
+
+									 
 									
 
+
+									<h3><i class="fas fa-tags"></i>Post Tags</h3>
+									
+									<a href=" ../../../../tag/c++/index.html" >C++</a>
+									
+									<br/>
+									<br/>
+
+									<h2 id="table-of-content">Table of Content</h2>
+<ul id="markdown-toc">
+  <li><a href="#table-of-content" id="markdown-toc-table-of-content">Table of Content</a></li>
+  <li><a href="#scope" id="markdown-toc-scope">Scope</a></li>
+  <li><a href="#storage" id="markdown-toc-storage">storage</a>    <ul>
+      <li><a href="#static" id="markdown-toc-static">static</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>Identifier Scope, Storage Class, and Linkage are three key attributes of variables and functions.
+Scope, storage, and linkage are decided by definition place and identifiers.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Definition</th>
+      <th>Storage</th>
+      <th>Active regions</th>
+      <th>Linkage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>in function blocks</td>
+      <td>auto</td>
+      <td>in blocks</td>
+      <td>NO</td>
+    </tr>
+    <tr>
+      <td>outside functions</td>
+      <td>static</td>
+      <td>in the file</td>
+      <td>internal</td>
+    </tr>
+    <tr>
+      <td>With  <span style="color:red;">‘static’</span> in blocks</td>
+      <td>static</td>
+      <td>in blocks</td>
+      <td>NO</td>
+    </tr>
+    <tr>
+      <td>With  <span style="color:red;">‘static’</span> outside function</td>
+      <td>static</td>
+      <td>in the file</td>
+      <td>internal</td>
+    </tr>
+    <tr>
+      <td>With  <span style="color:red;">‘extern’</span> in blocks</td>
+      <td>static</td>
+      <td>in blocks</td>
+      <td>NO</td>
+    </tr>
+    <tr>
+      <td>With  <span style="color:red;">‘extern’</span> outside function</td>
+      <td>static</td>
+      <td>in blocks</td>
+      <td>external</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>static,</p>
+
+<p>external can be accessed in other files, internal can be accessed in current file, NO can be accessed in current block or function.</p>
+
+<h2 id="scope">Scope</h2>
+
+<h2 id="storage">storage</h2>
+
+<h3 id="static">static</h3>
+
+
+
+									<br/>
+									<h3><i class="fas fa-tags"></i>Post Tags</h3>
+									
+									<a href=" ../../../../tag/c++/index.html" >C++</a>
+									
+									<head>
+<script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
+</head>
+
+<div id="vcomments"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '9CvJWlMvXQsUUkjcCF0nbtSS-MdYXbMMI',
+        appKey: 'KQFufTHJeHucASskKMC6xtLG',
+        avatar: 'retro',
+        meta: ['nick', 'mail'],
+        lang: 'en',
+        visitor: true,
+        enableQQ:true,
+        placeholder: 'Message here.\n (Tips: To make a anonymous comment, nickname and email are not necessary.\n Please entry nickname and email, if you want to show your nickname and get reminder of reply by email. )\n(输入nickname和email，可显示网络名并得到邮件回复提醒。)'
+    })
+</script>
 
 								</section>
 								

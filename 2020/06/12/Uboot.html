@@ -76,8 +76,63 @@
 									<br/>
 									<br/>
 
-									
+									<ul id="markdown-toc">
+  <li><a href="#1-files-need-to-be-configured" id="markdown-toc-1-files-need-to-be-configured">1. Files need to be configured</a></li>
+  <li><a href="#2-add-or-modify-devices-support" id="markdown-toc-2-add-or-modify-devices-support">2. Add or modify devices support</a>    <ul>
+      <li><a href="#21-add-lcd-support" id="markdown-toc-21-add-lcd-support">2.1 Add LCD support</a></li>
+    </ul>
+  </li>
+  <li><a href="#3-uboot-command" id="markdown-toc-3-uboot-command">3. Uboot command</a>    <ul>
+      <li><a href="#31-network-commands" id="markdown-toc-31-network-commands">3.1 Network commands</a>        <ul>
+          <li><a href="#311-ping-and-network-configuration" id="markdown-toc-311-ping-and-network-configuration">3.1.1 ping and network configuration</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
 <p>Some previous knowledge about U-boot has been discussed in <a href="../../../2020/05/25/embedded_linux.html">another blog</a>.</p>
+
+<h2 id="1-files-need-to-be-configured">1. Files need to be configured</h2>
+
+<p>THe following files are needed to be created and configured before doing further modifications.</p>
+
+<p><code class="highlighter-rouge">/configs/&lt;board_name&gt;_defconfig</code></p>
+
+<p><code class="highlighter-rouge">/include/configs/&lt;board_name&gt;.h</code></p>
+
+<p><code class="highlighter-rouge">/arch/arm/cpu/armv7/mash-imx/mx6/Kconfig</code>   //adding config TARGET and source “board/&lt;vendor&gt;/&lt;board_name&gt;”</p>
+
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">/</span><span class="n">board</span><span class="o">/&lt;</span><span class="n">vendor</span><span class="o">&gt;/&lt;</span><span class="n">board_name</span><span class="o">&gt;/</span><span class="w"> 
+                        </span><span class="n">...Kconfig</span><span class="w">
+                        </span><span class="n">...</span><span class="o">&lt;</span><span class="n">board_name</span><span class="o">&gt;</span><span class="n">.c</span><span class="w">
+                        </span><span class="n">...MAINTAINERS</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="2-add-or-modify-devices-support">2. Add or modify devices support</h2>
+<p>One of the most important file will need to modify is <code class="highlighter-rouge">/board/&lt;vendor&gt;/&lt;board_name&gt;/&lt;board_name&gt;.c</code>, which</p>
+
+<h3 id="21-add-lcd-support">2.1 Add LCD support</h3>
+
+<h2 id="3-uboot-command">3. Uboot command</h2>
+
+<h3 id="31-network-commands">3.1 Network commands</h3>
+
+<p>Basically, network connections can be very useful in debugging drivers and testing a system.</p>
+
+<h4 id="311-ping-and-network-configuration">3.1.1 ping and network configuration</h4>
+
+<p>ping and configuration
+Before we use the network. There are some configurations have to be done first.</p>
+<ul>
+  <li>setenv ipaddr 192.168.0.209 (Or using dhcp for dynamically allocate ip address)</li>
+  <li>setenv ethaddr 08:00:00:00:22:02 (Depend on the ethernet port for eth-0 ethaddr, eth-1 eth1addr, eth-2 eth2addr)</li>
+  <li>setenv gatewayip 192.168.0.1</li>
+  <li>setenv netmask 255.255.255.0</li>
+  <li>setenv serverip 192.168.1.250</li>
+  <li>saveenv</li>
+</ul>
+
 
 
 									<br/>
@@ -234,6 +289,17 @@
 												
 												
 
+																						
+												
+												
+
+												<li><a href="/2019/12/12/formation-control.html">Formation Control</a></li>
+												
+												
+												
+												
+												
+
 												
 												
 												
@@ -259,6 +325,10 @@
 										<li>
 											<a href="/2020/05/12/programming.html">Programming</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
 												
 												
 												
@@ -448,6 +518,10 @@
 
 												
 												
+												
+
+												
+												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -532,6 +606,10 @@
 
 												
 												
+												
+
+												
+												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -550,6 +628,8 @@
 										
 										
 										
+										
+										
 												
 												
 
@@ -597,6 +677,10 @@
 
 																						
 												
+												
+												
+												
+
 												
 												
 												
@@ -671,7 +755,37 @@
 									  
 
 									  
-									  <a href=" ../../../../tag/ros/index.html" style="font-size: 9pt; color: #999;">ROS</a>
+									  <a href=" ../../../../tag/ros/index.html" style="font-size: 12pt; color: #666;">ROS</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/robotics/index.html" style="font-size: 9pt; color: #999;">Robotics</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/localization/index.html" style="font-size: 12pt; color: #666;">Localization</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/formation-control/index.html" style="font-size: 9pt; color: #999;">Formation-control</a>
 									  
 									
 									  
@@ -692,16 +806,6 @@
 
 									  
 									  <a href=" ../../../../tag/camera-model/index.html" style="font-size: 9pt; color: #999;">Camera-model</a>
-									  
-									
-									  
-									  
-									  
-									  
-									  
-
-									  
-									  <a href=" ../../../../tag/localization/index.html" style="font-size: 9pt; color: #999;">Localization</a>
 									  
 									
 									  
@@ -837,6 +941,12 @@
 								
 								 
 								  
+								    <a href="/2019/12/12/formation-control.html">Formation-control</a>
+								  
+								  
+								
+								 
+								  
 								    <a href="/2020/06/12/Uboot.html">Linux</a>
 								  
 								    <a href="/2020/05/25/kernel-dts.html">Linux</a>
@@ -850,6 +960,8 @@
 								 
 								  
 								    <a href="/2019/12/12/QRcode.html">Localization</a>
+								  
+								    <a href="/2019/12/12/formation-control.html">Localization</a>
 								  
 								  
 								
@@ -870,6 +982,14 @@
 								 
 								  
 								    <a href="/2019/12/12/QRcode.html">ROS</a>
+								  
+								    <a href="/2019/12/12/formation-control.html">ROS</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2019/12/12/formation-control.html">Robotics</a>
 								  
 								  
 								

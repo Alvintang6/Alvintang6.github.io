@@ -1,4 +1,59 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-06-12T15:39:28-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jie Tang’s website</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Uboot porting with NXP MX serie</title><link href="http://localhost:4000/2020/06/12/Uboot.html" rel="alternate" type="text/html" title="Uboot porting with NXP MX serie" /><published>2020-06-12T10:51:36-04:00</published><updated>2020-06-12T10:51:36-04:00</updated><id>http://localhost:4000/2020/06/12/Uboot</id><content type="html" xml:base="http://localhost:4000/2020/06/12/Uboot.html">&lt;p&gt;Some previous knowledge about U-boot has been discussed in &lt;a href=&quot;../../../2020/05/25/embedded_linux.html&quot;&gt;another blog&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><category term="Linux" /><category term="Uboot" /></entry><entry><title type="html">Embedded linux system architecture</title><link href="http://localhost:4000/2020/05/25/embedded_linux.html" rel="alternate" type="text/html" title="Embedded linux system architecture" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/embedded_linux</id><content type="html" xml:base="http://localhost:4000/2020/05/25/embedded_linux.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-06-15T12:41:13-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jie Tang’s website</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Uboot porting with NXP MX serie</title><link href="http://localhost:4000/2020/06/12/Uboot.html" rel="alternate" type="text/html" title="Uboot porting with NXP MX serie" /><published>2020-06-12T10:51:36-04:00</published><updated>2020-06-12T10:51:36-04:00</updated><id>http://localhost:4000/2020/06/12/Uboot</id><content type="html" xml:base="http://localhost:4000/2020/06/12/Uboot.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#1-files-need-to-be-configured&quot; id=&quot;markdown-toc-1-files-need-to-be-configured&quot;&gt;1. Files need to be configured&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#2-add-or-modify-devices-support&quot; id=&quot;markdown-toc-2-add-or-modify-devices-support&quot;&gt;2. Add or modify devices support&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#21-add-lcd-support&quot; id=&quot;markdown-toc-21-add-lcd-support&quot;&gt;2.1 Add LCD support&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#3-uboot-command&quot; id=&quot;markdown-toc-3-uboot-command&quot;&gt;3. Uboot command&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#31-network-commands&quot; id=&quot;markdown-toc-31-network-commands&quot;&gt;3.1 Network commands&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#311-ping-and-network-configuration&quot; id=&quot;markdown-toc-311-ping-and-network-configuration&quot;&gt;3.1.1 ping and network configuration&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Some previous knowledge about U-boot has been discussed in &lt;a href=&quot;../../../2020/05/25/embedded_linux.html&quot;&gt;another blog&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;1-files-need-to-be-configured&quot;&gt;1. Files need to be configured&lt;/h2&gt;
+
+&lt;p&gt;THe following files are needed to be created and configured before doing further modifications.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;/configs/&amp;lt;board_name&amp;gt;_defconfig&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;/include/configs/&amp;lt;board_name&amp;gt;.h&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;/arch/arm/cpu/armv7/mash-imx/mx6/Kconfig&lt;/code&gt;   //adding config TARGET and source “board/&amp;lt;vendor&amp;gt;/&amp;lt;board_name&amp;gt;”&lt;/p&gt;
+
+&lt;div class=&quot;language-s highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vendor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;/&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;board_name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;/&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; 
+                        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;...Kconfig&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;board_name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;.c&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;...MAINTAINERS&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;2-add-or-modify-devices-support&quot;&gt;2. Add or modify devices support&lt;/h2&gt;
+&lt;p&gt;One of the most important file will need to modify is &lt;code class=&quot;highlighter-rouge&quot;&gt;/board/&amp;lt;vendor&amp;gt;/&amp;lt;board_name&amp;gt;/&amp;lt;board_name&amp;gt;.c&lt;/code&gt;, which&lt;/p&gt;
+
+&lt;h3 id=&quot;21-add-lcd-support&quot;&gt;2.1 Add LCD support&lt;/h3&gt;
+
+&lt;h2 id=&quot;3-uboot-command&quot;&gt;3. Uboot command&lt;/h2&gt;
+
+&lt;h3 id=&quot;31-network-commands&quot;&gt;3.1 Network commands&lt;/h3&gt;
+
+&lt;p&gt;Basically, network connections can be very useful in debugging drivers and testing a system.&lt;/p&gt;
+
+&lt;h4 id=&quot;311-ping-and-network-configuration&quot;&gt;3.1.1 ping and network configuration&lt;/h4&gt;
+
+&lt;p&gt;ping and configuration
+Before we use the network. There are some configurations have to be done first.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;setenv ipaddr 192.168.0.209 (Or using dhcp for dynamically allocate ip address)&lt;/li&gt;
+  &lt;li&gt;setenv ethaddr 08:00:00:00:22:02 (Depend on the ethernet port for eth-0 ethaddr, eth-1 eth1addr, eth-2 eth2addr)&lt;/li&gt;
+  &lt;li&gt;setenv gatewayip 192.168.0.1&lt;/li&gt;
+  &lt;li&gt;setenv netmask 255.255.255.0&lt;/li&gt;
+  &lt;li&gt;setenv serverip 192.168.1.250&lt;/li&gt;
+  &lt;li&gt;saveenv&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="Linux" /><category term="Uboot" /></entry><entry><title type="html">Embedded linux system architecture</title><link href="http://localhost:4000/2020/05/25/embedded_linux.html" rel="alternate" type="text/html" title="Embedded linux system architecture" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/embedded_linux</id><content type="html" xml:base="http://localhost:4000/2020/05/25/embedded_linux.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#1-u-boot&quot; id=&quot;markdown-toc-1-u-boot&quot;&gt;1. U-boot&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#11-basic-of-uboot-and-flashing&quot; id=&quot;markdown-toc-11-basic-of-uboot-and-flashing&quot;&gt;1.1 basic of uboot and flashing&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#12-porting-uboot-to-hardware&quot; id=&quot;markdown-toc-12-porting-uboot-to-hardware&quot;&gt;1.2 porting uboot to hardware&lt;/a&gt;&lt;/li&gt;
@@ -16,7 +71,7 @@
 
 &lt;h3 id=&quot;11-basic-of-uboot-and-flashing&quot;&gt;1.1 basic of uboot and flashing&lt;/h3&gt;
 
-&lt;p&gt;The official Uboot source code can be found at &lt;a href=&quot;https://www.denx.de/wiki/U-Boot/SourceCode&quot;&gt;DENX-U-Boot&lt;/a&gt;, also most of the SOCs manufactures will give their customized U-boot configuration, for example we can find most of the configurations of &lt;a href=&quot;https://github.com/Freescale/u-boot-fslc&quot;&gt;NXP’s Socs here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The official Uboot source code can be found at &lt;a href=&quot;https://www.denx.de/wiki/U-Boot/SourceCode&quot;&gt;DENX-U-Boot&lt;/a&gt;, also most of the SOCs manufactures will give their customized U-boot configuration, for example we can find most of the configurations of &lt;a href=&quot;http://47.105.163.166/cyndent/uboot-imx&quot;&gt;NXP’s Socs here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Before make an Uboot for one board some configurations should be done first, 
 Using the following command makefile will create &lt;code class=&quot;highlighter-rouge&quot;&gt;.config&lt;/code&gt; under the fold.&lt;/p&gt;

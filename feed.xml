@@ -1,12 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-06-15T13:21:35-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jie Tang’s website</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Uboot porting with NXP MX serie</title><link href="http://localhost:4000/2020/06/12/Uboot.html" rel="alternate" type="text/html" title="Uboot porting with NXP MX serie" /><published>2020-06-12T10:51:36-04:00</published><updated>2020-06-12T10:51:36-04:00</updated><id>http://localhost:4000/2020/06/12/Uboot</id><content type="html" xml:base="http://localhost:4000/2020/06/12/Uboot.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-06-17T22:26:21-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jie Tang’s website</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Uboot porting with NXP MX serie</title><link href="http://localhost:4000/2020/06/12/Uboot.html" rel="alternate" type="text/html" title="Uboot porting with NXP MX serie" /><published>2020-06-12T10:51:36-04:00</published><updated>2020-06-12T10:51:36-04:00</updated><id>http://localhost:4000/2020/06/12/Uboot</id><content type="html" xml:base="http://localhost:4000/2020/06/12/Uboot.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#1-files-need-to-be-configured&quot; id=&quot;markdown-toc-1-files-need-to-be-configured&quot;&gt;1. Files need to be configured&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#2-add-or-modify-devices-support&quot; id=&quot;markdown-toc-2-add-or-modify-devices-support&quot;&gt;2. Add or modify devices support&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#21-add-lcd-support&quot; id=&quot;markdown-toc-21-add-lcd-support&quot;&gt;2.1 Add LCD support&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#3-uboot-command&quot; id=&quot;markdown-toc-3-uboot-command&quot;&gt;3. Uboot command&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#31-network-commands&quot; id=&quot;markdown-toc-31-network-commands&quot;&gt;3.1 Network commands&lt;/a&gt;        &lt;ul&gt;
-          &lt;li&gt;&lt;a href=&quot;#311-ping-and-network-configuration&quot; id=&quot;markdown-toc-311-ping-and-network-configuration&quot;&gt;3.1.1 ping and network configuration&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#a-uboot-command&quot; id=&quot;markdown-toc-a-uboot-command&quot;&gt;A. Uboot command&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#a1-network-commands&quot; id=&quot;markdown-toc-a1-network-commands&quot;&gt;A.1 Network commands&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#a11-ping-and-network-configuration&quot; id=&quot;markdown-toc-a11-ping-and-network-configuration&quot;&gt;A.1.1 ping and network configuration&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#a12-nfs&quot; id=&quot;markdown-toc-a12-nfs&quot;&gt;A.1.2 nfs&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#1-nfs-server-setup-pc&quot; id=&quot;markdown-toc-1-nfs-server-setup-pc&quot;&gt;1. nfs server setup (pc)&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#2-nfs-client-operationembedded-device&quot; id=&quot;markdown-toc-2-nfs-client-operationembedded-device&quot;&gt;2. nfs client operation(embedded device)&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#a13-tftp&quot; id=&quot;markdown-toc-a13-tftp&quot;&gt;A.1.3 tftp&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#a2-boot-command&quot; id=&quot;markdown-toc-a2-boot-command&quot;&gt;A.2 boot command&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#a21-bootz&quot; id=&quot;markdown-toc-a21-bootz&quot;&gt;A.2.1 bootz&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#a22-go&quot; id=&quot;markdown-toc-a22-go&quot;&gt;A.2.2 go&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#b-usage-of-u-boot&quot; id=&quot;markdown-toc-b-usage-of-u-boot&quot;&gt;B Usage of U-boot&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#b1-boot-from-network&quot; id=&quot;markdown-toc-b1-boot-from-network&quot;&gt;B.1 Boot from network&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#b11-bootcmd--bootargs&quot; id=&quot;markdown-toc-b11-bootcmd--bootargs&quot;&gt;B.1.1. bootcmd &amp;amp; bootargs&lt;/a&gt;&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
@@ -36,13 +50,13 @@
 
 &lt;h3 id=&quot;21-add-lcd-support&quot;&gt;2.1 Add LCD support&lt;/h3&gt;
 
-&lt;h2 id=&quot;3-uboot-command&quot;&gt;3. Uboot command&lt;/h2&gt;
+&lt;h2 id=&quot;a-uboot-command&quot;&gt;A. Uboot command&lt;/h2&gt;
 
-&lt;h3 id=&quot;31-network-commands&quot;&gt;3.1 Network commands&lt;/h3&gt;
+&lt;h3 id=&quot;a1-network-commands&quot;&gt;A.1 Network commands&lt;/h3&gt;
 
 &lt;p&gt;Basically, network connections can be very useful in debugging drivers and testing a system.&lt;/p&gt;
 
-&lt;h4 id=&quot;311-ping-and-network-configuration&quot;&gt;3.1.1 ping and network configuration&lt;/h4&gt;
+&lt;h4 id=&quot;a11-ping-and-network-configuration&quot;&gt;A.1.1 ping and network configuration&lt;/h4&gt;
 
 &lt;p&gt;ping and configuration
 Before we use the network. There are some configurations have to be done first.&lt;/p&gt;
@@ -53,11 +67,98 @@ Before we use the network. There are some configurations have to be done first.&
   &lt;li&gt;setenv netmask 255.255.255.0&lt;/li&gt;
   &lt;li&gt;setenv serverip 192.168.1.250&lt;/li&gt;
   &lt;li&gt;saveenv&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;a12-nfs&quot;&gt;A.1.2 nfs&lt;/h4&gt;
+
+&lt;p&gt;nfs service can be very useful when we debug the rootsf or kernel.&lt;/p&gt;
+&lt;h4 id=&quot;1-nfs-server-setup-pc&quot;&gt;1. nfs server setup (pc)&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt; sudo apt install nfs-kernel-server &lt;/code&gt; install nfs-server&lt;/li&gt;
+  &lt;li&gt;configuration of nfs:&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo vim /etc/exports&lt;/code&gt;&lt;br /&gt;
+adding following content to the end of /etc/exports &lt;br /&gt;
+    &lt;code class=&quot;highlighter-rouge&quot;&gt;/home/jie/workdir 192.168.0.0/24(rw,sync,all_squash,anonuid=998,anongid=998,no_subtree_check)&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Note: anonuid=, anongid= related with the uid and gid of PC which can be obtained by `id` command in terminal.
+192.168.0.0/24 is the netmask and network of host PC. This `/home/jie/workdir` path, which can be modified , will be used to share files. 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;2-nfs-client-operationembedded-device&quot;&gt;2. nfs client operation(embedded device)&lt;/h4&gt;
+
+&lt;p&gt;nfs 80800000 192.168.0.250:/home/jie/workdir/zImage&lt;/p&gt;
+
+&lt;h4 id=&quot;a13-tftp&quot;&gt;A.1.3 tftp&lt;/h4&gt;
+&lt;p&gt;tftp command is very similar with nfs command.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo apt-get install tftp-hpa tftpd-hpa&lt;/code&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo apt-get install xinetd&lt;/code&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;mkdir /home/zuozhongkai/linux/tftpboot&lt;/code&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;chmod 777 /home/zuozhongkai/linux/tftpboot&lt;/code&gt;
+` touch  /etc/xinetd.d/tftp `
+write following content into tftp:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;server tftp
+ {
+  socket_type = dgram
+  protocol = udp
+  wait = yes
+  user = root
+  server = /usr/sbin/in.tftpd
+  server_args = -s /home/jie/linux/tftpboot/
+  disable = no
+  per_source = 11
+  cps = 100 2
+  flags = IPv4
+ }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;vim /etc/default.tftp-hpa&lt;/code&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo service tftpd-hpa start&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# /etc/default/tftpd-hpa
+2
+3 TFTP_USERNAME=&quot;tftp&quot;
+4 TFTP_DIRECTORY=&quot;/home/zuozhongkai/linux/tftpboot&quot;
+5 TFTP_ADDRESS=&quot;:69&quot;
+6 TFTP_OPTIONS=&quot;-l -c -s&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo service tftpd-hpa restart&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;a2-boot-command&quot;&gt;A.2 boot command&lt;/h3&gt;
+
+&lt;h4 id=&quot;a21-bootz&quot;&gt;A.2.1 bootz&lt;/h4&gt;
+
+&lt;h4 id=&quot;a22-go&quot;&gt;A.2.2 go&lt;/h4&gt;
+
+&lt;p&gt;By using go command, we can run the bare-metal program at assigned address.
+It is a convenient way to test bare-metal program.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tftp 87800000 printf.bin
+go 87800000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;b-usage-of-u-boot&quot;&gt;B Usage of U-boot&lt;/h3&gt;
+
+&lt;h4 id=&quot;b1-boot-from-network&quot;&gt;B.1 Boot from network&lt;/h4&gt;
+
+&lt;p&gt;bootcmd ‘tftp 80800000 zImage;tftp 83000000 imx6ull-14x14-evk.dtb;bootz 80800000 - 83000000’
+bootargs ‘console=ttymxc0,115200 root=/dev/mmcblk1p2’&lt;/p&gt;
+&lt;h4 id=&quot;b11-bootcmd--bootargs&quot;&gt;B.1.1. bootcmd &amp;amp; bootargs&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;bootcmd can save those default command and execute it when bringup.&lt;/li&gt;
+  &lt;li&gt;bootargs is one of the crucial arguments which save environment features&lt;/li&gt;
 &lt;/ul&gt;</content><author><name></name></author><category term="Linux" /><category term="Uboot" /></entry><entry><title type="html">Embedded linux system architecture</title><link href="http://localhost:4000/2020/05/25/embedded_linux.html" rel="alternate" type="text/html" title="Embedded linux system architecture" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/embedded_linux</id><content type="html" xml:base="http://localhost:4000/2020/05/25/embedded_linux.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#1-u-boot&quot; id=&quot;markdown-toc-1-u-boot&quot;&gt;1. U-boot&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#11-basic-of-uboot-and-flashing&quot; id=&quot;markdown-toc-11-basic-of-uboot-and-flashing&quot;&gt;1.1 basic of uboot and flashing&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#12-porting-uboot-to-hardware&quot; id=&quot;markdown-toc-12-porting-uboot-to-hardware&quot;&gt;1.2 porting uboot to hardware&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#2-kernel&quot; id=&quot;markdown-toc-2-kernel&quot;&gt;2. kernel&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#2-linux-kernel&quot; id=&quot;markdown-toc-2-linux-kernel&quot;&gt;2. Linux kernel&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#21-compile-the-official-kernel&quot; id=&quot;markdown-toc-21-compile-the-official-kernel&quot;&gt;2.1 Compile the official kernel&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#22-customize-our-linux-kernel&quot; id=&quot;markdown-toc-22-customize-our-linux-kernel&quot;&gt;2.2 Customize our linux kernel&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#3-rootfs&quot; id=&quot;markdown-toc-3-rootfs&quot;&gt;3. Rootfs&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -106,7 +207,30 @@ Here we use the &lt;code class=&quot;highlighter-rouge&quot;&gt;dd&lt;/code&gt; 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;The above configuration is the basic structure for a customized board. For the detailed configuration, I will write in &lt;a href=&quot;../../../2020/06/12/Uboot.html&quot;&gt;another blog&lt;/a&gt; about adding support of LCD, ethernet, and other devices.&lt;/p&gt;
 
-&lt;h3 id=&quot;2-kernel&quot;&gt;2. kernel&lt;/h3&gt;</content><author><name></name></author><category term="Linux" /><category term="Uboot" /><category term="Dirver" /></entry><entry><title type="html">Linux kernel module beginning (I)</title><link href="http://localhost:4000/2020/05/25/kernel.html" rel="alternate" type="text/html" title="Linux kernel module beginning (I)" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/kernel</id><content type="html" xml:base="http://localhost:4000/2020/05/25/kernel.html">&lt;h2 id=&quot;1envirnoment-prepare--module-insert&quot;&gt;(1).Envirnoment prepare &amp;amp; module insert&lt;/h2&gt;
+&lt;h3 id=&quot;2-linux-kernel&quot;&gt;2. Linux kernel&lt;/h3&gt;
+
+&lt;h4 id=&quot;21-compile-the-official-kernel&quot;&gt;2.1 Compile the official kernel&lt;/h4&gt;
+&lt;p&gt;The structure of Linux kernel is very similar with U-boot project. Also, we can use &lt;a href=&quot;https://github.com/Freescale/linux-fslc&quot;&gt;nxp offical linux kernel&lt;/a&gt; as our template to customize our kernel (git switch x.xx.x–imx:using the branch with –imx).&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;make ARCH=arm clean &lt;/code&gt;&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;make ARCH=arm XXX_defconfig&lt;/code&gt; (imx_v7_defconfig for nxp offical imx6)&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;make menuconfig&lt;/code&gt;(&lt;span style=&quot;color:red;&quot;&gt;optional&lt;/span&gt; if dont need config just esc)&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;make ARCH=arm -j10 CROSS_COMPILE= arm-linux-gnueabihf-&lt;/code&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span style=&quot;color:red;&quot;&gt;Note:&lt;/span&gt; Sometimes make cannot go through due to gcc version. In that case using older arm-linux-nueabihf- from source with &lt;code class=&quot;highlighter-rouge&quot;&gt;export PATH=/{your gcc address}/bin:$PATH&lt;/code&gt; &lt;br /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;22-customize-our-linux-kernel&quot;&gt;2.2 Customize our linux kernel&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;To customize a linux kernel, two important file are needed:
+- xxx_defconfig   (in arch/arm/configs/)
+- xxx.dts (in arch/arm/boot/dts ) 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;####&lt;/p&gt;
+
+&lt;h3 id=&quot;3-rootfs&quot;&gt;3. Rootfs&lt;/h3&gt;
+
+&lt;p&gt;####&lt;/p&gt;</content><author><name></name></author><category term="Linux" /><category term="Uboot" /><category term="Dirver" /></entry><entry><title type="html">Linux kernel module beginning (I)</title><link href="http://localhost:4000/2020/05/25/kernel.html" rel="alternate" type="text/html" title="Linux kernel module beginning (I)" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/kernel</id><content type="html" xml:base="http://localhost:4000/2020/05/25/kernel.html">&lt;h2 id=&quot;1envirnoment-prepare--module-insert&quot;&gt;(1).Envirnoment prepare &amp;amp; module insert&lt;/h2&gt;
 
 &lt;p&gt;Linux concerns kernel module version critically and it refuses to load kernel drivers that do not match. So at least the Minor version we use to do cross-compiling should match with the target platform. The download address can be find &lt;a href=&quot;https://www.kernel.org/&quot;&gt;linux kernel download&lt;/a&gt;. Or using following command to get history version&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-x.x.xx.tar.xz

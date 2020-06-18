@@ -47,7 +47,7 @@
 										<li><a href="https://github.com/Alvintang6" class="icon brands fa-github-square"><span class="label">Github</span></a></li>
 										<li><a href="https://www.instagram.com/tang12y/?hl=en" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 										<li><a href="https://www.linkedin.com/in/jie-tang-55070b148/" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a></li>
-										<li><a href="resume_jietang.pdf" class="logo"><i class="fas fa-file-invoice"></i>CV</a></li>
+										<li><a href="../../../../resume_jietang.pdf" class="logo"><i class="fas fa-file-invoice"></i>CV</a></li>
 									</ul>
 								</header>
 
@@ -82,7 +82,12 @@
   <li><a href="#1-u-boot" id="markdown-toc-1-u-boot">1. U-boot</a>    <ul>
       <li><a href="#11-basic-of-uboot-and-flashing" id="markdown-toc-11-basic-of-uboot-and-flashing">1.1 basic of uboot and flashing</a></li>
       <li><a href="#12-porting-uboot-to-hardware" id="markdown-toc-12-porting-uboot-to-hardware">1.2 porting uboot to hardware</a></li>
-      <li><a href="#2-kernel" id="markdown-toc-2-kernel">2. kernel</a></li>
+      <li><a href="#2-linux-kernel" id="markdown-toc-2-linux-kernel">2. Linux kernel</a>        <ul>
+          <li><a href="#21-compile-the-official-kernel" id="markdown-toc-21-compile-the-official-kernel">2.1 Compile the official kernel</a></li>
+          <li><a href="#22-customize-our-linux-kernel" id="markdown-toc-22-customize-our-linux-kernel">2.2 Customize our linux kernel</a></li>
+        </ul>
+      </li>
+      <li><a href="#3-rootfs" id="markdown-toc-3-rootfs">3. Rootfs</a></li>
     </ul>
   </li>
 </ul>
@@ -131,7 +136,30 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 </code></pre></div></div>
 <p>The above configuration is the basic structure for a customized board. For the detailed configuration, I will write in <a href="../../../2020/06/12/Uboot.html">another blog</a> about adding support of LCD, ethernet, and other devices.</p>
 
-<h3 id="2-kernel">2. kernel</h3>
+<h3 id="2-linux-kernel">2. Linux kernel</h3>
+
+<h4 id="21-compile-the-official-kernel">2.1 Compile the official kernel</h4>
+<p>The structure of Linux kernel is very similar with U-boot project. Also, we can use <a href="https://github.com/Freescale/linux-fslc">nxp offical linux kernel</a> as our template to customize our kernel (git switch x.xx.x–imx:using the branch with –imx).</p>
+
+<p><code class="highlighter-rouge">make ARCH=arm clean </code><br />
+<code class="highlighter-rouge">make ARCH=arm XXX_defconfig</code> (imx_v7_defconfig for nxp offical imx6)<br />
+<code class="highlighter-rouge">make menuconfig</code>(<span style="color:red;">optional</span> if dont need config just esc)<br />
+<code class="highlighter-rouge">make ARCH=arm -j10 CROSS_COMPILE= arm-linux-gnueabihf-</code><br /></p>
+
+<p><span style="color:red;">Note:</span> Sometimes make cannot go through due to gcc version. In that case using older arm-linux-nueabihf- from source with <code class="highlighter-rouge">export PATH=/{your gcc address}/bin:$PATH</code> <br /></p>
+
+<h4 id="22-customize-our-linux-kernel">2.2 Customize our linux kernel</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>To customize a linux kernel, two important file are needed:
+- xxx_defconfig   (in arch/arm/configs/)
+- xxx.dts (in arch/arm/boot/dts ) 
+</code></pre></div></div>
+
+<p>####</p>
+
+<h3 id="3-rootfs">3. Rootfs</h3>
+
+<p>####</p>
 
 
 									<br/>

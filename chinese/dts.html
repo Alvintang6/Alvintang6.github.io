@@ -10,11 +10,11 @@
 
 
 
-		<title>Embedded linux system architecture</title>
+		<title> 关于Device tree的一些笔记</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="../../../../assets/css/main.css" />
-		<link rel="stylesheet" href="../../../../assets/css/syntax.css">
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<link rel="stylesheet" href="../../assets/css/syntax.css">
 	</head>
 	<body class="is-preload">
 
@@ -39,7 +39,7 @@
 
 								<header id="header">
 									<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-									<a href="../../../../index.html" class="logo"><strong>Follow Jietang</strong> with:</a>
+									<a href="../../index.html" class="logo"><strong>Follow Jietang</strong> with:</a>
 									<ul class="icons">
 										<li><a href="mailto:alvin.tang6@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
 										
@@ -47,7 +47,7 @@
 										<li><a href="https://github.com/Alvintang6" class="icon brands fa-github-square"><span class="label">Github</span></a></li>
 										<li><a href="https://www.instagram.com/tang12y/?hl=en" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 										<li><a href="https://www.linkedin.com/in/jie-tang-55070b148/" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a></li>
-										<li><a href="../../../../resume_jietang.pdf" class="logo"><i class="fas fa-file-invoice"></i>CV</a></li>
+										<li><a href="../../resume_jietang.pdf" class="logo"><i class="fas fa-file-invoice"></i>CV</a></li>
 									</ul>
 								</header>
 
@@ -60,8 +60,8 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h1>Embedded linux system architecture</h1>
-										<p>25 May 2020</p>
+										<h1> 关于Device tree的一些笔记</h1>
+										<p>23 Jun 2020</p>
 									</header>
 									 
 									
@@ -69,119 +69,44 @@
 
 									<h3><i class="fas fa-tags"></i>Post Tags</h3>
 									
-									<a href=" ../../../../tag/linux/index.html" >Linux</a>
+									<a href=" ../../tag/中文/index.html" >中文</a>
 									
-									<a href=" ../../../../tag/uboot/index.html" >Uboot</a>
-									
-									<a href=" ../../../../tag/dirver/index.html" >Dirver</a>
+									<a href=" ../../tag/notes/index.html" >Notes</a>
 									
 									<br/>
 									<br/>
 
-									<ul id="markdown-toc">
-  <li><a href="#1-u-boot" id="markdown-toc-1-u-boot">1. U-boot</a>    <ul>
-      <li><a href="#11-basic-of-uboot-and-flashing" id="markdown-toc-11-basic-of-uboot-and-flashing">1.1 basic of uboot and flashing</a></li>
-      <li><a href="#12-porting-uboot-to-hardware" id="markdown-toc-12-porting-uboot-to-hardware">1.2 porting uboot to hardware</a></li>
-      <li><a href="#2-linux-kernel" id="markdown-toc-2-linux-kernel">2. Linux kernel</a>        <ul>
-          <li><a href="#21-compile-the-official-kernel" id="markdown-toc-21-compile-the-official-kernel">2.1 Compile the official kernel</a></li>
-          <li><a href="#22-customize-our-linux-kernel" id="markdown-toc-22-customize-our-linux-kernel">2.2 Customize our linux kernel</a></li>
-        </ul>
-      </li>
-      <li><a href="#3-rootfs" id="markdown-toc-3-rootfs">3. Rootfs</a>        <ul>
-          <li><a href="#31-roofts-make" id="markdown-toc-31-roofts-make">3.1 Roofts make</a></li>
-          <li><a href="#32-mount-rootfs-from-nfs-server" id="markdown-toc-32-mount-rootfs-from-nfs-server">3.2 mount rootfs from nfs server</a></li>
-        </ul>
-      </li>
+									<h2 id="目录">目录</h2>
+<ul id="markdown-toc">
+  <li><a href="#目录" id="markdown-toc-目录">目录</a>    <ul>
+      <li><a href="#设备树的主要作用" id="markdown-toc-设备树的主要作用">设备树的主要作用</a></li>
+      <li><a href="#设备树与内核以及linux的关联" id="markdown-toc-设备树与内核以及linux的关联">设备树与内核以及linux的关联</a></li>
     </ul>
   </li>
 </ul>
 
-<p>U-boot(bootloader), Linux Kernel and Rootsf are three key components of a embedded linux system.</p>
+<h3 id="设备树的主要作用">设备树的主要作用</h3>
+<p>（在早期的Linux系统中，使用的是硬件描述文件的形式来实现该功能的。每一个具体的硬件平台都会在Linux系统源码包的arch/arm/mach-xxx/。 随着新的硬件平台不断产生，为了支持这些硬件平台，Linux系统中会增加越来越多的板级描述文件，从而导致系统中的冗杂文件越来越多。）</p>
 
-<p><span style="color:red;">Caution: The configurations and operations are mainly based on nxp i.mx series</span></p>
+<ul>
+  <li>设备树是用来描述一款嵌入式设备的板级信息的（包括接口，地址，寄存器，部分自定义信息）。事实上设备树仅包含硬件信息，设备树做到了将硬件与软件信息解耦的作用。在开发中工程师仅需要着重开发软件驱动即可。</li>
+  <li>设备树与C语言类似支持include，实际上最基础的SOC信息会被芯片厂商写入xxx.dtbi文件中，使用时可直接基于dtbi文件写.dtb文件。</li>
+</ul>
 
-<h2 id="1-u-boot">1. U-boot</h2>
-<p>U-boot is the abbreviation and shorten of ‘Universal Boot Loader’, which support multiple architectures like ARM, MIPS, RISC-V and x86.</p>
+<h3 id="设备树与内核以及linux的关联">设备树与内核以及linux的关联</h3>
 
-<h3 id="11-basic-of-uboot-and-flashing">1.1 basic of uboot and flashing</h3>
-
-<p>The official Uboot source code can be found at <a href="https://www.denx.de/wiki/U-Boot/SourceCode">DENX-U-Boot</a>, also most of the SOCs manufactures will give their customized U-boot configuration, for example we can find most of the configurations of <a href="http://47.105.163.166/cyndent/uboot-imx">NXP’s Socs here</a>.</p>
-
-<p>Before make an Uboot for one board some configurations should be done first, 
-Using the following command makefile will create <code class="highlighter-rouge">.config</code> under the fold.</p>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">make</span> <span class="n">ARCH</span><span class="o">=</span><span class="n">arm</span> <span class="n">clean</span>
-<span class="n">make</span> <span class="n">ARCH</span><span class="o">=</span><span class="n">arm</span> <span class="n">XXXX_defconfig</span>
-<span class="c1">//make ARCH=arm mx6ull_14x14_evk_defconfig   ,   for freescale i.mx6u board SD card start</span>
-<span class="c1">//make ARCH=arm mx6ull_14x14_evk_ emmc _defconfig   </span>
-</code></pre></div></div>
-<p>Following command can make the corresponding U-boot file according to the <code class="highlighter-rouge">.config</code></p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> make -j8 ARCH=arm CROSS_COMPILE=arm-none-eabi- `
-</code></pre></div></div>
-<p>We can see the U-boot as a big bare-metal program. So the way used to flash Uboot to SD card is same with bare-metal program. To flash the program some header information should be added to <code class="highlighter-rouge">U-boot.bin</code> file, which 
-Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
-
-<p>According to the official image vector table of nxp IVT, we need to flash the U-boot to the address offset 1kBytes.</p>
-
-<p><code class="highlighter-rouge">sudo dd if=u-boot.imx of=/dev/sdb bs=512 seek=2 conv=fsync</code></p>
-
-<div align="center"><img width="80%" height="80%" src="/blog_photos/MPU/IVT_table.png" /><p>Table. IVT of nxp i.mx6ull</p></div>
-
-<h3 id="12-porting-uboot-to-hardware">1.2 porting uboot to hardware</h3>
-
-<p>To adding support of our customized board, most of the time, we only need the modify the U-boot from soc manufacture. There are three important path we need modify(take imx6u as example, U-boot version&gt;2018):</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/configs/&lt;board_name&gt;
-/include/configs/&lt;board_name&gt;
-/arch/arm/cpu/armv7/mash-imx/mx6/Kconfig   //adding config TARGET and source "board/&lt;vendor&gt;/&lt;board_name&gt;
-/board/&lt;vendor&gt;/&lt;board_name&gt;
-
-</code></pre></div></div>
-<p>The above configuration is the basic structure for a customized board. For the detailed configuration, I will write in <a href="../../../2020/06/12/Uboot.html">another blog</a> about adding support of LCD, ethernet, and other devices.</p>
-
-<h3 id="2-linux-kernel">2. Linux kernel</h3>
-
-<h4 id="21-compile-the-official-kernel">2.1 Compile the official kernel</h4>
-<p>The structure of Linux kernel is very similar with U-boot project. Also, we can use <a href="https://github.com/Freescale/linux-fslc">nxp offical linux kernel</a> as our template to customize our kernel (git switch x.xx.x–imx:using the branch with –imx).</p>
-
-<p><code class="highlighter-rouge">make ARCH=arm clean </code><br />
-<code class="highlighter-rouge">make ARCH=arm XXX_defconfig</code> (imx_v7_defconfig for nxp offical imx6)<br />
-<code class="highlighter-rouge">make menuconfig</code>(<span style="color:red;">optional</span> if dont need config just esc)<br />
-<code class="highlighter-rouge">make ARCH=arm -j10 CROSS_COMPILE= arm-linux-gnueabihf-</code><br /></p>
-
-<p><span style="color:red;">Note:</span> Sometimes make cannot go through due to gcc version. In that case using older arm-linux-nueabihf- from source with <code class="highlighter-rouge">export PATH=/{your gcc address}/bin:$PATH</code> <br /></p>
-
-<h4 id="22-customize-our-linux-kernel">2.2 Customize our linux kernel</h4>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>To customize a linux kernel, two important file are needed:
-- xxx_defconfig   (in arch/arm/configs/)
-- xxx.dts (in arch/arm/boot/dts ) 
-</code></pre></div></div>
-
-<p>####</p>
-
-<h3 id="3-rootfs">3. Rootfs</h3>
-
-<p>rootfs can be understand as the container files  of linux environment, configuration, and programs in the mpu.</p>
-
-<h4 id="31-roofts-make">3.1 Roofts make</h4>
-
-<p>Rootfs can be made from various sources, busybox, buildroot, yocto, openembedded.</p>
-
-<h4 id="32-mount-rootfs-from-nfs-server">3.2 mount rootfs from nfs server</h4>
-<p>setenv bootargs ‘console=ttymxc0,115200 nfsvers=4 root=/dev/nfs nfsroot=192.168.0.188:/home/jie/workdir/rootfs ip=192.168.0.16:192.168.0.188:192.168.0.1:255.255.255.0::eth1:off’</p>
-
+<ul>
+  <li>设备树中的”/”{ } 代表其为根节点， 所有根节点下的主节点均可在/proc/device-tree下查看。</li>
+  <li>在linux系统库中提供了一系列的of函数用于获取设备树中的信息</li>
+</ul>
 
 
 									<br/>
 									<h3><i class="fas fa-tags"></i>Post Tags</h3>
 									
-									<a href=" ../../../../tag/linux/index.html" >Linux</a>
+									<a href=" ../../tag/中文/index.html" >中文</a>
 									
-									<a href=" ../../../../tag/uboot/index.html" >Uboot</a>
-									
-									<a href=" ../../../../tag/dirver/index.html" >Dirver</a>
+									<a href=" ../../tag/notes/index.html" >Notes</a>
 									
 									<head>
 <script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
@@ -240,7 +165,7 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 										<h2>Menu</h2>
 									</header>
 									<ul>
-									<li><a href="../../../../index.html">About me</a></li>
+									<li><a href="../../index.html">About me</a></li>
 									<li>
 
 
@@ -248,10 +173,10 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 											<ul>
 												
 
-												<li><a href="../../../../photos/toronto/index.html">toronto</a></li>
+												<li><a href="../../photos/toronto/index.html">toronto</a></li>
 												
 
-												<li><a href="../../../../photos/windsor/index.html">windsor</a></li>
+												<li><a href="../../photos/windsor/index.html">windsor</a></li>
 												
 											</ul>
 									</li>	
@@ -824,7 +749,7 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/c++/index.html" style="font-size: 9pt; color: #999;">C++</a>
+									  <a href=" ../../tag/c++/index.html" style="font-size: 9pt; color: #999;">C++</a>
 									  
 									
 									  
@@ -834,7 +759,7 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/中文/index.html" style="font-size: 12pt; color: #666;">中文</a>
+									  <a href=" ../../tag/中文/index.html" style="font-size: 12pt; color: #666;">中文</a>
 									  
 									
 									  
@@ -844,7 +769,7 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/ros/index.html" style="font-size: 12pt; color: #666;">ROS</a>
+									  <a href=" ../../tag/ros/index.html" style="font-size: 12pt; color: #666;">ROS</a>
 									  
 									
 									  
@@ -854,7 +779,7 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/robotics/index.html" style="font-size: 9pt; color: #999;">Robotics</a>
+									  <a href=" ../../tag/robotics/index.html" style="font-size: 9pt; color: #999;">Robotics</a>
 									  
 									
 									  
@@ -864,7 +789,7 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/localization/index.html" style="font-size: 12pt; color: #666;">Localization</a>
+									  <a href=" ../../tag/localization/index.html" style="font-size: 12pt; color: #666;">Localization</a>
 									  
 									
 									  
@@ -874,7 +799,7 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/formation-control/index.html" style="font-size: 9pt; color: #999;">Formation-control</a>
+									  <a href=" ../../tag/formation-control/index.html" style="font-size: 9pt; color: #999;">Formation-control</a>
 									  
 									
 									  
@@ -884,7 +809,7 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/qrcode/index.html" style="font-size: 9pt; color: #999;">QRcode</a>
+									  <a href=" ../../tag/qrcode/index.html" style="font-size: 9pt; color: #999;">QRcode</a>
 									  
 									
 									  
@@ -894,7 +819,7 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/camera-model/index.html" style="font-size: 9pt; color: #999;">Camera-model</a>
+									  <a href=" ../../tag/camera-model/index.html" style="font-size: 9pt; color: #999;">Camera-model</a>
 									  
 									
 									  
@@ -904,7 +829,7 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/notes/index.html" style="font-size: 18pt; color: #000;">Notes</a>
+									  <a href=" ../../tag/notes/index.html" style="font-size: 18pt; color: #000;">Notes</a>
 									  
 									
 									  
@@ -914,7 +839,7 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/arm/index.html" style="font-size: 9pt; color: #999;">ARM</a>
+									  <a href=" ../../tag/arm/index.html" style="font-size: 9pt; color: #999;">ARM</a>
 									  
 									
 									  
@@ -924,7 +849,7 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/interrupt/index.html" style="font-size: 9pt; color: #999;">interrupt</a>
+									  <a href=" ../../tag/interrupt/index.html" style="font-size: 9pt; color: #999;">interrupt</a>
 									  
 									
 									  
@@ -934,7 +859,7 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/bare-metal/index.html" style="font-size: 9pt; color: #999;">bare-metal</a>
+									  <a href=" ../../tag/bare-metal/index.html" style="font-size: 9pt; color: #999;">bare-metal</a>
 									  
 									
 									  
@@ -944,7 +869,7 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/linux/index.html" style="font-size: 18pt; color: #000;">Linux</a>
+									  <a href=" ../../tag/linux/index.html" style="font-size: 18pt; color: #000;">Linux</a>
 									  
 									
 									  
@@ -954,7 +879,7 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/uboot/index.html" style="font-size: 12pt; color: #666;">Uboot</a>
+									  <a href=" ../../tag/uboot/index.html" style="font-size: 12pt; color: #666;">Uboot</a>
 									  
 									
 									  
@@ -964,7 +889,7 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/dirver/index.html" style="font-size: 12pt; color: #666;">Dirver</a>
+									  <a href=" ../../tag/dirver/index.html" style="font-size: 12pt; color: #666;">Dirver</a>
 									  
 									
 									  
@@ -974,7 +899,7 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/kernel/index.html" style="font-size: 12pt; color: #666;">kernel</a>
+									  <a href=" ../../tag/kernel/index.html" style="font-size: 12pt; color: #666;">kernel</a>
 									  
 									
 									  
@@ -984,7 +909,7 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/device-tree/index.html" style="font-size: 9pt; color: #999;">Device-tree</a>
+									  <a href=" ../../tag/device-tree/index.html" style="font-size: 9pt; color: #999;">Device-tree</a>
 									  
 									
 									
@@ -1134,11 +1059,11 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 			</div>
 
 		<!-- Scripts -->
-			<script src="../../../../assets/js/jquery.min.js"></script>
-			<script src="../../../../assets/js/browser.min.js"></script>
-			<script src="../../../../assets/js/breakpoints.min.js"></script>
-			<script src="../../../../assets/js/util.js"></script>
-			<script src="../../../../assets/js/main.js"></script>
+			<script src="../../assets/js/jquery.min.js"></script>
+			<script src="../../assets/js/browser.min.js"></script>
+			<script src="../../assets/js/breakpoints.min.js"></script>
+			<script src="../../assets/js/util.js"></script>
+			<script src="../../assets/js/main.js"></script>
 
 	</body>
 </html>

@@ -1,4 +1,84 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-06-17T22:26:21-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jie Tang’s website</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Uboot porting with NXP MX serie</title><link href="http://localhost:4000/2020/06/12/Uboot.html" rel="alternate" type="text/html" title="Uboot porting with NXP MX serie" /><published>2020-06-12T10:51:36-04:00</published><updated>2020-06-12T10:51:36-04:00</updated><id>http://localhost:4000/2020/06/12/Uboot</id><content type="html" xml:base="http://localhost:4000/2020/06/12/Uboot.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-06-25T11:48:24-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jie Tang’s website</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">关于Device tree的一些笔记</title><link href="http://localhost:4000/chinese/dts.html" rel="alternate" type="text/html" title=" 关于Device tree的一些笔记" /><published>2020-06-23T10:51:36-04:00</published><updated>2020-06-23T10:51:36-04:00</updated><id>http://localhost:4000/chinese/chinese_dts</id><content type="html" xml:base="http://localhost:4000/chinese/dts.html">&lt;h2 id=&quot;目录&quot;&gt;目录&lt;/h2&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#目录&quot; id=&quot;markdown-toc-目录&quot;&gt;目录&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#设备树的主要作用&quot; id=&quot;markdown-toc-设备树的主要作用&quot;&gt;设备树的主要作用&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#设备树与内核以及linux的关联&quot; id=&quot;markdown-toc-设备树与内核以及linux的关联&quot;&gt;设备树与内核以及linux的关联&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;设备树的主要作用&quot;&gt;设备树的主要作用&lt;/h3&gt;
+&lt;p&gt;（在早期的Linux系统中，使用的是硬件描述文件的形式来实现该功能的。每一个具体的硬件平台都会在Linux系统源码包的arch/arm/mach-xxx/。 随着新的硬件平台不断产生，为了支持这些硬件平台，Linux系统中会增加越来越多的板级描述文件，从而导致系统中的冗杂文件越来越多。）&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;设备树是用来描述一款嵌入式设备的板级信息的（包括接口，地址，寄存器，部分自定义信息）。事实上设备树仅包含硬件信息，设备树做到了将硬件与软件信息解耦的作用。在开发中工程师仅需要着重开发软件驱动即可。&lt;/li&gt;
+  &lt;li&gt;设备树与C语言类似支持include，实际上最基础的SOC信息会被芯片厂商写入xxx.dtbi文件中，使用时可直接基于dtbi文件写.dtb文件。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;设备树与内核以及linux的关联&quot;&gt;设备树与内核以及linux的关联&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;设备树中的”/”{ } 代表其为根节点， 所有根节点下的主节点均可在/proc/device-tree下查看。&lt;/li&gt;
+  &lt;li&gt;在linux系统库中提供了一系列的of函数用于获取设备树中的信息&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="中文" /><category term="Notes" /><summary type="html">目录 目录</summary></entry><entry><title type="html">linux command</title><link href="http://localhost:4000/chinese/linux_command.html" rel="alternate" type="text/html" title=" linux command " /><published>2020-06-23T10:51:36-04:00</published><updated>2020-06-23T10:51:36-04:00</updated><id>http://localhost:4000/chinese/chinese_linux_command</id><content type="html" xml:base="http://localhost:4000/chinese/linux_command.html">&lt;h2 id=&quot;目录&quot;&gt;目录&lt;/h2&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#目录&quot; id=&quot;markdown-toc-目录&quot;&gt;目录&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#linux-配置网络&quot; id=&quot;markdown-toc-linux-配置网络&quot;&gt;linux 配置网络&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#静态ip设定即时生效&quot; id=&quot;markdown-toc-静态ip设定即时生效&quot;&gt;静态ip设定即时生效&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#静态ip设定config文件&quot; id=&quot;markdown-toc-静态ip设定config文件&quot;&gt;静态ip设定config文件&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#linux-文件操作&quot; id=&quot;markdown-toc-linux-文件操作&quot;&gt;linux 文件操作&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#linux-查询操作&quot; id=&quot;markdown-toc-linux-查询操作&quot;&gt;linux 查询操作&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;linux-配置网络&quot;&gt;linux 配置网络&lt;/h3&gt;
+&lt;h4 id=&quot;静态ip设定即时生效&quot;&gt;静态ip设定即时生效&lt;/h4&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ifconfig eth0 192.168.1.5 netmask 255.255.255.0&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&quot;静态ip设定config文件&quot;&gt;静态ip设定config文件&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;(1)   vi /etc/network/interfaces&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;(2)  auto eth0
+  /#iface eth0 inet dhcp 
+  iface eth1 inet dhcp&lt;/p&gt;
+
+    &lt;p&gt;iface eth0 inet static&lt;br /&gt;
+  address 192.168.0.100&lt;br /&gt;
+  netmask 255.255.255.0&lt;br /&gt;
+  gateway 192.168.0.1&lt;br /&gt;
+  broadcast 192.168.0.255&lt;/p&gt;
+
+    &lt;p&gt;#Wireless interfaces&lt;br /&gt;
+  iface wlan0 inet dhcp&lt;br /&gt;
+      wireless_mode managed&lt;br /&gt;
+      wireless_essid any&lt;br /&gt;
+      wpa-driver wext&lt;br /&gt;
+      wpa-conf /etc/wpa_supplicant.conf&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;(3) restart network card: /etc/init.d/networking restart&lt;/li&gt;
+  &lt;li&gt;(4 optional) add /etc/init.d/networking restart  into /etc/rcN.d/&lt;SN_script.sh&gt; initial script&lt;/SN_script.sh&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;linux-文件操作&quot;&gt;linux 文件操作&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;从sd拷贝rootfs 
+sudo mount /dev/sdb2 /mnt
+sudo cp -r /mnt/* /&lt;your home=&quot;&quot; path=&quot;&quot;&gt;&lt;/your&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;拷贝rootfs到sd卡
+sudo mount /dev/&lt;your_sd_blk&gt; /mnt
+sudo mkfs.ext4 /dev/&lt;your_sd_blk&gt;
+sudo cp -r /rootfs/* /mnt&lt;/your_sd_blk&gt;&lt;/your_sd_blk&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;linux-查询操作&quot;&gt;linux 查询操作&lt;/h3&gt;</content><author><name></name></author><category term="Notes" /><summary type="html">目录 目录</summary></entry><entry><title type="html">Uboot porting with NXP MX serie</title><link href="http://localhost:4000/2020/06/12/Uboot.html" rel="alternate" type="text/html" title="Uboot porting with NXP MX serie" /><published>2020-06-12T10:51:36-04:00</published><updated>2020-06-12T10:51:36-04:00</updated><id>http://localhost:4000/2020/06/12/Uboot</id><content type="html" xml:base="http://localhost:4000/2020/06/12/Uboot.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#1-files-need-to-be-configured&quot; id=&quot;markdown-toc-1-files-need-to-be-configured&quot;&gt;1. Files need to be configured&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#2-add-or-modify-devices-support&quot; id=&quot;markdown-toc-2-add-or-modify-devices-support&quot;&gt;2. Add or modify devices support&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#21-add-lcd-support&quot; id=&quot;markdown-toc-21-add-lcd-support&quot;&gt;2.1 Add LCD support&lt;/a&gt;&lt;/li&gt;
@@ -88,7 +168,7 @@ adding following content to the end of /etc/exports &lt;br /&gt;
 
 &lt;h4 id=&quot;2-nfs-client-operationembedded-device&quot;&gt;2. nfs client operation(embedded device)&lt;/h4&gt;
 
-&lt;p&gt;nfs 80800000 192.168.0.250:/home/jie/workdir/zImage&lt;/p&gt;
+&lt;p&gt;nfs 80800000 192.168.0.188:/home/jie/workdir/zImage&lt;/p&gt;
 
 &lt;h4 id=&quot;a13-tftp&quot;&gt;A.1.3 tftp&lt;/h4&gt;
 &lt;p&gt;tftp command is very similar with nfs command.&lt;/p&gt;
@@ -142,11 +222,11 @@ go 87800000
 
 &lt;h4 id=&quot;b1-boot-from-network&quot;&gt;B.1 Boot from network&lt;/h4&gt;
 
-&lt;p&gt;bootcmd ‘tftp 80800000 zImage;tftp 83000000 imx6ull-14x14-evk.dtb;bootz 80800000 - 83000000’
-bootargs ‘console=ttymxc0,115200 root=/dev/mmcblk1p2’&lt;/p&gt;
-&lt;h4 id=&quot;b11-bootcmd--bootargs&quot;&gt;B.1.1. bootcmd &amp;amp; bootargs&lt;/h4&gt;
-
 &lt;ul&gt;
+  &lt;li&gt;bootcmd ‘tftp 80800000 zImage;tftp 83000000 imx6ull-14x14-evk.dtb;bootz 80800000 - 83000000’&lt;/li&gt;
+  &lt;li&gt;bootargs ‘console=ttymxc0,115200 root=/dev/mmcblk1p2’
+    &lt;h4 id=&quot;b11-bootcmd--bootargs&quot;&gt;B.1.1. bootcmd &amp;amp; bootargs&lt;/h4&gt;
+  &lt;/li&gt;
   &lt;li&gt;bootcmd can save those default command and execute it when bringup.&lt;/li&gt;
   &lt;li&gt;bootargs is one of the crucial arguments which save environment features&lt;/li&gt;
 &lt;/ul&gt;</content><author><name></name></author><category term="Linux" /><category term="Uboot" /></entry><entry><title type="html">Embedded linux system architecture</title><link href="http://localhost:4000/2020/05/25/embedded_linux.html" rel="alternate" type="text/html" title="Embedded linux system architecture" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/embedded_linux</id><content type="html" xml:base="http://localhost:4000/2020/05/25/embedded_linux.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
@@ -158,7 +238,11 @@ bootargs ‘console=ttymxc0,115200 root=/dev/mmcblk1p2’&lt;/p&gt;
           &lt;li&gt;&lt;a href=&quot;#22-customize-our-linux-kernel&quot; id=&quot;markdown-toc-22-customize-our-linux-kernel&quot;&gt;2.2 Customize our linux kernel&lt;/a&gt;&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#3-rootfs&quot; id=&quot;markdown-toc-3-rootfs&quot;&gt;3. Rootfs&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#3-rootfs&quot; id=&quot;markdown-toc-3-rootfs&quot;&gt;3. Rootfs&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#31-roofts-make&quot; id=&quot;markdown-toc-31-roofts-make&quot;&gt;3.1 Roofts make&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#32-mount-rootfs-from-nfs-server&quot; id=&quot;markdown-toc-32-mount-rootfs-from-nfs-server&quot;&gt;3.2 mount rootfs from nfs server&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -230,7 +314,14 @@ Here we use the &lt;code class=&quot;highlighter-rouge&quot;&gt;dd&lt;/code&gt; 
 
 &lt;h3 id=&quot;3-rootfs&quot;&gt;3. Rootfs&lt;/h3&gt;
 
-&lt;p&gt;####&lt;/p&gt;</content><author><name></name></author><category term="Linux" /><category term="Uboot" /><category term="Dirver" /></entry><entry><title type="html">Linux kernel module beginning (I)</title><link href="http://localhost:4000/2020/05/25/kernel.html" rel="alternate" type="text/html" title="Linux kernel module beginning (I)" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/kernel</id><content type="html" xml:base="http://localhost:4000/2020/05/25/kernel.html">&lt;h2 id=&quot;1envirnoment-prepare--module-insert&quot;&gt;(1).Envirnoment prepare &amp;amp; module insert&lt;/h2&gt;
+&lt;p&gt;rootfs can be understand as the container files  of linux environment, configuration, and programs in the mpu.&lt;/p&gt;
+
+&lt;h4 id=&quot;31-roofts-make&quot;&gt;3.1 Roofts make&lt;/h4&gt;
+
+&lt;p&gt;Rootfs can be made from various sources, busybox, buildroot, yocto, openembedded.&lt;/p&gt;
+
+&lt;h4 id=&quot;32-mount-rootfs-from-nfs-server&quot;&gt;3.2 mount rootfs from nfs server&lt;/h4&gt;
+&lt;p&gt;setenv bootargs ‘console=ttymxc0,115200 nfsvers=4 root=/dev/nfs nfsroot=192.168.0.188:/home/jie/workdir/rootfs ip=192.168.0.16:192.168.0.188:192.168.0.1:255.255.255.0::eth1:off’&lt;/p&gt;</content><author><name></name></author><category term="Linux" /><category term="Uboot" /><category term="Dirver" /></entry><entry><title type="html">Linux kernel module beginning (I)</title><link href="http://localhost:4000/2020/05/25/kernel.html" rel="alternate" type="text/html" title="Linux kernel module beginning (I)" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/kernel</id><content type="html" xml:base="http://localhost:4000/2020/05/25/kernel.html">&lt;h2 id=&quot;1envirnoment-prepare--module-insert&quot;&gt;(1).Envirnoment prepare &amp;amp; module insert&lt;/h2&gt;
 
 &lt;p&gt;Linux concerns kernel module version critically and it refuses to load kernel drivers that do not match. So at least the Minor version we use to do cross-compiling should match with the target platform. The download address can be find &lt;a href=&quot;https://www.kernel.org/&quot;&gt;linux kernel download&lt;/a&gt;. Or using following command to get history version&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-x.x.xx.tar.xz
@@ -479,7 +570,7 @@ Document/devicetree/bindings/xxx&lt;/li&gt;
 
 &lt;h2 id=&quot;5-of-function&quot;&gt;5. “of” function&lt;/h2&gt;
 
-&lt;p&gt;“of” function are used to obtain the contain information in the node.&lt;/p&gt;
+&lt;p&gt;In linux system lib, a series “of” function are provided to obtain the node information from the device tree.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;struct device_node *of_find_node_by_path(const char *path);&lt;/li&gt;
@@ -683,14 +774,4 @@ the value will be written into input_reg.&lt;/p&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;span style=&quot;color:red;&quot;&gt;Tips:&lt;/span&gt;&lt;/p&gt;</content><author><name></name></author><category term="Linux" /><category term="kernel" /><category term="Device-tree" /></entry><entry><title type="html">Interrupt of ARM A7</title><link href="http://localhost:4000/2020/05/22/interrupt.html" rel="alternate" type="text/html" title="Interrupt of ARM A7" /><published>2020-05-22T10:51:36-04:00</published><updated>2020-05-22T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/22/interrupt</id><content type="html" xml:base="http://localhost:4000/2020/05/22/interrupt.html">&lt;p&gt;Second post&lt;/p&gt;</content><author><name></name></author><category term="ARM" /><category term="interrupt" /><category term="bare-metal" /><summary type="html">Second post</summary></entry><entry><title type="html">Machine Vision</title><link href="http://localhost:4000/2020/05/12/Machine-Vision.html" rel="alternate" type="text/html" title="Machine Vision" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/Machine%20Vision</id><content type="html" xml:base="http://localhost:4000/2020/05/12/Machine-Vision.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">MCU&amp;amp;MPU</title><link href="http://localhost:4000/2020/05/12/mcu.html" rel="alternate" type="text/html" title="MCU&amp;MPU" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/mcu</id><content type="html" xml:base="http://localhost:4000/2020/05/12/mcu.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Programming Notes</title><link href="http://localhost:4000/2020/05/12/programming.html" rel="alternate" type="text/html" title="Programming Notes" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/programming</id><content type="html" xml:base="http://localhost:4000/2020/05/12/programming.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Robotics</title><link href="http://localhost:4000/2020/05/12/robotics.html" rel="alternate" type="text/html" title="Robotics" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/robotics</id><content type="html" xml:base="http://localhost:4000/2020/05/12/robotics.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Circuit</title><link href="http://localhost:4000/2020/05/12/Cricuit.html" rel="alternate" type="text/html" title="Circuit" /><published>2020-05-12T10:51:36-04:00</published><updated>2020-05-12T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/Cricuit</id><content type="html" xml:base="http://localhost:4000/2020/05/12/Cricuit.html">&lt;h2 id=&quot;table-of-content&quot;&gt;Table of Content&lt;/h2&gt;
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#table-of-content&quot; id=&quot;markdown-toc-table-of-content&quot;&gt;Table of Content&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#push-pull-output-推挽输出&quot; id=&quot;markdown-toc-push-pull-output-推挽输出&quot;&gt;Push-Pull Output (推挽输出)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#open-drain-output开漏输出&quot; id=&quot;markdown-toc-open-drain-output开漏输出&quot;&gt;Open Drain Output(开漏输出)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;push-pull-output-推挽输出&quot;&gt;Push-Pull Output (推挽输出)&lt;/h2&gt;
-&lt;p&gt;https://zhuanlan.zhihu.com/p/41942876&lt;/p&gt;
-
-&lt;h2 id=&quot;open-drain-output开漏输出&quot;&gt;Open Drain Output(开漏输出)&lt;/h2&gt;</content><author><name></name></author><category term="Notes" /><summary type="html">Table of Content Table of Content</summary></entry></feed>
+&lt;p&gt;&lt;span style=&quot;color:red;&quot;&gt;Tips:&lt;/span&gt;&lt;/p&gt;</content><author><name></name></author><category term="Linux" /><category term="kernel" /><category term="Device-tree" /></entry><entry><title type="html">Interrupt of ARM A7</title><link href="http://localhost:4000/2020/05/22/interrupt.html" rel="alternate" type="text/html" title="Interrupt of ARM A7" /><published>2020-05-22T10:51:36-04:00</published><updated>2020-05-22T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/22/interrupt</id><content type="html" xml:base="http://localhost:4000/2020/05/22/interrupt.html">&lt;p&gt;Second post&lt;/p&gt;</content><author><name></name></author><category term="ARM" /><category term="interrupt" /><category term="bare-metal" /><summary type="html">Second post</summary></entry><entry><title type="html">Machine Vision</title><link href="http://localhost:4000/2020/05/12/Machine-Vision.html" rel="alternate" type="text/html" title="Machine Vision" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/Machine%20Vision</id><content type="html" xml:base="http://localhost:4000/2020/05/12/Machine-Vision.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">MCU&amp;amp;MPU</title><link href="http://localhost:4000/2020/05/12/mcu.html" rel="alternate" type="text/html" title="MCU&amp;MPU" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/mcu</id><content type="html" xml:base="http://localhost:4000/2020/05/12/mcu.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Programming Notes</title><link href="http://localhost:4000/2020/05/12/programming.html" rel="alternate" type="text/html" title="Programming Notes" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/programming</id><content type="html" xml:base="http://localhost:4000/2020/05/12/programming.html"></content><author><name></name></author><summary type="html"></summary></entry></feed>

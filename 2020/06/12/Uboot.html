@@ -166,7 +166,7 @@ adding following content to the end of /etc/exports <br />
 
 <h4 id="2-nfs-client-operationembedded-device">2. nfs client operation(embedded device)</h4>
 
-<p>nfs 80800000 192.168.0.250:/home/jie/workdir/zImage</p>
+<p>nfs 80800000 192.168.0.188:/home/jie/workdir/zImage</p>
 
 <h4 id="a13-tftp">A.1.3 tftp</h4>
 <p>tftp command is very similar with nfs command.</p>
@@ -220,11 +220,11 @@ go 87800000
 
 <h4 id="b1-boot-from-network">B.1 Boot from network</h4>
 
-<p>bootcmd ‘tftp 80800000 zImage;tftp 83000000 imx6ull-14x14-evk.dtb;bootz 80800000 - 83000000’
-bootargs ‘console=ttymxc0,115200 root=/dev/mmcblk1p2’</p>
-<h4 id="b11-bootcmd--bootargs">B.1.1. bootcmd &amp; bootargs</h4>
-
 <ul>
+  <li>bootcmd ‘tftp 80800000 zImage;tftp 83000000 imx6ull-14x14-evk.dtb;bootz 80800000 - 83000000’</li>
+  <li>bootargs ‘console=ttymxc0,115200 root=/dev/mmcblk1p2’
+    <h4 id="b11-bootcmd--bootargs">B.1.1. bootcmd &amp; bootargs</h4>
+  </li>
   <li>bootcmd can save those default command and execute it when bringup.</li>
   <li>bootargs is one of the crucial arguments which save environment features</li>
 </ul>
@@ -330,9 +330,21 @@ bootargs ‘console=ttymxc0,115200 root=/dev/mmcblk1p2’</p>
 										
 										
 										
+										
+										
+										
+										
 										<li>
 											<a href="/2020/05/12/robotics.html">Robotics</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
+												
+												
+												
+
 												
 												
 												
@@ -477,6 +489,14 @@ bootargs ‘console=ttymxc0,115200 root=/dev/mmcblk1p2’</p>
 												
 												
 
+												
+												
+												
+
+												
+												
+												
+
 																						
 												
 												
@@ -513,6 +533,14 @@ bootargs ‘console=ttymxc0,115200 root=/dev/mmcblk1p2’</p>
 										<li>
 											<a href="/2020/05/12/mcu.html">Mcu&Mpu</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
+												
+												
+												
+
 												
 												
 												
@@ -677,6 +705,14 @@ bootargs ‘console=ttymxc0,115200 root=/dev/mmcblk1p2’</p>
 												
 												
 
+												
+												
+												
+
+												
+												
+												
+
 																						
 												
 												
@@ -726,6 +762,18 @@ bootargs ‘console=ttymxc0,115200 root=/dev/mmcblk1p2’</p>
 										
 										
 										
+												
+												
+
+																						
+												
+												
+												
+												
+
+																						
+												
+												
 												
 												
 
@@ -841,7 +889,7 @@ bootargs ‘console=ttymxc0,115200 root=/dev/mmcblk1p2’</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/中文/index.html" style="font-size: 9pt; color: #999;">中文</a>
+									  <a href=" ../../../../tag/中文/index.html" style="font-size: 12pt; color: #666;">中文</a>
 									  
 									
 									  
@@ -911,7 +959,7 @@ bootargs ‘console=ttymxc0,115200 root=/dev/mmcblk1p2’</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/notes/index.html" style="font-size: 12pt; color: #666;">Notes</a>
+									  <a href=" ../../../../tag/notes/index.html" style="font-size: 18pt; color: #000;">Notes</a>
 									  
 									
 									  
@@ -1063,6 +1111,10 @@ bootargs ‘console=ttymxc0,115200 root=/dev/mmcblk1p2’</p>
 								
 								 
 								  
+								    <a href="/chinese/linux_command.html">Notes</a>
+								  
+								    <a href="/chinese/dts.html">Notes</a>
+								  
 								    <a href="/2020/05/12/knowledge.html">Notes</a>
 								  
 								    <a href="/2020/05/12/Cricuit.html">Notes</a>
@@ -1118,6 +1170,8 @@ bootargs ‘console=ttymxc0,115200 root=/dev/mmcblk1p2’</p>
 								  
 								
 								 
+								  
+								    <a href="/chinese/dts.html">中文</a>
 								  
 								    <a href="/chinese/C_Cpp_scope.html">中文</a>
 								  

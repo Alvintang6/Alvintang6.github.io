@@ -87,10 +87,14 @@
   <li><a href="#3-some-specical-node" id="markdown-toc-3-some-specical-node">3. Some specical node</a></li>
   <li><a href="#4-property" id="markdown-toc-4-property">4. Property</a></li>
   <li><a href="#5-of-function" id="markdown-toc-5-of-function">5. “of” function</a></li>
-  <li><a href="#6-pinctrl--giop-subsystem" id="markdown-toc-6-pinctrl--giop-subsystem">6. Pinctrl &amp; GIOP subsystem</a>    <ul>
-      <li><a href="#61-pinctrl" id="markdown-toc-61-pinctrl">6.1. Pinctrl:</a></li>
-      <li><a href="#62-pinctrl-driver" id="markdown-toc-62-pinctrl-driver">6.2 pinctrl driver:</a></li>
-      <li><a href="#63-gpio-subsystem" id="markdown-toc-63-gpio-subsystem">6.3. GPIO subsystem</a></li>
+  <li><a href="#6-match-between-device-and-drive" id="markdown-toc-6-match-between-device-and-drive">6. Match between device and drive</a>    <ul>
+      <li><a href="#61-device-tree-device-match-with-driver" id="markdown-toc-61-device-tree-device-match-with-driver">6.1 Device tree device match with driver</a></li>
+    </ul>
+  </li>
+  <li><a href="#7-pinctrl--giop-subsystem" id="markdown-toc-7-pinctrl--giop-subsystem">7. Pinctrl &amp; GIOP subsystem</a>    <ul>
+      <li><a href="#71-pinctrl" id="markdown-toc-71-pinctrl">7.1. Pinctrl:</a></li>
+      <li><a href="#72-pinctrl-driver" id="markdown-toc-72-pinctrl-driver">7.2 pinctrl driver:</a></li>
+      <li><a href="#73-gpio-subsystem" id="markdown-toc-73-gpio-subsystem">7.3. GPIO subsystem</a></li>
     </ul>
   </li>
 </ul>
@@ -307,9 +311,27 @@ Document/devicetree/bindings/xxx</li>
   <li>int of_property_read_string(const struct device_node *np,const char *propname, const char **out_string)</li>
 </ul>
 
-<h2 id="6-pinctrl--giop-subsystem">6. Pinctrl &amp; GIOP subsystem</h2>
+<h2 id="6-match-between-device-and-drive">6. Match between device and drive</h2>
 
-<h3 id="61-pinctrl">6.1. Pinctrl:</h3>
+<h3 id="61-device-tree-device-match-with-driver">6.1 Device tree device match with driver</h3>
+<p>device tree matching driver will use of_match_table. The of_match_table should be define inside other structure.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">of_device_id</span> <span class="n">rgb_led</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="p">{.</span><span class="n">compatible</span> <span class="o">=</span> <span class="s">"fire,rgb_led"</span><span class="p">},</span>
+	<span class="p">{</span><span class="cm">/* sentinel */</span><span class="p">}};</span>
+
+<span class="k">struct</span> <span class="n">platform_driver</span> <span class="n">led_platform_driver</span> <span class="o">=</span> <span class="p">{</span>
+<span class="p">.</span><span class="n">driver</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">"rgb-leds-platform"</span><span class="p">,</span>
+		<span class="p">.</span><span class="n">owner</span> <span class="o">=</span> <span class="n">THIS_MODULE</span><span class="p">,</span>
+		<span class="p">.</span><span class="n">of_match_table</span> <span class="o">=</span> <span class="n">rgb_led</span><span class="p">,</span>
+	<span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="7-pinctrl--giop-subsystem">7. Pinctrl &amp; GIOP subsystem</h2>
+
+<h3 id="71-pinctrl">7.1. Pinctrl:</h3>
 
 <p>Pinctrl system is just other device tree nodes but under iomuxc node.</p>
 
@@ -395,7 +417,7 @@ the value will be written into input_reg.</p>
   </li>
 </ul>
 
-<h3 id="62-pinctrl-driver">6.2 pinctrl driver:</h3>
+<h3 id="72-pinctrl-driver">7.2 pinctrl driver:</h3>
 
 <p>When pinctrl node compatible property match with the compatible member of platform device structure `  const struct of_device_id ` the .probe function which inside platform_device will be executed.</p>
 
@@ -424,7 +446,7 @@ the value will be written into input_reg.</p>
   <li>pmx_set : set the multiplex of pins.</li>
 </ul>
 
-<h3 id="63-gpio-subsystem">6.3. GPIO subsystem</h3>
+<h3 id="73-gpio-subsystem">7.3. GPIO subsystem</h3>
 
 <p>After we configured the pins as GPIO. The next step is setting some properties of our GPIO pins. Here the GPIO subsystem can be used to do this work.</p>
 
@@ -435,6 +457,7 @@ the value will be written into input_reg.</p>
 </code></pre></div></div>
 
 <p><span style="color:red;">Tips:</span></p>
+
 
 
 									<br/>
@@ -542,9 +565,15 @@ the value will be written into input_reg.</p>
 										
 										
 										
+										
+										
 										<li>
 											<a href="/2020/05/12/robotics.html">Robotics</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
 												
 												
 												
@@ -705,6 +734,10 @@ the value will be written into input_reg.</p>
 												
 												
 
+												
+												
+												
+
 																						
 												
 												
@@ -741,6 +774,10 @@ the value will be written into input_reg.</p>
 										<li>
 											<a href="/2020/05/12/mcu.html">Mcu&Mpu</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
 												
 												
 												
@@ -921,6 +958,10 @@ the value will be written into input_reg.</p>
 												
 												
 
+												
+												
+												
+
 																						
 												
 												
@@ -981,6 +1022,10 @@ the value will be written into input_reg.</p>
 
 																						
 												
+												
+												
+												
+
 												
 												
 												
@@ -1097,7 +1142,7 @@ the value will be written into input_reg.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/中文/index.html" style="font-size: 12pt; color: #666;">中文</a>
+									  <a href=" ../../../../tag/中文/index.html" style="font-size: 11.5pt; color: #777;">中文</a>
 									  
 									
 									  
@@ -1107,7 +1152,7 @@ the value will be written into input_reg.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/ros/index.html" style="font-size: 12pt; color: #666;">ROS</a>
+									  <a href=" ../../../../tag/ros/index.html" style="font-size: 11.5pt; color: #777;">ROS</a>
 									  
 									
 									  
@@ -1127,7 +1172,7 @@ the value will be written into input_reg.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/localization/index.html" style="font-size: 12pt; color: #666;">Localization</a>
+									  <a href=" ../../../../tag/localization/index.html" style="font-size: 11.5pt; color: #777;">Localization</a>
 									  
 									
 									  
@@ -1207,7 +1252,7 @@ the value will be written into input_reg.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/linux/index.html" style="font-size: 18pt; color: #000;">Linux</a>
+									  <a href=" ../../../../tag/linux/index.html" style="font-size: 16pt; color: #222;">Linux</a>
 									  
 									
 									  
@@ -1217,7 +1262,7 @@ the value will be written into input_reg.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/uboot/index.html" style="font-size: 12pt; color: #666;">Uboot</a>
+									  <a href=" ../../../../tag/uboot/index.html" style="font-size: 11.5pt; color: #777;">Uboot</a>
 									  
 									
 									  
@@ -1227,7 +1272,7 @@ the value will be written into input_reg.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/dirver/index.html" style="font-size: 12pt; color: #666;">Dirver</a>
+									  <a href=" ../../../../tag/dirver/index.html" style="font-size: 11.5pt; color: #777;">Dirver</a>
 									  
 									
 									  
@@ -1237,7 +1282,7 @@ the value will be written into input_reg.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/kernel/index.html" style="font-size: 12pt; color: #666;">kernel</a>
+									  <a href=" ../../../../tag/kernel/index.html" style="font-size: 11.5pt; color: #777;">kernel</a>
 									  
 									
 									  
@@ -1322,6 +1367,8 @@ the value will be written into input_reg.</p>
 								    <a href="/chinese/linux_command.html">Notes</a>
 								  
 								    <a href="/chinese/dts.html">Notes</a>
+								  
+								    <a href="/chinese/linux_bug.html">Notes</a>
 								  
 								    <a href="/2020/05/12/knowledge.html">Notes</a>
 								  

@@ -1,4 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-06-25T11:48:24-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jie Tang’s website</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">关于Device tree的一些笔记</title><link href="http://localhost:4000/chinese/dts.html" rel="alternate" type="text/html" title=" 关于Device tree的一些笔记" /><published>2020-06-23T10:51:36-04:00</published><updated>2020-06-23T10:51:36-04:00</updated><id>http://localhost:4000/chinese/chinese_dts</id><content type="html" xml:base="http://localhost:4000/chinese/dts.html">&lt;h2 id=&quot;目录&quot;&gt;目录&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-07-01T13:10:56-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jie Tang’s website</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">linux system bug notes</title><link href="http://localhost:4000/chinese/linux_bug.html" rel="alternate" type="text/html" title=" linux system bug notes" /><published>2020-06-23T10:51:36-04:00</published><updated>2020-06-23T10:51:36-04:00</updated><id>http://localhost:4000/chinese/chinese_bug_linux</id><content type="html" xml:base="http://localhost:4000/chinese/linux_bug.html">&lt;h2 id=&quot;目录&quot;&gt;目录&lt;/h2&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#目录&quot; id=&quot;markdown-toc-目录&quot;&gt;目录&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#cant-find-a-valid-fat-filesystem&quot; id=&quot;markdown-toc-cant-find-a-valid-fat-filesystem&quot;&gt;Can’t find a valid FAT filesystem&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#python3-rosdep-modules-python3-rosdistro-modules&quot; id=&quot;markdown-toc-python3-rosdep-modules-python3-rosdistro-modules&quot;&gt;python3-rosdep-modules; python3-rosdistro-modules&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;cant-find-a-valid-fat-filesystem&quot;&gt;Can’t find a valid FAT filesystem&lt;/h3&gt;
+
+&lt;p&gt;启动时出现Can’t find a valid FAT filesystem且只能进入紧急emergency mode.
+可能是linux rootfs所在磁盘缺少FAT分区或者，1号内核分区格式不兼容。&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;缺少分区：
+  sudo fdisk /dev/&lt;your disk=&quot;&quot;&gt; n
+  ......
+  w
+  sudo mkfs.vfat -F 32 /dev/&lt;your disk=&quot;&quot;&gt;&lt;/your&gt;&lt;/your&gt;&lt;/li&gt;
+  &lt;li&gt;分区格式不匹配：
+  sudo mkfs.vfat -F 32 /dev/&lt;your disk=&quot;&quot;&gt;&lt;/your&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;python3-rosdep-modules-python3-rosdistro-modules&quot;&gt;python3-rosdep-modules; python3-rosdistro-modules&lt;/h3&gt;
+
+&lt;p&gt;The following packages have unmet dependencies:&lt;br /&gt;
+ python3-rosdep-modules : Depends: python3-rospkg-modules (&amp;gt;= 1.1.10) but it is not going to be installed&lt;br /&gt;
+                          Depends: python3-catkin-pkg-modules (&amp;gt;= 0.4.0) but it is not going to be installed&lt;br /&gt;
+                          Depends: python3-rosdistro-modules (&amp;gt;= 0.7.5) but it is not going to be installed&lt;br /&gt;
+E: Unmet dependencies. Try ‘apt –fix-broken install’ with no packages (or specify a solution).&lt;/p&gt;
+
+&lt;p&gt;Method 1:&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo apt --fix-broken install&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Method 2:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo mv&lt;/span&gt; /var/lib/dpkg/info /var/lib/dpkg/info.bk
+&lt;span class=&quot;nb&quot;&gt;sudo mkdir&lt;/span&gt; /var/lib/dpkg/info
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get update
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="Notes" /><summary type="html">目录 目录</summary></entry><entry><title type="html">关于Device tree的一些笔记</title><link href="http://localhost:4000/chinese/dts.html" rel="alternate" type="text/html" title=" 关于Device tree的一些笔记" /><published>2020-06-23T10:51:36-04:00</published><updated>2020-06-23T10:51:36-04:00</updated><id>http://localhost:4000/chinese/chinese_dts</id><content type="html" xml:base="http://localhost:4000/chinese/dts.html">&lt;h2 id=&quot;目录&quot;&gt;目录&lt;/h2&gt;
 &lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#目录&quot; id=&quot;markdown-toc-目录&quot;&gt;目录&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#设备树的主要作用&quot; id=&quot;markdown-toc-设备树的主要作用&quot;&gt;设备树的主要作用&lt;/a&gt;&lt;/li&gt;
@@ -427,10 +466,14 @@ Inside the structure, the corresponding operations can be configured by using fu
   &lt;li&gt;&lt;a href=&quot;#3-some-specical-node&quot; id=&quot;markdown-toc-3-some-specical-node&quot;&gt;3. Some specical node&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#4-property&quot; id=&quot;markdown-toc-4-property&quot;&gt;4. Property&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#5-of-function&quot; id=&quot;markdown-toc-5-of-function&quot;&gt;5. “of” function&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#6-pinctrl--giop-subsystem&quot; id=&quot;markdown-toc-6-pinctrl--giop-subsystem&quot;&gt;6. Pinctrl &amp;amp; GIOP subsystem&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#61-pinctrl&quot; id=&quot;markdown-toc-61-pinctrl&quot;&gt;6.1. Pinctrl:&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#62-pinctrl-driver&quot; id=&quot;markdown-toc-62-pinctrl-driver&quot;&gt;6.2 pinctrl driver:&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#63-gpio-subsystem&quot; id=&quot;markdown-toc-63-gpio-subsystem&quot;&gt;6.3. GPIO subsystem&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#6-match-between-device-and-drive&quot; id=&quot;markdown-toc-6-match-between-device-and-drive&quot;&gt;6. Match between device and drive&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#61-device-tree-device-match-with-driver&quot; id=&quot;markdown-toc-61-device-tree-device-match-with-driver&quot;&gt;6.1 Device tree device match with driver&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#7-pinctrl--giop-subsystem&quot; id=&quot;markdown-toc-7-pinctrl--giop-subsystem&quot;&gt;7. Pinctrl &amp;amp; GIOP subsystem&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#71-pinctrl&quot; id=&quot;markdown-toc-71-pinctrl&quot;&gt;7.1. Pinctrl:&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#72-pinctrl-driver&quot; id=&quot;markdown-toc-72-pinctrl-driver&quot;&gt;7.2 pinctrl driver:&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#73-gpio-subsystem&quot; id=&quot;markdown-toc-73-gpio-subsystem&quot;&gt;7.3. GPIO subsystem&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -647,9 +690,27 @@ Document/devicetree/bindings/xxx&lt;/li&gt;
   &lt;li&gt;int of_property_read_string(const struct device_node *np,const char *propname, const char **out_string)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;6-pinctrl--giop-subsystem&quot;&gt;6. Pinctrl &amp;amp; GIOP subsystem&lt;/h2&gt;
+&lt;h2 id=&quot;6-match-between-device-and-drive&quot;&gt;6. Match between device and drive&lt;/h2&gt;
 
-&lt;h3 id=&quot;61-pinctrl&quot;&gt;6.1. Pinctrl:&lt;/h3&gt;
+&lt;h3 id=&quot;61-device-tree-device-match-with-driver&quot;&gt;6.1 Device tree device match with driver&lt;/h3&gt;
+&lt;p&gt;device tree matching driver will use of_match_table. The of_match_table should be define inside other structure.&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;of_device_id&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb_led&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;{.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compatible&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;fire,rgb_led&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;cm&quot;&gt;/* sentinel */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}};&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;platform_driver&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;led_platform_driver&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;driver&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;rgb-leds-platform&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;owner&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;THIS_MODULE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;of_match_table&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb_led&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;7-pinctrl--giop-subsystem&quot;&gt;7. Pinctrl &amp;amp; GIOP subsystem&lt;/h2&gt;
+
+&lt;h3 id=&quot;71-pinctrl&quot;&gt;7.1. Pinctrl:&lt;/h3&gt;
 
 &lt;p&gt;Pinctrl system is just other device tree nodes but under iomuxc node.&lt;/p&gt;
 
@@ -735,7 +796,7 @@ the value will be written into input_reg.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;62-pinctrl-driver&quot;&gt;6.2 pinctrl driver:&lt;/h3&gt;
+&lt;h3 id=&quot;72-pinctrl-driver&quot;&gt;7.2 pinctrl driver:&lt;/h3&gt;
 
 &lt;p&gt;When pinctrl node compatible property match with the compatible member of platform device structure `  const struct of_device_id ` the .probe function which inside platform_device will be executed.&lt;/p&gt;
 
@@ -764,7 +825,7 @@ the value will be written into input_reg.&lt;/p&gt;
   &lt;li&gt;pmx_set : set the multiplex of pins.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;63-gpio-subsystem&quot;&gt;6.3. GPIO subsystem&lt;/h3&gt;
+&lt;h3 id=&quot;73-gpio-subsystem&quot;&gt;7.3. GPIO subsystem&lt;/h3&gt;
 
 &lt;p&gt;After we configured the pins as GPIO. The next step is setting some properties of our GPIO pins. Here the GPIO subsystem can be used to do this work.&lt;/p&gt;
 
@@ -774,4 +835,4 @@ the value will be written into input_reg.&lt;/p&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;span style=&quot;color:red;&quot;&gt;Tips:&lt;/span&gt;&lt;/p&gt;</content><author><name></name></author><category term="Linux" /><category term="kernel" /><category term="Device-tree" /></entry><entry><title type="html">Interrupt of ARM A7</title><link href="http://localhost:4000/2020/05/22/interrupt.html" rel="alternate" type="text/html" title="Interrupt of ARM A7" /><published>2020-05-22T10:51:36-04:00</published><updated>2020-05-22T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/22/interrupt</id><content type="html" xml:base="http://localhost:4000/2020/05/22/interrupt.html">&lt;p&gt;Second post&lt;/p&gt;</content><author><name></name></author><category term="ARM" /><category term="interrupt" /><category term="bare-metal" /><summary type="html">Second post</summary></entry><entry><title type="html">Machine Vision</title><link href="http://localhost:4000/2020/05/12/Machine-Vision.html" rel="alternate" type="text/html" title="Machine Vision" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/Machine%20Vision</id><content type="html" xml:base="http://localhost:4000/2020/05/12/Machine-Vision.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">MCU&amp;amp;MPU</title><link href="http://localhost:4000/2020/05/12/mcu.html" rel="alternate" type="text/html" title="MCU&amp;MPU" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/mcu</id><content type="html" xml:base="http://localhost:4000/2020/05/12/mcu.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Programming Notes</title><link href="http://localhost:4000/2020/05/12/programming.html" rel="alternate" type="text/html" title="Programming Notes" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/programming</id><content type="html" xml:base="http://localhost:4000/2020/05/12/programming.html"></content><author><name></name></author><summary type="html"></summary></entry></feed>
+&lt;p&gt;&lt;span style=&quot;color:red;&quot;&gt;Tips:&lt;/span&gt;&lt;/p&gt;</content><author><name></name></author><category term="Linux" /><category term="kernel" /><category term="Device-tree" /></entry><entry><title type="html">Interrupt of ARM A7</title><link href="http://localhost:4000/2020/05/22/interrupt.html" rel="alternate" type="text/html" title="Interrupt of ARM A7" /><published>2020-05-22T10:51:36-04:00</published><updated>2020-05-22T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/22/interrupt</id><content type="html" xml:base="http://localhost:4000/2020/05/22/interrupt.html">&lt;p&gt;Second post&lt;/p&gt;</content><author><name></name></author><category term="ARM" /><category term="interrupt" /><category term="bare-metal" /><summary type="html">Second post</summary></entry><entry><title type="html">Machine Vision</title><link href="http://localhost:4000/2020/05/12/Machine-Vision.html" rel="alternate" type="text/html" title="Machine Vision" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/Machine%20Vision</id><content type="html" xml:base="http://localhost:4000/2020/05/12/Machine-Vision.html"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">MCU&amp;amp;MPU</title><link href="http://localhost:4000/2020/05/12/mcu.html" rel="alternate" type="text/html" title="MCU&amp;MPU" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/mcu</id><content type="html" xml:base="http://localhost:4000/2020/05/12/mcu.html"></content><author><name></name></author><summary type="html"></summary></entry></feed>

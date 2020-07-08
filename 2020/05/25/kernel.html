@@ -108,7 +108,7 @@ Using load from linux-x.x.xx/arch/arm/configs can some default platforms. When f
 
 <p>With the command insmod, the module will be inserted into the kernel (Tips: printk function may not print in the terminal, in that case, <code class="highlighter-rouge">echo 8 &gt; /proc/sys/kernel/printk </code>):</p>
 
-<p><img src="/blog_photos/MCU&amp;MPU/ismod.png" alt="AltText-w150" height="50%" width="50%" /></p>
+<p><img src="/blog_photos/MPU/ismod.png" alt="ismod" height="50%" width="50%" /></p>
 
 <h2 id="2-register-the-character-device-into-kernel">(2) register the character device into kernel</h2>
 <p>A typical character device driver may include following components.</p>
@@ -122,8 +122,8 @@ Using load from linux-x.x.xx/arch/arm/configs can some default platforms. When f
   <li>A basic initial and exit function is shown below:</li>
 </ul>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define CHRDEVTEST_MAJOR 200
-#define CHRDEVTEST_NAME "chrdevtest"
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define CHRDEVTEST_MAJOR 248
+#define CHRDEVTEST_NAME "EmbedCharDev"
 </span>
 <span class="k">static</span> <span class="kt">int</span> <span class="n">__init</span> <span class="nf">chrdevtest_init</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     <span class="kt">int</span> <span class="n">ret</span><span class="p">;</span>
@@ -179,6 +179,16 @@ Inside the structure, the corresponding operations can be configured by using fu
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
  <span class="p">}</span>
 </code></pre></div></div>
+<p>After inserting kernel module, the kernel module name and it major id can be seen under <code class="highlighter-rouge">/proc/devices</code>.<br />
+<code class="highlighter-rouge">cat /proc/devices </code></p>
+<div align="center"><img width="30%" height="30%" src="/blog_photos/MPU/deviceid.jpg" /><p>Figure. Major deive ID </p>
+</div>
+
+<p>Using <code class="highlighter-rouge">mknod /dev/&lt;name&gt; c major_id minor_id</code> to creat a device, the deivce will be show at <code class="highlighter-rouge">/dev</code> <br />
+<code class="highlighter-rouge">mknod /dev/chrdev1 c 248 0</code></p>
+
+<p>Or using <code class="highlighter-rouge">device_create</code> automatically creat a device inside dirver.
+` device = device_create(class, NULL, devid, NULL, DEV_NAME); `</p>
 
 
 									<br/>
@@ -288,9 +298,15 @@ Inside the structure, the corresponding operations can be configured by using fu
 										
 										
 										
+										
+										
 										<li>
 											<a href="/2020/05/12/robotics.html">Robotics</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
 												
 												
 												
@@ -459,6 +475,10 @@ Inside the structure, the corresponding operations can be configured by using fu
 												
 												
 
+												
+												
+												
+
 																						
 												
 												
@@ -495,6 +515,17 @@ Inside the structure, the corresponding operations can be configured by using fu
 										<li>
 											<a href="/2020/05/12/mcu.html">Mcu&Mpu</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2020/07/04/driver-framework.html">Linux -- Driver framework</a></li>
+												
+												
 												
 												
 												
@@ -683,6 +714,10 @@ Inside the structure, the corresponding operations can be configured by using fu
 												
 												
 
+												
+												
+												
+
 																						
 												
 												
@@ -732,6 +767,10 @@ Inside the structure, the corresponding operations can be configured by using fu
 										
 										
 										
+												
+												
+
+												
 												
 												
 
@@ -973,7 +1012,7 @@ Inside the structure, the corresponding operations can be configured by using fu
 									  
 
 									  
-									  <a href=" ../../../../tag/linux/index.html" style="font-size: 16pt; color: #222;">Linux</a>
+									  <a href=" ../../../../tag/linux/index.html" style="font-size: 18pt; color: #000;">Linux</a>
 									  
 									
 									  
@@ -1003,7 +1042,7 @@ Inside the structure, the corresponding operations can be configured by using fu
 									  
 
 									  
-									  <a href=" ../../../../tag/kernel/index.html" style="font-size: 11.5pt; color: #777;">kernel</a>
+									  <a href=" ../../../../tag/kernel/index.html" style="font-size: 13.5pt; color: #444;">kernel</a>
 									  
 									
 									  
@@ -1013,7 +1052,7 @@ Inside the structure, the corresponding operations can be configured by using fu
 									  
 
 									  
-									  <a href=" ../../../../tag/device-tree/index.html" style="font-size: 9pt; color: #999;">Device-tree</a>
+									  <a href=" ../../../../tag/device-tree/index.html" style="font-size: 11.5pt; color: #777;">Device-tree</a>
 									  
 									
 									
@@ -1045,6 +1084,8 @@ Inside the structure, the corresponding operations can be configured by using fu
 								
 								 
 								  
+								    <a href="/2020/07/04/driver-framework.html">Device-tree</a>
+								  
 								    <a href="/2020/05/25/kernel-dts.html">Device-tree</a>
 								  
 								  
@@ -1064,6 +1105,8 @@ Inside the structure, the corresponding operations can be configured by using fu
 								  
 								
 								 
+								  
+								    <a href="/2020/07/04/driver-framework.html">Linux</a>
 								  
 								    <a href="/2020/06/12/Uboot.html">Linux</a>
 								  
@@ -1138,6 +1181,8 @@ Inside the structure, the corresponding operations can be configured by using fu
 								  
 								
 								 
+								  
+								    <a href="/2020/07/04/driver-framework.html">kernel</a>
 								  
 								    <a href="/2020/05/25/kernel-dts.html">kernel</a>
 								  

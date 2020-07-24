@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-07-07T15:12:13-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jie Tang’s website</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Linux – Driver framework</title><link href="http://localhost:4000/2020/07/04/driver-framework.html" rel="alternate" type="text/html" title="Linux -- Driver framework" /><published>2020-07-04T10:51:36-04:00</published><updated>2020-07-04T10:51:36-04:00</updated><id>http://localhost:4000/2020/07/04/driver-framework</id><content type="html" xml:base="http://localhost:4000/2020/07/04/driver-framework.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-07-24T09:51:22-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jie Tang’s website</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Linux – Driver framework</title><link href="http://localhost:4000/2020/07/04/driver-framework.html" rel="alternate" type="text/html" title="Linux -- Driver framework" /><published>2020-07-04T10:51:36-04:00</published><updated>2020-07-04T10:51:36-04:00</updated><id>http://localhost:4000/2020/07/04/driver-framework</id><content type="html" xml:base="http://localhost:4000/2020/07/04/driver-framework.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#general-device-driver-framework&quot; id=&quot;markdown-toc-general-device-driver-framework&quot;&gt;General device driver framework&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#1-driver-with-device-tree-and-busi2c-bus-for-example&quot; id=&quot;markdown-toc-1-driver-with-device-tree-and-busi2c-bus-for-example&quot;&gt;1. Driver with device tree and bus(i2c bus for example)&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#11-framework-of-i2c-device-driver-based-on-i2c-bus&quot; id=&quot;markdown-toc-11-framework-of-i2c-device-driver-based-on-i2c-bus&quot;&gt;1.1 Framework of i2c device driver based on i2c bus&lt;/a&gt;&lt;/li&gt;
@@ -598,7 +598,13 @@ E: Unmet dependencies. Try ‘apt –fix-broken install’ with no packages (or 
 &lt;span class=&quot;nb&quot;&gt;sudo mkdir&lt;/span&gt; /var/lib/dpkg/info
 &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get update
 &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="Notes" /><summary type="html">目录 目录</summary></entry><entry><title type="html">关于Device tree的一些笔记</title><link href="http://localhost:4000/chinese/dts.html" rel="alternate" type="text/html" title=" 关于Device tree的一些笔记" /><published>2020-06-23T10:51:36-04:00</published><updated>2020-06-23T10:51:36-04:00</updated><id>http://localhost:4000/chinese/chinese_dts</id><content type="html" xml:base="http://localhost:4000/chinese/dts.html">&lt;h2 id=&quot;目录&quot;&gt;目录&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Method 3(suggest):
+Using aptitude managment software&lt;/p&gt;
+
+&lt;p&gt;sudo apt-get install aptitude
+sudo aptitude install &lt;confilct package=&quot;&quot;&gt;&lt;/confilct&gt;&lt;/p&gt;</content><author><name></name></author><category term="Notes" /><summary type="html">目录 目录</summary></entry><entry><title type="html">关于Device tree的一些笔记</title><link href="http://localhost:4000/chinese/dts.html" rel="alternate" type="text/html" title=" 关于Device tree的一些笔记" /><published>2020-06-23T10:51:36-04:00</published><updated>2020-06-23T10:51:36-04:00</updated><id>http://localhost:4000/chinese/chinese_dts</id><content type="html" xml:base="http://localhost:4000/chinese/dts.html">&lt;h2 id=&quot;目录&quot;&gt;目录&lt;/h2&gt;
 &lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#目录&quot; id=&quot;markdown-toc-目录&quot;&gt;目录&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#设备树的主要作用&quot; id=&quot;markdown-toc-设备树的主要作用&quot;&gt;设备树的主要作用&lt;/a&gt;&lt;/li&gt;
@@ -641,8 +647,8 @@ E: Unmet dependencies. Try ‘apt –fix-broken install’ with no packages (or 
 &lt;ul&gt;
   &lt;li&gt;(1)   vi /etc/network/interfaces&lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;(2)  auto eth0
-  /#iface eth0 inet dhcp 
+    &lt;p&gt;(2)  auto eth0&lt;br /&gt;
+  /#iface eth0 inet dhcp &lt;br /&gt;
   iface eth1 inet dhcp&lt;/p&gt;
 
     &lt;p&gt;iface eth0 inet static&lt;br /&gt;
@@ -1044,7 +1050,10 @@ Inside the structure, the corresponding operations can be configured by using fu
   &lt;li&gt;&lt;a href=&quot;#7-pinctrl--giop-subsystem&quot; id=&quot;markdown-toc-7-pinctrl--giop-subsystem&quot;&gt;7. Pinctrl &amp;amp; GIOP subsystem&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#71-pinctrl&quot; id=&quot;markdown-toc-71-pinctrl&quot;&gt;7.1. Pinctrl:&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#72-pinctrl-driver&quot; id=&quot;markdown-toc-72-pinctrl-driver&quot;&gt;7.2 pinctrl driver:&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#73-gpio-subsystem&quot; id=&quot;markdown-toc-73-gpio-subsystem&quot;&gt;7.3. GPIO subsystem&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#73-gpio-subsystem&quot; id=&quot;markdown-toc-73-gpio-subsystem&quot;&gt;7.3. GPIO subsystem&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#gpio-ranges&quot; id=&quot;markdown-toc-gpio-ranges&quot;&gt;gpio-ranges&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -1406,4 +1415,473 @@ the value will be written into input_reg.&lt;/p&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;span style=&quot;color:red;&quot;&gt;Tips:&lt;/span&gt;&lt;/p&gt;</content><author><name></name></author><category term="Linux" /><category term="kernel" /><category term="Device-tree" /></entry><entry><title type="html">Interrupt of ARM A7</title><link href="http://localhost:4000/2020/05/22/interrupt.html" rel="alternate" type="text/html" title="Interrupt of ARM A7" /><published>2020-05-22T10:51:36-04:00</published><updated>2020-05-22T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/22/interrupt</id><content type="html" xml:base="http://localhost:4000/2020/05/22/interrupt.html">&lt;p&gt;Second post&lt;/p&gt;</content><author><name></name></author><category term="ARM" /><category term="interrupt" /><category term="bare-metal" /><summary type="html">Second post</summary></entry><entry><title type="html">Machine Vision</title><link href="http://localhost:4000/2020/05/12/Machine-Vision.html" rel="alternate" type="text/html" title="Machine Vision" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/Machine%20Vision</id><content type="html" xml:base="http://localhost:4000/2020/05/12/Machine-Vision.html"></content><author><name></name></author><summary type="html"></summary></entry></feed>
+&lt;h4 id=&quot;gpio-ranges&quot;&gt;gpio-ranges&lt;/h4&gt;
+&lt;p&gt;The first number is the index of first pin in this range,&lt;br /&gt;
+The second number, when multiplied by 4 is the offset to the iomuxc control register (starting at 20E_0000h) &lt;br /&gt;
+the third number is the number of pins in this range.&lt;/p&gt;
+
+&lt;p&gt;Take gpio1 for example:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gpio-ranges = &amp;lt;&amp;amp;iomuxc  0 23 10&amp;gt;, &amp;lt;&amp;amp;iomuxc 10 17 6&amp;gt;, &amp;lt;&amp;amp;iomuxc 16 33 16&amp;gt;;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Now the GPIO1 registers aren’t contiguous, pins are in 3 ranges.&lt;/p&gt;
+
+&lt;p&gt;First group is GPIO1.0 - GPIO1.9 (10pins), base offset = 23 * 4 = 0x5c which is IOMUXC_SW_MUX_CTL_PAD_GPIO1_IO00&lt;br /&gt;
+Second group is GPIO1.10 - GPIO1.15 (6pins), base offset = 17 * 4 = 0x44 which is IOMUXC_SW_MUX_CTL_PAD_JTAG_MOD&lt;br /&gt;
+Third group is GPIO1.16 - GPIO1.31 (16pins), base offset = 33 * 4 = 0x84 which is IOMUXC_SW_MUX_CTL_PAD_UART1_TX_DATA&lt;/p&gt;
+
+&lt;p&gt;&lt;span style=&quot;color:red;&quot;&gt;Tips:&lt;/span&gt;&lt;/p&gt;</content><author><name></name></author><category term="Linux" /><category term="kernel" /><category term="Device-tree" /></entry><entry><title type="html">Interrupt of ARM A7</title><link href="http://localhost:4000/2020/05/22/interrupt.html" rel="alternate" type="text/html" title="Interrupt of ARM A7" /><published>2020-05-22T10:51:36-04:00</published><updated>2020-05-22T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/22/interrupt</id><content type="html" xml:base="http://localhost:4000/2020/05/22/interrupt.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#中断程序逻辑&quot; id=&quot;markdown-toc-中断程序逻辑&quot;&gt;中断程序逻辑&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#gic-中断控制器&quot; id=&quot;markdown-toc-gic-中断控制器&quot;&gt;GIC 中断控制器&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#1-中断向量表以及复位中断初始化&quot; id=&quot;markdown-toc-1-中断向量表以及复位中断初始化&quot;&gt;1. 中断向量表以及复位中断初始化&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#2-main主函数初始化&quot; id=&quot;markdown-toc-2-main主函数初始化&quot;&gt;2. main主函数初始化&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#21-函数初始化中断引角&quot; id=&quot;markdown-toc-21-函数初始化中断引角&quot;&gt;2.1 函数初始化中断引角&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#22-向irq中断表中注册中断函数&quot; id=&quot;markdown-toc-22-向irq中断表中注册中断函数&quot;&gt;2.2 向irq中断表中注册中断函数&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#31-汇编定义irq中断&quot; id=&quot;markdown-toc-31-汇编定义irq中断&quot;&gt;3.1 汇编定义irq中断&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#附录&quot; id=&quot;markdown-toc-附录&quot;&gt;附录&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#attributeweak&quot; id=&quot;markdown-toc-attributeweak&quot;&gt;&lt;strong&gt;attribute&lt;/strong&gt;((weak))&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#typedef-函数指针&quot; id=&quot;markdown-toc-typedef-函数指针&quot;&gt;typedef 函数指针&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;中断程序逻辑&quot;&gt;中断程序逻辑&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;1. 在汇编start程序中初始化中断向量表，定义复位中断 Reset_handler初始化系统，在复位中断的最后跳转入C语言main函数。
+2. main函数中初始化中断引角(在irq_table中注册中断函数, 设置并使能该引角中断)，初始其他外设并执行程序大循环。
+3. 定义其他中断(如irq中断)，在irq中断中跳转至irq中断处理C语言函数SystemIrqHandler
+4. irq中断处理函数中会调用已经注册的中断函数irqTable[intNum].irqHandler();
+5. 程序中断返回后会回到主函数main中继续执行
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;一般情况下在汇编中初始化中断向量表，定义不同的中断函数的操作都是相同的。不同场景下主要需要修改的是中断处理函数和主函数中中断引角和外设的初始化。&lt;/p&gt;
+
+&lt;h3 id=&quot;gic-中断控制器&quot;&gt;GIC 中断控制器&lt;/h3&gt;
+
+&lt;p&gt;GIC general interrupt controller&lt;/p&gt;
+
+&lt;p&gt;关于GIC有两组寄存器GICD(GIC分发器)和GICC(CPU接口寄存器)，
+分发器(distributor)用于管理CPU所有中断源，确定每个中断的优先级，管理中断的屏蔽和中断抢占。最终将优先级最高的中断转发到一个或者多个CPU接口&lt;/p&gt;
+
+&lt;p&gt;GIC 的基地址保存在CP15协处理器中
+对于cp15协处理器中的数据需要使用mrc指令进行读取。&lt;br /&gt;
+&lt;b&gt;mrc {cond} p15, &amp;lt;Opcode_1&amp;gt;, &amp;lt;Rd&amp;gt;, &amp;lt;CRn&amp;gt;, &amp;lt;CRm&amp;gt;, &amp;lt;Opcode_2&amp;gt;  &lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;其中GIC的基地址在c15 4 c0中
+GICC相对于GIC偏移了0x2000, GICC_IAR寄存器相对于GICC的基地址又偏移了0xC&lt;/p&gt;
+&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;60%&quot; height=&quot;60%&quot; src=&quot;/blog_photos/MPU/GIC_offset.png&quot; /&gt;&lt;p&gt;GIC_offset&lt;/p&gt;&lt;/div&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;地址偏移&lt;/th&gt;
+      &lt;th&gt;寄存器名字&lt;/th&gt;
+      &lt;th&gt;类型&lt;/th&gt;
+      &lt;th&gt;复位值&lt;/th&gt;
+      &lt;th&gt;寄存器描述&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0x000C&lt;/td&gt;
+      &lt;td&gt;GICC_IAR&lt;/td&gt;
+      &lt;td&gt;RO&lt;/td&gt;
+      &lt;td&gt;0x000003FF&lt;/td&gt;
+      &lt;td&gt;中断确认寄存器&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;GICC_IAR : 中断确认寄存器 Interrupt acknowledge register [31:13]:reserved, [12:10]:CPUID, [9:0]:interrupt ID。
+中断id用于和xx表匹配相应的中断函数。&lt;/p&gt;
+
+&lt;h3 id=&quot;1-中断向量表以及复位中断初始化&quot;&gt;1. 中断向量表以及复位中断初始化&lt;/h3&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;align&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;//设置字节对齐&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;global&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_start&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;_start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;ldr&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;pc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Reset_Handler&lt;/span&gt;           &lt;span class=&quot;cm&quot;&gt;/* Reset                  */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ldr&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;pc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Undefined_Handler&lt;/span&gt;       &lt;span class=&quot;cm&quot;&gt;/* Undefined instructions */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ldr&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;pc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SVC_Handler&lt;/span&gt;             &lt;span class=&quot;cm&quot;&gt;/* Supervisor Call        */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ldr&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;pc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PrefAbort_Handler&lt;/span&gt;       &lt;span class=&quot;cm&quot;&gt;/* Prefetch abort         */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ldr&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;pc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DataAbort_Handler&lt;/span&gt;       &lt;span class=&quot;cm&quot;&gt;/* Data abort             */&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;word&lt;/span&gt;   &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;                            &lt;span class=&quot;cm&quot;&gt;/* RESERVED               */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ldr&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;pc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IRQ_Handler&lt;/span&gt;             &lt;span class=&quot;cm&quot;&gt;/* IRQ interrupt          */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ldr&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;pc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FIQ_Handler&lt;/span&gt;             &lt;span class=&quot;cm&quot;&gt;/* FIQ interrupt          */&lt;/span&gt;
+
+
+
+&lt;span class=&quot;cm&quot;&gt;/**********************第三部分*********************/&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Reset_Handler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;cpsid&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;                         &lt;span class=&quot;cm&quot;&gt;/* 全局关闭中断 */&lt;/span&gt;
+
+
+    &lt;span class=&quot;n&quot;&gt;mrc&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;p15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;     &lt;span class=&quot;cm&quot;&gt;/*读取CP15系统控制寄存器   */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;bic&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;r0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;r0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;     &lt;span class=&quot;cm&quot;&gt;/*  清除第12位（I位）禁用 I Cache  */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;bic&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;r0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;r0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;     &lt;span class=&quot;cm&quot;&gt;/*  清除第 2位（C位）禁用 D Cache  */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;bic&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;r0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;r0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x2&lt;/span&gt;             &lt;span class=&quot;cm&quot;&gt;/*  清除第 1位（A位）禁止严格对齐   */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;bic&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;r0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;r0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;     &lt;span class=&quot;cm&quot;&gt;/*  清除第11位（Z位）分支预测   */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;bic&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;r0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;r0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x1&lt;/span&gt;             &lt;span class=&quot;cm&quot;&gt;/*  清除第 0位（M位）禁用 MMU   */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;mcr&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;p15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;     &lt;span class=&quot;cm&quot;&gt;/*  将修改后的值写回CP15寄存器   */&lt;/span&gt;
+
+&lt;span class=&quot;cm&quot;&gt;/**********************第四部分*********************/&lt;/span&gt;
+    &lt;span class=&quot;cm&quot;&gt;/* 定义IRQ工作模式的栈起始地址 */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;cps&lt;/span&gt;     &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x12&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ldr&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IRQ_model_stack_start&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/*定义User工作模式的栈起始地址，与Supervisor相同*/&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;cps&lt;/span&gt;     &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x1F&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ldr&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SUP_model_stack_start&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/*定义Supervisor工作模式的栈起始地址，与User相同 */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;cps&lt;/span&gt;     &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x13&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ldr&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SUP_model_stack_start&lt;/span&gt;
+
+&lt;span class=&quot;cm&quot;&gt;/**********************第五部分*******************/&lt;/span&gt;
+    &lt;span class=&quot;cm&quot;&gt;/*跳转到系统初始化函数，初始化GIC、CACHE-L1、mmu等等*/&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ldr&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;r2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SystemInit&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;blx&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;r2&lt;/span&gt;
+
+ &lt;span class=&quot;cm&quot;&gt;/*********************第六部分*******************/&lt;/span&gt;
+    &lt;span class=&quot;cm&quot;&gt;/*开启全局中断*/&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;cpsie&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/*跳转到到 main 函数执行，*/&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;        &lt;span class=&quot;cm&quot;&gt;/*死循环*/&lt;/span&gt;
+    &lt;span class=&quot;cm&quot;&gt;/*其他中断处理函数与官方相同这里省略，可直接打开源码查看*/&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;其中SystemInit()函数是在C语言文件system_MCIMX6Y2.c中进行实现的。用于初始化GIC控制器&lt;code class=&quot;highlighter-rouge&quot;&gt;GIC_Init()&lt;/code&gt;;，设置中断向量表的偏移&lt;code class=&quot;highlighter-rouge&quot;&gt; __set_VBAR((uint32_t)__VECTOR_TABLE);&lt;/code&gt;， 设置系统控制寄存器SCTLR:使能I，D cache，mmu等&lt;code class=&quot;highlighter-rouge&quot;&gt;__set_SCTLR(sctlr);&lt;/code&gt; 。&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;SystemInit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;uint32_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sctlr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;uint32_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;actlr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;cp&quot;&gt;#if ((__FPU_PRESENT == 1) &amp;amp;&amp;amp; (__FPU_USED == 1))
+&lt;/span&gt;  &lt;span class=&quot;kt&quot;&gt;uint32_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cpacr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;uint32_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fpexc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;cp&quot;&gt;#endif
+&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;L1C_InvalidateInstructionCacheAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;L1C_InvalidateDataCacheAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;actlr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__get_ACTLR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;actlr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;actlr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ACTLR_SMP_Msk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* Change to SMP mode before enable DCache */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;__set_ACTLR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;actlr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;sctlr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__get_SCTLR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;sctlr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sctlr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SCTLR_V_Msk&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* Use low vector */&lt;/span&gt;
+                     &lt;span class=&quot;n&quot;&gt;SCTLR_A_Msk&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* Disable alignment fault checking */&lt;/span&gt;
+                     &lt;span class=&quot;n&quot;&gt;SCTLR_M_Msk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* Disable MMU */&lt;/span&gt;
+          &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SCTLR_I_Msk&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;         &lt;span class=&quot;cm&quot;&gt;/* Enable ICache */&lt;/span&gt;
+             &lt;span class=&quot;n&quot;&gt;SCTLR_Z_Msk&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;         &lt;span class=&quot;cm&quot;&gt;/* Enable Prediction */&lt;/span&gt;
+             &lt;span class=&quot;n&quot;&gt;SCTLR_CP15BEN_Msk&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;cm&quot;&gt;/* Enable CP15 barrier operations */&lt;/span&gt;
+             &lt;span class=&quot;n&quot;&gt;SCTLR_C_Msk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;         &lt;span class=&quot;cm&quot;&gt;/* Enable DCache */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;__set_SCTLR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sctlr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;cm&quot;&gt;/* Set vector base address */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GIC_Init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;__set_VBAR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;uint32_t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__VECTOR_TABLE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;// rgb_led_init();&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// blue_led_on;&lt;/span&gt;
+ &lt;span class=&quot;cp&quot;&gt;#if ((__FPU_PRESENT == 1) &amp;amp;&amp;amp; (__FPU_USED == 1))
+&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;cpacr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__get_CPACR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* Enable NEON and FPU */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;cpacr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cpacr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CPACR_ASEDIS_Msk&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CPACR_D32DIS_Msk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3UL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CPACR_cp10_Pos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3UL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CPACR_cp11_Pos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;__set_CPACR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cpacr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;fpexc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__get_FPEXC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;fpexc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|=&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x40000000UL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* Enable NEON and FPU */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;__set_FPEXC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fpexc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+ &lt;span class=&quot;cp&quot;&gt;#endif &lt;/span&gt;&lt;span class=&quot;cm&quot;&gt;/* ((__FPU_PRESENT == 1) &amp;amp;&amp;amp; (__FPU_USED == 1)) */&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;2-main主函数初始化&quot;&gt;2. main主函数初始化&lt;/h3&gt;
+
+&lt;p&gt;主函数调用&lt;code class=&quot;highlighter-rouge&quot;&gt;interrupt_button2_init(void)&lt;/code&gt;初始化&lt;/p&gt;
+&lt;h4 id=&quot;21-函数初始化中断引角&quot;&gt;2.1 函数初始化中断引角&lt;/h4&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;interrupt_button2_init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;volatile&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;uint32_t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;icr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//用于保存 GPIO-ICR寄存器的地址,与 icrShift 变量配合使用&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;uint32_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;icrShift&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;//引脚号大于16时会用到,&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;icrShift&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;button2_GPIO_PIN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//保存button2引脚对应的 GPIO 号&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/*添加中断服务函数到  &quot;中断向量表&quot;*/&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;SystemInstallIrqHandler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIO5_Combined_0_15_IRQn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;system_irq_handler_t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;EXAMPLE_GPIO_IRQHandler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;GIC_EnableIRQ&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIO5_Combined_0_15_IRQn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;                 &lt;span class=&quot;c1&quot;&gt;//开启中断&lt;/span&gt;
+
+
+    &lt;span class=&quot;n&quot;&gt;CCM_CCGR1_CG15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//开启GPIO5的时钟&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/*设置 按键引脚的PAD属性*/&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;IOMUXC_SetPinMux&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IOMUXC_SNVS_SNVS_TAMPER1_GPIO5_IO01&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;     
+    &lt;span class=&quot;n&quot;&gt;IOMUXC_SetPinConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IOMUXC_SNVS_SNVS_TAMPER1_GPIO5_IO01&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;button_PAD_CONFIG_DATA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
+    
+    &lt;span class=&quot;cm&quot;&gt;/*设置GPIO方向（输入或输出）*/&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;GPIO5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IMR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;button2_GPIO_PIN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//寄存器重置为默认值&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;GPIO5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GDIR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;                  &lt;span class=&quot;c1&quot;&gt;//设置GPIO5_01为输入模式&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/*设置GPIO引脚中断类型*/&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;GPIO5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;EDGE_SEL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1U&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;button2_GPIO_PIN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//寄存器重置为默认值&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;button2_GPIO_PIN&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;icr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIO5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ICR1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// interrupt configuration register1 save all interrupt trigger mode//&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;icr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GPIO5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ICR2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;icrShift&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/*按键引脚默认低电平，设置为上升沿触发中断*/&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;icr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;icr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3U&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;icrShift&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2U&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;icrShift&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+
+     &lt;span class=&quot;n&quot;&gt;button2_GPIO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IMR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;button2_GPIO_PIN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// IMR--interrupt mask register 1 for enable interrupt/&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;其中有几个寄存器需要配置，GPIO_IMR 和GPIO_ICR。&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;GPIO_IMR(interrupt mask register )&lt;br /&gt;
+Bit IMR[n] (n=0…31) controls interrupt n as follows:&lt;br /&gt;
+0 — MASKED — Interrupt n is disabled.&lt;br /&gt;
+1 — UNMASKED — Interrupt n is enabled.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;GPIO interrupt configuration register&lt;br /&gt;
+00 — LOW_LEVEL — Interrupt n is low-level sensitive.&lt;br /&gt;
+01 — HIGH_LEVEL — Interrupt n is high-level sensitive.&lt;br /&gt;
+10 — RISING_EDGE — Interrupt n is rising-edge sensitive.&lt;br /&gt;
+11 — FALLING_EDGE — Interrupt n is falling-edge sensitive.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;GPIO_EDGE_SEL edge select register
+ 1 — enable 使能则ICR寄存器无用，上升下降均可使能
+ 0 — disable 通过ICR寄存器使能&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;22-向irq中断表中注册中断函数&quot;&gt;2.2 向irq中断表中注册中断函数&lt;/h4&gt;
+
+&lt;p&gt;在2.1中使用了中断注册函数 &lt;code class=&quot;highlighter-rouge&quot;&gt;SystemInstallIrqHandler(GPIO5_Combined_0_15_IRQn, (system_irq_handler_t)EXAMPLE_GPIO_IRQHandler, NULL);&lt;/code&gt;向irq_table中注册了中断号为&lt;code class=&quot;highlighter-rouge&quot;&gt;GPIO5_Combined_0_15_IRQn&lt;/code&gt;的中断处理函数&lt;code class=&quot;highlighter-rouge&quot;&gt;EXAMPLE_GPIO_IRQHandler&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;下面展示了中断注册函数的实现，这里用到了一个全局定义的irqTabe, IRQn_Type是定义在NXP官方库中的enum枚举类型&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;SystemInstallIrqHandler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IRQn_Type&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;irq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;system_irq_handler_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userParam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;irqTable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;irq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;irqHandler&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;irqTable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;irq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userParam&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userParam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_sys_irq_handle&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;system_irq_handler_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;irqHandler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/**&amp;lt; IRQ handler for specific IRQ */&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userParam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;                 &lt;span class=&quot;cm&quot;&gt;/**&amp;lt; User param for handler callback */&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys_irq_handle_t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys_irq_handle_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;irqTable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NUMBER_OF_INT_VECTORS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;其中&lt;code class=&quot;highlighter-rouge&quot;&gt;system_irq_handler_t&lt;/code&gt; 是一个typedef修饰的函数指针变量&lt;/p&gt;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;system_irq_handler_t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;uint32_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;giccIar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;param&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;EXAMPLE_GPIO_IRQHandler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;cm&quot;&gt;/*按键引脚中断服务函数*/&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;button2_GPIO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ISR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1U&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;button2_GPIO_PIN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//清除GIIP中断标志位&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;button_status&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;button_status&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;button_status&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;31-汇编定义irq中断&quot;&gt;3.1 汇编定义irq中断&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nl&quot;&gt;IRQ_Handler:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;push&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;                         &lt;span class=&quot;cm&quot;&gt;/* Save return address+4                                */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;push&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;                 &lt;span class=&quot;cm&quot;&gt;/* Push caller save registers                           */&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;MRS&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;r0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;spsr&lt;/span&gt;                     &lt;span class=&quot;cm&quot;&gt;/* Save SPRS to allow interrupt reentry                 */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;push&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;MRC&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;P15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;       &lt;span class=&quot;cm&quot;&gt;/* Page 180 Get GIC base address C15 arm maunal */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ADD&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;r1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x2000&lt;/span&gt;              &lt;span class=&quot;cm&quot;&gt;/* r1: GICC base address CPU_interface */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;LDR&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;r0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;               &lt;span class=&quot;cm&quot;&gt;/* Cpu interface add 0xC register GIC_IAR  */&lt;/span&gt;
+    &lt;span class=&quot;cm&quot;&gt;/** IAr iar interrupt acknowloge register HAVE interrupt id from bit 0-9  */&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;push&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;CPS&lt;/span&gt;     &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x13&lt;/span&gt;                        &lt;span class=&quot;cm&quot;&gt;/* Change to Supervisor mode to allow interrupt reentry */&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;push&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;                         &lt;span class=&quot;cm&quot;&gt;/* Save Supervisor lr  */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ldr&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;r2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SystemIrqHandler&lt;/span&gt;       &lt;span class=&quot;cm&quot;&gt;/*  r0 passes the variable value to systemirq function  */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;blx&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;r2&lt;/span&gt;
+                           
+    &lt;span class=&quot;n&quot;&gt;POP&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;CPS&lt;/span&gt;     &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x12&lt;/span&gt;                        &lt;span class=&quot;cm&quot;&gt;/* Back to IRQ mode                                     */&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;POP&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;STR&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;r0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;              &lt;span class=&quot;cm&quot;&gt;/* write interupt num to EOIR responding with IAR            */&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;POP&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;MSR&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;spsr_cxsf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r0&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;POP&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;POP&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;SUBS&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;pc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;                  &lt;span class=&quot;cm&quot;&gt;/* set pc to lr-4  */&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;其中 &lt;code class=&quot;highlighter-rouge&quot;&gt;ldr     r2, =SystemIrqHandler&lt;/code&gt; , &lt;code class=&quot;highlighter-rouge&quot;&gt;blx    r2&lt;/code&gt; 执行到systemirqhandler函数的跳转。 并且这个c函数可以将R0(当前保存为GICC_IAR)的值传参。&lt;/p&gt;
+
+&lt;p&gt;具体的SystemIrqHandler 函数在 system_MCIMX6Y2.c文件中如下:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;__attribute__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weak&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;SystemIrqHandler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;uint32_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;giccIar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;cm&quot;&gt;/***********************第二部分********************/&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;uint32_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;intNum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;giccIar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x3FFUL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// last 10 bits indicate interrupt numbers&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;// rgb_led_init();&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// blue_led_on;&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/***********************第三部分********************/&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* Spurious interrupt ID or Wrong interrupt number */&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;intNum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1023&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;intNum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NUMBER_OF_INT_VECTORS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;irqNesting&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;// __enable_irq();      /* Support nesting interrupt */&lt;/span&gt;
+
+&lt;span class=&quot;cm&quot;&gt;/***********************第四部分********************/&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/* Now call the real irq handler for intNum */&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;irqTable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;intNum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;irqHandler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;giccIar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;irqTable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;intNum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userParam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;// __disable_irq();&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;irqNesting&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;注意第22行中有&lt;code class=&quot;highlighter-rouge&quot;&gt;irqTable[intNum].irqHandler(giccIar, irqTable[intNum].userParam);&lt;/code&gt; 此语句根据中断id(intNum)调用着一个该中断所对应的中断函数，这个中断函数的首地址写在irqTable中。&lt;/p&gt;
+
+&lt;h3 id=&quot;附录&quot;&gt;附录&lt;/h3&gt;
+
+&lt;h4 id=&quot;attributeweak&quot;&gt;&lt;strong&gt;attribute&lt;/strong&gt;((weak))&lt;/h4&gt;
+
+&lt;p&gt;在本文件中定义：&lt;/p&gt;
+
+&lt;p&gt;int  &lt;strong&gt;attribute&lt;/strong&gt;((weak))  func(……)
+{
+return 0;
+}&lt;/p&gt;
+
+&lt;p&gt;将本模块的func转成弱符号类型，如果遇到强符号类型（即外部模块定义了func），那么我们在本模块执行的func将会是外部模块定义的func。类似于c++中的重载&lt;/p&gt;
+
+&lt;p&gt;如果外部模块没有定义，那么，将会调用这个弱符号，也就是在本地定义的func&lt;/p&gt;
+
+&lt;h4 id=&quot;typedef-函数指针&quot;&gt;typedef 函数指针&lt;/h4&gt;
+
+&lt;p&gt;下面代码定义了一个指针变量 pFun， pFun = glFun将函数glFun的地址指向pFun。&lt;/p&gt;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pFun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;   
+&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;glFun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;}&lt;/span&gt;   
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;   
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;   
+    &lt;span class=&quot;n&quot;&gt;pFun&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;glFun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   
+    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pFun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;   
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;  
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PTRFUN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;   
+&lt;span class=&quot;n&quot;&gt;PTRFUN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pFun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   
+&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;glFun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;}&lt;/span&gt;   
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;   
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;   
+    &lt;span class=&quot;n&quot;&gt;pFun&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;glFun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   
+    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pFun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;   
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;   
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="ARM" /><category term="interrupt" /><category term="bare-metal" /></entry><entry><title type="html">Machine Vision</title><link href="http://localhost:4000/2020/05/12/Machine-Vision.html" rel="alternate" type="text/html" title="Machine Vision" /><published>2020-05-12T17:51:36-04:00</published><updated>2020-05-12T17:51:36-04:00</updated><id>http://localhost:4000/2020/05/12/Machine%20Vision</id><content type="html" xml:base="http://localhost:4000/2020/05/12/Machine-Vision.html"></content><author><name></name></author><summary type="html"></summary></entry></feed>

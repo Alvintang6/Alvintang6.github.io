@@ -94,7 +94,10 @@
   <li><a href="#7-pinctrl--giop-subsystem" id="markdown-toc-7-pinctrl--giop-subsystem">7. Pinctrl &amp; GIOP subsystem</a>    <ul>
       <li><a href="#71-pinctrl" id="markdown-toc-71-pinctrl">7.1. Pinctrl:</a></li>
       <li><a href="#72-pinctrl-driver" id="markdown-toc-72-pinctrl-driver">7.2 pinctrl driver:</a></li>
-      <li><a href="#73-gpio-subsystem" id="markdown-toc-73-gpio-subsystem">7.3. GPIO subsystem</a></li>
+      <li><a href="#73-gpio-subsystem" id="markdown-toc-73-gpio-subsystem">7.3. GPIO subsystem</a>        <ul>
+          <li><a href="#gpio-ranges" id="markdown-toc-gpio-ranges">gpio-ranges</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
 </ul>
@@ -456,6 +459,21 @@ the value will be written into input_reg.</p>
 
 </code></pre></div></div>
 
+<h4 id="gpio-ranges">gpio-ranges</h4>
+<p>The first number is the index of first pin in this range,<br />
+The second number, when multiplied by 4 is the offset to the iomuxc control register (starting at 20E_0000h) <br />
+the third number is the number of pins in this range.</p>
+
+<p>Take gpio1 for example:</p>
+
+<p><code class="highlighter-rouge">gpio-ranges = &lt;&amp;iomuxc  0 23 10&gt;, &lt;&amp;iomuxc 10 17 6&gt;, &lt;&amp;iomuxc 16 33 16&gt;;</code></p>
+
+<p>Now the GPIO1 registers aren’t contiguous, pins are in 3 ranges.</p>
+
+<p>First group is GPIO1.0 - GPIO1.9 (10pins), base offset = 23 * 4 = 0x5c which is IOMUXC_SW_MUX_CTL_PAD_GPIO1_IO00<br />
+Second group is GPIO1.10 - GPIO1.15 (6pins), base offset = 17 * 4 = 0x44 which is IOMUXC_SW_MUX_CTL_PAD_JTAG_MOD<br />
+Third group is GPIO1.16 - GPIO1.31 (16pins), base offset = 33 * 4 = 0x84 which is IOMUXC_SW_MUX_CTL_PAD_UART1_TX_DATA</p>
+
 <p><span style="color:red;">Tips:</span></p>
 
 
@@ -665,6 +683,14 @@ the value will be written into input_reg.</p>
 
 												
 												
+												
+
+												
+												
+												
+
+												
+												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -751,6 +777,17 @@ the value will be written into input_reg.</p>
 																						
 												
 												
+
+												<li><a href="/2019/12/12/SQL.html"> SQL command and usage </a></li>
+												
+												
+												
+												
+												
+
+																						
+												
+												
 												
 												
 												
@@ -761,6 +798,17 @@ the value will be written into input_reg.</p>
 												
 
 												<li><a href="/2019/12/12/c_cpp_scope.html"> C/C++ Scope, Storage, and Linkage</a></li>
+												
+												
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2019/12/12/c_cpp_STL.html"> C/C++ Scope, Storage, and Linkage</a></li>
 												
 												
 												
@@ -862,6 +910,14 @@ the value will be written into input_reg.</p>
 												<li><a href="/2020/05/22/interrupt.html">Interrupt of ARM A7</a></li>
 												
 												
+												
+												
+												
+
+												
+												
+												
+
 												
 												
 												
@@ -1016,6 +1072,14 @@ the value will be written into input_reg.</p>
 
 												
 												
+												
+
+												
+												
+												
+
+												
+												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -1036,6 +1100,10 @@ the value will be written into input_reg.</p>
 										
 										
 										
+										
+										
+										
+										
 												
 												
 
@@ -1103,6 +1171,14 @@ the value will be written into input_reg.</p>
 
 																						
 												
+												
+												
+												
+
+												
+												
+												
+
 												
 												
 												
@@ -1161,7 +1237,7 @@ the value will be written into input_reg.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/c++/index.html" style="font-size: 9pt; color: #999;">C++</a>
+									  <a href=" ../../../../tag/c++/index.html" style="font-size: 11.5pt; color: #777;">C++</a>
 									  
 									
 									  
@@ -1171,7 +1247,17 @@ the value will be written into input_reg.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/中文/index.html" style="font-size: 11.5pt; color: #777;">中文</a>
+									  <a href=" ../../../../tag/中文/index.html" style="font-size: 13.5pt; color: #444;">中文</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/sql/index.html" style="font-size: 9pt; color: #999;">SQL</a>
 									  
 									
 									  
@@ -1343,6 +1429,8 @@ the value will be written into input_reg.</p>
 								  
 								    <a href="/2019/12/12/c_cpp_scope.html">C++</a>
 								  
+								    <a href="/2019/12/12/c_cpp_STL.html">C++</a>
+								  
 								  
 								
 								 
@@ -1431,6 +1519,12 @@ the value will be written into input_reg.</p>
 								
 								 
 								  
+								    <a href="/2019/12/12/SQL.html">SQL</a>
+								  
+								  
+								
+								 
+								  
 								    <a href="/2020/06/12/Uboot.html">Uboot</a>
 								  
 								    <a href="/2020/05/25/embedded_linux.html">Uboot</a>
@@ -1462,6 +1556,8 @@ the value will be written into input_reg.</p>
 								 
 								  
 								    <a href="/chinese/dts.html">中文</a>
+								  
+								    <a href="/2020/05/12/knowledge.html">中文</a>
 								  
 								    <a href="/chinese/C_Cpp_scope.html">中文</a>
 								  

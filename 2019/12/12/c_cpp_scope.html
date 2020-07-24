@@ -82,7 +82,10 @@
   <li><a href="#table-of-content" id="markdown-toc-table-of-content">Table of Content</a></li>
   <li><a href="#scope" id="markdown-toc-scope">Scope</a></li>
   <li><a href="#storage" id="markdown-toc-storage">storage</a>    <ul>
-      <li><a href="#static" id="markdown-toc-static">static</a></li>
+      <li><a href="#static" id="markdown-toc-static">static</a>        <ul>
+          <li><a href="#static-member-varibale-in-c" id="markdown-toc-static-member-varibale-in-c">Static member varibale in C++</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
 </ul>
@@ -148,6 +151,19 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 <h2 id="storage">storage</h2>
 
 <h3 id="static">static</h3>
+
+<h4 id="static-member-varibale-in-c">Static member varibale in C++</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">class</span> <span class="n">my_client</span><span class="p">{</span>
+    <span class="nl">public:</span>
+    	<span class="k">static</span> <span class="kt">int</span> <span class="n">count</span><span class="p">;</span>
+<span class="p">};</span>
+
+</code></pre></div></div>
+<p>features:
+1.The variable exists even when no objects of the class have been definded so it can be modified at any ponit i the source code.
+2.All objects that try to access their cout member variable refer to the only class-vound static count variable
+3.The variable is allocated only once, regardless of how many objects are instantiated because it is bound to class itself, not its instances</p>
 
 
 
@@ -352,6 +368,14 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 
 												
 												
+												
+
+												
+												
+												
+
+												
+												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -438,6 +462,17 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 																						
 												
 												
+
+												<li><a href="/2019/12/12/SQL.html"> SQL command and usage </a></li>
+												
+												
+												
+												
+												
+
+																						
+												
+												
 												
 												
 												
@@ -448,6 +483,17 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 												
 
 												<li><a href="/2019/12/12/c_cpp_scope.html"> C/C++ Scope, Storage, and Linkage</a></li>
+												
+												
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2019/12/12/c_cpp_STL.html"> C/C++ Scope, Storage, and Linkage</a></li>
 												
 												
 												
@@ -549,6 +595,14 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 												<li><a href="/2020/05/22/interrupt.html">Interrupt of ARM A7</a></li>
 												
 												
+												
+												
+												
+
+												
+												
+												
+
 												
 												
 												
@@ -703,6 +757,14 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 
 												
 												
+												
+
+												
+												
+												
+
+												
+												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -723,6 +785,10 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 										
 										
 										
+										
+										
+										
+										
 												
 												
 
@@ -790,6 +856,14 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 
 																						
 												
+												
+												
+												
+
+												
+												
+												
+
 												
 												
 												
@@ -848,7 +922,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/c++/index.html" style="font-size: 9pt; color: #999;">C++</a>
+									  <a href=" ../../../../tag/c++/index.html" style="font-size: 11.5pt; color: #777;">C++</a>
 									  
 									
 									  
@@ -858,7 +932,17 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/中文/index.html" style="font-size: 11.5pt; color: #777;">中文</a>
+									  <a href=" ../../../../tag/中文/index.html" style="font-size: 13.5pt; color: #444;">中文</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/sql/index.html" style="font-size: 9pt; color: #999;">SQL</a>
 									  
 									
 									  
@@ -1030,6 +1114,8 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 								  
 								    <a href="/2019/12/12/c_cpp_scope.html">C++</a>
 								  
+								    <a href="/2019/12/12/c_cpp_STL.html">C++</a>
+								  
 								  
 								
 								 
@@ -1118,6 +1204,12 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 								
 								 
 								  
+								    <a href="/2019/12/12/SQL.html">SQL</a>
+								  
+								  
+								
+								 
+								  
 								    <a href="/2020/06/12/Uboot.html">Uboot</a>
 								  
 								    <a href="/2020/05/25/embedded_linux.html">Uboot</a>
@@ -1149,6 +1241,8 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 								 
 								  
 								    <a href="/chinese/dts.html">中文</a>
+								  
+								    <a href="/2020/05/12/knowledge.html">中文</a>
 								  
 								    <a href="/chinese/C_Cpp_scope.html">中文</a>
 								  

@@ -10,10 +10,11 @@
 
 
 
-		<title>Jie-Notes for presonal use</title>
+		<title> SQL command and usage </title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="../../../../assets/css/main.css" />
+		<link rel="stylesheet" href="../../../../assets/css/syntax.css">
 	</head>
 	<body class="is-preload">
 
@@ -25,7 +26,19 @@
 						<div class="inner">
 
 							<!-- Header -->
+																  <script type="text/x-mathjax-config">
+								    MathJax.Hub.Config({
+								      tex2jax: {
+								        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+								        inlineMath: [['$','$']]
+								      }
+								    });
+								  </script>
+								  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
 								<header id="header">
+									<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 									<a href="../../../../index.html" class="logo"><strong>Follow Jietang</strong> with:</a>
 									<ul class="icons">
 										<li><a href="mailto:alvin.tang6@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
@@ -38,142 +51,365 @@
 									</ul>
 								</header>
 
+
+							
+
+
+								
+
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h1>Notes for presonal use</h1>
+										<h1> SQL command and usage </h1>
+										<p>12 Dec 2019</p>
 									</header>
-
-
-										<script language="JavaScript">
-            function password() 
-            {
-                var testV = 1;
-                var pass1 = prompt('press password:','');
-                while (testV < 3) 
-                {
-                    if (!pass1)
-                    history.go(-1);
-                    if (pass1 == "321") 
-                    {
-                        alert('right!');
-                        break;
-                    }
-                    testV+=1;
-                    var pass1 =
-                    prompt('wrong:');
-                }
-                if (pass1!="password" & testV ==3)
-                history.go(-1);
-                return " ";
-            }
-            document.write(password());
-        </script>
-
-<p>个人在线笔记</p>
-
-
-
-
 									
-										
-												
-													
-												
-													
-												
+									<p style="float:right"><a href=" ../../../..//chinese/C_Cpp_scope.html" >中文连接</a></p>
 
-												
-													<div class="box">
-														<a href="/chinese/linux_command.html"><h2> linux command </h2></a>
-														<p>关于liunx command的一些笔记</p>
-												
-														
-												<p style="float:left">23 Jun 2020</p><p style="float:right"><a href="/chinese/linux_command.html" class="button primary small">continue</a></p><br/>
-
-													</div>
-
-												
-												
-													
-												
-
-												
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-
-												
-													<div class="box">
-														<a href="/2020/05/12/knowledge.html"><h2>计算机知识</h2></a>
-														<p></p>
-												
-														
-												<p style="float:left">12 May 2020</p><p style="float:right"><a href="/2020/05/12/knowledge.html" class="button primary small">continue</a></p><br/>
-
-													</div>
-
-												
-												
-													
-												
-
-												
-													<div class="box">
-														<a href="/2020/05/12/Cricuit.html"><h2>Circuit</h2></a>
-														<p></p>
-												
-														
-												<p style="float:left">12 May 2020</p><p style="float:right"><a href="/2020/05/12/Cricuit.html" class="button primary small">continue</a></p><br/>
-
-													</div>
-
-												
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-													
-												
-												
-												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
-										
-										
-										
-							
+									 
 									
 
+
+									<h3><i class="fas fa-tags"></i>Post Tags</h3>
+									
+									<a href=" ../../../../tag/sql/index.html" >SQL</a>
+									
+									<br/>
+									<br/>
+
+									<h2 id="table-of-content">Table of Content</h2>
+<ul id="markdown-toc">
+  <li><a href="#table-of-content" id="markdown-toc-table-of-content">Table of Content</a></li>
+  <li><a href="#basic-command-of-sql" id="markdown-toc-basic-command-of-sql">Basic command of SQL</a>    <ul>
+      <li><a href="#create-a-table" id="markdown-toc-create-a-table">Create a table:</a></li>
+      <li><a href="#select-data-from-table" id="markdown-toc-select-data-from-table">Select data from table</a></li>
+    </ul>
+  </li>
+  <li><a href="#datatype-in-sql" id="markdown-toc-datatype-in-sql">Datatype in SQL</a></li>
+  <li><a href="#design-pattern" id="markdown-toc-design-pattern">Design pattern</a>    <ul>
+      <li><a href="#first-normal-form-1nf" id="markdown-toc-first-normal-form-1nf">First normal form (1NF)</a></li>
+      <li><a href="#second-normal-form-2nf" id="markdown-toc-second-normal-form-2nf">Second normal form (2NF)</a></li>
+      <li><a href="#third-normal-form-3nf" id="markdown-toc-third-normal-form-3nf">Third normal form (3NF)</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="basic-command-of-sql">Basic command of SQL</h2>
+
+<ul>
+  <li>
+    <p>show all databases:<br />
+<code class="highlighter-rouge">Show databases;</code></p>
+  </li>
+  <li>
+    <p>create a database:
+create database &lt;your_database&gt;;</p>
+  </li>
+  <li>
+    <p>select the database to use:<br />
+use &lt;your_database&gt;;</p>
+  </li>
+</ul>
+
+<h3 id="create-a-table">Create a table:</h3>
+<ul>
+  <li>general table create
+    <pre><code class="language-C">CREATE TABLE &lt;your_table&gt; (  
+  &lt;name1&gt; &lt;data_type&gt;,   
+  &lt;name2&gt; &lt;data_type&gt;,  
+  &lt;name3&gt; &lt;data_type&gt;......);   
+</code></pre>
+    <p>data_type can be chosen from: number; date and time; char ; details are in <a href="#anchor_datatype">datatype</a></p>
+  </li>
+  <li>table with <b>primary key</b> constrain:<br />
+The column name modified with <code class="highlighter-rouge">primary key</code> means that the items under this column should be unique.
+    <pre><code class="language-C">CREATE TABLE &lt;your_table&gt; (  
+  &lt;name1&gt; &lt;data_type&gt; primary key,   
+  &lt;name2&gt; &lt;data_type&gt;,  
+  &lt;name3&gt; &lt;data_type&gt;......);   
+</code></pre>
+  </li>
+</ul>
+<p><b>Add primary key after create table:</b><br />
+<code class="highlighter-rouge">alter table &lt;your_table&gt; add primary key(&lt;name1&gt;);</code></p>
+
+<p><b>Delete primary key after create table:</b> <br />
+<code class="highlighter-rouge">alter table &lt;your_table&gt; drop primary key(&lt;name1&gt;);</code></p>
+
+<ul>
+  <li>Unique constrain:<br />
+CREATE TABLE <your_table> (
+</your_table>    <name1> <data_type> primary key,   
+  <name2> <data_type>,  
+  <name3> <data_type>,
+  ...,
+  unique(<name1>)); 
+
+</name1></data_type></name3></data_type></name2></data_type></name1>
+  </li>
+</ul>
+<p><code class="highlighter-rouge">alter table &lt;your_table&gt; add primary key(&lt;name1&gt;);</code><br />
+<span style="color:red;">Tips:</span> unique constrain can be <span style="color:red;">‘NULL’</span>, primary key cannot.</p>
+
+<ul>
+  <li>Composite Primary Key:
+The column names combined by <code class="highlighter-rouge">primary key</code> means that the items under these columns should not be same simultaneously
+    <pre><code class="language-C">CREATE TABLE &lt;your_table&gt; (  
+  &lt;name1&gt; &lt;data_type&gt; primary key,   
+  &lt;name2&gt; &lt;data_type&gt;,  
+  &lt;name3&gt; &lt;data_type&gt;,
+  ...,
+  primary key(&lt;name1&gt;,&lt;name2&gt;));   
+</code></pre>
+  </li>
+  <li>Auto increasing Key:</li>
+</ul>
+
+<pre><code class="language-C">CREATE TABLE &lt;your_table&gt; (  
+	id int primary key auto_increment,  
+	name varchar(50)
+	...,);   
+
+insert into &lt;your_table&gt; (name) value ('&lt;name_value&gt;');
+</code></pre>
+
+<ul>
+  <li>not NULL constrain:</li>
+</ul>
+
+<pre><code class="language-C">CREATE TABLE &lt;your_table&gt; (  
+	&lt;name1&gt; &lt;data_type&gt;,   
+	&lt;name2&gt; &lt;data_type&gt;,  
+	&lt;name3&gt; &lt;data_type&gt;,
+	...,
+	&lt;namen&gt; &lt;data_type&gt; not null);   
+</code></pre>
+
+<ul>
+  <li>default constrain:</li>
+</ul>
+
+<pre><code class="language-SQL">CREATE TABLE &lt;your_table&gt; (  
+	&lt;name1&gt; &lt;data_type&gt;,   
+	&lt;name2&gt; &lt;data_type&gt;,  
+	&lt;name3&gt; &lt;data_type&gt;,
+	...,
+	&lt;namen&gt; &lt;data_type&gt; default &lt;default_value&gt;);   
+</code></pre>
+
+<ul>
+  <li>
+    <p>foreign key constrain:</p>
+
+    <p>constrain from outside table:</p>
+  </li>
+</ul>
+
+<p>For example:</p>
+
+<pre><code class="language-C">--- classes as parent table
+create table classes(
+	id int primary key,
+	name varchar(20)
+);
+
+--- students as child table
+create table students(
+	id int primary key,
+	name varchar(20),
+	class_id int,
+	foreign key(class_id) references classes(id)
+);
+
+insert into classes values(1,'class one');
+insert into classes values(2,'class two');
+insert into classes values(3,'class three');
+insert into classes values(4,'class four');
+
+insert into students values(10001,'Jack',1);
+insert into students values(10002,'Max',2);
+insert into students values(10003,'Henry',3);
+insert into students values(10004,'Tom',4);
+insert into students values(10005,'Jack',3);
+
+</code></pre>
+
+<h3 id="select-data-from-table">Select data from table</h3>
+
+<ul>
+  <li>
+    <p>1, Select columns from a table:<br />
+<code class="highlighter-rouge">select &lt;coulmn1_name&gt;,&lt;coulmn2_name&gt;... from &lt;table_name&gt;;</code></p>
+  </li>
+  <li>
+    <p>2, Select columns without duplicate:<br />
+<code class="highlighter-rouge">select distinct &lt;column_name&gt; from &lt;table_name&gt;;</code></p>
+  </li>
+  <li>
+    <p>3, Select columns from a range:<br />
+<code class="highlighter-rouge">select * from &lt;table_name&gt; where &lt;column_name&gt; between &lt;range_begin&gt; and &lt;range_end&gt;;</code><br />
+OR <code class="highlighter-rouge">select * from &lt;table_name&gt; where &lt;column_name&gt; &gt; &lt;range_begin&gt; and &lt;column_name&gt; &lt; &lt;range_end&gt;;</code>.</p>
+  </li>
+  <li>
+    <p>4, Select columns without duplicate:<br />
+<code class="highlighter-rouge">select distinct &lt;column_name&gt; from &lt;table_name&gt;;</code></p>
+  </li>
+  <li>
+    <p>Show all tables<br />
+show tables;</p>
+  </li>
+  <li>
+    <p>show contents in current table:<br />
+select * from &lt;your_table&gt;; (show all contents in the table)</p>
+  </li>
+  <li>
+    <p>show the information(data type, structure) of table <br />
+describe &lt;your_table&gt;;</p>
+  </li>
+  <li>
+    <p>insert a row of data<br />
+<code class="highlighter-rouge">insert into &lt;your_table&gt; values('&lt;data&gt;','&lt;data&gt;','&lt;data&gt;'...);</code></p>
+  </li>
+</ul>
+
+<h2 id="datatype-in-sql">Datatype in SQL</h2>
+<div id="anchor_datatype"></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Definition</th>
+      <th>Length</th>
+      <th>Range(sign)</th>
+      <th>Range(unsigned)</th>
+      <th>Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>TINYINT</td>
+      <td>1 byte</td>
+      <td>(-128，127)</td>
+      <td>(0，255)</td>
+      <td>小整数值</td>
+    </tr>
+    <tr>
+      <td>SMALLINT</td>
+      <td>2 bytes</td>
+      <td>(-32 768，32 767)</td>
+      <td>(0，65 535)</td>
+      <td>大整数值</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>MEDIUMINT	3 bytes	(-8 388 608，8 388 607)	(0，16 777 215)	大整数值
+INT或INTEGER	4 bytes	(-2 147 483 648，2 147 483 647)	(0，4 294 967 295)	大整数值
+BIGINT	8 bytes	(-9,223,372,036,854,775,808，9 223 372 036 854 775 807)	(0，18 446 744 073 709 551 615)	极大整数值
+FLOAT	4 bytes	(-3.402 823 466 E+38，-1.175 494 351 E-38)，0，(1.175 494 351 E-38，3.402 823 466 351 E+38)	0，(1.175 494 351 E-38，3.402 823 466 E+38)	单精度
+浮点数值
+DOUBLE	8 bytes	(-1.797 693 134 862 315 7 E+308，-2.225 073 858 507 201 4 E-308)，0，(2.225 073 858 507 201 4 E-308，1.797 693 134 862 315 7 E+308)	0，(2.225 073 858 507 201 4 E-308，1.797 693 134 862 315 7 E+308)	双精度
+浮点数值
+DECIMAL	对DECIMAL(M,D) ，如果M&gt;D，为M+2否则为D+2	依赖于M和D的值	依赖于M和D的值	小数值</p>
+
+<h2 id="design-pattern">Design pattern</h2>
+
+<h3 id="first-normal-form-1nf">First normal form (1NF)</h3>
+
+<p>1NF design means each column should be the smallest unit which can not be separated.<br />
+For example:
+<code class="highlighter-rouge">insert into address values(1, ' 1 York Ave Toronto Ontario Canada ')</code> doesn’t fulfill 1NF<br />
+<code class="highlighter-rouge">insert into address values(1, 1, 'York Ave', 'Toronto', 'Ontario', 'Canada ')</code> is 1NF.</p>
+
+<h3 id="second-normal-form-2nf">Second normal form (2NF)</h3>
+
+<p>2NF should fulfill 1NF first then it also need to satisfy that every column should depends on primary key(except primary key)</p>
+
+<p>For example:</p>
+
+<pre><code class="language-SQL">create table sale_list(
+	product_id int,
+	customer_id int,
+	product_name varchar(20),
+	customer_name varchar(20),
+	primary key(product_id, customer_id)
+);
+</code></pre>
+<p>This one above is not qualified with 2NF. Since, the product name is only related to product_id and customer name is only related to customer_id.
+In this case, we need to break 1 table into 3 tables in following way:</p>
+
+<pre><code class="language-SQL">create table sale_list(
+	order_id int primary key,
+	product_id int,
+	customer_id int
+);
+
+create table products(
+	id int primary key,
+	product_name varchar(20)
+);
+
+create table customers(
+	id int primary key,
+	custom_name varchar(20)
+);
+</code></pre>
+
+<h3 id="third-normal-form-3nf">Third normal form (3NF)</h3>
+
+<ol>
+  <li>The 3NF should fulfill 2NF first</li>
+  <li>The column items should not have any relationship between each other(except with primary key)</li>
+</ol>
+
+<p>For example:</p>
+<pre><code class="language-SQL">create table myorder(
+	order_id int primary key,
+	product_id int,
+	customer_id int,
+	customer_name varchr(50)
+);
+
+</code></pre>
+<p>Here customer name have relationship with customer_id, so it can be break int two tables.</p>
+
+<pre><code class="language-SQL">create table myorder(
+	order_id int primary key,
+	product_id int,
+	customer_id int,
+);
+
+create table customer(
+	id int primary key,
+	customer_name varchar(50)
+);
+
+</code></pre>
+
+
+									<br/>
+									<h3><i class="fas fa-tags"></i>Post Tags</h3>
+									
+									<a href=" ../../../../tag/sql/index.html" >SQL</a>
+									
+									<head>
+<script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
+</head>
+
+<div id="vcomments"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '9CvJWlMvXQsUUkjcCF0nbtSS-MdYXbMMI',
+        appKey: 'KQFufTHJeHucASskKMC6xtLG',
+        avatar: 'retro',
+        meta: ['nick', 'mail'],
+        lang: 'en',
+        visitor: true,
+        enableQQ:true,
+        placeholder: 'Message here.\n (Tips: To make a anonymous comment, nickname and email are not necessary.\n Please entry nickname and email, if you want to show your nickname and get reminder of reply by email. )\n(输入nickname和email，可显示网络名并得到邮件回复提醒。)'
+    })
+</script>
 
 								</section>
 								

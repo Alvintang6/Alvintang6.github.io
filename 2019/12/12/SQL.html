@@ -63,9 +63,6 @@
 										<h1> SQL command and usage </h1>
 										<p>12 Dec 2019</p>
 									</header>
-									
-									<p style="float:right"><a href=" ../../../..//chinese/C_Cpp_scope.html" >中文连接</a></p>
-
 									 
 									
 
@@ -83,13 +80,27 @@
   <li><a href="#basic-command-of-sql" id="markdown-toc-basic-command-of-sql">Basic command of SQL</a>    <ul>
       <li><a href="#create-a-table" id="markdown-toc-create-a-table">Create a table:</a></li>
       <li><a href="#select-data-from-table" id="markdown-toc-select-data-from-table">Select data from table</a></li>
+      <li><a href="#analyze-of-data" id="markdown-toc-analyze-of-data">Analyze of data</a></li>
     </ul>
   </li>
-  <li><a href="#datatype-in-sql" id="markdown-toc-datatype-in-sql">Datatype in SQL</a></li>
   <li><a href="#design-pattern" id="markdown-toc-design-pattern">Design pattern</a>    <ul>
       <li><a href="#first-normal-form-1nf" id="markdown-toc-first-normal-form-1nf">First normal form (1NF)</a></li>
       <li><a href="#second-normal-form-2nf" id="markdown-toc-second-normal-form-2nf">Second normal form (2NF)</a></li>
       <li><a href="#third-normal-form-3nf" id="markdown-toc-third-normal-form-3nf">Third normal form (3NF)</a></li>
+    </ul>
+  </li>
+  <li><a href="#transaction-in-sql" id="markdown-toc-transaction-in-sql">Transaction in SQL</a>    <ul>
+      <li><a href="#features-of-transaction" id="markdown-toc-features-of-transaction">Features of transaction</a></li>
+      <li><a href="#isolation" id="markdown-toc-isolation">Isolation</a>        <ul>
+          <li><a href="#dirty-reads" id="markdown-toc-dirty-reads">Dirty reads</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#datatype-in-sql" id="markdown-toc-datatype-in-sql">Datatype in SQL</a>    <ul>
+      <li><a href="#number" id="markdown-toc-number">NUMBER</a></li>
+      <li><a href="#time-and-date" id="markdown-toc-time-and-date">Time and date</a></li>
+      <li><a href="#character" id="markdown-toc-character">Character</a></li>
     </ul>
   </li>
 </ul>
@@ -238,22 +249,66 @@ insert into students values(10005,'Jack',3);
 
 <ul>
   <li>
-    <p>1, Select columns from a table:<br />
+    <p><b>1, Select columns from a table:</b><br />
 <code class="highlighter-rouge">select &lt;coulmn1_name&gt;,&lt;coulmn2_name&gt;... from &lt;table_name&gt;;</code></p>
   </li>
   <li>
-    <p>2, Select columns without duplicate:<br />
+    <p><b>2, Select columns without duplicate:</b><br />
 <code class="highlighter-rouge">select distinct &lt;column_name&gt; from &lt;table_name&gt;;</code></p>
   </li>
   <li>
-    <p>3, Select columns from a range:<br />
+    <p><b>3, Select columns from a range:</b><br />
 <code class="highlighter-rouge">select * from &lt;table_name&gt; where &lt;column_name&gt; between &lt;range_begin&gt; and &lt;range_end&gt;;</code><br />
 OR <code class="highlighter-rouge">select * from &lt;table_name&gt; where &lt;column_name&gt; &gt; &lt;range_begin&gt; and &lt;column_name&gt; &lt; &lt;range_end&gt;;</code>.</p>
   </li>
   <li>
-    <p>4, Select columns without duplicate:<br />
+    <p><b>4, Select columns without duplicate:</b>  <br />
 <code class="highlighter-rouge">select distinct &lt;column_name&gt; from &lt;table_name&gt;;</code></p>
   </li>
+  <li>
+    <p><b>5, Select exact element from a column:</b><br />
+<code class="highlighter-rouge">select * from &lt;table_name&gt; where &lt;column_name&gt; in(&lt;elements1&gt;,&lt;elements2&gt;...);</code></p>
+  </li>
+  <li>
+    <p><b>6, ‘Or’ select distinct elements from two columns:</b><br />
+<code class="highlighter-rouge">select * from &lt;table_name&gt; where &lt;column_name1&gt;=&lt;element1&gt; or &lt;column_name2&gt;=&lt;element2&gt;;</code></p>
+  </li>
+  <li>
+    <p><b>7, Select column with descending or ascending order:</b><br />
+descending: <code class="highlighter-rouge">select * from &lt;table_name&gt; order by &lt;column_name&gt; desc;</code><br />
+ascending: <code class="highlighter-rouge">select * from &lt;table_name&gt; order by &lt;column_name&gt;; </code> (default ascending order)</p>
+  </li>
+  <li>
+    <p><b>8, Select column with descending and ascending simultaneously:</b><br />
+<code class="highlighter-rouge">select * from &lt;table_name&gt; by &lt;column_name1&gt; asc,&lt;column_name2&gt; desc;</code></p>
+  </li>
+  <li>
+    <p><b>9, Count the number of distinct element in one column  :</b><br />
+<code class="highlighter-rouge">select count(*) from &lt;table_name&gt; where &lt;column_name&gt;=&lt;element&gt;</code></p>
+  </li>
+  <li>
+    <p><b>10, Select the maximum element in column:</b><br />
+<code class="highlighter-rouge">select max(&lt;column1&gt;) from &lt;table_name&gt;; </code></p>
+  </li>
+  <li>
+    <p><b>11, Group select:
+<code class="highlighter-rouge">select avg(&lt;column1&gt;) from &lt;table&gt; group by &lt;column2&gt; </code></b></p>
+  </li>
+</ul>
+
+<p><span style="color:red;"> Nest and combined selection:</span><br />
+  <code class="highlighter-rouge">select &lt;column&gt;,&lt;column2&gt;... from &lt;table_name&gt; where &lt;columnN&gt;=(select max(&lt;columnN&gt;) from &lt;table&gt;);</code></p>
+
+<ul>
+  <li><b>12, “having” condition select:</b><br />
+` `</li>
+</ul>
+
+<h3 id="analyze-of-data">Analyze of data</h3>
+
+<p>avg()</p>
+
+<ul>
   <li>
     <p>Show all tables<br />
 show tables;</p>
@@ -271,46 +326,6 @@ describe &lt;your_table&gt;;</p>
 <code class="highlighter-rouge">insert into &lt;your_table&gt; values('&lt;data&gt;','&lt;data&gt;','&lt;data&gt;'...);</code></p>
   </li>
 </ul>
-
-<h2 id="datatype-in-sql">Datatype in SQL</h2>
-<div id="anchor_datatype"></div>
-
-<table>
-  <thead>
-    <tr>
-      <th>Definition</th>
-      <th>Length</th>
-      <th>Range(sign)</th>
-      <th>Range(unsigned)</th>
-      <th>Usage</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>TINYINT</td>
-      <td>1 byte</td>
-      <td>(-128，127)</td>
-      <td>(0，255)</td>
-      <td>小整数值</td>
-    </tr>
-    <tr>
-      <td>SMALLINT</td>
-      <td>2 bytes</td>
-      <td>(-32 768，32 767)</td>
-      <td>(0，65 535)</td>
-      <td>大整数值</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>MEDIUMINT	3 bytes	(-8 388 608，8 388 607)	(0，16 777 215)	大整数值
-INT或INTEGER	4 bytes	(-2 147 483 648，2 147 483 647)	(0，4 294 967 295)	大整数值
-BIGINT	8 bytes	(-9,223,372,036,854,775,808，9 223 372 036 854 775 807)	(0，18 446 744 073 709 551 615)	极大整数值
-FLOAT	4 bytes	(-3.402 823 466 E+38，-1.175 494 351 E-38)，0，(1.175 494 351 E-38，3.402 823 466 351 E+38)	0，(1.175 494 351 E-38，3.402 823 466 E+38)	单精度
-浮点数值
-DOUBLE	8 bytes	(-1.797 693 134 862 315 7 E+308，-2.225 073 858 507 201 4 E-308)，0，(2.225 073 858 507 201 4 E-308，1.797 693 134 862 315 7 E+308)	0，(2.225 073 858 507 201 4 E-308，1.797 693 134 862 315 7 E+308)	双精度
-浮点数值
-DECIMAL	对DECIMAL(M,D) ，如果M&gt;D，为M+2否则为D+2	依赖于M和D的值	依赖于M和D的值	小数值</p>
 
 <h2 id="design-pattern">Design pattern</h2>
 
@@ -385,6 +400,255 @@ create table customer(
 );
 
 </code></pre>
+
+<h2 id="transaction-in-sql">Transaction in SQL</h2>
+
+<p>Transaction is just ‘atomic set’ in other programming, like embedded C, which means several operations should be bound together. For example, sending money and receiving money.</p>
+
+<h3 id="features-of-transaction">Features of transaction</h3>
+
+<ul>
+  <li>
+    <p>Atomicity − ensures that all operations within the work unit are completed successfully. Otherwise, the transaction is aborted at the point of failure and all the previous operations are rolled back to their former state.</p>
+  </li>
+  <li>
+    <p>Consistency − ensures that the database properly changes states upon a successfully committed transaction.</p>
+  </li>
+  <li>
+    <p>Isolation − enables transactions to operate independently of and transparent to each other.</p>
+  </li>
+  <li>
+    <p>Durability − ensures that the result or effect of a committed transaction persists in case of a system failure.</p>
+  </li>
+</ul>
+
+<ol>
+  <li>The autocommit is enabled by default; and when autocommit is enabled, the <code class="highlighter-rouge">rollback</code> command is disabled.</li>
+  <li>To enable the rollback function, using <code class="highlighter-rouge">set autocommit=0;</code></li>
+  <li>Also we can use <code class="highlighter-rouge">commit</code> to manually submit commit.</li>
+</ol>
+
+<p><span style="color:red">Hint:</span> After <code class="highlighter-rouge">commit</code>, the transaction is also finished. So we cannot use rollback to withdraw.</p>
+
+<pre><code class="language-SQL">update user set money=money-100 where name='a';
+update user set money=money+100 where name='b';
+
+</code></pre>
+
+<p><b>Manually enable the transaction</b></p>
+
+<ol>
+  <li>Enable the transaction by <code class="highlighter-rouge">begin;</code></li>
+  <li>Enable the transaction by <code class="highlighter-rouge">start transaction;</code></li>
+</ol>
+
+<h3 id="isolation">Isolation</h3>
+
+<p>1, Read Uncommitted
+2, Read committed
+3, Repeatable read
+4, Serializable</p>
+
+<p>The default isolation level in mysql is (Repeatable read).</p>
+
+<p><b>Checking isolation level:</b><br />
+<code class="highlighter-rouge">select @@global.transaction_isolation;</code> Or <code class="highlighter-rouge">select @@transaction_isolation;</code></p>
+
+<p><b>Changing isolation level:</b><br />
+set global transaction isolation level read uncommitted;</p>
+
+<h4 id="dirty-reads">Dirty reads</h4>
+<p>A dirty read (aka uncommitted dependency) occurs when a transaction is allowed to read data from a row that has been modified by another running transaction and not yet committed.</p>
+
+<h2 id="datatype-in-sql">Datatype in SQL</h2>
+<div id="anchor_datatype"></div>
+
+<h3 id="number">NUMBER</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Length</th>
+      <th>Range(sign)</th>
+      <th>Range(unsigned)</th>
+      <th>Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>TINYINT</td>
+      <td>1 byte</td>
+      <td>(-128，127)</td>
+      <td>(0，255)</td>
+      <td>小整数值</td>
+    </tr>
+    <tr>
+      <td>SMALLINT</td>
+      <td>2 bytes</td>
+      <td>(-32 768，32 767)</td>
+      <td>(0，65 535)</td>
+      <td>大整数值</td>
+    </tr>
+    <tr>
+      <td>MEDIUMINT</td>
+      <td>3 bytes</td>
+      <td>(-8 388 608，8 388 607)</td>
+      <td>(0，16 777 215)</td>
+      <td>大整数值</td>
+    </tr>
+    <tr>
+      <td>INT或INTEGER</td>
+      <td>4 bytes</td>
+      <td>(-2 147 483 648，2 147 483 647)</td>
+      <td>(0，4 294 967 295)</td>
+      <td>大整数值</td>
+    </tr>
+    <tr>
+      <td>BIGINT</td>
+      <td>8 bytes</td>
+      <td>(-9,223,372,036,854,775,808，9 223 372 036 854 775 807)</td>
+      <td>(0，18 446 744 073 709 551 615)</td>
+      <td>极大整数值</td>
+    </tr>
+    <tr>
+      <td>FLOAT</td>
+      <td>4 bytes</td>
+      <td>(-3.402 823 466 E+38，-1.175 494 351 E-38)， 0，(1.175 494 351 E-38，3.402 823 466 351 E+38)</td>
+      <td>0，(1.175494351 E-38 <br />，3.402 823 466 E+38)</td>
+      <td>单精度浮点数值</td>
+    </tr>
+    <tr>
+      <td>DOUBLE</td>
+      <td>8 bytes</td>
+      <td>(-1.797 693 134 862 315 7 E+308，-2.225 073 858 507 201 4 E-308)，0，(2.225 073 858 507 201 4 E-308，1.797 693 134 862 315 7 E+308)</td>
+      <td>0，(2.225 073 858 507 201 4 E-308，1.797 693 134 862 315 7 E+308)</td>
+      <td>双精度浮点数值</td>
+    </tr>
+    <tr>
+      <td>DECIMAL</td>
+      <td>对DECIMAL(M,D) ，如果M&gt;D，为M+2否则为D+2</td>
+      <td>依赖于M和D的值</td>
+      <td>依赖于M和D的值</td>
+      <td>小数值</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="time-and-date">Time and date</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Size(Byte)</th>
+      <th>Range</th>
+      <th>Format</th>
+      <th>Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>DATE</td>
+      <td>3</td>
+      <td>1000-01-01/9999-12-31</td>
+      <td>YYYY-MM-DD</td>
+      <td>日期值</td>
+    </tr>
+    <tr>
+      <td>TIME</td>
+      <td>3</td>
+      <td>‘-838:59:59’/’838:59:59’</td>
+      <td>HH:MM:SS</td>
+      <td>时间值或持续时间</td>
+    </tr>
+    <tr>
+      <td>YEAR</td>
+      <td>1</td>
+      <td>1901/2155</td>
+      <td>YYYY</td>
+      <td>年份值</td>
+    </tr>
+    <tr>
+      <td>DATETIME</td>
+      <td>8</td>
+      <td>1000-01-01 00:00:00/9999-12-31 23:59:59</td>
+      <td>YYYY-MM-DD HH:MM:SS</td>
+      <td>混合日期和时间值</td>
+    </tr>
+    <tr>
+      <td>TIMESTAMP</td>
+      <td>4</td>
+      <td>1970-01-01 00:00:00/2038<br />结束时间是第 2147483647 秒，北京时间 2038-1-19 11:14:07，格林尼治时间 2038年1月19日 凌晨 03:14:07</td>
+      <td>YYYYMMDD HHMMSS</td>
+      <td>混合日期和时间值，时间戳</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="character">Character</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Size</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CHAR</td>
+      <td>0-255 bytes</td>
+      <td>定长字符串</td>
+    </tr>
+    <tr>
+      <td>VARCHAR</td>
+      <td>0-65535 bytes</td>
+      <td>变长字符串</td>
+    </tr>
+    <tr>
+      <td>TINYBLOB</td>
+      <td>0-255 bytes</td>
+      <td>不超过 255 个字符的二进制字符串</td>
+    </tr>
+    <tr>
+      <td>TINYTEXT</td>
+      <td>0-255 bytes</td>
+      <td>短文本字符串</td>
+    </tr>
+    <tr>
+      <td>BLOB</td>
+      <td>0-65 535 bytes</td>
+      <td>二进制形式的长文本数据</td>
+    </tr>
+    <tr>
+      <td>TEXT</td>
+      <td>0-65 535 bytes</td>
+      <td>长文本数据</td>
+    </tr>
+    <tr>
+      <td>MEDIUMBLOB</td>
+      <td>0-16 777 215 bytes</td>
+      <td>二进制形式的中等长度文本数据</td>
+    </tr>
+    <tr>
+      <td>MEDIUMTEXT</td>
+      <td>0-16 777 215 bytes</td>
+      <td>中等长度文本数据</td>
+    </tr>
+    <tr>
+      <td>LONGBLOB</td>
+      <td>0-4 294 967 295 bytes</td>
+      <td>二进制形式的极大文本数据</td>
+    </tr>
+    <tr>
+      <td>LONGTEXT</td>
+      <td>0-4 294 967 295 bytes</td>
+      <td>极大文本数据</td>
+    </tr>
+  </tbody>
+</table>
 
 
 									<br/>

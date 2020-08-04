@@ -80,7 +80,8 @@
   <li><a href="#basic-command-of-sql" id="markdown-toc-basic-command-of-sql">Basic command of SQL</a>    <ul>
       <li><a href="#create-a-table" id="markdown-toc-create-a-table">Create a table:</a></li>
       <li><a href="#select-data-from-table" id="markdown-toc-select-data-from-table">Select data from table</a></li>
-      <li><a href="#analyze-of-data" id="markdown-toc-analyze-of-data">Analyze of data</a></li>
+      <li><a href="#join-table" id="markdown-toc-join-table">join table</a></li>
+      <li><a href="#aggregate-function" id="markdown-toc-aggregate-function">Aggregate function</a></li>
     </ul>
   </li>
   <li><a href="#design-pattern" id="markdown-toc-design-pattern">Design pattern</a>    <ul>
@@ -300,13 +301,111 @@ ascending: <code class="highlighter-rouge">select * from &lt;table_name&gt; orde
   <code class="highlighter-rouge">select &lt;column&gt;,&lt;column2&gt;... from &lt;table_name&gt; where &lt;columnN&gt;=(select max(&lt;columnN&gt;) from &lt;table&gt;);</code></p>
 
 <ul>
-  <li><b>12, “having” condition select:</b><br />
-` `</li>
+  <li>
+    <p><b>12, “having” condition select:</b><br />
+<code class="highlighter-rouge">select &lt;column1&gt; from &lt;table1&gt;</code></p>
+  </li>
+  <li>
+    <p><b>15, Select from two tables:</b><br />
+<code class="highlighter-rouge">Select &lt;column1&gt;,&lt;column2&gt;,&lt;coulmn3&gt; from &lt;table1&gt;,&lt;table2&gt; where &lt;table1&gt;.&lt;column4&gt; = &lt;table2&gt;.&lt;column5&gt;;</code></p>
+  </li>
+  <li>
+    <p><span style="color:red;">16, Duplicating table to compare</span></p>
+  </li>
+  <li>
+    <p><b>17, Age check:</b>
+<code class="highlighter-rouge">select year(now)-year(sbirthday) as 'aging' from students;</code></p>
+  </li>
 </ul>
 
-<h3 id="analyze-of-data">Analyze of data</h3>
+<h3 id="join-table">join table</h3>
 
-<p>avg()</p>
+<ul>
+  <li>
+    <p><b>(inner) join:</b></p>
+  </li>
+  <li>
+    <p><b>left (outer) join:</b>
+If two tables have same values in two columns, it will show the items values. Otherwise it show ‘NUll’ of other items in left table.</p>
+  </li>
+  <li>
+    <p><b>right (outer) join:</b>
+Similar with left join, but shows all the items in right table.</p>
+  </li>
+  <li>
+    <p><b>full join:</b>
+show all items in both table1 and table2. 
+<span style="color:red">mysql not support full join</span></p>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>snum</th>
+      <th>cnum</th>
+      <th>degree</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>101</td>
+      <td>1-881</td>
+      <td>78</td>
+    </tr>
+    <tr>
+      <td>101</td>
+      <td>2-105</td>
+      <td>86</td>
+    </tr>
+    <tr>
+      <td>101</td>
+      <td>3-225</td>
+      <td>69</td>
+    </tr>
+    <tr>
+      <td>102</td>
+      <td>2-105</td>
+      <td>96</td>
+    </tr>
+    <tr>
+      <td>102</td>
+      <td>4-901</td>
+      <td>96</td>
+    </tr>
+    <tr>
+      <td>103</td>
+      <td>3-225</td>
+      <td>81</td>
+    </tr>
+    <tr>
+      <td>104</td>
+      <td>1-881</td>
+      <td>88</td>
+    </tr>
+    <tr>
+      <td>105</td>
+      <td>1-881</td>
+      <td>89</td>
+    </tr>
+    <tr>
+      <td>106</td>
+      <td>1-881</td>
+      <td>99</td>
+    </tr>
+    <tr>
+      <td>106</td>
+      <td>2-105</td>
+      <td>80</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="highlighter-rouge">select * from scores a where degree &lt;(select avg(degree) from scores b where a.cnum = b.cnum);</code></p>
+
+<h3 id="aggregate-function">Aggregate function</h3>
+
+<p>avg(),maxx(),</p>
 
 <ul>
   <li>
@@ -448,6 +547,8 @@ update user set money=money+100 where name='b';
 2, Read committed
 3, Repeatable read
 4, Serializable</p>
+
+<p>Performance: 1&gt;2&gt;3&gt;4</p>
 
 <p>The default isolation level in mysql is (Repeatable read).</p>
 
@@ -756,9 +857,15 @@ set global transaction isolation level read uncommitted;</p>
 										
 										
 										
+										
+										
 										<li>
 											<a href="/2020/05/12/robotics.html">Robotics</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
 												
 												
 												
@@ -834,6 +941,14 @@ set global transaction isolation level read uncommitted;</p>
 												<li><a href="/2019/12/12/formation-control.html">Formation Control</a></li>
 												
 												
+												
+												
+												
+
+												
+												
+												
+
 												
 												
 												
@@ -943,11 +1058,26 @@ set global transaction isolation level read uncommitted;</p>
 												
 												
 
+												
+												
+												
+
 																						
 												
 												
 
 												<li><a href="/2019/12/12/SQL.html"> SQL command and usage </a></li>
+												
+												
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2019/12/12/SQL-(copy).html"> SQL testing cases</a></li>
 												
 												
 												
@@ -976,8 +1106,16 @@ set global transaction isolation level read uncommitted;</p>
 																						
 												
 												
+												
+												
+												
+												
 
-												<li><a href="/2019/12/12/c_cpp_STL.html"> C/C++ Scope, Storage, and Linkage</a></li>
+																						
+												
+												
+
+												<li><a href="/2019/12/12/c_cpp_STL.html"> C++ STL container</a></li>
 												
 												
 												
@@ -1043,6 +1181,17 @@ set global transaction isolation level read uncommitted;</p>
 												
 												
 
+												<li><a href="/2020/06/12/FreeRTOS.html">Framework of FreeRTOS</a></li>
+												
+												
+												
+												
+												
+
+																						
+												
+												
+
 												<li><a href="/2020/05/25/kernel-dts.html">Linux DTB -- device tree</a></li>
 												
 												
@@ -1079,6 +1228,14 @@ set global transaction isolation level read uncommitted;</p>
 												<li><a href="/2020/05/22/interrupt.html">Interrupt of ARM A7</a></li>
 												
 												
+												
+												
+												
+
+												
+												
+												
+
 												
 												
 												
@@ -1212,6 +1369,10 @@ set global transaction isolation level read uncommitted;</p>
 												
 												
 
+												
+												
+												
+
 																						
 												
 												
@@ -1219,6 +1380,14 @@ set global transaction isolation level read uncommitted;</p>
 												<li><a href="/2019/12/12/QRcode.html">Usage of QR code in ROS</a></li>
 												
 												
+												
+												
+												
+
+												
+												
+												
+
 												
 												
 												
@@ -1273,6 +1442,10 @@ set global transaction isolation level read uncommitted;</p>
 										
 										
 										
+										
+										
+										
+										
 												
 												
 
@@ -1332,6 +1505,10 @@ set global transaction isolation level read uncommitted;</p>
 												
 												
 
+												
+												
+												
+
 																						
 												
 												
@@ -1340,6 +1517,14 @@ set global transaction isolation level read uncommitted;</p>
 
 																						
 												
+												
+												
+												
+
+												
+												
+												
+
 												
 												
 												
@@ -1416,7 +1601,7 @@ set global transaction isolation level read uncommitted;</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/中文/index.html" style="font-size: 13.5pt; color: #444;">中文</a>
+									  <a href=" ../../../../tag/中文/index.html" style="font-size: 16pt; color: #222;">中文</a>
 									  
 									
 									  
@@ -1426,7 +1611,17 @@ set global transaction isolation level read uncommitted;</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/sql/index.html" style="font-size: 9pt; color: #999;">SQL</a>
+									  <a href=" ../../../../tag/sql/index.html" style="font-size: 11.5pt; color: #777;">SQL</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/testing/index.html" style="font-size: 9pt; color: #999;">testing</a>
 									  
 									
 									  
@@ -1579,6 +1774,26 @@ set global transaction isolation level read uncommitted;</p>
 									  <a href=" ../../../../tag/device-tree/index.html" style="font-size: 11.5pt; color: #777;">Device-tree</a>
 									  
 									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/rtos/index.html" style="font-size: 9pt; color: #999;">RTOS</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/freertos/index.html" style="font-size: 9pt; color: #999;">FreeRTOS</a>
+									  
+									
 									
 
 								</nav>
@@ -1627,6 +1842,12 @@ set global transaction isolation level read uncommitted;</p>
 								 
 								  
 								    <a href="/2019/12/12/formation-control.html">Formation-control</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/06/12/FreeRTOS.html">FreeRTOS</a>
 								  
 								  
 								
@@ -1682,6 +1903,12 @@ set global transaction isolation level read uncommitted;</p>
 								
 								 
 								  
+								    <a href="/2020/06/12/FreeRTOS.html">RTOS</a>
+								  
+								  
+								
+								 
+								  
 								    <a href="/2019/12/12/formation-control.html">Robotics</a>
 								  
 								  
@@ -1689,6 +1916,8 @@ set global transaction isolation level read uncommitted;</p>
 								 
 								  
 								    <a href="/2019/12/12/SQL.html">SQL</a>
+								  
+								    <a href="/2019/12/12/SQL-(copy).html">SQL</a>
 								  
 								  
 								
@@ -1724,11 +1953,19 @@ set global transaction isolation level read uncommitted;</p>
 								
 								 
 								  
+								    <a href="/2019/12/12/SQL-(copy).html">testing</a>
+								  
+								  
+								
+								 
+								  
 								    <a href="/chinese/dts.html">中文</a>
 								  
 								    <a href="/2020/05/12/knowledge.html">中文</a>
 								  
 								    <a href="/chinese/C_Cpp_scope.html">中文</a>
+								  
+								    <a href="/chinese/C_Cpp_STL.html">中文</a>
 								  
 								  
 								 -->

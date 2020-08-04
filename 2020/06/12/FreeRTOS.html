@@ -10,11 +10,11 @@
 
 
 
-		<title> linux system bug notes</title>
+		<title>Framework of FreeRTOS</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="../../assets/css/main.css" />
-		<link rel="stylesheet" href="../../assets/css/syntax.css">
+		<link rel="stylesheet" href="../../../../assets/css/main.css" />
+		<link rel="stylesheet" href="../../../../assets/css/syntax.css">
 	</head>
 	<body class="is-preload">
 
@@ -39,7 +39,7 @@
 
 								<header id="header">
 									<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-									<a href="../../index.html" class="logo"><strong>Follow Jietang</strong> with:</a>
+									<a href="../../../../index.html" class="logo"><strong>Follow Jietang</strong> with:</a>
 									<ul class="icons">
 										<li><a href="mailto:alvin.tang6@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
 										
@@ -47,7 +47,7 @@
 										<li><a href="https://github.com/Alvintang6" class="icon brands fa-github-square"><span class="label">Github</span></a></li>
 										<li><a href="https://www.instagram.com/tang12y/?hl=en" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 										<li><a href="https://www.linkedin.com/in/jie-tang-55070b148/" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a></li>
-										<li><a href="../../resume_jietang.pdf" class="logo"><i class="fas fa-file-invoice"></i>CV</a></li>
+										<li><a href="../../../../resume_jietang.pdf" class="logo"><i class="fas fa-file-invoice"></i>CV</a></li>
 									</ul>
 								</header>
 
@@ -60,8 +60,8 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h1> linux system bug notes</h1>
-										<p>23 Jun 2020</p>
+										<h1>Framework of FreeRTOS</h1>
+										<p>12 Jun 2020</p>
 									</header>
 									 
 									
@@ -69,63 +69,31 @@
 
 									<h3><i class="fas fa-tags"></i>Post Tags</h3>
 									
-									<a href=" ../../tag/notes/index.html" >Notes</a>
+									<a href=" ../../../../tag/rtos/index.html" >RTOS</a>
+									
+									<a href=" ../../../../tag/freertos/index.html" >FreeRTOS</a>
 									
 									<br/>
 									<br/>
 
-									<h2 id="目录">目录</h2>
-<ul id="markdown-toc">
-  <li><a href="#目录" id="markdown-toc-目录">目录</a>    <ul>
-      <li><a href="#cant-find-a-valid-fat-filesystem" id="markdown-toc-cant-find-a-valid-fat-filesystem">Can’t find a valid FAT filesystem</a></li>
-      <li><a href="#python3-rosdep-modules-python3-rosdistro-modules" id="markdown-toc-python3-rosdep-modules-python3-rosdistro-modules">python3-rosdep-modules; python3-rosdistro-modules</a></li>
+									<ul id="markdown-toc">
+  <li><a href="#task" id="markdown-toc-task">Task</a>    <ul>
+      <li><a href="#task-create" id="markdown-toc-task-create">Task Create</a></li>
     </ul>
   </li>
 </ul>
 
-<h3 id="cant-find-a-valid-fat-filesystem">Can’t find a valid FAT filesystem</h3>
+<h2 id="task">Task</h2>
 
-<p>启动时出现Can’t find a valid FAT filesystem且只能进入紧急emergency mode.
-可能是linux rootfs所在磁盘缺少FAT分区或者，1号内核分区格式不兼容。</p>
-<ul>
-  <li>缺少分区：
-  sudo fdisk /dev/<your disk=""> n
-  ......
-  w
-  sudo mkfs.vfat -F 32 /dev/<your disk=""></your></your></li>
-  <li>分区格式不匹配：
-  sudo mkfs.vfat -F 32 /dev/<your disk=""></your></li>
-</ul>
-
-<h3 id="python3-rosdep-modules-python3-rosdistro-modules">python3-rosdep-modules; python3-rosdistro-modules</h3>
-
-<p>The following packages have unmet dependencies:<br />
- python3-rosdep-modules : Depends: python3-rospkg-modules (&gt;= 1.1.10) but it is not going to be installed<br />
-                          Depends: python3-catkin-pkg-modules (&gt;= 0.4.0) but it is not going to be installed<br />
-                          Depends: python3-rosdistro-modules (&gt;= 0.7.5) but it is not going to be installed<br />
-E: Unmet dependencies. Try ‘apt –fix-broken install’ with no packages (or specify a solution).</p>
-
-<p>Method 1:<br />
-<code class="highlighter-rouge">sudo apt --fix-broken install</code></p>
-
-<p>Method 2:</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo mv</span> /var/lib/dpkg/info /var/lib/dpkg/info.bk
-<span class="nb">sudo mkdir</span> /var/lib/dpkg/info
-<span class="nb">sudo </span>apt-get update
-<span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="nt">-f</span>
-</code></pre></div></div>
-
-<p>Method 3(suggest):
-Using aptitude managment software</p>
-
-<p>sudo apt-get install aptitude
-sudo aptitude install <confilct package=""></confilct></p>
+<h3 id="task-create">Task Create</h3>
 
 
 									<br/>
 									<h3><i class="fas fa-tags"></i>Post Tags</h3>
 									
-									<a href=" ../../tag/notes/index.html" >Notes</a>
+									<a href=" ../../../../tag/rtos/index.html" >RTOS</a>
+									
+									<a href=" ../../../../tag/freertos/index.html" >FreeRTOS</a>
 									
 									<head>
 <script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
@@ -184,7 +152,7 @@ sudo aptitude install <confilct package=""></confilct></p>
 										<h2>Menu</h2>
 									</header>
 									<ul>
-									<li><a href="../../index.html">About me</a></li>
+									<li><a href="../../../../index.html">About me</a></li>
 									<li>
 
 
@@ -192,10 +160,10 @@ sudo aptitude install <confilct package=""></confilct></p>
 											<ul>
 												
 
-												<li><a href="../../photos/toronto/index.html">toronto</a></li>
+												<li><a href="../../../../photos/toronto/index.html">toronto</a></li>
 												
 
-												<li><a href="../../photos/windsor/index.html">windsor</a></li>
+												<li><a href="../../../../photos/windsor/index.html">windsor</a></li>
 												
 											</ul>
 									</li>	
@@ -961,7 +929,7 @@ sudo aptitude install <confilct package=""></confilct></p>
 									  
 
 									  
-									  <a href=" ../../tag/c++/index.html" style="font-size: 11.5pt; color: #777;">C++</a>
+									  <a href=" ../../../../tag/c++/index.html" style="font-size: 11.5pt; color: #777;">C++</a>
 									  
 									
 									  
@@ -971,7 +939,7 @@ sudo aptitude install <confilct package=""></confilct></p>
 									  
 
 									  
-									  <a href=" ../../tag/中文/index.html" style="font-size: 16pt; color: #222;">中文</a>
+									  <a href=" ../../../../tag/中文/index.html" style="font-size: 16pt; color: #222;">中文</a>
 									  
 									
 									  
@@ -981,7 +949,7 @@ sudo aptitude install <confilct package=""></confilct></p>
 									  
 
 									  
-									  <a href=" ../../tag/sql/index.html" style="font-size: 11.5pt; color: #777;">SQL</a>
+									  <a href=" ../../../../tag/sql/index.html" style="font-size: 11.5pt; color: #777;">SQL</a>
 									  
 									
 									  
@@ -991,7 +959,7 @@ sudo aptitude install <confilct package=""></confilct></p>
 									  
 
 									  
-									  <a href=" ../../tag/testing/index.html" style="font-size: 9pt; color: #999;">testing</a>
+									  <a href=" ../../../../tag/testing/index.html" style="font-size: 9pt; color: #999;">testing</a>
 									  
 									
 									  
@@ -1001,7 +969,7 @@ sudo aptitude install <confilct package=""></confilct></p>
 									  
 
 									  
-									  <a href=" ../../tag/ros/index.html" style="font-size: 11.5pt; color: #777;">ROS</a>
+									  <a href=" ../../../../tag/ros/index.html" style="font-size: 11.5pt; color: #777;">ROS</a>
 									  
 									
 									  
@@ -1011,7 +979,7 @@ sudo aptitude install <confilct package=""></confilct></p>
 									  
 
 									  
-									  <a href=" ../../tag/robotics/index.html" style="font-size: 9pt; color: #999;">Robotics</a>
+									  <a href=" ../../../../tag/robotics/index.html" style="font-size: 9pt; color: #999;">Robotics</a>
 									  
 									
 									  
@@ -1021,7 +989,7 @@ sudo aptitude install <confilct package=""></confilct></p>
 									  
 
 									  
-									  <a href=" ../../tag/localization/index.html" style="font-size: 11.5pt; color: #777;">Localization</a>
+									  <a href=" ../../../../tag/localization/index.html" style="font-size: 11.5pt; color: #777;">Localization</a>
 									  
 									
 									  
@@ -1031,7 +999,7 @@ sudo aptitude install <confilct package=""></confilct></p>
 									  
 
 									  
-									  <a href=" ../../tag/formation-control/index.html" style="font-size: 9pt; color: #999;">Formation-control</a>
+									  <a href=" ../../../../tag/formation-control/index.html" style="font-size: 9pt; color: #999;">Formation-control</a>
 									  
 									
 									  
@@ -1041,7 +1009,7 @@ sudo aptitude install <confilct package=""></confilct></p>
 									  
 
 									  
-									  <a href=" ../../tag/qrcode/index.html" style="font-size: 9pt; color: #999;">QRcode</a>
+									  <a href=" ../../../../tag/qrcode/index.html" style="font-size: 9pt; color: #999;">QRcode</a>
 									  
 									
 									  
@@ -1051,7 +1019,7 @@ sudo aptitude install <confilct package=""></confilct></p>
 									  
 
 									  
-									  <a href=" ../../tag/camera-model/index.html" style="font-size: 9pt; color: #999;">Camera-model</a>
+									  <a href=" ../../../../tag/camera-model/index.html" style="font-size: 9pt; color: #999;">Camera-model</a>
 									  
 									
 									  
@@ -1061,7 +1029,7 @@ sudo aptitude install <confilct package=""></confilct></p>
 									  
 
 									  
-									  <a href=" ../../tag/notes/index.html" style="font-size: 18pt; color: #000;">Notes</a>
+									  <a href=" ../../../../tag/notes/index.html" style="font-size: 18pt; color: #000;">Notes</a>
 									  
 									
 									  
@@ -1071,7 +1039,7 @@ sudo aptitude install <confilct package=""></confilct></p>
 									  
 
 									  
-									  <a href=" ../../tag/arm/index.html" style="font-size: 9pt; color: #999;">ARM</a>
+									  <a href=" ../../../../tag/arm/index.html" style="font-size: 9pt; color: #999;">ARM</a>
 									  
 									
 									  
@@ -1081,7 +1049,7 @@ sudo aptitude install <confilct package=""></confilct></p>
 									  
 
 									  
-									  <a href=" ../../tag/interrupt/index.html" style="font-size: 9pt; color: #999;">interrupt</a>
+									  <a href=" ../../../../tag/interrupt/index.html" style="font-size: 9pt; color: #999;">interrupt</a>
 									  
 									
 									  
@@ -1091,7 +1059,7 @@ sudo aptitude install <confilct package=""></confilct></p>
 									  
 
 									  
-									  <a href=" ../../tag/bare-metal/index.html" style="font-size: 9pt; color: #999;">bare-metal</a>
+									  <a href=" ../../../../tag/bare-metal/index.html" style="font-size: 9pt; color: #999;">bare-metal</a>
 									  
 									
 									  
@@ -1101,7 +1069,7 @@ sudo aptitude install <confilct package=""></confilct></p>
 									  
 
 									  
-									  <a href=" ../../tag/linux/index.html" style="font-size: 18pt; color: #000;">Linux</a>
+									  <a href=" ../../../../tag/linux/index.html" style="font-size: 18pt; color: #000;">Linux</a>
 									  
 									
 									  
@@ -1111,7 +1079,7 @@ sudo aptitude install <confilct package=""></confilct></p>
 									  
 
 									  
-									  <a href=" ../../tag/uboot/index.html" style="font-size: 11.5pt; color: #777;">Uboot</a>
+									  <a href=" ../../../../tag/uboot/index.html" style="font-size: 11.5pt; color: #777;">Uboot</a>
 									  
 									
 									  
@@ -1121,7 +1089,7 @@ sudo aptitude install <confilct package=""></confilct></p>
 									  
 
 									  
-									  <a href=" ../../tag/dirver/index.html" style="font-size: 11.5pt; color: #777;">Dirver</a>
+									  <a href=" ../../../../tag/dirver/index.html" style="font-size: 11.5pt; color: #777;">Dirver</a>
 									  
 									
 									  
@@ -1131,7 +1099,7 @@ sudo aptitude install <confilct package=""></confilct></p>
 									  
 
 									  
-									  <a href=" ../../tag/kernel/index.html" style="font-size: 13.5pt; color: #444;">kernel</a>
+									  <a href=" ../../../../tag/kernel/index.html" style="font-size: 13.5pt; color: #444;">kernel</a>
 									  
 									
 									  
@@ -1141,7 +1109,7 @@ sudo aptitude install <confilct package=""></confilct></p>
 									  
 
 									  
-									  <a href=" ../../tag/device-tree/index.html" style="font-size: 11.5pt; color: #777;">Device-tree</a>
+									  <a href=" ../../../../tag/device-tree/index.html" style="font-size: 11.5pt; color: #777;">Device-tree</a>
 									  
 									
 									  
@@ -1151,7 +1119,7 @@ sudo aptitude install <confilct package=""></confilct></p>
 									  
 
 									  
-									  <a href=" ../../tag/rtos/index.html" style="font-size: 9pt; color: #999;">RTOS</a>
+									  <a href=" ../../../../tag/rtos/index.html" style="font-size: 9pt; color: #999;">RTOS</a>
 									  
 									
 									  
@@ -1161,7 +1129,7 @@ sudo aptitude install <confilct package=""></confilct></p>
 									  
 
 									  
-									  <a href=" ../../tag/freertos/index.html" style="font-size: 9pt; color: #999;">FreeRTOS</a>
+									  <a href=" ../../../../tag/freertos/index.html" style="font-size: 9pt; color: #999;">FreeRTOS</a>
 									  
 									
 									
@@ -1351,11 +1319,11 @@ sudo aptitude install <confilct package=""></confilct></p>
 			</div>
 
 		<!-- Scripts -->
-			<script src="../../assets/js/jquery.min.js"></script>
-			<script src="../../assets/js/browser.min.js"></script>
-			<script src="../../assets/js/breakpoints.min.js"></script>
-			<script src="../../assets/js/util.js"></script>
-			<script src="../../assets/js/main.js"></script>
+			<script src="../../../../assets/js/jquery.min.js"></script>
+			<script src="../../../../assets/js/browser.min.js"></script>
+			<script src="../../../../assets/js/breakpoints.min.js"></script>
+			<script src="../../../../assets/js/util.js"></script>
+			<script src="../../../../assets/js/main.js"></script>
 
 	</body>
 </html>

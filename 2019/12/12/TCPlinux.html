@@ -1,0 +1,2127 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		
+
+
+
+		<title> Socket(TCP/UDP) use note in linux</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../../../../assets/css/main.css" />
+		<link rel="stylesheet" href="../../../../assets/css/syntax.css">
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+																  <script type="text/x-mathjax-config">
+								    MathJax.Hub.Config({
+								      tex2jax: {
+								        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+								        inlineMath: [['$','$']]
+								      }
+								    });
+								  </script>
+								  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+								<header id="header">
+									<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+									<a href="../../../../index.html" class="logo"><strong>Follow Jietang</strong> with:</a>
+									<ul class="icons">
+										<li><a href="mailto:alvin.tang6@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+										
+										<!--<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li> -->
+										<li><a href="https://github.com/Alvintang6" class="icon brands fa-github-square"><span class="label">Github</span></a></li>
+										<li><a href="https://www.instagram.com/tang12y/?hl=en" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="https://www.linkedin.com/in/jie-tang-55070b148/" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a></li>
+										<li><a href="../../../../resume_jietang.pdf" class="logo"><i class="fas fa-file-invoice"></i>CV</a></li>
+									</ul>
+								</header>
+
+
+							
+
+
+								
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1> Socket(TCP/UDP) use note in linux</h1>
+										<p>12 Dec 2019</p>
+									</header>
+									
+									<p style="float:right"><a href=" ../../../..//chinese/C_TCP.html" >中文连接</a></p>
+
+									 
+									
+
+
+									<h3><i class="fas fa-tags"></i>Post Tags</h3>
+									
+									<a href=" ../../../../tag/c/index.html" >C</a>
+									
+									<a href=" ../../../../tag/tcp/index.html" >TCP</a>
+									
+									<br/>
+									<br/>
+
+									<h2 id="socket">Socket</h2>
+
+<h3 id="structure-of-sockaddr_in">Structure of sockaddr_in</h3>
+
+<ul>
+  <li>in_port_t sin_port</li>
+  <li>struct in_addr sin_addr</li>
+  <li>sin_family</li>
+  <li>sin_len</li>
+</ul>
+
+<h4 id="sin_family">sin_family</h4>
+<p>| sin_family | protocol explain  |
+|—|—|
+|AF_INET|	IPv4 protocol|
+|AF_INET6|	IPv6 protocol|
+|AF_LOCAL	|Unix area protocol|
+|AF_ROUTE	|route socket protocol|
+|AF_KEY	|key socket|</p>
+
+<h4 id="sin_port">sin_port</h4>
+
+<h4 id="sin_addr">sin_addr</h4>
+<p>Using inet_addr can transfer the ip address to unsigned long int</p>
+
+<p>a.sin_addr.s_addr = inet_addr(“132.241.5.10”);</p>
+
+<h2 id="processes-of-using-tcp">Processes of using tcp</h2>
+
+<h3 id="server">Server</h3>
+
+<ol>
+  <li>create socket and assign IP and port</li>
+  <li>Bind IP and port with socket</li>
+  <li>Server start up listen process</li>
+  <li>Accept the connect request from clients( get the socket_fd of clients )</li>
+  <li>Assign thread resource to each connected clients</li>
+  <li>receive from/send to message clients(by clients socket)</li>
+</ol>
+
+<h3 id="client">client</h3>
+<ol>
+  <li>create socket and assign IP and port</li>
+  <li>Bind IP and port with socket (server ip )</li>
+  <li>Ask for connect with server</li>
+  <li>receive or send message</li>
+</ol>
+
+<h3 id="code-example">code example</h3>
+
+<p>Following code gives a example of using tcp framework to connect multi clients.<br />
+In main function, it initialized server and assign a thread for each client request to connect. <br />
+The receive function could be varied based on the usage of server. In this program server will answer clients request , send a 10 numbers array and receive changed array as feedback from client.</p>
+
+<p>The frame message should be defined when transferring some complex information</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define READ_REQ 1
+#define WRTTO_SERV 2
+#define WRTTO_CLIT 3
+#define CHECKTO_CLIT 4
+</span> 
+<span class="cp">#define MSG_SIZE 10
+</span>
+
+<span class="k">struct</span> <span class="n">msg_frame</span>
+<span class="p">{</span>   
+    <span class="kt">uint8_t</span> <span class="n">msg_type</span><span class="p">;</span>
+    <span class="kt">uint8_t</span> <span class="n">client_id</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">msg_info</span><span class="p">[</span><span class="n">MSG_SIZE</span><span class="p">];</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<ul>
+  <li>server</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+</pre></td><td class="code"><pre> 
+<span class="cp">#include &lt;stdio.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdbool.h&gt;
+#include &lt;string.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;pthread.h&gt;
+#include &lt;sys/types.h&gt;
+#include "msg_frame.h"
+</span>
+
+<span class="cp">#define MAX_BUFF 1000      // buffer used for communicate    
+#define PORT 1502
+#define MAX_COUNT 3         // The maximum numbers of clients can be served
+</span><span class="kt">int</span> <span class="n">clients_fd</span><span class="p">[</span><span class="n">MAX_COUNT</span><span class="p">];</span> 
+<span class="n">pthread_mutex_t</span> <span class="n">mutx</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">count_clients</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="cm">/* maintaining a global array as server infomation */</span>
+<span class="kt">float</span> <span class="n">server_nums</span><span class="p">[</span><span class="n">MSG_SIZE</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">.</span><span class="mi">0</span><span class="p">};</span>
+
+
+
+<span class="cm">/* sub-thread used for each clients */</span>
+<span class="kt">void</span> <span class="o">*</span><span class="nf">receive</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">index_arg</span><span class="p">)</span> <span class="p">{</span>                   
+	<span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="o">*</span><span class="p">((</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">index_arg</span><span class="p">);</span>
+	<span class="kt">char</span> <span class="n">buff_recv</span><span class="p">[</span><span class="n">MAX_BUFF</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="kt">uint8_t</span> <span class="n">client_id</span><span class="p">;</span>
+    <span class="n">bool</span> <span class="n">connect_msg</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+
+    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">recv</span><span class="p">(</span><span class="n">clients_fd</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">buff_recv</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buff_recv</span><span class="p">),</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"client[%d] closed now...</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">client_id</span><span class="p">);</span>
+                <span class="n">count_clients</span><span class="o">--</span><span class="p">;</span>
+                <span class="n">close</span><span class="p">(</span><span class="n">clients_fd</span><span class="p">[</span><span class="n">index</span><span class="p">]);</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+
+
+            <span class="k">struct</span> <span class="n">msg_frame</span> <span class="n">recv_msg</span><span class="p">;</span>
+            <span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">recv_msg</span><span class="p">,</span><span class="n">buff_recv</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">recv_msg</span><span class="p">));</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">connect_msg</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span>   <span class="c1">// first time connect with client save their client ID</span>
+            <span class="p">{</span>
+                <span class="n">client_id</span> <span class="o">=</span> <span class="n">recv_msg</span><span class="p">.</span><span class="n">client_id</span><span class="p">;</span>
+                <span class="n">connect_msg</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+            <span class="p">}</span>
+            
+            <span class="k">if</span> <span class="p">(</span><span class="n">recv_msg</span><span class="p">.</span><span class="n">msg_type</span> <span class="o">==</span> <span class="n">READ_REQ</span><span class="p">){</span>
+                
+
+                <span class="k">struct</span> <span class="n">msg_frame</span> <span class="n">send_msg_t</span><span class="p">;</span>
+                <span class="kt">char</span> <span class="n">buff_send</span><span class="p">[</span><span class="n">MAX_BUFF</span><span class="p">];</span>
+
+                <span class="cm">/* send the original array numbers to clients */</span>
+                <span class="n">send_msg_t</span><span class="p">.</span><span class="n">msg_type</span> <span class="o">=</span> <span class="n">WRTTO_CLIT</span><span class="p">;</span>
+                <span class="n">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mutx</span><span class="p">);</span> <span class="c1">// use mutex_lock to protect global resource</span>
+                <span class="n">memcpy</span><span class="p">(</span><span class="n">send_msg_t</span><span class="p">.</span><span class="n">msg_info</span><span class="p">,</span> <span class="n">server_nums</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">server_nums</span><span class="p">));</span>
+                <span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mutx</span><span class="p">);</span>
+                
+
+                <span class="n">memset</span><span class="p">(</span><span class="n">buff_send</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">buff_send</span><span class="p">));</span>
+                <span class="n">memcpy</span><span class="p">(</span><span class="n">buff_send</span><span class="p">,</span><span class="o">&amp;</span><span class="n">send_msg_t</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">send_msg_t</span><span class="p">));</span>
+                <span class="n">send</span><span class="p">(</span><span class="n">clients_fd</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">buff_send</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buff_send</span><span class="p">),</span><span class="mi">0</span><span class="p">);</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"Message were sent to the client</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+
+
+            <span class="p">}</span><span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">recv_msg</span><span class="p">.</span><span class="n">msg_type</span> <span class="o">==</span> <span class="n">WRTTO_SERV</span><span class="p">){</span>
+                <span class="cm">/* save the feedback message to the array */</span>
+
+                <span class="n">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mutx</span><span class="p">);</span>              <span class="c1">// using mutex to lock shared resource</span>
+                <span class="n">memcpy</span><span class="p">(</span><span class="n">server_nums</span><span class="p">,</span> <span class="n">recv_msg</span><span class="p">.</span><span class="n">msg_info</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">server_nums</span><span class="p">));</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"From client[%d] got array of nums: </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">client_id</span><span class="p">);</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MSG_SIZE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">printf</span><span class="p">(</span><span class="s">"%.1f "</span><span class="p">,</span> <span class="n">server_nums</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+                <span class="p">}</span>
+                <span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mutx</span><span class="p">);</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+                <span class="cm">/* Send the received msg back to client  */</span>
+                <span class="n">recv_msg</span><span class="p">.</span><span class="n">msg_type</span> <span class="o">=</span> <span class="n">CHECKTO_CLIT</span><span class="p">;</span>       
+                <span class="n">memcpy</span><span class="p">(</span><span class="n">buff_recv</span><span class="p">,</span><span class="o">&amp;</span><span class="n">recv_msg</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">recv_msg</span><span class="p">));</span>
+                <span class="n">send</span><span class="p">(</span><span class="n">clients_fd</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">buff_recv</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buff_recv</span><span class="p">),</span><span class="mi">0</span><span class="p">);</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"A feedback check array was sent to client[%d]</span><span class="se">\n\n</span><span class="s">"</span><span class="p">,</span><span class="n">client_id</span><span class="p">);</span>
+            <span class="p">}</span>
+    <span class="p">}</span>
+	<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+
+
+<span class="c1">// Driver function</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="n">buff</span><span class="p">[</span><span class="n">MAX_BUFF</span><span class="p">];</span>
+    
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">server_fd</span><span class="p">,</span> <span class="n">client_fd</span><span class="p">,</span> <span class="n">len</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="n">server</span><span class="p">,</span> <span class="n">client</span><span class="p">;</span>
+    <span class="n">pthread_t</span> <span class="n">tpid</span><span class="p">;</span>
+
+    <span class="c1">// socket create and verification</span>
+    <span class="n">server_fd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">server_fd</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"socket creation failed...</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="cm">/* Enable address reuse */</span>
+    <span class="kt">int</span> <span class="n">on</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">setsockopt</span><span class="p">(</span> <span class="n">server_fd</span><span class="p">,</span> <span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">SO_REUSEADDR</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">on</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">on</span><span class="p">)</span> <span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"socket successfully created..</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">bzero</span><span class="p">(</span><span class="o">&amp;</span><span class="n">server</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">server</span><span class="p">));</span>
+
+    <span class="c1">// assign IP, PORT</span>
+    <span class="n">server</span><span class="p">.</span><span class="n">sin_family</span> <span class="o">=</span> <span class="n">AF_INET</span><span class="p">;</span>
+    <span class="n">server</span><span class="p">.</span><span class="n">sin_addr</span><span class="p">.</span><span class="n">s_addr</span> <span class="o">=</span> <span class="n">htonl</span><span class="p">(</span><span class="n">INADDR_ANY</span><span class="p">);</span>
+    <span class="n">server</span><span class="p">.</span><span class="n">sin_port</span> <span class="o">=</span> <span class="n">htons</span><span class="p">(</span><span class="n">PORT</span><span class="p">);</span>
+
+    <span class="c1">// binding newly created socket to given IP and verification</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">bind</span><span class="p">(</span><span class="n">server_fd</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">server</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">server</span><span class="p">)))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"socket bind failed...</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"socket successfully binded..</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+    <span class="c1">// now server is ready to listen and verification</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">listen</span><span class="p">(</span><span class="n">server_fd</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Listen failed...</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"server listening...</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+    <span class="n">len</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">client</span><span class="p">);</span>
+    
+    <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="n">pthread_mutex_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mutx</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="c1">// infinite loop for chat</span>
+    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        
+        <span class="k">if</span><span class="p">(</span><span class="n">count_clients</span><span class="o">&lt;</span> <span class="n">MAX_COUNT</span><span class="p">){</span>     <span class="c1">// maximum number of clients</span>
+
+            <span class="cm">/* accept the client connection and verification */</span>
+            <span class="n">client_fd</span> <span class="o">=</span> <span class="n">accept</span><span class="p">(</span><span class="n">server_fd</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">client</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">len</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">client_fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"server acccept failed...</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+                <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"server acccept the client...</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+            <span class="n">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mutx</span><span class="p">);</span>
+            <span class="n">clients_fd</span><span class="p">[</span><span class="n">count_clients</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">client_fd</span><span class="p">;</span>
+            <span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mutx</span><span class="p">);</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"Now server having %d Clients</span><span class="se">\n</span><span class="s"> "</span><span class="p">,</span> <span class="n">count_clients</span><span class="p">);</span>
+
+            <span class="n">index</span> <span class="o">=</span> <span class="n">count_clients</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+            <span class="cm">/* create threads for every client connected */</span>
+             <span class="n">ret</span> <span class="o">=</span> <span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tpid</span><span class="p">,</span><span class="nb">NULL</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">index</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">perror</span><span class="p">(</span><span class="s">" pthread_create failed</span><span class="se">\n</span><span class="s"> "</span><span class="p">);</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">pthread_detach</span><span class="p">(</span><span class="n">tpid</span><span class="p">);</span>
+            
+            
+        <span class="p">}</span>
+        
+    <span class="p">}</span>
+
+    <span class="c1">// After chatting close the socket</span>
+    <span class="n">close</span><span class="p">(</span><span class="n">server_fd</span><span class="p">);</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+  
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Multi thread is not necessary in client which depends on the task.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+</pre></td><td class="code"><pre><span class="cp">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netdb.h&gt;
+#include "msg_frame.h"
+</span>
+<span class="cp">#define HOST "127.0.0.1"        
+#define PORT 1502                   // port num of 1502
+#define MAX_BUFF  1000           // 1k buffer zone
+</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="n">ret</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">client_id</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="n">server</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">MAX_BUFF</span><span class="p">];</span>        <span class="c1">//using for keep the input message</span>
+    <span class="kt">char</span> <span class="n">press_key</span><span class="p">;</span>
+
+    <span class="c1">// create the socket </span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">sockfd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"create an endpoint for communication fail!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">bzero</span><span class="p">(</span><span class="o">&amp;</span><span class="n">server</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">server</span><span class="p">));</span>
+    <span class="n">server</span><span class="p">.</span><span class="n">sin_family</span> <span class="o">=</span> <span class="n">AF_INET</span><span class="p">;</span>
+    <span class="n">server</span><span class="p">.</span><span class="n">sin_port</span> <span class="o">=</span> <span class="n">htons</span><span class="p">(</span><span class="n">PORT</span><span class="p">);</span>
+    <span class="n">server</span><span class="p">.</span><span class="n">sin_addr</span><span class="p">.</span><span class="n">s_addr</span> <span class="o">=</span> <span class="n">inet_addr</span><span class="p">(</span><span class="n">HOST</span><span class="p">);</span>
+
+    <span class="c1">// create tcp connection</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">connect</span><span class="p">(</span><span class="n">sockfd</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">server</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span><span class="p">))</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"connect server fail...</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="n">close</span><span class="p">(</span><span class="n">sockfd</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"connect server success...</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"please enter the ID[0~255] of this client: </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">fflush</span><span class="p">(</span><span class="n">stdin</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">client_id</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">client_id</span><span class="o">&gt;</span><span class="mi">255</span> <span class="o">||</span> <span class="n">client_id</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">){</span>
+        <span class="n">perror</span><span class="p">(</span><span class="s">"Client ID should between 0 and 255"</span><span class="p">);</span>
+        <span class="n">close</span><span class="p">(</span><span class="n">sockfd</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Client:%d </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">client_id</span><span class="p">);</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="n">printf</span><span class="p">(</span><span class="s">"please enter character S/s (send) to send a request to server: </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="n">getchar</span><span class="p">();</span>
+        <span class="n">scanf</span><span class="p">(</span><span class="s">"%c"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">press_key</span><span class="p">);</span>
+
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">press_key</span> <span class="o">==</span> <span class="sc">'s'</span> <span class="o">||</span> <span class="n">press_key</span> <span class="o">==</span> <span class="sc">'S'</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+			<span class="cm">/* send the array sending request message to the server */</span>
+            <span class="k">struct</span> <span class="n">msg_frame</span> <span class="n">msg_temp</span><span class="p">;</span>
+            <span class="n">msg_temp</span><span class="p">.</span><span class="n">msg_type</span> <span class="o">=</span> <span class="n">READ_REQ</span><span class="p">;</span>
+            <span class="n">msg_temp</span><span class="p">.</span><span class="n">client_id</span> <span class="o">=</span> <span class="n">client_id</span><span class="p">;</span>
+            <span class="n">memset</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">));</span>
+            <span class="n">memcpy</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="o">&amp;</span><span class="n">msg_temp</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">msg_temp</span><span class="p">));</span>
+            <span class="n">send</span><span class="p">(</span><span class="n">sockfd</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span><span class="mi">0</span><span class="p">);</span>
+
+
+            <span class="n">memset</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">));</span>
+            <span class="n">recv</span><span class="p">(</span><span class="n">sockfd</span><span class="p">,</span><span class="n">buffer</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span><span class="mi">0</span><span class="p">);</span>
+            <span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg_temp</span><span class="p">,</span><span class="n">buffer</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">msg_temp</span><span class="p">));</span>
+
+			<span class="cm">/* processing the array answered from server  */</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">msg_temp</span><span class="p">.</span><span class="n">msg_type</span> <span class="o">==</span> <span class="n">WRTTO_CLIT</span><span class="p">)</span>
+            <span class="p">{</span>   
+                <span class="kt">float</span> <span class="n">recv_info</span><span class="p">[</span><span class="n">MSG_SIZE</span><span class="p">];</span>
+                <span class="n">memcpy</span><span class="p">(</span><span class="n">recv_info</span><span class="p">,</span><span class="n">msg_temp</span><span class="p">.</span><span class="n">msg_info</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">recv_info</span><span class="p">));</span>
+
+                <span class="n">printf</span><span class="p">(</span><span class="s">"From Server got a array of nums: </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MSG_SIZE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">printf</span><span class="p">(</span><span class="s">"%.1f "</span><span class="p">,</span> <span class="n">recv_info</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+                <span class="p">}</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+                
+
+				<span class="cm">/* send the modified array information back to server */</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"The following processed array was sent to the server: </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MSG_SIZE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+                <span class="p">{</span>   
+                    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">4</span><span class="p">)</span>
+                    <span class="p">{</span>
+                        <span class="n">recv_info</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*=</span><span class="mi">2</span><span class="p">;</span>
+                    <span class="p">}</span>
+                
+                    <span class="n">printf</span><span class="p">(</span><span class="s">"%.1f "</span><span class="p">,</span> <span class="n">recv_info</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+                <span class="p">}</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+                <span class="n">msg_temp</span><span class="p">.</span><span class="n">msg_type</span> <span class="o">=</span> <span class="n">WRTTO_SERV</span><span class="p">;</span>
+                <span class="n">memcpy</span><span class="p">(</span><span class="n">msg_temp</span><span class="p">.</span><span class="n">msg_info</span><span class="p">,</span> <span class="n">recv_info</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">recv_info</span><span class="p">));</span>
+                <span class="n">memcpy</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="o">&amp;</span><span class="n">msg_temp</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">msg_temp</span><span class="p">));</span>
+                <span class="n">send</span><span class="p">(</span><span class="n">sockfd</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span><span class="mi">0</span><span class="p">);</span>
+
+            
+				<span class="cm">/* receiving the confirmation message from server */</span>
+            <span class="n">recv</span><span class="p">(</span><span class="n">sockfd</span><span class="p">,</span><span class="n">buffer</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span><span class="mi">0</span><span class="p">);</span>
+            <span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg_temp</span><span class="p">,</span><span class="n">buffer</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">msg_temp</span><span class="p">));</span>
+            <span class="n">memcpy</span><span class="p">(</span><span class="n">recv_info</span><span class="p">,</span><span class="n">msg_temp</span><span class="p">.</span><span class="n">msg_info</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">recv_info</span><span class="p">));</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">msg_temp</span><span class="p">.</span><span class="n">msg_type</span> <span class="o">==</span> <span class="n">CHECKTO_CLIT</span><span class="p">){</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"From Server got a feedback array for checking: </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MSG_SIZE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">printf</span><span class="p">(</span><span class="s">"%.1f "</span><span class="p">,</span> <span class="n">recv_info</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+                <span class="p">}</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+
+        
+    <span class="p">}</span>
+
+    <span class="n">close</span><span class="p">(</span><span class="n">sockfd</span><span class="p">);</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+
+									<br/>
+									<h3><i class="fas fa-tags"></i>Post Tags</h3>
+									
+									<a href=" ../../../../tag/c/index.html" >C</a>
+									
+									<a href=" ../../../../tag/tcp/index.html" >TCP</a>
+									
+									<head>
+<script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
+</head>
+
+<div id="vcomments"></div>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '9CvJWlMvXQsUUkjcCF0nbtSS-MdYXbMMI',
+        appKey: 'KQFufTHJeHucASskKMC6xtLG',
+        avatar: 'retro',
+        meta: ['nick', 'mail'],
+        lang: 'en',
+        visitor: true,
+        enableQQ:true,
+        placeholder: 'Message here.\n (Tips: To make a anonymous comment, nickname and email are not necessary.\n Please entry nickname and email, if you want to show your nickname and get reminder of reply by email. )\n(输入nickname和email，可显示网络名并得到邮件回复提醒。)'
+    })
+</script>
+
+								</section>
+								
+								
+
+								
+
+							</div>
+						</div>
+								
+
+								
+								
+								
+
+				<!-- Sidebar -->
+
+
+
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+
+
+
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+									<li><a href="../../../../index.html">About me</a></li>
+									<li>
+
+
+											<span class="opener">Photograph</span>
+											<ul>
+												
+
+												<li><a href="../../../../photos/toronto/index.html">toronto</a></li>
+												
+
+												<li><a href="../../../../photos/windsor/index.html">windsor</a></li>
+												
+											</ul>
+									</li>	
+									</ul>
+									<br/>
+										
+									<header class="major">
+									<h2>Tech Blogs</h2>
+									</header>	
+									<ul>
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										<li>
+											<a href="/2020/05/12/robotics.html">Robotics</a><span class="opener" style="font-size: 0.1;"></span>
+											<ul>
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2019/12/12/formation-control.html">Formation Control</a></li>
+												
+												
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
+											</ul>
+										</li>
+										
+										
+										
+										
+										
+										<li>
+											<a href="/2020/05/12/programming.html">Programming</a><span class="opener" style="font-size: 0.1;"></span>
+											<ul>
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2020/08/06/c_cpp.html"> C++ STL container</a></li>
+												
+												
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2019/12/12/TCPlinux.html"> Socket(TCP/UDP) use note in linux</a></li>
+												
+												
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2019/12/12/SQL.html"> SQL command and usage </a></li>
+												
+												
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2019/12/12/makefile.html"> Makefile</a></li>
+												
+												
+												
+												
+												
+
+																						
+												
+												
+												
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2019/12/12/c_cpp_scope.html"> C/C++ Scope, Storage, and Linkage</a></li>
+												
+												
+												
+												
+												
+
+																						
+												
+												
+												
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2019/12/12/c_cpp_STL.html"> C++ STL container</a></li>
+												
+												
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
+											</ul>
+										</li>
+										
+										
+										
+										
+										
+										<li>
+											<a href="/2020/05/12/mcu.html">Mcu&Mpu</a><span class="opener" style="font-size: 0.1;"></span>
+											<ul>
+												
+												
+												
+
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2020/07/04/driver-framework.html">Linux -- Driver framework</a></li>
+												
+												
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2020/06/12/Uboot.html">Uboot porting with NXP MX serie</a></li>
+												
+												
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2020/06/12/FreeRTOS.html">Framework of FreeRTOS</a></li>
+												
+												
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2020/05/25/kernel-dts.html">Linux DTB -- device tree</a></li>
+												
+												
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2020/05/25/kernel.html">Linux kernel module beginning (I)</a></li>
+												
+												
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2020/05/25/embedded_linux.html">Embedded linux system architecture</a></li>
+												
+												
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2020/05/22/interrupt.html">Interrupt of ARM A7</a></li>
+												
+												
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
+											</ul>
+										</li>
+										
+										
+										
+										
+										
+										<li>
+											<a href="/2020/05/12/Machine-Vision.html">Machine Vision</a><span class="opener" style="font-size: 0.1;"></span>
+											<ul>
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2019/12/12/QRcode.html">Usage of QR code in ROS</a></li>
+												
+												
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
+											</ul>
+										</li>
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+																						
+												
+												
+												
+												
+
+																						
+												
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+																						
+												
+												
+												
+												
+
+																						
+												
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
+											</ul>
+										</li>
+										
+										
+										
+										
+										
+										<br/>
+										<!--<li><a href="elements.html">Elements</a></li>-->
+										<!--<li><a href="elements.html">Elements</a></li>-->
+										
+										
+									</ul>
+
+									<div>
+										<h3><a href=" "><i class="fas fa-tags"></i>Tags</h3></a>
+									</div>
+									
+									
+									
+									
+									
+
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/c++/index.html" style="font-size: 13.5pt; color: #444;">C++</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/中文/index.html" style="font-size: 16pt; color: #222;">中文</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/makefile/index.html" style="font-size: 9pt; color: #999;">Makefile</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/sql/index.html" style="font-size: 9pt; color: #999;">SQL</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/c/index.html" style="font-size: 9pt; color: #999;">C</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/tcp/index.html" style="font-size: 9pt; color: #999;">TCP</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/ros/index.html" style="font-size: 11.5pt; color: #777;">ROS</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/robotics/index.html" style="font-size: 9pt; color: #999;">Robotics</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/localization/index.html" style="font-size: 11.5pt; color: #777;">Localization</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/formation-control/index.html" style="font-size: 9pt; color: #999;">Formation-control</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/qrcode/index.html" style="font-size: 9pt; color: #999;">QRcode</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/camera-model/index.html" style="font-size: 9pt; color: #999;">Camera-model</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/notes/index.html" style="font-size: 18pt; color: #000;">Notes</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/arm/index.html" style="font-size: 9pt; color: #999;">ARM</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/interrupt/index.html" style="font-size: 9pt; color: #999;">interrupt</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/bare-metal/index.html" style="font-size: 9pt; color: #999;">bare-metal</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/linux/index.html" style="font-size: 18pt; color: #000;">Linux</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/uboot/index.html" style="font-size: 11.5pt; color: #777;">Uboot</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/dirver/index.html" style="font-size: 11.5pt; color: #777;">Dirver</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/kernel/index.html" style="font-size: 13.5pt; color: #444;">kernel</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/device-tree/index.html" style="font-size: 11.5pt; color: #777;">Device-tree</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/rtos/index.html" style="font-size: 9pt; color: #999;">RTOS</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/freertos/index.html" style="font-size: 9pt; color: #999;">FreeRTOS</a>
+									  
+									
+									
+
+								</nav>
+
+
+								<!-- 
+								
+
+								
+								 
+								  
+								    <a href="/2020/05/22/interrupt.html">ARM</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2019/12/12/TCPlinux.html">C</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/08/06/c_cpp.html">C++</a>
+								  
+								    <a href="/2019/12/12/c_cpp_scope.html">C++</a>
+								  
+								    <a href="/2019/12/12/c_cpp_STL.html">C++</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2019/12/12/QRcode.html">Camera-model</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/07/04/driver-framework.html">Device-tree</a>
+								  
+								    <a href="/2020/05/25/kernel-dts.html">Device-tree</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/05/25/kernel.html">Dirver</a>
+								  
+								    <a href="/2020/05/25/embedded_linux.html">Dirver</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2019/12/12/formation-control.html">Formation-control</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/06/12/FreeRTOS.html">FreeRTOS</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/07/04/driver-framework.html">Linux</a>
+								  
+								    <a href="/2020/06/12/Uboot.html">Linux</a>
+								  
+								    <a href="/2020/05/25/kernel-dts.html">Linux</a>
+								  
+								    <a href="/2020/05/25/kernel.html">Linux</a>
+								  
+								    <a href="/2020/05/25/embedded_linux.html">Linux</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2019/12/12/QRcode.html">Localization</a>
+								  
+								    <a href="/2019/12/12/formation-control.html">Localization</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2019/12/12/makefile.html">Makefile</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/chinese/linux_command.html">Notes</a>
+								  
+								    <a href="/chinese/dts.html">Notes</a>
+								  
+								    <a href="/chinese/linux_bug.html">Notes</a>
+								  
+								    <a href="/2020/05/12/knowledge.html">Notes</a>
+								  
+								    <a href="/2020/05/12/Cricuit.html">Notes</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2019/12/12/QRcode.html">QRcode</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2019/12/12/QRcode.html">ROS</a>
+								  
+								    <a href="/2019/12/12/formation-control.html">ROS</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/06/12/FreeRTOS.html">RTOS</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2019/12/12/formation-control.html">Robotics</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2019/12/12/SQL.html">SQL</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2019/12/12/TCPlinux.html">TCP</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/06/12/Uboot.html">Uboot</a>
+								  
+								    <a href="/2020/05/25/embedded_linux.html">Uboot</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/05/22/interrupt.html">bare-metal</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/05/22/interrupt.html">interrupt</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/07/04/driver-framework.html">kernel</a>
+								  
+								    <a href="/2020/05/25/kernel-dts.html">kernel</a>
+								  
+								    <a href="/2020/05/25/kernel.html">kernel</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/chinese/dts.html">中文</a>
+								  
+								    <a href="/2020/05/12/knowledge.html">中文</a>
+								  
+								    <a href="/chinese/C_Cpp_scope.html">中文</a>
+								  
+								    <a href="/chinese/C_Cpp_STL.html">中文</a>
+								  
+								  
+								 -->
+							
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; Jietang. All rights reserved.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../../../assets/js/jquery.min.js"></script>
+			<script src="../../../../assets/js/browser.min.js"></script>
+			<script src="../../../../assets/js/breakpoints.min.js"></script>
+			<script src="../../../../assets/js/util.js"></script>
+			<script src="../../../../assets/js/main.js"></script>
+
+	</body>
+</html>

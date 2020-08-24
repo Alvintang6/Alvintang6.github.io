@@ -78,14 +78,151 @@
 
 									<ul id="markdown-toc">
   <li><a href="#task" id="markdown-toc-task">Task</a>    <ul>
-      <li><a href="#task-create" id="markdown-toc-task-create">Task Create</a></li>
+      <li><a href="#task-create" id="markdown-toc-task-create">Task Create</a>        <ul>
+          <li><a href="#create-function-of-a-task" id="markdown-toc-create-function-of-a-task">Create function of a task</a></li>
+          <li><a href="#delete-function-of-a-task" id="markdown-toc-delete-function-of-a-task">Delete function of a task</a></li>
+        </ul>
+      </li>
+      <li><a href="#task-suspend-and-resume" id="markdown-toc-task-suspend-and-resume">Task suspend and resume</a></li>
     </ul>
   </li>
 </ul>
 
 <h2 id="task">Task</h2>
 
+<p>One of the most important purpose that people use ‘RTOS’ is due to the task management of RTOS.</p>
+
 <h3 id="task-create">Task Create</h3>
+
+<p>In FreeRTOS, we use xTaskCreateStatic(), xTaskCreate() and xTaskCreateRestricted() function to create task.
+The TaskCreateStatic function create task by use static <code class="highlighter-rouge">task heap</code> which created by programmer manually. Also TaskCreateStatic function need manually create Idling task by creating following function:<br />
+<code class="highlighter-rouge">vApplicationGetIdleTaskMemory() and vApplicationGetTimerTaskMemory()</code></p>
+
+<h4 id="create-function-of-a-task">Create function of a task</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>BaseType_t xTaskCreate(
+                    TaskFunction_t   pxTaskCode,
+                    const char * const  pcName,
+                    const uint16_t  usStackDepth,
+                    void * const    pvParameters,
+                    UBaseType_t     uxPriority,
+                    TaskHandle_t *  const pxCreatedTask )
+</code></pre></div></div>
+<ul>
+  <li>pxTaskCode:  the function name of task</li>
+  <li>pName:    The name of task used for debug and tracking.</li>
+  <li>usStackDepth: The size of stack of a task, the real size will be 4 times of <code class="highlighter-rouge">usStackDepth</code>.</li>
+  <li>pvParameters: Parameters passed to the task.</li>
+  <li>uxPriority: priorities of one task, the value of this property should between 0 and configMAX_PRIORITIES-1.</li>
+  <li>pxCreatedTask: After successful create a task, the function will return this variable as a handle of this task.</li>
+</ul>
+
+<h4 id="delete-function-of-a-task">Delete function of a task</h4>
+
+<p>By using Taskhandle, we can delete a task:
+<code class="highlighter-rouge">vTaskDelete( TaskHandle_t xTaskToDelete )</code></p>
+
+<p>Example 1. Creating tasks
+This example demonstrates the steps needed to create two simple tasks, then start the tasks
+executing. The tasks simply print out a string periodically, using a crude null loop to create the
+53
+period delay. Both tasks are created at the same priority, and are identical except for the
+string they print out—see Listing 14 and Listing 15 for their respective implementations.</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">vTask1</span><span class="p">(</span> <span class="kt">void</span> <span class="o">*</span><span class="n">pvParameters</span> <span class="p">)</span>
+<span class="p">{</span>
+<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">pcTaskName</span> <span class="o">=</span> <span class="s">"Task 1 is running</span><span class="se">\r\n</span><span class="s">"</span><span class="p">;</span>
+<span class="k">volatile</span> <span class="kt">uint32_t</span> <span class="n">ul</span><span class="p">;</span> <span class="cm">/* volatile to ensure ul is not optimized away. */</span>
+ <span class="cm">/* As per most tasks, this task is implemented in an infinite loop. */</span>
+ <span class="k">for</span><span class="p">(</span> <span class="p">;;</span> <span class="p">)</span>
+ <span class="p">{</span>
+ <span class="cm">/* Print out the name of this task. */</span>
+ <span class="n">vPrintString</span><span class="p">(</span> <span class="n">pcTaskName</span> <span class="p">);</span>
+ <span class="cm">/* Delay for a period. */</span>
+ <span class="k">for</span><span class="p">(</span> <span class="n">ul</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">ul</span> <span class="o">&lt;</span> <span class="n">mainDELAY_LOOP_COUNT</span><span class="p">;</span> <span class="n">ul</span><span class="o">++</span> <span class="p">)</span>
+ <span class="p">{</span>
+ <span class="cm">/* This loop is just a very crude delay implementation. There is
+ nothing to do in here. Later examples will replace this crude
+ loop with a proper delay/sleep function. */</span>
+ <span class="p">}</span>
+ <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">vTask2</span><span class="p">(</span> <span class="kt">void</span> <span class="o">*</span><span class="n">pvParameters</span> <span class="p">)</span>
+<span class="p">{</span>
+<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">pcTaskName</span> <span class="o">=</span> <span class="s">"Task 2 is running</span><span class="se">\r\n</span><span class="s">"</span><span class="p">;</span>
+<span class="k">volatile</span> <span class="kt">uint32_t</span> <span class="n">ul</span><span class="p">;</span> <span class="cm">/* volatile to ensure ul is not optimized away. */</span>
+ <span class="cm">/* As per most tasks, this task is implemented in an infinite loop. */</span>
+ <span class="k">for</span><span class="p">(</span> <span class="p">;;</span> <span class="p">)</span>
+ <span class="p">{</span>
+ <span class="cm">/* Print out the name of this task. */</span>
+ <span class="n">vPrintString</span><span class="p">(</span> <span class="n">pcTaskName</span> <span class="p">);</span>
+ <span class="cm">/* Delay for a period. */</span>
+ <span class="k">for</span><span class="p">(</span> <span class="n">ul</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">ul</span> <span class="o">&lt;</span> <span class="n">mainDELAY_LOOP_COUNT</span><span class="p">;</span> <span class="n">ul</span><span class="o">++</span> <span class="p">)</span>
+ <span class="p">{</span>
+ <span class="cm">/* This loop is just a very crude delay implementation. There is
+ nothing to do in here. Later examples will replace this crude
+ loop with a proper delay/sleep function. */</span>
+ <span class="p">}</span>
+ <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/*The main() function creates the tasks before starting the scheduler—see Listing 16 for its
+implementation.*/</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span> <span class="kt">void</span> <span class="p">)</span>
+<span class="p">{</span>
+ <span class="cm">/* Create one of the two tasks. Note that a real application should check
+ the return value of the xTaskCreate() call to ensure the task was created
+ successfully. */</span>
+ <span class="n">xTaskCreate</span><span class="p">(</span> <span class="n">vTask1</span><span class="p">,</span>           <span class="cm">/* Pointer to the function that implements the task. */</span>
+              <span class="s">"Task 1"</span><span class="p">,</span><span class="cm">/* Text name for the task. This is to facilitate debugging only. */</span>
+              <span class="mi">1000</span><span class="p">,</span> <span class="cm">/* Stack depth - small microcontrollers will use much less stack than this. */</span>
+              <span class="nb">NULL</span><span class="p">,</span> <span class="cm">/* This example does not use the task parameter. */</span>
+              <span class="mi">1</span><span class="p">,</span> <span class="cm">/* This task will run at priority 1. */</span>
+              <span class="nb">NULL</span> <span class="p">);</span> <span class="cm">/* This example does not use the task handle. */</span>
+
+ <span class="cm">/* Create the other task in exactly the same way and at the same priority. */</span>
+ <span class="n">xTaskCreate</span><span class="p">(</span> <span class="n">vTask2</span><span class="p">,</span> <span class="s">"Task 2"</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">NULL</span> <span class="p">);</span>
+ <span class="cm">/* Start the scheduler so the tasks start executing. */</span>
+ <span class="n">vTaskStartScheduler</span><span class="p">();</span>
+
+ <span class="cm">/* If all is well then main() will never reach here as the scheduler will
+ now be running the tasks. If main() does reach here then it is likely that
+ there was insufficient heap memory available for the idle task to be created.
+ Chapter 2 provides more information on heap memory management. */</span>
+ <span class="k">for</span><span class="p">(</span> <span class="p">;;</span> <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="task-suspend-and-resume">Task suspend and resume</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>vTaskSuspend()</td>
+      <td>Suspend a task</td>
+    </tr>
+    <tr>
+      <td>vTaskResume()</td>
+      <td>Resume a task</td>
+    </tr>
+    <tr>
+      <td>xTaskResumeFromISR()</td>
+      <td>Resume a task from interrupt Service Routine</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>By using the following function, the task will be suspended until awakened by vTaskResume function.<br />
+The task are identified by TaskHandles.
+void vTaskSuspend( TaskHandle_t xTaskToSuspend)</p>
+
+<p>void vTaskResume( TaskHandle_t xTaskToSuspend)</p>
 
 
 									<br/>
@@ -197,9 +334,15 @@
 										
 										
 										
+										
+										
 										<li>
 											<a href="/2020/05/12/robotics.html">Robotics</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
 												
 												
 												
@@ -313,6 +456,10 @@
 
 												
 												
+												
+
+												
+												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -328,6 +475,13 @@
 												
 												
 
+																						
+												
+												
+
+												<li><a href="/2020/08/06/c_cpp.html"> C++ STL container</a></li>
+												
+												
 												
 												
 												
@@ -396,6 +550,21 @@
 												
 												
 
+												
+												
+												
+
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2019/12/12/TCPlinux.html"> Socket(TCP/UDP) use note in linux</a></li>
+												
+												
 												
 												
 												
@@ -415,7 +584,7 @@
 												
 												
 
-												<li><a href="/2019/12/12/SQL-(copy).html"> SQL testing cases</a></li>
+												<li><a href="/2019/12/12/makefile.html"> Makefile</a></li>
 												
 												
 												
@@ -477,6 +646,10 @@
 										<li>
 											<a href="/2020/05/12/mcu.html">Mcu&Mpu</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
 												
 												
 												
@@ -632,6 +805,10 @@
 
 												
 												
+												
+
+												
+												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -643,6 +820,10 @@
 										<li>
 											<a href="/2020/05/12/Machine-Vision.html">Machine Vision</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
 												
 												
 												
@@ -756,6 +937,10 @@
 
 												
 												
+												
+
+												
+												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -784,58 +969,8 @@
 										
 										
 										
-												
-												
-
-												
-												
-												
-
-																						
-												
-												
-												
-												
-
-																						
-												
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
+										
+										
 												
 												
 
@@ -855,6 +990,66 @@
 
 																						
 												
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+																						
+												
+												
+												
+												
+
+																						
+												
+												
+												
+												
+
 												
 												
 												
@@ -929,7 +1124,7 @@
 									  
 
 									  
-									  <a href=" ../../../../tag/c++/index.html" style="font-size: 11.5pt; color: #777;">C++</a>
+									  <a href=" ../../../../tag/c++/index.html" style="font-size: 13.5pt; color: #444;">C++</a>
 									  
 									
 									  
@@ -949,7 +1144,7 @@
 									  
 
 									  
-									  <a href=" ../../../../tag/sql/index.html" style="font-size: 11.5pt; color: #777;">SQL</a>
+									  <a href=" ../../../../tag/makefile/index.html" style="font-size: 9pt; color: #999;">Makefile</a>
 									  
 									
 									  
@@ -959,7 +1154,27 @@
 									  
 
 									  
-									  <a href=" ../../../../tag/testing/index.html" style="font-size: 9pt; color: #999;">testing</a>
+									  <a href=" ../../../../tag/sql/index.html" style="font-size: 9pt; color: #999;">SQL</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/c/index.html" style="font-size: 9pt; color: #999;">C</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/tcp/index.html" style="font-size: 9pt; color: #999;">TCP</a>
 									  
 									
 									  
@@ -1149,6 +1364,14 @@
 								
 								 
 								  
+								    <a href="/2019/12/12/TCPlinux.html">C</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/08/06/c_cpp.html">C++</a>
+								  
 								    <a href="/2019/12/12/c_cpp_scope.html">C++</a>
 								  
 								    <a href="/2019/12/12/c_cpp_STL.html">C++</a>
@@ -1213,6 +1436,12 @@
 								
 								 
 								  
+								    <a href="/2019/12/12/makefile.html">Makefile</a>
+								  
+								  
+								
+								 
+								  
 								    <a href="/chinese/linux_command.html">Notes</a>
 								  
 								    <a href="/chinese/dts.html">Notes</a>
@@ -1255,7 +1484,11 @@
 								  
 								    <a href="/2019/12/12/SQL.html">SQL</a>
 								  
-								    <a href="/2019/12/12/SQL-(copy).html">SQL</a>
+								  
+								
+								 
+								  
+								    <a href="/2019/12/12/TCPlinux.html">TCP</a>
 								  
 								  
 								
@@ -1286,12 +1519,6 @@
 								    <a href="/2020/05/25/kernel-dts.html">kernel</a>
 								  
 								    <a href="/2020/05/25/kernel.html">kernel</a>
-								  
-								  
-								
-								 
-								  
-								    <a href="/2019/12/12/SQL-(copy).html">testing</a>
 								  
 								  
 								

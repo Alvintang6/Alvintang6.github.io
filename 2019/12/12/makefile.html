@@ -10,7 +10,7 @@
 
 
 
-		<title> SQL testing cases</title>
+		<title> Makefile</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="../../../../assets/css/main.css" />
@@ -60,39 +60,129 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h1> SQL testing cases</h1>
+										<h1> Makefile</h1>
 										<p>12 Dec 2019</p>
 									</header>
+									
+									<p style="float:right"><a href=" ../../../..//chinese/makefile.html" >中文连接</a></p>
+
 									 
 									
 
 
 									<h3><i class="fas fa-tags"></i>Post Tags</h3>
 									
-									<a href=" ../../../../tag/sql/index.html" >SQL</a>
-									
-									<a href=" ../../../../tag/testing/index.html" >testing</a>
+									<a href=" ../../../../tag/makefile/index.html" >Makefile</a>
 									
 									<br/>
 									<br/>
 
 									<h2 id="table-of-content">Table of Content</h2>
 <ul id="markdown-toc">
-  <li><a href="#table-of-content" id="markdown-toc-table-of-content">Table of Content</a>    <ul>
-      <li><a href="#data-import" id="markdown-toc-data-import">Data import</a></li>
+  <li><a href="#table-of-content" id="markdown-toc-table-of-content">Table of Content</a></li>
+  <li><a href="#a-tips-and-errors-when-using-makefile" id="markdown-toc-a-tips-and-errors-when-using-makefile">A. Tips and errors when using makefile</a>    <ul>
+      <li><a href="#a1-shell-related-command-cd" id="markdown-toc-a1-shell-related-command-cd">A.1. shell related command (cd)</a></li>
+      <li><a href="#a2-bash-tips-colors-and-formatting" id="markdown-toc-a2-bash-tips-colors-and-formatting">A.2. Bash tips: Colors and formatting</a></li>
+      <li><a href="#a3-pattern-specific-variable" id="markdown-toc-a3-pattern-specific-variable">A.3. Pattern-specific Variable</a></li>
     </ul>
   </li>
 </ul>
 
-<h3 id="data-import">Data import</h3>
+<h2 id="a-tips-and-errors-when-using-makefile">A. Tips and errors when using makefile</h2>
+
+<h3 id="a1-shell-related-command-cd">A.1. shell related command (cd)</h3>
+
+<p>Every shell based command are only valid in current line. Since each shell command in makefile will call a sub shell.
+For example, <code class="highlighter-rouge">cd</code> command will only change the path once in this line. So if you do want to use <code class="highlighter-rouge">cd</code> in makefile you have to combine other command with <code class="highlighter-rouge">&amp;&amp;</code> or <code class="highlighter-rouge">;</code>. Like following</p>
+
+<p><code class="highlighter-rouge">cd /lib &amp;&amp; tar -xvf xxxx.tar or cd /lib; tar -xvf xxxx.tar</code></p>
+
+<h3 id="a2-bash-tips-colors-and-formatting">A.2. Bash tips: Colors and formatting</h3>
+
+<p>background color:40—-49 <br />
+40:black <br />
+41:dark red <br />
+42:green <br />
+43:yellow <br />
+44:blue <br />
+45:purple <br />
+46:dark green <br />
+47:white</p>
+
+<p>words color:30———–39 <br />
+30:black <br />
+31:red <br />
+32:green <br />
+33:yellow <br />
+34:blue <br />
+35:purple <br />
+36:dark green <br />
+37:white</p>
+
+<p>===============================================ANSI control code<br />
+\33[0m default <br />
+\33[1m enable highlight <br />
+\33[4m underline <br />
+\33[5m blink <br />
+\33[7m reverse <br />
+\33[8m blanking <br />
+\33[30m – \33[37m set front  color <br />
+\33[40m – \33[47m set background color <br />
+\33[nA cursor move up n row<br />
+\33[nB cursor move down n row <br />
+\33[nC cursor move right n row <br />
+\33[nD cursor move left n row<br />
+\33[y;xH set cursor position<br />
+\33[2J clear screen <br />
+\33[K clear contents after cursor <br />
+\33[s save cursor position <br />
+\33[u reset cursor position <br />
+\33[?25l hide cursor <br />
+\33[?25h show cursor</p>
+
+<p>example 1:</p>
+
+<p><code class="highlighter-rouge">echo -e "\033[41;36m hello world \033[0m"</code></p>
+
+<p>example 2:</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CR_GREEN</span><span class="o">=</span><span class="se">\0</span>33[1<span class="p">;</span>32m
+<span class="nv">CR_RESET</span><span class="o">=</span><span class="se">\0</span>33[0m
+<span class="nv">TARGET</span> <span class="o">=</span> main
+<span class="err">@echo</span> <span class="s2">"The executable files $(CR_GREEN)$(TARGET)$(CR_RESET) are in $(BUILD_DIR)"</span>
+</code></pre></div></div>
+
+<h3 id="a3-pattern-specific-variable">A.3. Pattern-specific Variable</h3>
+
+<p>One way to make multi targets is using pattern-specific Variable:<br />
+For example, we want to generate multi targets which have the same name with source code.
+If we have TARGETS = app1 app2 app3, and SOURCE = app1.c app2.c app3.c.<br />
+Then $(TARGETS):%:%.c means:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app1:app1.c
+app2:app2.c
+test:test.c
+</code></pre></div></div>
+<p>The complete is shown in following lines:</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">SOURCE</span> <span class="o">=</span> <span class="nf">$(</span><span class="nb">wildcard</span> <span class="k">*</span>.c<span class="nf">)</span>
+<span class="nv">TARGETS</span> <span class="o">=</span> <span class="nf">$(</span><span class="nb">patsubst</span> %.c, %, <span class="nv">$(SOURCE)</span><span class="nf">)</span>
+ 
+<span class="nv">CC</span> <span class="o">=</span> gcc
+<span class="nv">CFLAGS</span> <span class="o">=</span> <span class="nt">-Wall</span> <span class="nt">-g</span>
+ 
+<span class="nl">all</span><span class="o">:</span><span class="nf">$(TARGETS)</span>
+ 
+<span class="nl">$(TARGETS)</span><span class="o">:</span><span class="nf">%:%.c</span>
+    <span class="err">$(CC)</span> <span class="err">$&lt;</span> <span class="err">$(CFLAGS)</span> <span class="err">-o</span> <span class="err">$@</span>
+ 
+</code></pre></div></div>
 
 
 									<br/>
 									<h3><i class="fas fa-tags"></i>Post Tags</h3>
 									
-									<a href=" ../../../../tag/sql/index.html" >SQL</a>
-									
-									<a href=" ../../../../tag/testing/index.html" >testing</a>
+									<a href=" ../../../../tag/makefile/index.html" >Makefile</a>
 									
 									<head>
 <script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
@@ -196,9 +286,15 @@
 										
 										
 										
+										
+										
 										<li>
 											<a href="/2020/05/12/robotics.html">Robotics</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
 												
 												
 												
@@ -312,6 +408,10 @@
 
 												
 												
+												
+
+												
+												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -327,6 +427,13 @@
 												
 												
 
+																						
+												
+												
+
+												<li><a href="/2020/08/06/c_cpp.html"> C++ STL container</a></li>
+												
+												
 												
 												
 												
@@ -395,6 +502,21 @@
 												
 												
 
+												
+												
+												
+
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2019/12/12/TCPlinux.html"> Socket(TCP/UDP) use note in linux</a></li>
+												
+												
 												
 												
 												
@@ -414,7 +536,7 @@
 												
 												
 
-												<li><a href="/2019/12/12/SQL-(copy).html"> SQL testing cases</a></li>
+												<li><a href="/2019/12/12/makefile.html"> Makefile</a></li>
 												
 												
 												
@@ -476,6 +598,10 @@
 										<li>
 											<a href="/2020/05/12/mcu.html">Mcu&Mpu</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
 												
 												
 												
@@ -631,6 +757,10 @@
 
 												
 												
+												
+
+												
+												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -642,6 +772,10 @@
 										<li>
 											<a href="/2020/05/12/Machine-Vision.html">Machine Vision</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
 												
 												
 												
@@ -755,6 +889,10 @@
 
 												
 												
+												
+
+												
+												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -783,58 +921,8 @@
 										
 										
 										
-												
-												
-
-												
-												
-												
-
-																						
-												
-												
-												
-												
-
-																						
-												
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
+										
+										
 												
 												
 
@@ -854,6 +942,66 @@
 
 																						
 												
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+																						
+												
+												
+												
+												
+
+																						
+												
+												
+												
+												
+
 												
 												
 												
@@ -928,7 +1076,7 @@
 									  
 
 									  
-									  <a href=" ../../../../tag/c++/index.html" style="font-size: 11.5pt; color: #777;">C++</a>
+									  <a href=" ../../../../tag/c++/index.html" style="font-size: 13.5pt; color: #444;">C++</a>
 									  
 									
 									  
@@ -948,7 +1096,7 @@
 									  
 
 									  
-									  <a href=" ../../../../tag/sql/index.html" style="font-size: 11.5pt; color: #777;">SQL</a>
+									  <a href=" ../../../../tag/makefile/index.html" style="font-size: 9pt; color: #999;">Makefile</a>
 									  
 									
 									  
@@ -958,7 +1106,27 @@
 									  
 
 									  
-									  <a href=" ../../../../tag/testing/index.html" style="font-size: 9pt; color: #999;">testing</a>
+									  <a href=" ../../../../tag/sql/index.html" style="font-size: 9pt; color: #999;">SQL</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/c/index.html" style="font-size: 9pt; color: #999;">C</a>
+									  
+									
+									  
+									  
+									  
+									  
+									  
+
+									  
+									  <a href=" ../../../../tag/tcp/index.html" style="font-size: 9pt; color: #999;">TCP</a>
 									  
 									
 									  
@@ -1148,6 +1316,14 @@
 								
 								 
 								  
+								    <a href="/2019/12/12/TCPlinux.html">C</a>
+								  
+								  
+								
+								 
+								  
+								    <a href="/2020/08/06/c_cpp.html">C++</a>
+								  
 								    <a href="/2019/12/12/c_cpp_scope.html">C++</a>
 								  
 								    <a href="/2019/12/12/c_cpp_STL.html">C++</a>
@@ -1212,6 +1388,12 @@
 								
 								 
 								  
+								    <a href="/2019/12/12/makefile.html">Makefile</a>
+								  
+								  
+								
+								 
+								  
 								    <a href="/chinese/linux_command.html">Notes</a>
 								  
 								    <a href="/chinese/dts.html">Notes</a>
@@ -1254,7 +1436,11 @@
 								  
 								    <a href="/2019/12/12/SQL.html">SQL</a>
 								  
-								    <a href="/2019/12/12/SQL-(copy).html">SQL</a>
+								  
+								
+								 
+								  
+								    <a href="/2019/12/12/TCPlinux.html">TCP</a>
 								  
 								  
 								
@@ -1285,12 +1471,6 @@
 								    <a href="/2020/05/25/kernel-dts.html">kernel</a>
 								  
 								    <a href="/2020/05/25/kernel.html">kernel</a>
-								  
-								  
-								
-								 
-								  
-								    <a href="/2019/12/12/SQL-(copy).html">testing</a>
 								  
 								  
 								

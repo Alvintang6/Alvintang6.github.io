@@ -10,7 +10,7 @@
 
 
 
-		<title> SQL command and usage </title>
+		<title>IKM C/C++ Test Summury</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="../../../../assets/css/main.css" />
@@ -60,8 +60,8 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h1> SQL command and usage </h1>
-										<p>12 Dec 2019</p>
+										<h1>IKM C/C++ Test Summury</h1>
+										<p>29 Apr 2023</p>
 									</header>
 									 
 									
@@ -69,693 +69,160 @@
 
 									<h3><i class="fas fa-tags"></i>Post Tags</h3>
 									
-									<a href=" ../../../../tag/sql/index.html" >SQL</a>
+									<a href=" ../../../../tag/c/c++/index.html" >C/C++</a>
 									
 									<br/>
 									<br/>
 
-									<h2 id="table-of-content">Table of Content</h2>
-<ul id="markdown-toc">
-  <li><a href="#table-of-content" id="markdown-toc-table-of-content">Table of Content</a></li>
-  <li><a href="#basic-command-of-sql" id="markdown-toc-basic-command-of-sql">Basic command of SQL</a>    <ul>
-      <li><a href="#create-a-table" id="markdown-toc-create-a-table">Create a table:</a></li>
-      <li><a href="#select-data-from-table" id="markdown-toc-select-data-from-table">Select data from table</a></li>
-      <li><a href="#join-table" id="markdown-toc-join-table">join table</a></li>
-      <li><a href="#aggregate-function" id="markdown-toc-aggregate-function">Aggregate function</a></li>
-    </ul>
-  </li>
-  <li><a href="#design-pattern" id="markdown-toc-design-pattern">Design pattern</a>    <ul>
-      <li><a href="#first-normal-form-1nf" id="markdown-toc-first-normal-form-1nf">First normal form (1NF)</a></li>
-      <li><a href="#second-normal-form-2nf" id="markdown-toc-second-normal-form-2nf">Second normal form (2NF)</a></li>
-      <li><a href="#third-normal-form-3nf" id="markdown-toc-third-normal-form-3nf">Third normal form (3NF)</a></li>
-    </ul>
-  </li>
-  <li><a href="#transaction-in-sql" id="markdown-toc-transaction-in-sql">Transaction in SQL</a>    <ul>
-      <li><a href="#features-of-transaction" id="markdown-toc-features-of-transaction">Features of transaction</a></li>
-      <li><a href="#isolation" id="markdown-toc-isolation">Isolation</a>        <ul>
-          <li><a href="#dirty-reads" id="markdown-toc-dirty-reads">Dirty reads</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><a href="#datatype-in-sql" id="markdown-toc-datatype-in-sql">Datatype in SQL</a>    <ul>
-      <li><a href="#number" id="markdown-toc-number">NUMBER</a></li>
-      <li><a href="#time-and-date" id="markdown-toc-time-and-date">Time and date</a></li>
-      <li><a href="#character" id="markdown-toc-character">Character</a></li>
-    </ul>
-  </li>
+									<ul id="markdown-toc">
+  <li><a href="#1-container-adapters" id="markdown-toc-1-container-adapters">1. Container Adapters</a></li>
+  <li><a href="#2-getline-vs-extraction-operator" id="markdown-toc-2-getline-vs-extraction-operator">2. getline() VS extraction operator(»)</a></li>
+  <li><a href="#3-inheritage-1" id="markdown-toc-3-inheritage-1">3. Inheritage (1)</a></li>
 </ul>
 
-<h2 id="basic-command-of-sql">Basic command of SQL</h2>
-
-<ul>
-  <li>
-    <p>show all databases:<br />
-<code class="highlighter-rouge">Show databases;</code></p>
-  </li>
-  <li>
-    <p>create a database:
-create database &lt;your_database&gt;;</p>
-  </li>
-  <li>
-    <p>select the database to use:<br />
-use &lt;your_database&gt;;</p>
-  </li>
-</ul>
-
-<h3 id="create-a-table">Create a table:</h3>
-<ul>
-  <li>general table create
-    <pre><code class="language-C">CREATE TABLE &lt;your_table&gt; (  
-  &lt;name1&gt; &lt;data_type&gt;,   
-  &lt;name2&gt; &lt;data_type&gt;,  
-  &lt;name3&gt; &lt;data_type&gt;......);   
-</code></pre>
-    <p>data_type can be chosen from: number; date and time; char ; details are in <a href="#anchor_datatype">datatype</a></p>
-  </li>
-  <li>table with <b>primary key</b> constrain:<br />
-The column name modified with <code class="highlighter-rouge">primary key</code> means that the items under this column should be unique.
-    <pre><code class="language-C">CREATE TABLE &lt;your_table&gt; (  
-  &lt;name1&gt; &lt;data_type&gt; primary key,   
-  &lt;name2&gt; &lt;data_type&gt;,  
-  &lt;name3&gt; &lt;data_type&gt;......);   
-</code></pre>
-  </li>
-</ul>
-<p><b>Add primary key after create table:</b><br />
-<code class="highlighter-rouge">alter table &lt;your_table&gt; add primary key(&lt;name1&gt;);</code></p>
-
-<p><b>Delete primary key after create table:</b> <br />
-<code class="highlighter-rouge">alter table &lt;your_table&gt; drop primary key(&lt;name1&gt;);</code></p>
-
-<ul>
-  <li>Unique constrain:<br />
-CREATE TABLE <your_table> (
-</your_table>    <name1> <data_type> primary key,   
-  <name2> <data_type>,  
-  <name3> <data_type>,
-  ...,
-  unique(<name1>)); 
-
-</name1></data_type></name3></data_type></name2></data_type></name1>
-  </li>
-</ul>
-<p><code class="highlighter-rouge">alter table &lt;your_table&gt; add primary key(&lt;name1&gt;);</code><br />
-<span style="color:red;">Tips:</span> unique constrain can be <span style="color:red;">‘NULL’</span>, primary key cannot.</p>
-
-<ul>
-  <li>Composite Primary Key:
-The column names combined by <code class="highlighter-rouge">primary key</code> means that the items under these columns should not be same simultaneously
-    <pre><code class="language-C">CREATE TABLE &lt;your_table&gt; (  
-  &lt;name1&gt; &lt;data_type&gt; primary key,   
-  &lt;name2&gt; &lt;data_type&gt;,  
-  &lt;name3&gt; &lt;data_type&gt;,
-  ...,
-  primary key(&lt;name1&gt;,&lt;name2&gt;));   
-</code></pre>
-  </li>
-  <li>Auto increasing Key:</li>
-</ul>
-
-<pre><code class="language-C">CREATE TABLE &lt;your_table&gt; (  
-	id int primary key auto_increment,  
-	name varchar(50)
-	...,);   
-
-insert into &lt;your_table&gt; (name) value ('&lt;name_value&gt;');
-</code></pre>
-
-<ul>
-  <li>not NULL constrain:</li>
-</ul>
-
-<pre><code class="language-C">CREATE TABLE &lt;your_table&gt; (  
-	&lt;name1&gt; &lt;data_type&gt;,   
-	&lt;name2&gt; &lt;data_type&gt;,  
-	&lt;name3&gt; &lt;data_type&gt;,
-	...,
-	&lt;namen&gt; &lt;data_type&gt; not null);   
-</code></pre>
-
-<ul>
-  <li>default constrain:</li>
-</ul>
-
-<pre><code class="language-SQL">CREATE TABLE &lt;your_table&gt; (  
-	&lt;name1&gt; &lt;data_type&gt;,   
-	&lt;name2&gt; &lt;data_type&gt;,  
-	&lt;name3&gt; &lt;data_type&gt;,
-	...,
-	&lt;namen&gt; &lt;data_type&gt; default &lt;default_value&gt;);   
-</code></pre>
-
-<ul>
-  <li>
-    <p>foreign key constrain:</p>
-
-    <p>constrain from outside table:</p>
-  </li>
-</ul>
-
-<p>For example:</p>
-
-<pre><code class="language-C">--- classes as parent table
-create table classes(
-	id int primary key,
-	name varchar(20)
-);
-
---- students as child table
-create table students(
-	id int primary key,
-	name varchar(20),
-	class_id int,
-	foreign key(class_id) references classes(id)
-);
-
-insert into classes values(1,'class one');
-insert into classes values(2,'class two');
-insert into classes values(3,'class three');
-insert into classes values(4,'class four');
-
-insert into students values(10001,'Jack',1);
-insert into students values(10002,'Max',2);
-insert into students values(10003,'Henry',3);
-insert into students values(10004,'Tom',4);
-insert into students values(10005,'Jack',3);
-
-</code></pre>
-
-<h3 id="select-data-from-table">Select data from table</h3>
-
-<ul>
-  <li>
-    <p><b>1, Select columns from a table:</b><br />
-<code class="highlighter-rouge">select &lt;coulmn1_name&gt;,&lt;coulmn2_name&gt;... from &lt;table_name&gt;;</code></p>
-  </li>
-  <li>
-    <p><b>2, Select columns without duplicate:</b><br />
-<code class="highlighter-rouge">select distinct &lt;column_name&gt; from &lt;table_name&gt;;</code></p>
-  </li>
-  <li>
-    <p><b>3, Select columns from a range:</b><br />
-<code class="highlighter-rouge">select * from &lt;table_name&gt; where &lt;column_name&gt; between &lt;range_begin&gt; and &lt;range_end&gt;;</code><br />
-OR <code class="highlighter-rouge">select * from &lt;table_name&gt; where &lt;column_name&gt; &gt; &lt;range_begin&gt; and &lt;column_name&gt; &lt; &lt;range_end&gt;;</code>.</p>
-  </li>
-  <li>
-    <p><b>4, Select columns without duplicate:</b>  <br />
-<code class="highlighter-rouge">select distinct &lt;column_name&gt; from &lt;table_name&gt;;</code></p>
-  </li>
-  <li>
-    <p><b>5, Select exact element from a column:</b><br />
-<code class="highlighter-rouge">select * from &lt;table_name&gt; where &lt;column_name&gt; in(&lt;elements1&gt;,&lt;elements2&gt;...);</code></p>
-  </li>
-  <li>
-    <p><b>6, ‘Or’ select distinct elements from two columns:</b><br />
-<code class="highlighter-rouge">select * from &lt;table_name&gt; where &lt;column_name1&gt;=&lt;element1&gt; or &lt;column_name2&gt;=&lt;element2&gt;;</code></p>
-  </li>
-  <li>
-    <p><b>7, Select column with descending or ascending order:</b><br />
-descending: <code class="highlighter-rouge">select * from &lt;table_name&gt; order by &lt;column_name&gt; desc;</code><br />
-ascending: <code class="highlighter-rouge">select * from &lt;table_name&gt; order by &lt;column_name&gt;; </code> (default ascending order)</p>
-  </li>
-  <li>
-    <p><b>8, Select column with descending and ascending simultaneously:</b><br />
-<code class="highlighter-rouge">select * from &lt;table_name&gt; by &lt;column_name1&gt; asc,&lt;column_name2&gt; desc;</code></p>
-  </li>
-  <li>
-    <p><b>9, Count the number of distinct element in one column  :</b><br />
-<code class="highlighter-rouge">select count(*) from &lt;table_name&gt; where &lt;column_name&gt;=&lt;element&gt;</code></p>
-  </li>
-  <li>
-    <p><b>10, Select the maximum element in column:</b><br />
-<code class="highlighter-rouge">select max(&lt;column1&gt;) from &lt;table_name&gt;; </code></p>
-  </li>
-  <li>
-    <p><b>11, Group select:
-<code class="highlighter-rouge">select avg(&lt;column1&gt;) from &lt;table&gt; group by &lt;column2&gt; </code></b></p>
-  </li>
-</ul>
-
-<p><span style="color:red;"> Nest and combined selection:</span><br />
-  <code class="highlighter-rouge">select &lt;column&gt;,&lt;column2&gt;... from &lt;table_name&gt; where &lt;columnN&gt;=(select max(&lt;columnN&gt;) from &lt;table&gt;);</code></p>
-
-<ul>
-  <li>
-    <p><b>12, “having” condition select:</b><br />
-<code class="highlighter-rouge">select &lt;column1&gt; from &lt;table1&gt;</code></p>
-  </li>
-  <li>
-    <p><b>15, Select from two tables:</b><br />
-<code class="highlighter-rouge">Select &lt;column1&gt;,&lt;column2&gt;,&lt;coulmn3&gt; from &lt;table1&gt;,&lt;table2&gt; where &lt;table1&gt;.&lt;column4&gt; = &lt;table2&gt;.&lt;column5&gt;;</code></p>
-  </li>
-  <li>
-    <p><span style="color:red;">16, Duplicating table to compare</span></p>
-  </li>
-  <li>
-    <p><b>17, Age check:</b>
-<code class="highlighter-rouge">select year(now)-year(sbirthday) as 'aging' from students;</code></p>
-  </li>
-</ul>
-
-<h3 id="join-table">join table</h3>
-
-<ul>
-  <li>
-    <p><b>(inner) join:</b></p>
-  </li>
-  <li>
-    <p><b>left (outer) join:</b>
-If two tables have same values in two columns, it will show the items values. Otherwise it show ‘NUll’ of other items in left table.</p>
-  </li>
-  <li>
-    <p><b>right (outer) join:</b>
-Similar with left join, but shows all the items in right table.</p>
-  </li>
-  <li>
-    <p><b>full join:</b>
-show all items in both table1 and table2. 
-<span style="color:red">mysql not support full join</span></p>
-  </li>
-</ul>
-
-<table>
-  <thead>
-    <tr>
-      <th>snum</th>
-      <th>cnum</th>
-      <th>degree</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>101</td>
-      <td>1-881</td>
-      <td>78</td>
-    </tr>
-    <tr>
-      <td>101</td>
-      <td>2-105</td>
-      <td>86</td>
-    </tr>
-    <tr>
-      <td>101</td>
-      <td>3-225</td>
-      <td>69</td>
-    </tr>
-    <tr>
-      <td>102</td>
-      <td>2-105</td>
-      <td>96</td>
-    </tr>
-    <tr>
-      <td>102</td>
-      <td>4-901</td>
-      <td>96</td>
-    </tr>
-    <tr>
-      <td>103</td>
-      <td>3-225</td>
-      <td>81</td>
-    </tr>
-    <tr>
-      <td>104</td>
-      <td>1-881</td>
-      <td>88</td>
-    </tr>
-    <tr>
-      <td>105</td>
-      <td>1-881</td>
-      <td>89</td>
-    </tr>
-    <tr>
-      <td>106</td>
-      <td>1-881</td>
-      <td>99</td>
-    </tr>
-    <tr>
-      <td>106</td>
-      <td>2-105</td>
-      <td>80</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><code class="highlighter-rouge">select * from scores a where degree &lt;(select avg(degree) from scores b where a.cnum = b.cnum);</code></p>
-
-<h3 id="aggregate-function">Aggregate function</h3>
-
-<p>avg(),maxx(),</p>
-
-<ul>
-  <li>
-    <p>Show all tables<br />
-show tables;</p>
-  </li>
-  <li>
-    <p>show contents in current table:<br />
-select * from &lt;your_table&gt;; (show all contents in the table)</p>
-  </li>
-  <li>
-    <p>show the information(data type, structure) of table <br />
-describe &lt;your_table&gt;;</p>
-  </li>
-  <li>
-    <p>insert a row of data<br />
-<code class="highlighter-rouge">insert into &lt;your_table&gt; values('&lt;data&gt;','&lt;data&gt;','&lt;data&gt;'...);</code></p>
-  </li>
-</ul>
-
-<h2 id="design-pattern">Design pattern</h2>
-
-<h3 id="first-normal-form-1nf">First normal form (1NF)</h3>
-
-<p>1NF design means each column should be the smallest unit which can not be separated.<br />
-For example:
-<code class="highlighter-rouge">insert into address values(1, ' 1 York Ave Toronto Ontario Canada ')</code> doesn’t fulfill 1NF<br />
-<code class="highlighter-rouge">insert into address values(1, 1, 'York Ave', 'Toronto', 'Ontario', 'Canada ')</code> is 1NF.</p>
-
-<h3 id="second-normal-form-2nf">Second normal form (2NF)</h3>
-
-<p>2NF should fulfill 1NF first then it also need to satisfy that every column should depends on primary key(except primary key)</p>
-
-<p>For example:</p>
-
-<pre><code class="language-SQL">create table sale_list(
-	product_id int,
-	customer_id int,
-	product_name varchar(20),
-	customer_name varchar(20),
-	primary key(product_id, customer_id)
-);
-</code></pre>
-<p>This one above is not qualified with 2NF. Since, the product name is only related to product_id and customer name is only related to customer_id.
-In this case, we need to break 1 table into 3 tables in following way:</p>
-
-<pre><code class="language-SQL">create table sale_list(
-	order_id int primary key,
-	product_id int,
-	customer_id int
-);
-
-create table products(
-	id int primary key,
-	product_name varchar(20)
-);
-
-create table customers(
-	id int primary key,
-	custom_name varchar(20)
-);
-</code></pre>
-
-<h3 id="third-normal-form-3nf">Third normal form (3NF)</h3>
-
-<ol>
-  <li>The 3NF should fulfill 2NF first</li>
-  <li>The column items should not have any relationship between each other(except with primary key)</li>
-</ol>
-
-<p>For example:</p>
-<pre><code class="language-SQL">create table myorder(
-	order_id int primary key,
-	product_id int,
-	customer_id int,
-	customer_name varchr(50)
-);
-
-</code></pre>
-<p>Here customer name have relationship with customer_id, so it can be break int two tables.</p>
-
-<pre><code class="language-SQL">create table myorder(
-	order_id int primary key,
-	product_id int,
-	customer_id int,
-);
-
-create table customer(
-	id int primary key,
-	customer_name varchar(50)
-);
-
-</code></pre>
-
-<h2 id="transaction-in-sql">Transaction in SQL</h2>
-
-<p>Transaction is just ‘atomic set’ in other programming, like embedded C, which means several operations should be bound together. For example, sending money and receiving money.</p>
-
-<h3 id="features-of-transaction">Features of transaction</h3>
-
-<ul>
-  <li>
-    <p>Atomicity − ensures that all operations within the work unit are completed successfully. Otherwise, the transaction is aborted at the point of failure and all the previous operations are rolled back to their former state.</p>
-  </li>
-  <li>
-    <p>Consistency − ensures that the database properly changes states upon a successfully committed transaction.</p>
-  </li>
-  <li>
-    <p>Isolation − enables transactions to operate independently of and transparent to each other.</p>
-  </li>
-  <li>
-    <p>Durability − ensures that the result or effect of a committed transaction persists in case of a system failure.</p>
-  </li>
-</ul>
-
-<ol>
-  <li>The autocommit is enabled by default; and when autocommit is enabled, the <code class="highlighter-rouge">rollback</code> command is disabled.</li>
-  <li>To enable the rollback function, using <code class="highlighter-rouge">set autocommit=0;</code></li>
-  <li>Also we can use <code class="highlighter-rouge">commit</code> to manually submit commit.</li>
-</ol>
-
-<p><span style="color:red">Hint:</span> After <code class="highlighter-rouge">commit</code>, the transaction is also finished. So we cannot use rollback to withdraw.</p>
-
-<pre><code class="language-SQL">update user set money=money-100 where name='a';
-update user set money=money+100 where name='b';
-
-</code></pre>
-
-<p><b>Manually enable the transaction</b></p>
-
-<ol>
-  <li>Enable the transaction by <code class="highlighter-rouge">begin;</code></li>
-  <li>Enable the transaction by <code class="highlighter-rouge">start transaction;</code></li>
-</ol>
-
-<h3 id="isolation">Isolation</h3>
-
-<p>1, Read Uncommitted
-2, Read committed
-3, Repeatable read
-4, Serializable</p>
-
-<p>Performance: 1&gt;2&gt;3&gt;4</p>
-
-<p>The default isolation level in mysql is (Repeatable read).</p>
-
-<p><b>Checking isolation level:</b><br />
-<code class="highlighter-rouge">select @@global.transaction_isolation;</code> Or <code class="highlighter-rouge">select @@transaction_isolation;</code></p>
-
-<p><b>Changing isolation level:</b><br />
-set global transaction isolation level read uncommitted;</p>
-
-<h4 id="dirty-reads">Dirty reads</h4>
-<p>A dirty read (aka uncommitted dependency) occurs when a transaction is allowed to read data from a row that has been modified by another running transaction and not yet committed.</p>
-
-<h2 id="datatype-in-sql">Datatype in SQL</h2>
-<div id="anchor_datatype"></div>
-
-<h3 id="number">NUMBER</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Length</th>
-      <th>Range(sign)</th>
-      <th>Range(unsigned)</th>
-      <th>Usage</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>TINYINT</td>
-      <td>1 byte</td>
-      <td>(-128，127)</td>
-      <td>(0，255)</td>
-      <td>小整数值</td>
-    </tr>
-    <tr>
-      <td>SMALLINT</td>
-      <td>2 bytes</td>
-      <td>(-32 768，32 767)</td>
-      <td>(0，65 535)</td>
-      <td>大整数值</td>
-    </tr>
-    <tr>
-      <td>MEDIUMINT</td>
-      <td>3 bytes</td>
-      <td>(-8 388 608，8 388 607)</td>
-      <td>(0，16 777 215)</td>
-      <td>大整数值</td>
-    </tr>
-    <tr>
-      <td>INT或INTEGER</td>
-      <td>4 bytes</td>
-      <td>(-2 147 483 648，2 147 483 647)</td>
-      <td>(0，4 294 967 295)</td>
-      <td>大整数值</td>
-    </tr>
-    <tr>
-      <td>BIGINT</td>
-      <td>8 bytes</td>
-      <td>(-9,223,372,036,854,775,808，9 223 372 036 854 775 807)</td>
-      <td>(0，18 446 744 073 709 551 615)</td>
-      <td>极大整数值</td>
-    </tr>
-    <tr>
-      <td>FLOAT</td>
-      <td>4 bytes</td>
-      <td>(-3.402 823 466 E+38，-1.175 494 351 E-38)， 0，(1.175 494 351 E-38，3.402 823 466 351 E+38)</td>
-      <td>0，(1.175494351 E-38 <br />，3.402 823 466 E+38)</td>
-      <td>单精度浮点数值</td>
-    </tr>
-    <tr>
-      <td>DOUBLE</td>
-      <td>8 bytes</td>
-      <td>(-1.797 693 134 862 315 7 E+308，-2.225 073 858 507 201 4 E-308)，0，(2.225 073 858 507 201 4 E-308，1.797 693 134 862 315 7 E+308)</td>
-      <td>0，(2.225 073 858 507 201 4 E-308，1.797 693 134 862 315 7 E+308)</td>
-      <td>双精度浮点数值</td>
-    </tr>
-    <tr>
-      <td>DECIMAL</td>
-      <td>对DECIMAL(M,D) ，如果M&gt;D，为M+2否则为D+2</td>
-      <td>依赖于M和D的值</td>
-      <td>依赖于M和D的值</td>
-      <td>小数值</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="time-and-date">Time and date</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Size(Byte)</th>
-      <th>Range</th>
-      <th>Format</th>
-      <th>Usage</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>DATE</td>
-      <td>3</td>
-      <td>1000-01-01/9999-12-31</td>
-      <td>YYYY-MM-DD</td>
-      <td>日期值</td>
-    </tr>
-    <tr>
-      <td>TIME</td>
-      <td>3</td>
-      <td>‘-838:59:59’/’838:59:59’</td>
-      <td>HH:MM:SS</td>
-      <td>时间值或持续时间</td>
-    </tr>
-    <tr>
-      <td>YEAR</td>
-      <td>1</td>
-      <td>1901/2155</td>
-      <td>YYYY</td>
-      <td>年份值</td>
-    </tr>
-    <tr>
-      <td>DATETIME</td>
-      <td>8</td>
-      <td>1000-01-01 00:00:00/9999-12-31 23:59:59</td>
-      <td>YYYY-MM-DD HH:MM:SS</td>
-      <td>混合日期和时间值</td>
-    </tr>
-    <tr>
-      <td>TIMESTAMP</td>
-      <td>4</td>
-      <td>1970-01-01 00:00:00/2038<br />结束时间是第 2147483647 秒，北京时间 2038-1-19 11:14:07，格林尼治时间 2038年1月19日 凌晨 03:14:07</td>
-      <td>YYYYMMDD HHMMSS</td>
-      <td>混合日期和时间值，时间戳</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="character">Character</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Size</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>CHAR</td>
-      <td>0-255 bytes</td>
-      <td>定长字符串</td>
-    </tr>
-    <tr>
-      <td>VARCHAR</td>
-      <td>0-65535 bytes</td>
-      <td>变长字符串</td>
-    </tr>
-    <tr>
-      <td>TINYBLOB</td>
-      <td>0-255 bytes</td>
-      <td>不超过 255 个字符的二进制字符串</td>
-    </tr>
-    <tr>
-      <td>TINYTEXT</td>
-      <td>0-255 bytes</td>
-      <td>短文本字符串</td>
-    </tr>
-    <tr>
-      <td>BLOB</td>
-      <td>0-65 535 bytes</td>
-      <td>二进制形式的长文本数据</td>
-    </tr>
-    <tr>
-      <td>TEXT</td>
-      <td>0-65 535 bytes</td>
-      <td>长文本数据</td>
-    </tr>
-    <tr>
-      <td>MEDIUMBLOB</td>
-      <td>0-16 777 215 bytes</td>
-      <td>二进制形式的中等长度文本数据</td>
-    </tr>
-    <tr>
-      <td>MEDIUMTEXT</td>
-      <td>0-16 777 215 bytes</td>
-      <td>中等长度文本数据</td>
-    </tr>
-    <tr>
-      <td>LONGBLOB</td>
-      <td>0-4 294 967 295 bytes</td>
-      <td>二进制形式的极大文本数据</td>
-    </tr>
-    <tr>
-      <td>LONGTEXT</td>
-      <td>0-4 294 967 295 bytes</td>
-      <td>极大文本数据</td>
-    </tr>
-  </tbody>
-</table>
+<h2 id="1-container-adapters">1. Container Adapters</h2>
+<p>Question: Which of the following are container adapters in the STL (Standard Template Library) in C++?
+A. list
+B. map
+C. stack 
+D. queue 
+E. deque</p>
+
+<details>
+  <summary> Answer: </summary>
+  <p><span style="color:red;">Answer: C D</span>
+<br />
+Basically, the queue, stack and priority_queue are derived/trimed from some other basic container: queue–&gt; deque, stack–&gt;deque, priority_queue–&gt;vector. For example, stack is implement as following:</p>
+
+  <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">_Ty</span><span class="p">,</span> <span class="k">class</span> <span class="nc">_Container</span> <span class="o">=</span> <span class="n">deque</span><span class="o">&lt;</span><span class="n">_Ty</span><span class="p">&gt;</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">stack</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="k">using</span> <span class="n">value_type</span>      <span class="o">=</span> <span class="k">typename</span> <span class="n">_Container</span><span class="o">::</span><span class="n">value_type</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">reference</span>       <span class="o">=</span> <span class="k">typename</span> <span class="n">_Container</span><span class="o">::</span><span class="n">reference</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">const_reference</span> <span class="o">=</span> <span class="k">typename</span> <span class="n">_Container</span><span class="o">::</span><span class="n">const_reference</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">size_type</span>       <span class="o">=</span> <span class="k">typename</span> <span class="n">_Container</span><span class="o">::</span><span class="n">size_type</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">container_type</span>  <span class="o">=</span> <span class="n">_Container</span><span class="p">;</span>
+<span class="p">...</span>
+    <span class="n">stack</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+
+    <span class="k">explicit</span> <span class="n">stack</span><span class="p">(</span><span class="k">const</span> <span class="n">_Container</span><span class="o">&amp;</span> <span class="n">_Cont</span><span class="p">)</span> <span class="o">:</span> <span class="n">c</span><span class="p">(</span><span class="n">_Cont</span><span class="p">)</span> <span class="p">{}</span>
+<span class="p">...</span>
+<span class="nl">private:</span>
+    <span class="n">_Container</span> <span class="n">c</span><span class="p">{};</span>
+<span class="p">}</span>
+
+</code></pre></div>  </div>
+  <p>So it called container adapter. I think the world <code class="highlighter-rouge">adapter</code> could be some how related with adapter design pattern.</p>
+</details>
+
+<h2 id="2-getline-vs-extraction-operator">2. getline() VS extraction operator(»)</h2>
+<p>Question: Which of the following correctly identify benefits of the getline() member function for cin over the extraction operator in C++?</p>
+
+<p>A. The getline() function by default, accepts whitespace, and returns on seeing the ‘\n’ character, whereas the extraction operator returns when it encounters any whitespace character.
+B. Delimiters indicating end of input can be specified to the getline() function, whereas the extraction operator has no such facility.
+C. The getline() function can be overloaded to accept different argument types, whereas the extraction operator cannot be overloaded.
+D. The number of bytes to read can be specified to the getline() function, whereas it cannot be done with the extraction operator.
+E. The getline() function can be used like a manipulator with cin, whereas the extraction operator cannot be used as a manipulator.</p>
+<details>
+  <summary> Answer: </summary>
+  <p><span style="color:red;">Answer: B E</span></p>
+
+  <p>operator» reads till a space (as defined by std::isspace) and is found. Extracts characters from is and stores them into str until the delimitation character delim is found (or the newline character, ‘\n’, for (2)).</p>
+
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// two prototype of getline are given below:</span>
+<span class="n">istream</span><span class="o">&amp;</span> <span class="n">getline</span> <span class="p">(</span><span class="n">istream</span><span class="o">&amp;</span> <span class="n">is</span><span class="p">,</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">str</span><span class="p">,</span> <span class="kt">char</span> <span class="n">delim</span><span class="p">);</span><span class="c1">// (1)</span>
+<span class="n">istream</span><span class="o">&amp;</span> <span class="n">getline</span> <span class="p">(</span><span class="n">istream</span><span class="o">&amp;</span> <span class="n">is</span><span class="p">,</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">str</span><span class="p">);</span> <span class="c1">// (2)</span>
+</code></pre></div>  </div>
+</details>
+
+<h2 id="3-inheritage-1">3. Inheritage (1)</h2>
+<p>Question: Which of the following statements correctly describe the results of executing the code below in C++?</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+
+<span class="k">class</span> <span class="nc">ExBase</span>
+<span class="p">{</span>
+<span class="nl">private:</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="n">stat</span><span class="p">;</span>
+<span class="nl">public:</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="n">GetStat</span><span class="p">(){</span> <span class="k">return</span> <span class="n">stat</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+
+<span class="kt">int</span> <span class="n">ExBase</span><span class="o">::</span><span class="n">stat</span> <span class="o">=</span> <span class="mi">25</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ExDer1</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ExBase</span>
+<span class="p">{</span>
+<span class="nl">public:</span>
+<span class="k">friend</span> <span class="kt">int</span> <span class="n">Der1Fn</span><span class="p">(){</span> <span class="k">return</span> <span class="n">ExBase</span><span class="o">::</span><span class="n">stat</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+
+<span class="k">class</span> <span class="nc">ExDer2</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ExBase</span><span class="p">{};</span>
+
+
+<span class="k">class</span> <span class="nc">ExDer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ExDer1</span><span class="p">,</span> <span class="k">public</span> <span class="n">ExDer2</span><span class="p">{};</span>
+</code></pre></div></div>
+
+<p>A.</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="n">ExDer</span> <span class="n">d</span><span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">d</span><span class="p">.</span><span class="n">Der1Fn</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>will result in an ambiguity error from the compiler.</p>
+
+<p>B.</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="n">ExDer</span> <span class="n">d</span><span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">d</span><span class="p">.</span><span class="n">GetStat</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>will display an output as “25”.</p>
+
+<p>C.</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ExDer1</span><span class="o">::</span><span class="n">GetStat</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>will result in an ambiguity error from the compiler.</p>
+
+<p>D.</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ExDer1</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ExBase</span>
+<span class="p">{</span>
+<span class="nl">public:</span>
+<span class="k">friend</span> <span class="kt">int</span> <span class="n">Der1Fn</span><span class="p">(){</span> <span class="k">return</span> <span class="n">ExBase</span><span class="o">::</span><span class="n">stat</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+<p>will result in an access error from the compiler.</p>
+
+<p>E.</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ExDer1</span><span class="o">::</span><span class="n">ExBase</span><span class="o">::</span><span class="n">GetStat</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>will display an output as “25”.</p>
+
+<details>
+  <summary> Answer: </summary>
+  <p><span style="color:red;">Answer: C D E</span></p>
+
+  <p>D ask for a private member of ExBase directly, which will cause access error. C,D is correct since GetStat() declared as static function.</p>
+
+</details>
 
 
 									<br/>
 									<h3><i class="fas fa-tags"></i>Post Tags</h3>
 									
-									<a href=" ../../../../tag/sql/index.html" >SQL</a>
+									<a href=" ../../../../tag/c/c++/index.html" >C/C++</a>
 									
 									<head>
 <script src='https://unpkg.com/valine/dist/Valine.min.js'></script>

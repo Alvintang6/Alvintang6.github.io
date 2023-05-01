@@ -85,13 +85,13 @@
   <li><a href="#table-of-content" id="markdown-toc-table-of-content">Table of Content</a></li>
   <li><a href="#1-formation-control" id="markdown-toc-1-formation-control">1. Formation Control</a>    <ul>
       <li><a href="#11-dynamic-model-of-vehicles" id="markdown-toc-11-dynamic-model-of-vehicles">1.1. Dynamic model of vehicles</a></li>
-      <li><a href="#12-gradient-descent-control" id="markdown-toc-12-gradient-descent-control">1.2. Gradient descent control</a></li>
+      <li><a href="#gradient-descent-control" id="markdown-toc-gradient-descent-control">1.2. Gradient descent control</a></li>
     </ul>
   </li>
-  <li><a href="#2-implementation-of-a-formation-system" id="markdown-toc-2-implementation-of-a-formation-system">2. Implementation of a formation system</a>    <ul>
-      <li><a href="#21-overview-of-the-system" id="markdown-toc-21-overview-of-the-system">2.1. Overview of the system</a></li>
-      <li><a href="#22-perception--vision" id="markdown-toc-22-perception--vision">2.2. Perception – Vision</a></li>
-      <li><a href="#23-code-and-design" id="markdown-toc-23-code-and-design">2.3. Code and design</a></li>
+  <li><a href="#implementation-of-a-formation-system" id="markdown-toc-implementation-of-a-formation-system">2. Implementation of a formation system</a>    <ul>
+      <li><a href="#overview-of-the-system" id="markdown-toc-overview-of-the-system">2.1. Overview of the system</a></li>
+      <li><a href="#perception--vision" id="markdown-toc-perception--vision">2.2. Perception – Vision</a></li>
+      <li><a href="#code-and-design" id="markdown-toc-code-and-design">2.3. Code and design</a></li>
     </ul>
   </li>
   <li><a href="#reference" id="markdown-toc-reference">Reference</a></li>
@@ -101,8 +101,7 @@
 Before introduce the algorithm and implementation method, lets see the video of my robots:</p>
 
 <div align="center">
-<iframe width="480" height="360" src="https://www.youtube.com/embed/5x1tOIw7TJc">
-</iframe>
+  <iframe width="480" height="360" src="https://www.youtube.com/embed/5x1tOIw7TJc"></iframe>
 </div>
 <p><br /></p>
 
@@ -127,14 +126,16 @@ Researchers have developed several methods to solve formation problem, which inc
 
 <p>For nonholonomic models, the model on $\Re^{2}$ is generally given by</p>
 
-<div align="center"><img width="25%" height="25%" src="/blog_photos/Robotics/nonholonomic.png" /><p> Equation (1.1.2). nonholonomic dynamic model</p></div>
-<p>Where the $v_{i}$, ${\theta_i}$ and $\omega_{i}$ are linear velocity, handing direction and angular velocity respectively. The vehicle position in world frame is presented by $p_{i}=|x_{i}, y_{i}|^{\top} \in \Re^{2}$. A general illustration of nonholonomic vehicle model is shown in Fig below.</p>
+<div align="center">
+  <p><img width="25%" height="25%" src="/blog_photos/Robotics/nonholonomic.png" />&lt;p&gt; Equation (1.1.2). nonholonomic dynamic model&lt;/p&gt;&lt;/div&gt;
+Where the $v_{i}$, ${\theta_i}$ and $\omega_{i}$ are linear velocity, handing direction and angular velocity respectively. The vehicle position in world frame is presented by $p_{i}=|x_{i}, y_{i}|^{\top} \in \Re^{2}$. A general illustration of nonholonomic vehicle model is shown in Fig below.</p>
 
-<div align="center"><img width="25%" height="25%" src="/blog_photos/Robotics/nonholonomic_robot.png" /><p> Fig illustration of nonholonomic vehicles.</p></div>
+  <div align="center">
+    <p><img width="25%" height="25%" src="/blog_photos/Robotics/nonholonomic_robot.png" />&lt;p&gt; Fig illustration of nonholonomic vehicles.&lt;/p&gt;&lt;/div&gt;</p>
 
-<h3 id="12-gradient-descent-control">1.2. Gradient descent control</h3>
+    <h3 id="gradient-descent-control">1.2. Gradient descent control</h3>
 
-<p>Gradient formation controllers are based on the gradient descent optimization algorithm, which can find the minimum of a function by using iteration methods. For a general formation control case, consider the formation of $\textbf{n}$ vehicles with typical holonomic dynamic, and a graph pattern $\mathscr{G}$. Between arbitrary two vehicles has an edge $\mathscr{E_{ij}}$ where a corresponding potential function (cost function) $V_{ij}$ can be constructed. When these two vehicles are at the desired relative position, the potential function $V_{ij}$ gets the global minimum value. A typical potential function  $V_{ij}$ could have the following conditions<a href="#refer-anchor-1"><sup>[1]</sup></a>.</p>
+    <p>Gradient formation controllers are based on the gradient descent optimization algorithm, which can find the minimum of a function by using iteration methods. For a general formation control case, consider the formation of $\textbf{n}$ vehicles with typical holonomic dynamic, and a graph pattern $\mathscr{G}$. Between arbitrary two vehicles has an edge $\mathscr{E_{ij}}$ where a corresponding potential function (cost function) $V_{ij}$ can be constructed. When these two vehicles are at the desired relative position, the potential function $V_{ij}$ gets the global minimum value. A typical potential function  $V_{ij}$ could have the following conditions<a href="#refer-anchor-1"><sup>[1]</sup></a>.</p>
 
 \[\begin{equation}
 \label{con1}
@@ -151,66 +152,74 @@ V_{ij}=0 \Longleftrightarrow\left\|p_{i}-p_{j}\right\|=d_{ij} ......(1.2.2)
 \nabla_{p_{i}} V_{ij}=0 \Longleftrightarrow\left\|p_{i}-p_{j}\right\|=d_{ij} ......(1.2.3)
 \end{equation}\]
 
-<p>Where the $d_{ij}$ is the desired relative position between the vehicle $\textbf{i}$ and vehicle $\textbf{j}$. $\nabla_{x}$ is defined as $\nabla_{\boldsymbol{x}} \triangleq\left[\frac{\partial}{\partial x_{1}}, \dots, \frac{\partial}{\partial x_{m}}\right]^{T}$, in 2D case $\nabla_{p_i} = \left[\frac{\partial}{\partial x_{i}}, \frac{\partial}{\partial y_{i}}\right]^{T}$. To calculate all the edges inside the graph, the potential function can be defined as :</p>
+    <p>Where the $d_{ij}$ is the desired relative position between the vehicle $\textbf{i}$ and vehicle $\textbf{j}$. $\nabla_{x}$ is defined as $\nabla_{\boldsymbol{x}} \triangleq\left[\frac{\partial}{\partial x_{1}}, \dots, \frac{\partial}{\partial x_{m}}\right]^{T}$, in 2D case $\nabla_{p_i} = \left[\frac{\partial}{\partial x_{i}}, \frac{\partial}{\partial y_{i}}\right]^{T}$. To calculate all the edges inside the graph, the potential function can be defined as :</p>
 
 \[V = \sum_{(i, j) \in \mathcal{E}(t)} V_{i j} ......(1.2.4)\]
 
-<p>Thus, a gradient descent controller for each vehicle can be defined as:</p>
+    <p>Thus, a gradient descent controller for each vehicle can be defined as:</p>
 
 \[\begin{equation}
 \label{holonomic_ui}
 u_{i}=-\nabla_{p_{i}}\sum_{(i, j) \in \mathcal{E}(t)} V_{i j} ......(1.2.5)
 \end{equation}\]
 
-<p>It has been proved in article<a href="#refer-anchor-2"><sup>[2]</sup></a> that the formation will finally converge to the desired pattern $\mathscr{G}^f$. If all the conditions (1.1), (1.2), (1.3) are  satisfied.</p>
+    <p>It has been proved in article<a href="#refer-anchor-2"><sup>[2]</sup></a> that the formation will finally converge to the desired pattern $\mathscr{G}^f$. If all the conditions (1.1), (1.2), (1.3) are  satisfied.</p>
 
-<p>The above conclusion is the basic of gradient formation control algorithm. It will be much complicated to drive a group of robots or vehicles with nonholonomic or other dynamic vehicle model. The method and proof of nonholonomic formation can be found in my thesis<a href="#refer-anchor-3"><sup>[3]</sup></a>.</p>
+    <p>The above conclusion is the basic of gradient formation control algorithm. It will be much complicated to drive a group of robots or vehicles with nonholonomic or other dynamic vehicle model. The method and proof of nonholonomic formation can be found in my thesis<a href="#refer-anchor-3"><sup>[3]</sup></a>.</p>
 
-<h2 id="2-implementation-of-a-formation-system">2. Implementation of a formation system</h2>
+    <h2 id="implementation-of-a-formation-system">2. Implementation of a formation system</h2>
 
-<h3 id="21-overview-of-the-system">2.1. Overview of the system</h3>
+    <h3 id="overview-of-the-system">2.1. Overview of the system</h3>
 
-<p>Even it is a distributed control system, we still need a central controller(laptop) to send start and stop command only.</p>
+    <p>Even it is a distributed control system, we still need a central controller(laptop) to send start and stop command only.</p>
 
-<div align="center"><img width="40%" height="40%" src="/blog_photos/Robotics/layout.jpg" /><p> <br />Fig Formation system of 4 vehicles .</p></div>
+    <div align="center">
+      <p><img width="40%" height="40%" src="/blog_photos/Robotics/layout.jpg" />&lt;p&gt; <br />Fig Formation system of 4 vehicles .&lt;/p&gt;&lt;/div&gt;</p>
 
-<p>Vehicles are designed by myself with nvida TX2 as high level cointroller, and a stm32f1 based low level controller which used to control motors directly. The picture below is a general architecture that briefly illustrate the main components used in
+      <p>Vehicles are designed by myself with nvida TX2 as high level cointroller, and a stm32f1 based low level controller which used to control motors directly. The picture below is a general architecture that briefly illustrate the main components used in
 this project. The main program runs on NVIDIA TX2 with Linux system. Robot
 Operation System (ROS) are used to fulfill high-level action which finally send the
 desired velocity to the MCU (Micro Controller Unit). MCU is responsible for low-level
 motors control.</p>
-<div align="center"><img width="40%" height="40%" src="/blog_photos/Robotics/TX2_stm32.jpg" /><p> <br />Fig Project Architecture .</p></div>
+      <div align="center">
+        <p><img width="40%" height="40%" src="/blog_photos/Robotics/TX2_stm32.jpg" />&lt;p&gt; <br />Fig Project Architecture .&lt;/p&gt;&lt;/div&gt;</p>
 
-<h3 id="22-perception--vision">2.2. Perception – Vision</h3>
+        <h3 id="perception--vision">2.2. Perception – Vision</h3>
 
-<p>It is crucial for robot to know where are they and their companions. Basically, people have developed several indoor localization method, like ultrasonic, lidar, vision, and etc. In this project, I use vision, QR-code marker, combined with inertial. For how to use the QR-code I wrote in <a href="/2019/12/12/QRcode.html">another post</a><br />
+        <p>It is crucial for robot to know where are they and their companions. Basically, people have developed several indoor localization method, like ultrasonic, lidar, vision, and etc. In this project, I use vision, QR-code marker, combined with inertial. For how to use the QR-code I wrote in <a href="/2019/12/12/QRcode.html">another post</a><br />
 The vehicles around with 4 markers, and attached with 2 cameras in opposite direction to localize each other.</p>
 
-<div align="center"><img width="35%" height="35%" src="/blog_photos/Robotics/vehicle_photo.jpg" /><p> <br />Fig Photo of the vehicle .</p></div>
+        <div align="center">
+          <p><img width="35%" height="35%" src="/blog_photos/Robotics/vehicle_photo.jpg" />&lt;p&gt; <br />Fig Photo of the vehicle .&lt;/p&gt;&lt;/div&gt;</p>
 
-<h3 id="23-code-and-design">2.3. Code and design</h3>
-<p>/* TODO */</p>
+          <h3 id="code-and-design">2.3. Code and design</h3>
+          <p>/* TODO */</p>
 
-<p>The code can be found in <a href="https://github.com/Alvintang6/robot_formation">github</a></p>
+          <p>The code can be found in <a href="https://github.com/Alvintang6/robot_formation">github</a></p>
 
-<h2 id="reference">Reference</h2>
+          <h2 id="reference">Reference</h2>
 
-<div id="refer-anchor-1"></div>
-<ul>
-  <li>[1] <a href="https://www.rug.nl/research/portal/files/35456623/Complete_thesis.pdf">Distributed formation control for autonomous robots.</a></li>
-</ul>
+          <div id="refer-anchor-1"></div>
+          <ul>
+            <li>[1] <a href="https://www.rug.nl/research/portal/files/35456623/Complete_thesis.pdf">Distributed formation control for autonomous robots.</a></li>
+          </ul>
 
-<div id="refer-anchor-2"></div>
-<ul>
-  <li>[2] <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/rnc.2967">Distance-based undirected formations of single-
+          <div id="refer-anchor-2"></div>
+          <ul>
+            <li>[2] <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/rnc.2967">Distance-based undirected formations of single-
 integrator and double-integrator modeled agents in n-dimensional space.</a></li>
-</ul>
+          </ul>
 
-<div id="refer-anchor-3"></div>
-<ul>
-  <li>[3] <a href="https://scholar.uwindsor.ca/etd/8181">Distributed Formation Control for Ground Vehicles with Visual Sensing Constraint.</a></li>
-</ul>
+          <div id="refer-anchor-3"></div>
+          <ul>
+            <li>[3] <a href="https://scholar.uwindsor.ca/etd/8181">Distributed Formation Control for Ground Vehicles with Visual Sensing Constraint.</a></li>
+          </ul>
 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 									<br/>
@@ -328,9 +337,19 @@ integrator and double-integrator modeled agents in n-dimensional space.</a></li>
 										
 										
 										
+										
+										
 										<li>
 											<a href="/2020/05/12/robotics.html">Robotics</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
+												
+												
+												
+
 												
 												
 												
@@ -444,14 +463,6 @@ integrator and double-integrator modeled agents in n-dimensional space.</a></li>
 
 												
 												
-												
-
-												
-												
-												
-
-												
-												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -467,13 +478,14 @@ integrator and double-integrator modeled agents in n-dimensional space.</a></li>
 												
 												
 
-																						
+												
 												
 												
 
-												<li><a href="/2020/08/06/c_cpp.html"> C++ STL container</a></li>
 												
 												
+												
+
 												
 												
 												
@@ -591,32 +603,6 @@ integrator and double-integrator modeled agents in n-dimensional space.</a></li>
 												
 												
 
-																						
-												
-												
-
-												<li><a href="/2019/12/12/c_cpp_scope.html"> C/C++ Scope, Storage, and Linkage</a></li>
-												
-												
-												
-												
-												
-
-																						
-												
-												
-												
-												
-												
-												
-
-																						
-												
-												
-
-												<li><a href="/2019/12/12/c_cpp_STL.html"> C++ STL container</a></li>
-												
-												
 												
 												
 												
@@ -638,6 +624,10 @@ integrator and double-integrator modeled agents in n-dimensional space.</a></li>
 										<li>
 											<a href="/2020/05/12/mcu.html">Mcu&Mpu</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
 												
 												
 												
@@ -797,10 +787,6 @@ integrator and double-integrator modeled agents in n-dimensional space.</a></li>
 
 												
 												
-												
-
-												
-												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -812,6 +798,14 @@ integrator and double-integrator modeled agents in n-dimensional space.</a></li>
 										<li>
 											<a href="/2020/05/12/Machine-Vision.html">Machine Vision</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
+												
+												
+												
+
 												
 												
 												
@@ -925,6 +919,144 @@ integrator and double-integrator modeled agents in n-dimensional space.</a></li>
 
 												
 												
+												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
+											</ul>
+										</li>
+										
+										
+										
+										
+										
+										<li>
+											<a href="/2020/05/12/C-C++.html">C/C++</a><span class="opener" style="font-size: 0.1;"></span>
+											<ul>
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2023/04/29/IKM-test-summury.html">IKM C/C++ Test Summury</a></li>
+												
+												
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2020/08/06/c_cpp.html"> C++ Misc</a></li>
+												
+												
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2019/12/12/c_cpp_STL.html"> C++ STL container</a></li>
+												
+												
+												
+												
 												
 
 												
@@ -959,62 +1091,6 @@ integrator and double-integrator modeled agents in n-dimensional space.</a></li>
 										
 										
 										
-										
-										
-										
-										
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-																						
-												
-												
-												
-												
-
-																						
-												
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
 												
 												
 
@@ -1046,6 +1122,58 @@ integrator and double-integrator modeled agents in n-dimensional space.</a></li>
 												
 												
 
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+																						
+												
+												
+												
+												
+
+																						
+												
 												
 												
 												
@@ -1116,7 +1244,7 @@ integrator and double-integrator modeled agents in n-dimensional space.</a></li>
 									  
 
 									  
-									  <a href=" ../../../../tag/c++/index.html" style="font-size: 13.5pt; color: #444;">C++</a>
+									  <a href=" ../../../../tag/c/c++/index.html" style="font-size: 13.5pt; color: #444;">C/C++</a>
 									  
 									
 									  
@@ -1126,7 +1254,7 @@ integrator and double-integrator modeled agents in n-dimensional space.</a></li>
 									  
 
 									  
-									  <a href=" ../../../../tag/中文/index.html" style="font-size: 16pt; color: #222;">中文</a>
+									  <a href=" ../../../../tag/中文/index.html" style="font-size: 13.5pt; color: #444;">中文</a>
 									  
 									
 									  
@@ -1362,11 +1490,11 @@ integrator and double-integrator modeled agents in n-dimensional space.</a></li>
 								
 								 
 								  
-								    <a href="/2020/08/06/c_cpp.html">C++</a>
+								    <a href="/2023/04/29/IKM-test-summury.html">C/C++</a>
 								  
-								    <a href="/2019/12/12/c_cpp_scope.html">C++</a>
+								    <a href="/2020/08/06/c_cpp.html">C/C++</a>
 								  
-								    <a href="/2019/12/12/c_cpp_STL.html">C++</a>
+								    <a href="/2019/12/12/c_cpp_STL.html">C/C++</a>
 								  
 								  
 								
@@ -1519,8 +1647,6 @@ integrator and double-integrator modeled agents in n-dimensional space.</a></li>
 								    <a href="/chinese/dts.html">中文</a>
 								  
 								    <a href="/2020/05/12/knowledge.html">中文</a>
-								  
-								    <a href="/chinese/C_Cpp_scope.html">中文</a>
 								  
 								    <a href="/chinese/C_Cpp_STL.html">中文</a>
 								  

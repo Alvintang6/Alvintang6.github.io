@@ -81,15 +81,15 @@
 									<ul id="markdown-toc">
   <li><a href="#1-u-boot" id="markdown-toc-1-u-boot">1. U-boot</a>    <ul>
       <li><a href="#11-basic-of-uboot-and-flashing" id="markdown-toc-11-basic-of-uboot-and-flashing">1.1 basic of uboot and flashing</a></li>
-      <li><a href="#12-porting-uboot-to-hardware" id="markdown-toc-12-porting-uboot-to-hardware">1.2 porting uboot to hardware</a></li>
-      <li><a href="#2-linux-kernel" id="markdown-toc-2-linux-kernel">2. Linux kernel</a>        <ul>
-          <li><a href="#21-compile-the-official-kernel" id="markdown-toc-21-compile-the-official-kernel">2.1 Compile the official kernel</a></li>
-          <li><a href="#22-customize-our-linux-kernel" id="markdown-toc-22-customize-our-linux-kernel">2.2 Customize our linux kernel</a></li>
+      <li><a href="#porting-uboot-to-hardware" id="markdown-toc-porting-uboot-to-hardware">1.2 porting uboot to hardware</a></li>
+      <li><a href="#linux-kernel" id="markdown-toc-linux-kernel">2. Linux kernel</a>        <ul>
+          <li><a href="#compile-the-official-kernel" id="markdown-toc-compile-the-official-kernel">2.1 Compile the official kernel</a></li>
+          <li><a href="#customize-our-linux-kernel" id="markdown-toc-customize-our-linux-kernel">2.2 Customize our linux kernel</a></li>
         </ul>
       </li>
-      <li><a href="#3-rootfs" id="markdown-toc-3-rootfs">3. Rootfs</a>        <ul>
-          <li><a href="#31-roofts-make" id="markdown-toc-31-roofts-make">3.1 Roofts make</a></li>
-          <li><a href="#32-mount-rootfs-from-nfs-server" id="markdown-toc-32-mount-rootfs-from-nfs-server">3.2 mount rootfs from nfs server</a></li>
+      <li><a href="#rootfs" id="markdown-toc-rootfs">3. Rootfs</a>        <ul>
+          <li><a href="#roofts-make" id="markdown-toc-roofts-make">3.1 Roofts make</a></li>
+          <li><a href="#mount-rootfs-from-nfs-server" id="markdown-toc-mount-rootfs-from-nfs-server">3.2 mount rootfs from nfs server</a></li>
         </ul>
       </li>
     </ul>
@@ -126,52 +126,54 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 
 <p><code class="highlighter-rouge">sudo dd if=u-boot.imx of=/dev/sdb bs=512 seek=2 conv=fsync</code></p>
 
-<div align="center"><img width="80%" height="80%" src="/blog_photos/MPU/IVT_table.png" /><p>Table. IVT of nxp i.mx6ull</p></div>
+<div align="center">
+  <p><img width="80%" height="80%" src="/blog_photos/MPU/IVT_table.png" />&lt;p&gt;Table. IVT of nxp i.mx6ull&lt;/p&gt;&lt;/div&gt;</p>
 
-<h3 id="12-porting-uboot-to-hardware">1.2 porting uboot to hardware</h3>
+  <h3 id="porting-uboot-to-hardware">1.2 porting uboot to hardware</h3>
 
-<p>To adding support of our customized board, most of the time, we only need the modify the U-boot from soc manufacture. There are three important path we need modify(take imx6u as example, U-boot version&gt;2018):</p>
+  <p>To adding support of our customized board, most of the time, we only need the modify the U-boot from soc manufacture. There are three important path we need modify(take imx6u as example, U-boot version&gt;2018):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/configs/&lt;board_name&gt;
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/configs/&lt;board_name&gt;
 /include/configs/&lt;board_name&gt;
 /arch/arm/cpu/armv7/mash-imx/mx6/Kconfig   //adding config TARGET and source "board/&lt;vendor&gt;/&lt;board_name&gt;
 /board/&lt;vendor&gt;/&lt;board_name&gt;
 
-</code></pre></div></div>
-<p>The above configuration is the basic structure for a customized board. For the detailed configuration, I will write in <a href="../../../2020/06/12/Uboot.html">another blog</a> about adding support of LCD, ethernet, and other devices.</p>
+</code></pre></div>  </div>
+  <p>The above configuration is the basic structure for a customized board. For the detailed configuration, I will write in <a href="../../../2020/06/12/Uboot.html">another blog</a> about adding support of LCD, ethernet, and other devices.</p>
 
-<h3 id="2-linux-kernel">2. Linux kernel</h3>
+  <h3 id="linux-kernel">2. Linux kernel</h3>
 
-<h4 id="21-compile-the-official-kernel">2.1 Compile the official kernel</h4>
-<p>The structure of Linux kernel is very similar with U-boot project. Also, we can use <a href="https://github.com/Freescale/linux-fslc">nxp offical linux kernel</a> as our template to customize our kernel (git switch x.xx.x–imx:using the branch with –imx).</p>
+  <h4 id="compile-the-official-kernel">2.1 Compile the official kernel</h4>
+  <p>The structure of Linux kernel is very similar with U-boot project. Also, we can use <a href="https://github.com/Freescale/linux-fslc">nxp offical linux kernel</a> as our template to customize our kernel (git switch x.xx.x–imx:using the branch with –imx).</p>
 
-<p><code class="highlighter-rouge">make ARCH=arm clean </code><br />
+  <p><code class="highlighter-rouge">make ARCH=arm clean </code><br />
 <code class="highlighter-rouge">make ARCH=arm XXX_defconfig</code> (imx_v7_defconfig for nxp offical imx6)<br />
 <code class="highlighter-rouge">make menuconfig</code>(<span style="color:red;">optional</span> if dont need config just esc)<br />
 <code class="highlighter-rouge">make ARCH=arm -j10 CROSS_COMPILE= arm-linux-gnueabihf-</code><br /></p>
 
-<p><span style="color:red;">Note:</span> Sometimes make cannot go through due to gcc version. In that case using older arm-linux-nueabihf- from source with <code class="highlighter-rouge">export PATH=/{your gcc address}/bin:$PATH</code> <br /></p>
+  <p><span style="color:red;">Note:</span> Sometimes make cannot go through due to gcc version. In that case using older arm-linux-nueabihf- from source with <code class="highlighter-rouge">export PATH=/{your gcc address}/bin:$PATH</code> <br /></p>
 
-<h4 id="22-customize-our-linux-kernel">2.2 Customize our linux kernel</h4>
+  <h4 id="customize-our-linux-kernel">2.2 Customize our linux kernel</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>To customize a linux kernel, two important file are needed:
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>To customize a linux kernel, two important file are needed:
 - xxx_defconfig   (in arch/arm/configs/)
 - xxx.dts (in arch/arm/boot/dts ) 
-</code></pre></div></div>
+</code></pre></div>  </div>
 
-<p>####</p>
+  <p>####</p>
 
-<h3 id="3-rootfs">3. Rootfs</h3>
+  <h3 id="rootfs">3. Rootfs</h3>
 
-<p>rootfs can be understand as the container files  of linux environment, configuration, and programs in the mpu.</p>
+  <p>rootfs can be understand as the container files  of linux environment, configuration, and programs in the mpu.</p>
 
-<h4 id="31-roofts-make">3.1 Roofts make</h4>
+  <h4 id="roofts-make">3.1 Roofts make</h4>
 
-<p>Rootfs can be made from various sources, busybox, buildroot, yocto, openembedded.</p>
+  <p>Rootfs can be made from various sources, busybox, buildroot, yocto, openembedded.</p>
 
-<h4 id="32-mount-rootfs-from-nfs-server">3.2 mount rootfs from nfs server</h4>
-<p>setenv bootargs ‘console=ttymxc0,115200 nfsvers=4 root=/dev/nfs nfsroot=192.168.0.188:/home/jie/workdir/rootfs ip=192.168.0.16:192.168.0.188:192.168.0.1:255.255.255.0::eth1:off’</p>
+  <h4 id="mount-rootfs-from-nfs-server">3.2 mount rootfs from nfs server</h4>
+  <p>setenv bootargs ‘console=ttymxc0,115200 nfsvers=4 root=/dev/nfs nfsroot=192.168.0.188:/home/jie/workdir/rootfs ip=192.168.0.16:192.168.0.188:192.168.0.1:255.255.255.0::eth1:off’</p>
 
+</div>
 
 
 									<br/>
@@ -287,9 +289,19 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 										
 										
 										
+										
+										
 										<li>
 											<a href="/2020/05/12/robotics.html">Robotics</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
+												
+												
+												
+
 												
 												
 												
@@ -403,14 +415,6 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 
 												
 												
-												
-
-												
-												
-												
-
-												
-												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -426,13 +430,14 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 												
 												
 
-																						
+												
 												
 												
 
-												<li><a href="/2020/08/06/c_cpp.html"> C++ STL container</a></li>
 												
 												
+												
+
 												
 												
 												
@@ -550,32 +555,6 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 												
 												
 
-																						
-												
-												
-
-												<li><a href="/2019/12/12/c_cpp_scope.html"> C/C++ Scope, Storage, and Linkage</a></li>
-												
-												
-												
-												
-												
-
-																						
-												
-												
-												
-												
-												
-												
-
-																						
-												
-												
-
-												<li><a href="/2019/12/12/c_cpp_STL.html"> C++ STL container</a></li>
-												
-												
 												
 												
 												
@@ -597,6 +576,10 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 										<li>
 											<a href="/2020/05/12/mcu.html">Mcu&Mpu</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
 												
 												
 												
@@ -756,10 +739,6 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 
 												
 												
-												
-
-												
-												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -771,6 +750,14 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 										<li>
 											<a href="/2020/05/12/Machine-Vision.html">Machine Vision</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
+												
+												
+												
+
 												
 												
 												
@@ -884,6 +871,144 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 
 												
 												
+												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
+											</ul>
+										</li>
+										
+										
+										
+										
+										
+										<li>
+											<a href="/2020/05/12/C-C++.html">C/C++</a><span class="opener" style="font-size: 0.1;"></span>
+											<ul>
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2023/04/29/IKM-test-summury.html">IKM C/C++ Test Summury</a></li>
+												
+												
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2020/08/06/c_cpp.html"> C++ Misc</a></li>
+												
+												
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2019/12/12/c_cpp_STL.html"> C++ STL container</a></li>
+												
+												
+												
+												
 												
 
 												
@@ -918,62 +1043,6 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 										
 										
 										
-										
-										
-										
-										
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-																						
-												
-												
-												
-												
-
-																						
-												
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
 												
 												
 
@@ -1005,6 +1074,58 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 												
 												
 
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+																						
+												
+												
+												
+												
+
+																						
+												
 												
 												
 												
@@ -1075,7 +1196,7 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/c++/index.html" style="font-size: 13.5pt; color: #444;">C++</a>
+									  <a href=" ../../../../tag/c/c++/index.html" style="font-size: 13.5pt; color: #444;">C/C++</a>
 									  
 									
 									  
@@ -1085,7 +1206,7 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/中文/index.html" style="font-size: 16pt; color: #222;">中文</a>
+									  <a href=" ../../../../tag/中文/index.html" style="font-size: 13.5pt; color: #444;">中文</a>
 									  
 									
 									  
@@ -1321,11 +1442,11 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 								
 								 
 								  
-								    <a href="/2020/08/06/c_cpp.html">C++</a>
+								    <a href="/2023/04/29/IKM-test-summury.html">C/C++</a>
 								  
-								    <a href="/2019/12/12/c_cpp_scope.html">C++</a>
+								    <a href="/2020/08/06/c_cpp.html">C/C++</a>
 								  
-								    <a href="/2019/12/12/c_cpp_STL.html">C++</a>
+								    <a href="/2019/12/12/c_cpp_STL.html">C/C++</a>
 								  
 								  
 								
@@ -1478,8 +1599,6 @@ Here we use the <code class="highlighter-rouge">dd</code> command to flash.</p>
 								    <a href="/chinese/dts.html">中文</a>
 								  
 								    <a href="/2020/05/12/knowledge.html">中文</a>
-								  
-								    <a href="/chinese/C_Cpp_scope.html">中文</a>
 								  
 								    <a href="/chinese/C_Cpp_STL.html">中文</a>
 								  

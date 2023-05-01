@@ -81,16 +81,16 @@
 									<ul id="markdown-toc">
   <li><a href="#中断程序逻辑" id="markdown-toc-中断程序逻辑">中断程序逻辑</a></li>
   <li><a href="#gic-中断控制器" id="markdown-toc-gic-中断控制器">GIC 中断控制器</a></li>
-  <li><a href="#1-中断向量表以及复位中断初始化" id="markdown-toc-1-中断向量表以及复位中断初始化">1. 中断向量表以及复位中断初始化</a></li>
-  <li><a href="#2-main主函数初始化" id="markdown-toc-2-main主函数初始化">2. main主函数初始化</a>    <ul>
-      <li><a href="#21-函数初始化中断引角" id="markdown-toc-21-函数初始化中断引角">2.1 函数初始化中断引角</a></li>
-      <li><a href="#22-向irq中断表中注册中断函数" id="markdown-toc-22-向irq中断表中注册中断函数">2.2 向irq中断表中注册中断函数</a></li>
+  <li><a href="#section" id="markdown-toc-section">1. 中断向量表以及复位中断初始化</a></li>
+  <li><a href="#main" id="markdown-toc-main">2. main主函数初始化</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">2.1 函数初始化中断引角</a></li>
+      <li><a href="#irq" id="markdown-toc-irq">2.2 向irq中断表中注册中断函数</a></li>
     </ul>
   </li>
-  <li><a href="#31-汇编定义irq中断" id="markdown-toc-31-汇编定义irq中断">3.1 汇编定义irq中断</a></li>
-  <li><a href="#附录" id="markdown-toc-附录">附录</a>    <ul>
+  <li><a href="#irq-1" id="markdown-toc-irq-1">3.1 汇编定义irq中断</a></li>
+  <li><a href="#section-2" id="markdown-toc-section-2">附录</a>    <ul>
       <li><a href="#attributeweak" id="markdown-toc-attributeweak"><strong>attribute</strong>((weak))</a></li>
-      <li><a href="#typedef-函数指针" id="markdown-toc-typedef-函数指针">typedef 函数指针</a></li>
+      <li><a href="#typedef-" id="markdown-toc-typedef-">typedef 函数指针</a></li>
     </ul>
   </li>
 </ul>
@@ -119,35 +119,36 @@
 
 <p>其中GIC的基地址在c15 4 c0中
 GICC相对于GIC偏移了0x2000, GICC_IAR寄存器相对于GICC的基地址又偏移了0xC</p>
-<div align="center"><img width="60%" height="60%" src="/blog_photos/MPU/GIC_offset.png" /><p>GIC_offset</p></div>
+<div align="center">
+  <p><img width="60%" height="60%" src="/blog_photos/MPU/GIC_offset.png" />&lt;p&gt;GIC_offset&lt;/p&gt;&lt;/div&gt;</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>地址偏移</th>
-      <th>寄存器名字</th>
-      <th>类型</th>
-      <th>复位值</th>
-      <th>寄存器描述</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0x000C</td>
-      <td>GICC_IAR</td>
-      <td>RO</td>
-      <td>0x000003FF</td>
-      <td>中断确认寄存器</td>
-    </tr>
-  </tbody>
-</table>
+  <table>
+    <thead>
+      <tr>
+        <th>地址偏移</th>
+        <th>寄存器名字</th>
+        <th>类型</th>
+        <th>复位值</th>
+        <th>寄存器描述</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>0x000C</td>
+        <td>GICC_IAR</td>
+        <td>RO</td>
+        <td>0x000003FF</td>
+        <td>中断确认寄存器</td>
+      </tr>
+    </tbody>
+  </table>
 
-<p>GICC_IAR : 中断确认寄存器 Interrupt acknowledge register [31:13]:reserved, [12:10]:CPUID, [9:0]:interrupt ID。
+  <p>GICC_IAR : 中断确认寄存器 Interrupt acknowledge register [31:13]:reserved, [12:10]:CPUID, [9:0]:interrupt ID。
 中断id用于和xx表匹配相应的中断函数。</p>
 
-<h3 id="1-中断向量表以及复位中断初始化">1. 中断向量表以及复位中断初始化</h3>
+  <h3 id="section">1. 中断向量表以及复位中断初始化</h3>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="p">.</span><span class="n">text</span>
 <span class="p">.</span><span class="n">align</span> <span class="mi">2</span>         <span class="c1">//设置字节对齐</span>
 <span class="p">.</span><span class="n">global</span> <span class="n">_start</span>
@@ -204,11 +205,11 @@ GICC相对于GIC偏移了0x2000, GICC_IAR寄存器相对于GICC的基地址又�
     <span class="n">b</span> <span class="p">.</span>        <span class="cm">/*死循环*/</span>
     <span class="cm">/*其他中断处理函数与官方相同这里省略，可直接打开源码查看*/</span>
 
-</code></pre></div></div>
+</code></pre></div>  </div>
 
-<p>其中SystemInit()函数是在C语言文件system_MCIMX6Y2.c中进行实现的。用于初始化GIC控制器<code class="highlighter-rouge">GIC_Init()</code>;，设置中断向量表的偏移<code class="highlighter-rouge"> __set_VBAR((uint32_t)__VECTOR_TABLE);</code>， 设置系统控制寄存器SCTLR:使能I，D cache，mmu等<code class="highlighter-rouge">__set_SCTLR(sctlr);</code> 。</p>
+  <p>其中SystemInit()函数是在C语言文件system_MCIMX6Y2.c中进行实现的。用于初始化GIC控制器<code class="highlighter-rouge">GIC_Init()</code>;，设置中断向量表的偏移<code class="highlighter-rouge"> __set_VBAR((uint32_t)__VECTOR_TABLE);</code>， 设置系统控制寄存器SCTLR:使能I，D cache，mmu等<code class="highlighter-rouge">__set_SCTLR(sctlr);</code> 。</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">SystemInit</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">SystemInit</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="kt">uint32_t</span> <span class="n">sctlr</span><span class="p">;</span>
   <span class="kt">uint32_t</span> <span class="n">actlr</span><span class="p">;</span>
@@ -252,13 +253,13 @@ GICC相对于GIC偏移了0x2000, GICC_IAR寄存器相对于GICC的基地址又�
  <span class="cp">#endif </span><span class="cm">/* ((__FPU_PRESENT == 1) &amp;&amp; (__FPU_USED == 1)) */</span><span class="cp">
 </span><span class="p">}</span>
 
-</code></pre></div></div>
-<h3 id="2-main主函数初始化">2. main主函数初始化</h3>
+</code></pre></div>  </div>
+  <h3 id="main">2. main主函数初始化</h3>
 
-<p>主函数调用<code class="highlighter-rouge">interrupt_button2_init(void)</code>初始化</p>
-<h4 id="21-函数初始化中断引角">2.1 函数初始化中断引角</h4>
+  <p>主函数调用<code class="highlighter-rouge">interrupt_button2_init(void)</code>初始化</p>
+  <h4 id="section-1">2.1 函数初始化中断引角</h4>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">interrupt_button2_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">interrupt_button2_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">volatile</span> <span class="kt">uint32_t</span> <span class="o">*</span><span class="n">icr</span><span class="p">;</span>  <span class="c1">//用于保存 GPIO-ICR寄存器的地址,与 icrShift 变量配合使用</span>
     <span class="kt">uint32_t</span> <span class="n">icrShift</span><span class="p">;</span>       <span class="c1">//引脚号大于16时会用到,</span>
@@ -298,44 +299,44 @@ GICC相对于GIC偏移了0x2000, GICC_IAR寄存器相对于GICC的基地址又�
 
      <span class="n">button2_GPIO</span><span class="o">-&gt;</span><span class="n">IMR</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">button2_GPIO_PIN</span><span class="p">);</span>    <span class="c1">// IMR--interrupt mask register 1 for enable interrupt/</span>
 <span class="p">}</span>
-</code></pre></div></div>
+</code></pre></div>  </div>
 
-<p>其中有几个寄存器需要配置，GPIO_IMR 和GPIO_ICR。</p>
-<ul>
-  <li>
-    <p>GPIO_IMR(interrupt mask register )<br />
+  <p>其中有几个寄存器需要配置，GPIO_IMR 和GPIO_ICR。</p>
+  <ul>
+    <li>
+      <p>GPIO_IMR(interrupt mask register )<br />
 Bit IMR[n] (n=0…31) controls interrupt n as follows:<br />
 0 — MASKED — Interrupt n is disabled.<br />
 1 — UNMASKED — Interrupt n is enabled.</p>
-  </li>
-  <li>
-    <p>GPIO interrupt configuration register<br />
+    </li>
+    <li>
+      <p>GPIO interrupt configuration register<br />
 00 — LOW_LEVEL — Interrupt n is low-level sensitive.<br />
 01 — HIGH_LEVEL — Interrupt n is high-level sensitive.<br />
 10 — RISING_EDGE — Interrupt n is rising-edge sensitive.<br />
 11 — FALLING_EDGE — Interrupt n is falling-edge sensitive.</p>
-  </li>
-  <li>
-    <p>GPIO_EDGE_SEL edge select register
+    </li>
+    <li>
+      <p>GPIO_EDGE_SEL edge select register
  1 — enable 使能则ICR寄存器无用，上升下降均可使能
  0 — disable 通过ICR寄存器使能</p>
-  </li>
-</ul>
+    </li>
+  </ul>
 
-<h4 id="22-向irq中断表中注册中断函数">2.2 向irq中断表中注册中断函数</h4>
+  <h4 id="irq">2.2 向irq中断表中注册中断函数</h4>
 
-<p>在2.1中使用了中断注册函数 <code class="highlighter-rouge">SystemInstallIrqHandler(GPIO5_Combined_0_15_IRQn, (system_irq_handler_t)EXAMPLE_GPIO_IRQHandler, NULL);</code>向irq_table中注册了中断号为<code class="highlighter-rouge">GPIO5_Combined_0_15_IRQn</code>的中断处理函数<code class="highlighter-rouge">EXAMPLE_GPIO_IRQHandler</code>。</p>
+  <p>在2.1中使用了中断注册函数 <code class="highlighter-rouge">SystemInstallIrqHandler(GPIO5_Combined_0_15_IRQn, (system_irq_handler_t)EXAMPLE_GPIO_IRQHandler, NULL);</code>向irq_table中注册了中断号为<code class="highlighter-rouge">GPIO5_Combined_0_15_IRQn</code>的中断处理函数<code class="highlighter-rouge">EXAMPLE_GPIO_IRQHandler</code>。</p>
 
-<p>下面展示了中断注册函数的实现，这里用到了一个全局定义的irqTabe, IRQn_Type是定义在NXP官方库中的enum枚举类型</p>
+  <p>下面展示了中断注册函数的实现，这里用到了一个全局定义的irqTabe, IRQn_Type是定义在NXP官方库中的enum枚举类型</p>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">SystemInstallIrqHandler</span><span class="p">(</span><span class="n">IRQn_Type</span> <span class="n">irq</span><span class="p">,</span> <span class="n">system_irq_handler_t</span> <span class="n">handler</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">userParam</span><span class="p">)</span>
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">SystemInstallIrqHandler</span><span class="p">(</span><span class="n">IRQn_Type</span> <span class="n">irq</span><span class="p">,</span> <span class="n">system_irq_handler_t</span> <span class="n">handler</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">userParam</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="n">irqTable</span><span class="p">[</span><span class="n">irq</span><span class="p">].</span><span class="n">irqHandler</span> <span class="o">=</span> <span class="n">handler</span><span class="p">;</span>
   <span class="n">irqTable</span><span class="p">[</span><span class="n">irq</span><span class="p">].</span><span class="n">userParam</span> <span class="o">=</span> <span class="n">userParam</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div></div>
+</code></pre></div>  </div>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="n">_sys_irq_handle</span>
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="n">_sys_irq_handle</span>
 <span class="p">{</span>
     <span class="n">system_irq_handler_t</span> <span class="n">irqHandler</span><span class="p">;</span> <span class="cm">/**&lt; IRQ handler for specific IRQ */</span>
     <span class="kt">void</span> <span class="o">*</span><span class="n">userParam</span><span class="p">;</span>                 <span class="cm">/**&lt; User param for handler callback */</span>
@@ -343,13 +344,13 @@ Bit IMR[n] (n=0…31) controls interrupt n as follows:<br />
 
 <span class="k">static</span> <span class="n">sys_irq_handle_t</span> <span class="n">irqTable</span><span class="p">[</span><span class="n">NUMBER_OF_INT_VECTORS</span><span class="p">];</span>
 
-</code></pre></div></div>
+</code></pre></div>  </div>
 
-<p>其中<code class="highlighter-rouge">system_irq_handler_t</code> 是一个typedef修饰的函数指针变量</p>
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="nf">void</span> <span class="p">(</span><span class="o">*</span><span class="n">system_irq_handler_t</span><span class="p">)</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="n">giccIar</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">param</span><span class="p">);</span>
-</code></pre></div></div>
+  <p>其中<code class="highlighter-rouge">system_irq_handler_t</code> 是一个typedef修饰的函数指针变量</p>
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="nf">void</span> <span class="p">(</span><span class="o">*</span><span class="n">system_irq_handler_t</span><span class="p">)</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="n">giccIar</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">param</span><span class="p">);</span>
+</code></pre></div>  </div>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">EXAMPLE_GPIO_IRQHandler</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">EXAMPLE_GPIO_IRQHandler</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="cm">/*按键引脚中断服务函数*/</span>
     <span class="n">button2_GPIO</span><span class="o">-&gt;</span><span class="n">ISR</span> <span class="o">=</span> <span class="mi">1U</span> <span class="o">&lt;&lt;</span> <span class="n">button2_GPIO_PIN</span><span class="p">;</span>  <span class="c1">//清除GIIP中断标志位</span>
@@ -363,11 +364,12 @@ Bit IMR[n] (n=0…31) controls interrupt n as follows:<br />
     <span class="p">}</span>
 <span class="p">}</span>
 
-</code></pre></div></div>
+</code></pre></div>  </div>
 
-<h3 id="31-汇编定义irq中断">3.1 汇编定义irq中断</h3>
+  <h3 id="irq-1">3.1 汇编定义irq中断</h3>
 
-<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+  <figure class="highlight">
+    <pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -433,13 +435,15 @@ Bit IMR[n] (n=0…31) controls interrupt n as follows:<br />
     <span class="n">POP</span>     <span class="p">{</span><span class="n">r0</span><span class="o">-</span><span class="n">r3</span><span class="p">,</span> <span class="n">r12</span><span class="p">}</span>
     <span class="n">POP</span>     <span class="p">{</span><span class="n">lr</span><span class="p">}</span>
     <span class="n">SUBS</span>    <span class="n">pc</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="err">#</span><span class="mi">4</span>                  <span class="cm">/* set pc to lr-4  */</span>
-</pre></td></tr></tbody></table></code></pre></figure>
+</pre></td></tr></tbody></table></code></pre>
+  </figure>
 
-<p>其中 <code class="highlighter-rouge">ldr     r2, =SystemIrqHandler</code> , <code class="highlighter-rouge">blx    r2</code> 执行到systemirqhandler函数的跳转。 并且这个c函数可以将R0(当前保存为GICC_IAR)的值传参。</p>
+  <p>其中 <code class="highlighter-rouge">ldr     r2, =SystemIrqHandler</code> , <code class="highlighter-rouge">blx    r2</code> 执行到systemirqhandler函数的跳转。 并且这个c函数可以将R0(当前保存为GICC_IAR)的值传参。</p>
 
-<p>具体的SystemIrqHandler 函数在 system_MCIMX6Y2.c文件中如下:</p>
+  <p>具体的SystemIrqHandler 函数在 system_MCIMX6Y2.c文件中如下:</p>
 
-<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+  <figure class="highlight">
+    <pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -491,29 +495,30 @@ Bit IMR[n] (n=0…31) controls interrupt n as follows:<br />
   <span class="c1">// __disable_irq();</span>
   <span class="n">irqNesting</span><span class="o">--</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></td></tr></tbody></table></code></pre></figure>
+</pre></td></tr></tbody></table></code></pre>
+  </figure>
 
-<p>注意第22行中有<code class="highlighter-rouge">irqTable[intNum].irqHandler(giccIar, irqTable[intNum].userParam);</code> 此语句根据中断id(intNum)调用着一个该中断所对应的中断函数，这个中断函数的首地址写在irqTable中。</p>
+  <p>注意第22行中有<code class="highlighter-rouge">irqTable[intNum].irqHandler(giccIar, irqTable[intNum].userParam);</code> 此语句根据中断id(intNum)调用着一个该中断所对应的中断函数，这个中断函数的首地址写在irqTable中。</p>
 
-<h3 id="附录">附录</h3>
+  <h3 id="section-2">附录</h3>
 
-<h4 id="attributeweak"><strong>attribute</strong>((weak))</h4>
+  <h4 id="attributeweak"><strong>attribute</strong>((weak))</h4>
 
-<p>在本文件中定义：</p>
+  <p>在本文件中定义：</p>
 
-<p>int  <strong>attribute</strong>((weak))  func(……)
+  <p>int  <strong>attribute</strong>((weak))  func(……)
 {
 return 0;
 }</p>
 
-<p>将本模块的func转成弱符号类型，如果遇到强符号类型（即外部模块定义了func），那么我们在本模块执行的func将会是外部模块定义的func。类似于c++中的重载</p>
+  <p>将本模块的func转成弱符号类型，如果遇到强符号类型（即外部模块定义了func），那么我们在本模块执行的func将会是外部模块定义的func。类似于c++中的重载</p>
 
-<p>如果外部模块没有定义，那么，将会调用这个弱符号，也就是在本地定义的func</p>
+  <p>如果外部模块没有定义，那么，将会调用这个弱符号，也就是在本地定义的func</p>
 
-<h4 id="typedef-函数指针">typedef 函数指针</h4>
+  <h4 id="typedef-">typedef 函数指针</h4>
 
-<p>下面代码定义了一个指针变量 pFun， pFun = glFun将函数glFun的地址指向pFun。</p>
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="p">(</span><span class="o">*</span><span class="n">pFun</span><span class="p">)(</span><span class="kt">int</span><span class="p">);</span>   
+  <p>下面代码定义了一个指针变量 pFun， pFun = glFun将函数glFun的地址指向pFun。</p>
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> <span class="p">(</span><span class="o">*</span><span class="n">pFun</span><span class="p">)(</span><span class="kt">int</span><span class="p">);</span>   
 <span class="kt">char</span> <span class="nf">glFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">){</span> <span class="k">return</span><span class="p">;}</span>   
 <span class="kt">void</span> <span class="nf">main</span><span class="p">()</span>   
 <span class="p">{</span>   
@@ -521,9 +526,9 @@ return 0;
     <span class="p">(</span><span class="o">*</span><span class="n">pFun</span><span class="p">)(</span><span class="mi">2</span><span class="p">);</span>   
 <span class="p">}</span>  
 
-</code></pre></div></div>
+</code></pre></div>  </div>
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="nf">char</span> <span class="p">(</span><span class="o">*</span><span class="n">PTRFUN</span><span class="p">)(</span><span class="kt">int</span><span class="p">);</span>   
+  <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="nf">char</span> <span class="p">(</span><span class="o">*</span><span class="n">PTRFUN</span><span class="p">)(</span><span class="kt">int</span><span class="p">);</span>   
 <span class="n">PTRFUN</span> <span class="n">pFun</span><span class="p">;</span>   
 <span class="kt">char</span> <span class="nf">glFun</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">){</span> <span class="k">return</span><span class="p">;}</span>   
 <span class="kt">void</span> <span class="nf">main</span><span class="p">()</span>   
@@ -532,8 +537,9 @@ return 0;
     <span class="p">(</span><span class="o">*</span><span class="n">pFun</span><span class="p">)(</span><span class="mi">2</span><span class="p">);</span>   
 <span class="p">}</span>   
 
-</code></pre></div></div>
+</code></pre></div>  </div>
 
+</div>
 
 
 									<br/>
@@ -649,9 +655,19 @@ return 0;
 										
 										
 										
+										
+										
 										<li>
 											<a href="/2020/05/12/robotics.html">Robotics</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
+												
+												
+												
+
 												
 												
 												
@@ -765,14 +781,6 @@ return 0;
 
 												
 												
-												
-
-												
-												
-												
-
-												
-												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -788,13 +796,14 @@ return 0;
 												
 												
 
-																						
+												
 												
 												
 
-												<li><a href="/2020/08/06/c_cpp.html"> C++ STL container</a></li>
 												
 												
+												
+
 												
 												
 												
@@ -912,32 +921,6 @@ return 0;
 												
 												
 
-																						
-												
-												
-
-												<li><a href="/2019/12/12/c_cpp_scope.html"> C/C++ Scope, Storage, and Linkage</a></li>
-												
-												
-												
-												
-												
-
-																						
-												
-												
-												
-												
-												
-												
-
-																						
-												
-												
-
-												<li><a href="/2019/12/12/c_cpp_STL.html"> C++ STL container</a></li>
-												
-												
 												
 												
 												
@@ -959,6 +942,10 @@ return 0;
 										<li>
 											<a href="/2020/05/12/mcu.html">Mcu&Mpu</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
 												
 												
 												
@@ -1118,10 +1105,6 @@ return 0;
 
 												
 												
-												
-
-												
-												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -1133,6 +1116,14 @@ return 0;
 										<li>
 											<a href="/2020/05/12/Machine-Vision.html">Machine Vision</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
+												
+												
+												
+
 												
 												
 												
@@ -1246,6 +1237,144 @@ return 0;
 
 												
 												
+												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
+											</ul>
+										</li>
+										
+										
+										
+										
+										
+										<li>
+											<a href="/2020/05/12/C-C++.html">C/C++</a><span class="opener" style="font-size: 0.1;"></span>
+											<ul>
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2023/04/29/IKM-test-summury.html">IKM C/C++ Test Summury</a></li>
+												
+												
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2020/08/06/c_cpp.html"> C++ Misc</a></li>
+												
+												
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2019/12/12/c_cpp_STL.html"> C++ STL container</a></li>
+												
+												
+												
+												
 												
 
 												
@@ -1280,62 +1409,6 @@ return 0;
 										
 										
 										
-										
-										
-										
-										
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-																						
-												
-												
-												
-												
-
-																						
-												
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
 												
 												
 
@@ -1367,6 +1440,58 @@ return 0;
 												
 												
 
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+																						
+												
+												
+												
+												
+
+																						
+												
 												
 												
 												
@@ -1437,7 +1562,7 @@ return 0;
 									  
 
 									  
-									  <a href=" ../../../../tag/c++/index.html" style="font-size: 13.5pt; color: #444;">C++</a>
+									  <a href=" ../../../../tag/c/c++/index.html" style="font-size: 13.5pt; color: #444;">C/C++</a>
 									  
 									
 									  
@@ -1447,7 +1572,7 @@ return 0;
 									  
 
 									  
-									  <a href=" ../../../../tag/中文/index.html" style="font-size: 16pt; color: #222;">中文</a>
+									  <a href=" ../../../../tag/中文/index.html" style="font-size: 13.5pt; color: #444;">中文</a>
 									  
 									
 									  
@@ -1683,11 +1808,11 @@ return 0;
 								
 								 
 								  
-								    <a href="/2020/08/06/c_cpp.html">C++</a>
+								    <a href="/2023/04/29/IKM-test-summury.html">C/C++</a>
 								  
-								    <a href="/2019/12/12/c_cpp_scope.html">C++</a>
+								    <a href="/2020/08/06/c_cpp.html">C/C++</a>
 								  
-								    <a href="/2019/12/12/c_cpp_STL.html">C++</a>
+								    <a href="/2019/12/12/c_cpp_STL.html">C/C++</a>
 								  
 								  
 								
@@ -1840,8 +1965,6 @@ return 0;
 								    <a href="/chinese/dts.html">中文</a>
 								  
 								    <a href="/2020/05/12/knowledge.html">中文</a>
-								  
-								    <a href="/chinese/C_Cpp_scope.html">中文</a>
 								  
 								    <a href="/chinese/C_Cpp_STL.html">中文</a>
 								  

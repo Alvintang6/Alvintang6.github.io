@@ -10,11 +10,10 @@
 
 
 
-		<title> C/C++ Scope, Storage, and Linkage</title>
+		<title></title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="../../../../assets/css/main.css" />
-		<link rel="stylesheet" href="../../../../assets/css/syntax.css">
+		<link rel="stylesheet" href="../../../assets/css/main.css" />
 	</head>
 	<body class="is-preload">
 
@@ -26,20 +25,8 @@
 						<div class="inner">
 
 							<!-- Header -->
-																  <script type="text/x-mathjax-config">
-								    MathJax.Hub.Config({
-								      tex2jax: {
-								        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-								        inlineMath: [['$','$']]
-								      }
-								    });
-								  </script>
-								  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
-
-
 								<header id="header">
-									<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-									<a href="../../../../index.html" class="logo"><strong>Follow Jietang</strong> with:</a>
+									<a href="../../../index.html" class="logo"><strong>Follow Jietang</strong> with:</a>
 									<ul class="icons">
 										<li><a href="mailto:alvin.tang6@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
 										
@@ -47,149 +34,153 @@
 										<li><a href="https://github.com/Alvintang6" class="icon brands fa-github-square"><span class="label">Github</span></a></li>
 										<li><a href="https://www.instagram.com/tang12y/?hl=en" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 										<li><a href="https://www.linkedin.com/in/jie-tang-55070b148/" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a></li>
-										<li><a href="../../../../resume_jietang.pdf" class="logo"><i class="fas fa-file-invoice"></i>CV</a></li>
+										<li><a href="../../../resume_jietang.pdf" class="logo"><i class="fas fa-file-invoice"></i>CV</a></li>
 									</ul>
 								</header>
 
-
-							
-
-
-								
-
 							<!-- Content -->
 								<section>
-									<header class="main">
-										<h1> C/C++ Scope, Storage, and Linkage</h1>
-										<p>12 Dec 2019</p>
-									</header>
-									
-									<p style="float:right"><a href=" ../../../..//chinese/C_Cpp_scope.html" >中文连接</a></p>
+									<h3><a href=" "><i class="fas fa-tags"></i>All Tags</h3></a>
 
-									 
+
+									
+									
+									<a href=" ../../../tag/c/c++/index.html" class="button">C/C++<sup>3</sup></a>
 									
 
-
-									<h3><i class="fas fa-tags"></i>Post Tags</h3>
 									
-									<a href=" ../../../../tag/c++/index.html" >C++</a>
 									
-									<br/>
-									<br/>
-
-									<h2 id="table-of-content">Table of Content</h2>
-<ul id="markdown-toc">
-  <li><a href="#table-of-content" id="markdown-toc-table-of-content">Table of Content</a></li>
-  <li><a href="#scope" id="markdown-toc-scope">Scope</a></li>
-  <li><a href="#storage" id="markdown-toc-storage">storage</a>    <ul>
-      <li><a href="#static" id="markdown-toc-static">static</a>        <ul>
-          <li><a href="#static-member-varibale-in-c" id="markdown-toc-static-member-varibale-in-c">Static member varibale in C++</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<p>Identifier Scope, Storage Class, and Linkage are three key attributes of variables and functions.
-Scope, storage, and linkage are decided by definition place and identifiers.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Definition</th>
-      <th>Storage</th>
-      <th>Active regions</th>
-      <th>Linkage</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>in function blocks</td>
-      <td>auto</td>
-      <td>in blocks</td>
-      <td>NO</td>
-    </tr>
-    <tr>
-      <td>outside functions</td>
-      <td>static</td>
-      <td>in the file</td>
-      <td>internal</td>
-    </tr>
-    <tr>
-      <td>With  <span style="color:red;">‘static’</span> in blocks</td>
-      <td>static</td>
-      <td>in blocks</td>
-      <td>NO</td>
-    </tr>
-    <tr>
-      <td>With  <span style="color:red;">‘static’</span> outside function</td>
-      <td>static</td>
-      <td>in the file</td>
-      <td>internal</td>
-    </tr>
-    <tr>
-      <td>With  <span style="color:red;">‘extern’</span> in blocks</td>
-      <td>static</td>
-      <td>in blocks</td>
-      <td>NO</td>
-    </tr>
-    <tr>
-      <td>With  <span style="color:red;">‘extern’</span> outside function</td>
-      <td>static</td>
-      <td>in blocks</td>
-      <td>external</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>static,</p>
-
-<p>external can be accessed in other files, internal can be accessed in current file, NO can be accessed in current block or function.</p>
-
-<h2 id="scope">Scope</h2>
-
-<h2 id="storage">storage</h2>
-
-<h3 id="static">static</h3>
-
-<h4 id="static-member-varibale-in-c">Static member varibale in C++</h4>
-
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">class</span> <span class="n">my_client</span><span class="p">{</span>
-    <span class="nl">public:</span>
-    	<span class="k">static</span> <span class="kt">int</span> <span class="n">count</span><span class="p">;</span>
-<span class="p">};</span>
-
-</code></pre></div></div>
-<p>features:
-1.The variable exists even when no objects of the class have been definded so it can be modified at any ponit i the source code.
-2.All objects that try to access their cout member variable refer to the only class-vound static count variable
-3.The variable is allocated only once, regardless of how many objects are instantiated because it is bound to class itself, not its instances</p>
-
-
-
-									<br/>
-									<h3><i class="fas fa-tags"></i>Post Tags</h3>
+									<a href=" ../../../tag/中文/index.html" class="button">中文<sup>3</sup></a>
 									
-									<a href=" ../../../../tag/c++/index.html" >C++</a>
-									
-									<head>
-<script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
-</head>
 
-<div id="vcomments"></div>
-<script>
-    new Valine({
-        el: '#vcomments',
-        appId: '9CvJWlMvXQsUUkjcCF0nbtSS-MdYXbMMI',
-        appKey: 'KQFufTHJeHucASskKMC6xtLG',
-        avatar: 'retro',
-        meta: ['nick', 'mail'],
-        lang: 'en',
-        visitor: true,
-        enableQQ:true,
-        placeholder: 'Message here.\n (Tips: To make a anonymous comment, nickname and email are not necessary.\n Please entry nickname and email, if you want to show your nickname and get reminder of reply by email. )\n(输入nickname和email，可显示网络名并得到邮件回复提醒。)'
-    })
-</script>
+									
+									
+									<a href=" ../../../tag/makefile/index.html" class="button">Makefile<sup>1</sup></a>
+									
+
+									
+									
+									<a href=" ../../../tag/sql/index.html" class="button">SQL<sup>1</sup></a>
+									
+
+									
+									
+									<a href=" ../../../tag/c/index.html" class="button">C<sup>1</sup></a>
+									
+
+									
+									
+									<a href=" ../../../tag/tcp/index.html" class="button">TCP<sup>1</sup></a>
+									
+
+									
+									
+									<a href=" ../../../tag/ros/index.html" class="button">ROS<sup>2</sup></a>
+									
+
+									
+									
+									<a href=" ../../../tag/robotics/index.html" class="button">Robotics<sup>1</sup></a>
+									
+
+									
+									
+									<a href=" ../../../tag/localization/index.html" class="button">Localization<sup>2</sup></a>
+									
+
+									
+									
+									<a href=" ../../../tag/formation-control/index.html" class="button">Formation-control<sup>1</sup></a>
+									
+
+									
+									
+									<a href=" ../../../tag/qrcode/index.html" class="button">QRcode<sup>1</sup></a>
+									
+
+									
+									
+									<a href=" ../../../tag/camera-model/index.html" class="button">Camera-model<sup>1</sup></a>
+									
+
+									
+									
+									<a href=" ../../../tag/notes/index.html" class="button">Notes<sup>5</sup></a>
+									
+
+									
+									
+									<a href=" ../../../tag/arm/index.html" class="button">ARM<sup>1</sup></a>
+									
+
+									
+									
+									<a href=" ../../../tag/interrupt/index.html" class="button">interrupt<sup>1</sup></a>
+									
+
+									
+									
+									<a href=" ../../../tag/bare-metal/index.html" class="button">bare-metal<sup>1</sup></a>
+									
+
+									
+									
+									<a href=" ../../../tag/linux/index.html" class="button">Linux<sup>5</sup></a>
+									
+
+									
+									
+									<a href=" ../../../tag/uboot/index.html" class="button">Uboot<sup>2</sup></a>
+									
+
+									
+									
+									<a href=" ../../../tag/dirver/index.html" class="button">Dirver<sup>2</sup></a>
+									
+
+									
+									
+									<a href=" ../../../tag/kernel/index.html" class="button">kernel<sup>3</sup></a>
+									
+
+									
+									
+									<a href=" ../../../tag/device-tree/index.html" class="button">Device-tree<sup>2</sup></a>
+									
+
+									
+									
+									<a href=" ../../../tag/rtos/index.html" class="button">RTOS<sup>1</sup></a>
+									
+
+									
+									
+									<a href=" ../../../tag/freertos/index.html" class="button">FreeRTOS<sup>1</sup></a>
+									
+
+									
+									<p></p>
+
+									<h1>C/C++</h1>
+
+									
+									<ul>
+									
+									<div class="box">
+  									<li><a href="/2023/04/29/IKM-test-summury.html">IKM C/C++ Test Summury</a> (29 Apr 2023 | Tags: <a href="/tag/c%2Fc%2B%2B/" rel="tag">C/C++</a>)</li>
+  									</div>
+									
+									<div class="box">
+  									<li><a href="/2020/08/06/c_cpp.html"> C++ Misc</a> (06 Aug 2020 | Tags: <a href="/tag/c%2Fc%2B%2B/" rel="tag">C/C++</a>)</li>
+  									</div>
+									
+									<div class="box">
+  									<li><a href="/2019/12/12/c_cpp_STL.html"> C++ STL container</a> (12 Dec 2019 | Tags: <a href="/tag/c%2Fc%2B%2B/" rel="tag">C/C++</a>)</li>
+  									</div>
+									
+									</ul>
+									
+								
 
 								</section>
 								
@@ -229,7 +220,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 										<h2>Menu</h2>
 									</header>
 									<ul>
-									<li><a href="../../../../index.html">About me</a></li>
+									<li><a href="../../../index.html">About me</a></li>
 									<li>
 
 
@@ -237,10 +228,10 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 											<ul>
 												
 
-												<li><a href="../../../../photos/toronto/index.html">toronto</a></li>
+												<li><a href="../../../photos/toronto/index.html">toronto</a></li>
 												
 
-												<li><a href="../../../../photos/windsor/index.html">windsor</a></li>
+												<li><a href="../../../photos/windsor/index.html">windsor</a></li>
 												
 											</ul>
 									</li>	
@@ -276,9 +267,19 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 										
 										
 										
+										
+										
 										<li>
 											<a href="/2020/05/12/robotics.html">Robotics</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
+												
+												
+												
+
 												
 												
 												
@@ -392,14 +393,6 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 
 												
 												
-												
-
-												
-												
-												
-
-												
-												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -415,13 +408,14 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 												
 												
 
-																						
+												
 												
 												
 
-												<li><a href="/2020/08/06/c_cpp.html"> C++ STL container</a></li>
 												
 												
+												
+
 												
 												
 												
@@ -539,32 +533,6 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 												
 												
 
-																						
-												
-												
-
-												<li><a href="/2019/12/12/c_cpp_scope.html"> C/C++ Scope, Storage, and Linkage</a></li>
-												
-												
-												
-												
-												
-
-																						
-												
-												
-												
-												
-												
-												
-
-																						
-												
-												
-
-												<li><a href="/2019/12/12/c_cpp_STL.html"> C++ STL container</a></li>
-												
-												
 												
 												
 												
@@ -586,6 +554,10 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 										<li>
 											<a href="/2020/05/12/mcu.html">Mcu&Mpu</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
 												
 												
 												
@@ -745,10 +717,6 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 
 												
 												
-												
-
-												
-												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -760,6 +728,14 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 										<li>
 											<a href="/2020/05/12/Machine-Vision.html">Machine Vision</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
+												
+												
+												
+
 												
 												
 												
@@ -873,6 +849,144 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 
 												
 												
+												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
+											</ul>
+										</li>
+										
+										
+										
+										
+										
+										<li>
+											<a href="/2020/05/12/C-C++.html">C/C++</a><span class="opener" style="font-size: 0.1;"></span>
+											<ul>
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2023/04/29/IKM-test-summury.html">IKM C/C++ Test Summury</a></li>
+												
+												
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2020/08/06/c_cpp.html"> C++ Misc</a></li>
+												
+												
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2019/12/12/c_cpp_STL.html"> C++ STL container</a></li>
+												
+												
+												
+												
 												
 
 												
@@ -907,62 +1021,6 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 										
 										
 										
-										
-										
-										
-										
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-																						
-												
-												
-												
-												
-
-																						
-												
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
 												
 												
 
@@ -994,6 +1052,58 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 												
 												
 
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+																						
+												
+												
+												
+												
+
+																						
+												
 												
 												
 												
@@ -1064,7 +1174,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/c++/index.html" style="font-size: 13.5pt; color: #444;">C++</a>
+									  <a href=" ../../../tag/c/c++/index.html" style="font-size: 13.5pt; color: #444;">C/C++</a>
 									  
 									
 									  
@@ -1074,7 +1184,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/中文/index.html" style="font-size: 16pt; color: #222;">中文</a>
+									  <a href=" ../../../tag/中文/index.html" style="font-size: 13.5pt; color: #444;">中文</a>
 									  
 									
 									  
@@ -1084,7 +1194,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/makefile/index.html" style="font-size: 9pt; color: #999;">Makefile</a>
+									  <a href=" ../../../tag/makefile/index.html" style="font-size: 9pt; color: #999;">Makefile</a>
 									  
 									
 									  
@@ -1094,7 +1204,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/sql/index.html" style="font-size: 9pt; color: #999;">SQL</a>
+									  <a href=" ../../../tag/sql/index.html" style="font-size: 9pt; color: #999;">SQL</a>
 									  
 									
 									  
@@ -1104,7 +1214,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/c/index.html" style="font-size: 9pt; color: #999;">C</a>
+									  <a href=" ../../../tag/c/index.html" style="font-size: 9pt; color: #999;">C</a>
 									  
 									
 									  
@@ -1114,7 +1224,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/tcp/index.html" style="font-size: 9pt; color: #999;">TCP</a>
+									  <a href=" ../../../tag/tcp/index.html" style="font-size: 9pt; color: #999;">TCP</a>
 									  
 									
 									  
@@ -1124,7 +1234,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/ros/index.html" style="font-size: 11.5pt; color: #777;">ROS</a>
+									  <a href=" ../../../tag/ros/index.html" style="font-size: 11.5pt; color: #777;">ROS</a>
 									  
 									
 									  
@@ -1134,7 +1244,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/robotics/index.html" style="font-size: 9pt; color: #999;">Robotics</a>
+									  <a href=" ../../../tag/robotics/index.html" style="font-size: 9pt; color: #999;">Robotics</a>
 									  
 									
 									  
@@ -1144,7 +1254,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/localization/index.html" style="font-size: 11.5pt; color: #777;">Localization</a>
+									  <a href=" ../../../tag/localization/index.html" style="font-size: 11.5pt; color: #777;">Localization</a>
 									  
 									
 									  
@@ -1154,7 +1264,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/formation-control/index.html" style="font-size: 9pt; color: #999;">Formation-control</a>
+									  <a href=" ../../../tag/formation-control/index.html" style="font-size: 9pt; color: #999;">Formation-control</a>
 									  
 									
 									  
@@ -1164,7 +1274,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/qrcode/index.html" style="font-size: 9pt; color: #999;">QRcode</a>
+									  <a href=" ../../../tag/qrcode/index.html" style="font-size: 9pt; color: #999;">QRcode</a>
 									  
 									
 									  
@@ -1174,7 +1284,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/camera-model/index.html" style="font-size: 9pt; color: #999;">Camera-model</a>
+									  <a href=" ../../../tag/camera-model/index.html" style="font-size: 9pt; color: #999;">Camera-model</a>
 									  
 									
 									  
@@ -1184,7 +1294,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/notes/index.html" style="font-size: 18pt; color: #000;">Notes</a>
+									  <a href=" ../../../tag/notes/index.html" style="font-size: 18pt; color: #000;">Notes</a>
 									  
 									
 									  
@@ -1194,7 +1304,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/arm/index.html" style="font-size: 9pt; color: #999;">ARM</a>
+									  <a href=" ../../../tag/arm/index.html" style="font-size: 9pt; color: #999;">ARM</a>
 									  
 									
 									  
@@ -1204,7 +1314,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/interrupt/index.html" style="font-size: 9pt; color: #999;">interrupt</a>
+									  <a href=" ../../../tag/interrupt/index.html" style="font-size: 9pt; color: #999;">interrupt</a>
 									  
 									
 									  
@@ -1214,7 +1324,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/bare-metal/index.html" style="font-size: 9pt; color: #999;">bare-metal</a>
+									  <a href=" ../../../tag/bare-metal/index.html" style="font-size: 9pt; color: #999;">bare-metal</a>
 									  
 									
 									  
@@ -1224,7 +1334,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/linux/index.html" style="font-size: 18pt; color: #000;">Linux</a>
+									  <a href=" ../../../tag/linux/index.html" style="font-size: 18pt; color: #000;">Linux</a>
 									  
 									
 									  
@@ -1234,7 +1344,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/uboot/index.html" style="font-size: 11.5pt; color: #777;">Uboot</a>
+									  <a href=" ../../../tag/uboot/index.html" style="font-size: 11.5pt; color: #777;">Uboot</a>
 									  
 									
 									  
@@ -1244,7 +1354,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/dirver/index.html" style="font-size: 11.5pt; color: #777;">Dirver</a>
+									  <a href=" ../../../tag/dirver/index.html" style="font-size: 11.5pt; color: #777;">Dirver</a>
 									  
 									
 									  
@@ -1254,7 +1364,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/kernel/index.html" style="font-size: 13.5pt; color: #444;">kernel</a>
+									  <a href=" ../../../tag/kernel/index.html" style="font-size: 13.5pt; color: #444;">kernel</a>
 									  
 									
 									  
@@ -1264,7 +1374,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/device-tree/index.html" style="font-size: 11.5pt; color: #777;">Device-tree</a>
+									  <a href=" ../../../tag/device-tree/index.html" style="font-size: 11.5pt; color: #777;">Device-tree</a>
 									  
 									
 									  
@@ -1274,7 +1384,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/rtos/index.html" style="font-size: 9pt; color: #999;">RTOS</a>
+									  <a href=" ../../../tag/rtos/index.html" style="font-size: 9pt; color: #999;">RTOS</a>
 									  
 									
 									  
@@ -1284,7 +1394,7 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 									  
 
 									  
-									  <a href=" ../../../../tag/freertos/index.html" style="font-size: 9pt; color: #999;">FreeRTOS</a>
+									  <a href=" ../../../tag/freertos/index.html" style="font-size: 9pt; color: #999;">FreeRTOS</a>
 									  
 									
 									
@@ -1310,11 +1420,11 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 								
 								 
 								  
-								    <a href="/2020/08/06/c_cpp.html">C++</a>
+								    <a href="/2023/04/29/IKM-test-summury.html">C/C++</a>
 								  
-								    <a href="/2019/12/12/c_cpp_scope.html">C++</a>
+								    <a href="/2020/08/06/c_cpp.html">C/C++</a>
 								  
-								    <a href="/2019/12/12/c_cpp_STL.html">C++</a>
+								    <a href="/2019/12/12/c_cpp_STL.html">C/C++</a>
 								  
 								  
 								
@@ -1468,8 +1578,6 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 								  
 								    <a href="/2020/05/12/knowledge.html">中文</a>
 								  
-								    <a href="/chinese/C_Cpp_scope.html">中文</a>
-								  
 								    <a href="/chinese/C_Cpp_STL.html">中文</a>
 								  
 								  
@@ -1486,11 +1594,19 @@ Scope, storage, and linkage are decided by definition place and identifiers.</p>
 			</div>
 
 		<!-- Scripts -->
-			<script src="../../../../assets/js/jquery.min.js"></script>
-			<script src="../../../../assets/js/browser.min.js"></script>
-			<script src="../../../../assets/js/breakpoints.min.js"></script>
-			<script src="../../../../assets/js/util.js"></script>
-			<script src="../../../../assets/js/main.js"></script>
+			<script src="../../../assets/js/jquery.min.js"></script>
+			<script src="../../../assets/js/browser.min.js"></script>
+			<script src="../../../assets/js/breakpoints.min.js"></script>
+			<script src="../../../assets/js/util.js"></script>
+			<script src="../../../assets/js/main.js"></script>
 
 	</body>
 </html>
+
+
+
+
+
+
+
+

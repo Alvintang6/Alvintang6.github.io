@@ -118,10 +118,11 @@ image plane. Here using K to represent the intrinsic matrix<a href="#refer-ancho
 
 <p>Where $[x_{distorted},\  y_{distorted}]^T$ represents the point in distorted images, $[x_{ideal},\  y_{ideal}]^T$ means the point in ideal images. $\textbf{r}$ expresses the distance to the image center, $k_1,k_2,k_3$ are distortion factors, which respect to different camera and lens.</p>
 
-<div align="center"><img width="50%" height="50%" src="/blog_photos/Machine_Vision/camera_3D2D.jpg" /><p>Figure. Camera model transform point from 3D to 2D</p>
+<div align="center">
+  <p><img width="50%" height="50%" src="/blog_photos/Machine_Vision/camera_3D2D.jpg" />&lt;p&gt;Figure. Camera model transform point from 3D to 2D&lt;/p&gt;</p>
 
-<img width="28%" height="28%" src="/blog_photos/Machine_Vision/distortion_image.jpg" />
-<p>Figure. Distortion transfer</p>
+  <p><img width="28%" height="28%" src="/blog_photos/Machine_Vision/distortion_image.jpg" /></p>
+  <p>Figure. Distortion transfer</p>
 </div>
 
 <h3 id="12-extrinsic-modelpose-estimation">1.2 Extrinsic model(Pose estimation)</h3>
@@ -129,7 +130,8 @@ image plane. Here using K to represent the intrinsic matrix<a href="#refer-ancho
 
 \[(3). \mathbf{P_{c}} = [\mathbf{R} | \mathbf{t}] \mathbf{P_{w}}\]
 
-<div align="center"><img width="50%" height="50%" src="/blog_photos/Machine_Vision/Transfomation_matrix.jpg" /><p>Figure. The transformation from world frame to camera coordinate</p>
+<div align="center">
+  <p><img width="50%" height="50%" src="/blog_photos/Machine_Vision/Transfomation_matrix.jpg" />&lt;p&gt;Figure. The transformation from world frame to camera coordinate&lt;/p&gt;</p>
 </div>
 
 <p>Combining the equation(1), (2), and (3), the transformation from world coordinates to image planes can be established in equation (4).</p>
@@ -215,14 +217,16 @@ be transformed to 3D world frame. Here is the official website of <a href="http:
 
 <p>One AlvarMarker<strong>s</strong> message may includes several ‘AlvarMarker’ message, the number of ‘AlvarMarker’ message depends on how many marks are found by camera.</p>
 
-<div align="center"><img width="100%" height="100%" src="/blog_photos/Machine_Vision/AR_track_alvar_msgs.png" />
+<div align="center">
+  <p><img width="100%" height="100%" src="/blog_photos/Machine_Vision/AR_track_alvar_msgs.png" /></p>
 </div>
 
 <p><strong>AlvarMarker message:</strong></p>
 
 <p>AlvarMarker message contains the 6 degrees of freedom pose information.</p>
 
-<div align="center"><img width="100%" height="100%" src="/blog_photos/Machine_Vision/AR_track_alvar_msg1.png" />
+<div align="center">
+  <p><img width="100%" height="100%" src="/blog_photos/Machine_Vision/AR_track_alvar_msg1.png" /></p>
 </div>
 
 <h3 id="24-example-code-in-c">2.4 Example code in C++</h3>
@@ -381,9 +385,19 @@ When you have multiple markers at same time alvarmarkers message will wrapper al
 										
 										
 										
+										
+										
 										<li>
 											<a href="/2020/05/12/robotics.html">Robotics</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
+												
+												
+												
+
 												
 												
 												
@@ -497,14 +511,6 @@ When you have multiple markers at same time alvarmarkers message will wrapper al
 
 												
 												
-												
-
-												
-												
-												
-
-												
-												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -520,13 +526,14 @@ When you have multiple markers at same time alvarmarkers message will wrapper al
 												
 												
 
-																						
+												
 												
 												
 
-												<li><a href="/2020/08/06/c_cpp.html"> C++ STL container</a></li>
 												
 												
+												
+
 												
 												
 												
@@ -644,32 +651,6 @@ When you have multiple markers at same time alvarmarkers message will wrapper al
 												
 												
 
-																						
-												
-												
-
-												<li><a href="/2019/12/12/c_cpp_scope.html"> C/C++ Scope, Storage, and Linkage</a></li>
-												
-												
-												
-												
-												
-
-																						
-												
-												
-												
-												
-												
-												
-
-																						
-												
-												
-
-												<li><a href="/2019/12/12/c_cpp_STL.html"> C++ STL container</a></li>
-												
-												
 												
 												
 												
@@ -691,6 +672,10 @@ When you have multiple markers at same time alvarmarkers message will wrapper al
 										<li>
 											<a href="/2020/05/12/mcu.html">Mcu&Mpu</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
 												
 												
 												
@@ -850,10 +835,6 @@ When you have multiple markers at same time alvarmarkers message will wrapper al
 
 												
 												
-												
-
-												
-												
 												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
 											</ul>
 										</li>
@@ -865,6 +846,14 @@ When you have multiple markers at same time alvarmarkers message will wrapper al
 										<li>
 											<a href="/2020/05/12/Machine-Vision.html">Machine Vision</a><span class="opener" style="font-size: 0.1;"></span>
 											<ul>
+												
+												
+												
+
+												
+												
+												
+
 												
 												
 												
@@ -978,6 +967,144 @@ When you have multiple markers at same time alvarmarkers message will wrapper al
 
 												
 												
+												<!--<li><a href="#">Feugiat Veroeros</a></li> -->
+											</ul>
+										</li>
+										
+										
+										
+										
+										
+										<li>
+											<a href="/2020/05/12/C-C++.html">C/C++</a><span class="opener" style="font-size: 0.1;"></span>
+											<ul>
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2023/04/29/IKM-test-summury.html">IKM C/C++ Test Summury</a></li>
+												
+												
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2020/08/06/c_cpp.html"> C++ Misc</a></li>
+												
+												
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+																						
+												
+												
+
+												<li><a href="/2019/12/12/c_cpp_STL.html"> C++ STL container</a></li>
+												
+												
+												
+												
 												
 
 												
@@ -1012,62 +1139,6 @@ When you have multiple markers at same time alvarmarkers message will wrapper al
 										
 										
 										
-										
-										
-										
-										
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-																						
-												
-												
-												
-												
-
-																						
-												
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
-												
-												
-
-												
 												
 												
 
@@ -1099,6 +1170,58 @@ When you have multiple markers at same time alvarmarkers message will wrapper al
 												
 												
 
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+												
+												
+												
+
+																						
+												
+												
+												
+												
+
+																						
+												
 												
 												
 												
@@ -1169,7 +1292,7 @@ When you have multiple markers at same time alvarmarkers message will wrapper al
 									  
 
 									  
-									  <a href=" ../../../../tag/c++/index.html" style="font-size: 13.5pt; color: #444;">C++</a>
+									  <a href=" ../../../../tag/c/c++/index.html" style="font-size: 13.5pt; color: #444;">C/C++</a>
 									  
 									
 									  
@@ -1179,7 +1302,7 @@ When you have multiple markers at same time alvarmarkers message will wrapper al
 									  
 
 									  
-									  <a href=" ../../../../tag/中文/index.html" style="font-size: 16pt; color: #222;">中文</a>
+									  <a href=" ../../../../tag/中文/index.html" style="font-size: 13.5pt; color: #444;">中文</a>
 									  
 									
 									  
@@ -1415,11 +1538,11 @@ When you have multiple markers at same time alvarmarkers message will wrapper al
 								
 								 
 								  
-								    <a href="/2020/08/06/c_cpp.html">C++</a>
+								    <a href="/2023/04/29/IKM-test-summury.html">C/C++</a>
 								  
-								    <a href="/2019/12/12/c_cpp_scope.html">C++</a>
+								    <a href="/2020/08/06/c_cpp.html">C/C++</a>
 								  
-								    <a href="/2019/12/12/c_cpp_STL.html">C++</a>
+								    <a href="/2019/12/12/c_cpp_STL.html">C/C++</a>
 								  
 								  
 								
@@ -1572,8 +1695,6 @@ When you have multiple markers at same time alvarmarkers message will wrapper al
 								    <a href="/chinese/dts.html">中文</a>
 								  
 								    <a href="/2020/05/12/knowledge.html">中文</a>
-								  
-								    <a href="/chinese/C_Cpp_scope.html">中文</a>
 								  
 								    <a href="/chinese/C_Cpp_STL.html">中文</a>
 								  

@@ -1,8 +1,150 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-08-18T12:29:46-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jie Tang’s website</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">C++ STL container</title><link href="http://localhost:4000/2020/08/06/c_cpp.html" rel="alternate" type="text/html" title=" C++ STL container" /><published>2020-08-06T10:51:36-04:00</published><updated>2020-08-06T10:51:36-04:00</updated><id>http://localhost:4000/2020/08/06/c_cpp</id><content type="html" xml:base="http://localhost:4000/2020/08/06/c_cpp.html">&lt;h2 id=&quot;performance-enhancement&quot;&gt;Performance enhancement&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-04-30T17:05:26-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Jie Tang’s website</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">IKM C/C++ Test Summury</title><link href="http://localhost:4000/2023/04/29/IKM-test-summury.html" rel="alternate" type="text/html" title="IKM C/C++ Test Summury" /><published>2023-04-29T07:51:36-07:00</published><updated>2023-04-29T07:51:36-07:00</updated><id>http://localhost:4000/2023/04/29/IKM%20test%20summury</id><content type="html" xml:base="http://localhost:4000/2023/04/29/IKM-test-summury.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#1-container-adapters&quot; id=&quot;markdown-toc-1-container-adapters&quot;&gt;1. Container Adapters&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#2-getline-vs-extraction-operator&quot; id=&quot;markdown-toc-2-getline-vs-extraction-operator&quot;&gt;2. getline() VS extraction operator(»)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#3-inheritage-1&quot; id=&quot;markdown-toc-3-inheritage-1&quot;&gt;3. Inheritage (1)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;1-container-adapters&quot;&gt;1. Container Adapters&lt;/h2&gt;
+&lt;p&gt;Question: Which of the following are container adapters in the STL (Standard Template Library) in C++?
+A. list
+B. map
+C. stack 
+D. queue 
+E. deque&lt;/p&gt;
+
+&lt;details&gt;
+  &lt;summary&gt; Answer: &lt;/summary&gt;
+  &lt;p&gt;&lt;span style=&quot;color:red;&quot;&gt;Answer: C D&lt;/span&gt;
+&lt;br /&gt;
+Basically, the queue, stack and priority_queue are derived/trimed from some other basic container: queue–&amp;gt; deque, stack–&amp;gt;deque, priority_queue–&amp;gt;vector. For example, stack is implement as following:&lt;/p&gt;
+
+  &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;_Ty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;_Container&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;deque&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_Ty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;stack&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;public:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value_type&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;typename&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_Container&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value_type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reference&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;typename&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_Container&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reference&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;const_reference&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;typename&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_Container&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;const_reference&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size_type&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;typename&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_Container&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size_type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;container_type&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_Container&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;explicit&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_Container&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_Cont&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_Cont&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;private:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;_Container&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{};&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+  &lt;p&gt;So it called container adapter. I think the world &lt;code class=&quot;highlighter-rouge&quot;&gt;adapter&lt;/code&gt; could be some how related with adapter design pattern.&lt;/p&gt;
+&lt;/details&gt;
+
+&lt;h2 id=&quot;2-getline-vs-extraction-operator&quot;&gt;2. getline() VS extraction operator(»)&lt;/h2&gt;
+&lt;p&gt;Question: Which of the following correctly identify benefits of the getline() member function for cin over the extraction operator in C++?&lt;/p&gt;
+
+&lt;p&gt;A. The getline() function by default, accepts whitespace, and returns on seeing the ‘\n’ character, whereas the extraction operator returns when it encounters any whitespace character.
+B. Delimiters indicating end of input can be specified to the getline() function, whereas the extraction operator has no such facility.
+C. The getline() function can be overloaded to accept different argument types, whereas the extraction operator cannot be overloaded.
+D. The number of bytes to read can be specified to the getline() function, whereas it cannot be done with the extraction operator.
+E. The getline() function can be used like a manipulator with cin, whereas the extraction operator cannot be used as a manipulator.&lt;/p&gt;
+&lt;details&gt;
+  &lt;summary&gt; Answer: &lt;/summary&gt;
+  &lt;p&gt;&lt;span style=&quot;color:red;&quot;&gt;Answer: B E&lt;/span&gt;&lt;/p&gt;
+
+  &lt;p&gt;operator» reads till a space (as defined by std::isspace) and is found. Extracts characters from is and stores them into str until the delimitation character delim is found (or the newline character, ‘\n’, for (2)).&lt;/p&gt;
+
+  &lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// two prototype of getline are given below:&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;istream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getline&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// (1)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;istream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getline&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;istream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// (2)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+&lt;/details&gt;
+
+&lt;h2 id=&quot;3-inheritage-1&quot;&gt;3. Inheritage (1)&lt;/h2&gt;
+&lt;p&gt;Question: Which of the following statements correctly describe the results of executing the code below in C++?&lt;/p&gt;
+
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;iostream&amp;gt;
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ExBase&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;private:&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;public:&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GetStat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ExBase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;25&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ExDer1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ExBase&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;public:&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;friend&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Der1Fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ExBase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ExDer2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ExBase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{};&lt;/span&gt;
+
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ExDer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ExDer1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ExDer2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;A.&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ExDer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Der1Fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;will result in an ambiguity error from the compiler.&lt;/p&gt;
+
+&lt;p&gt;B.&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ExDer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GetStat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;will display an output as “25”.&lt;/p&gt;
+
+&lt;p&gt;C.&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ExDer1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GetStat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;will result in an ambiguity error from the compiler.&lt;/p&gt;
+
+&lt;p&gt;D.&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ExDer1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ExBase&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;public:&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;friend&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Der1Fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ExBase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;will result in an access error from the compiler.&lt;/p&gt;
+
+&lt;p&gt;E.&lt;/p&gt;
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ExDer1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ExBase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GetStat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;will display an output as “25”.&lt;/p&gt;
+
+&lt;details&gt;
+  &lt;summary&gt; Answer: &lt;/summary&gt;
+  &lt;p&gt;&lt;span style=&quot;color:red;&quot;&gt;Answer: C D E&lt;/span&gt;&lt;/p&gt;
+
+  &lt;p&gt;D ask for a private member of ExBase directly, which will cause access error. C,D is correct since GetStat() declared as static function.&lt;/p&gt;
+
+&lt;/details&gt;</content><author><name></name></author><category term="C/C++" /></entry><entry><title type="html">C++ Misc</title><link href="http://localhost:4000/2020/08/06/c_cpp.html" rel="alternate" type="text/html" title=" C++ Misc" /><published>2020-08-06T07:51:36-07:00</published><updated>2020-08-06T07:51:36-07:00</updated><id>http://localhost:4000/2020/08/06/c_cpp</id><content type="html" xml:base="http://localhost:4000/2020/08/06/c_cpp.html">&lt;h2 id=&quot;performance-enhancement&quot;&gt;Performance enhancement&lt;/h2&gt;
 
 &lt;h3 id=&quot;cin&quot;&gt;cin&lt;/h3&gt;
 
-&lt;p&gt;ios::sync_with_stdio(false); cin.tie(0);&lt;/p&gt;</content><author><name></name></author><category term="C++" /><summary type="html">Performance enhancement</summary></entry><entry><title type="html">Linux – Driver framework</title><link href="http://localhost:4000/2020/07/04/driver-framework.html" rel="alternate" type="text/html" title="Linux -- Driver framework" /><published>2020-07-04T10:51:36-04:00</published><updated>2020-07-04T10:51:36-04:00</updated><id>http://localhost:4000/2020/07/04/driver-framework</id><content type="html" xml:base="http://localhost:4000/2020/07/04/driver-framework.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
+&lt;p&gt;ios::sync_with_stdio(false); cin.tie(0);&lt;/p&gt;</content><author><name></name></author><category term="C/C++" /><summary type="html">Performance enhancement</summary></entry><entry><title type="html">Linux – Driver framework</title><link href="http://localhost:4000/2020/07/04/driver-framework.html" rel="alternate" type="text/html" title="Linux -- Driver framework" /><published>2020-07-04T07:51:36-07:00</published><updated>2020-07-04T07:51:36-07:00</updated><id>http://localhost:4000/2020/07/04/driver-framework</id><content type="html" xml:base="http://localhost:4000/2020/07/04/driver-framework.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#general-device-driver-framework&quot; id=&quot;markdown-toc-general-device-driver-framework&quot;&gt;General device driver framework&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#1-driver-with-device-tree-and-busi2c-bus-for-example&quot; id=&quot;markdown-toc-1-driver-with-device-tree-and-busi2c-bus-for-example&quot;&gt;1. Driver with device tree and bus(i2c bus for example)&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#11-framework-of-i2c-device-driver-based-on-i2c-bus&quot; id=&quot;markdown-toc-11-framework-of-i2c-device-driver-based-on-i2c-bus&quot;&gt;1.1 Framework of i2c device driver based on i2c bus&lt;/a&gt;&lt;/li&gt;
@@ -22,7 +164,8 @@
 2.register &amp;amp; unregister function (inside initial, exit function and used for configurating operations of drivers)&lt;br /&gt;
 3.file_operation structure (include basic operation accept by drives like: open,read,write and etc..)&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;figure class=&quot;highlight&quot;&gt;
+  &lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
@@ -258,7 +401,8 @@
  &lt;span class=&quot;n&quot;&gt;module_init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chrdev_init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
  &lt;span class=&quot;n&quot;&gt;module_exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chrdev_exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
  &lt;span class=&quot;n&quot;&gt;MODULE_LICENSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;GPL&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/figure&gt;
 
 &lt;h2 id=&quot;1-driver-with-device-tree-and-busi2c-bus-for-example&quot;&gt;1. Driver with device tree and bus(i2c bus for example)&lt;/h2&gt;
 
@@ -324,7 +468,8 @@
   &lt;li&gt;running the file operation function(open,release,write, read, etc.)&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;figure class=&quot;highlight&quot;&gt;
+  &lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
@@ -558,12 +703,13 @@
 &lt;span class=&quot;n&quot;&gt;module_init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mpu6050_driver_init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;module_exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mpu6050_driver_exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;MODULE_LICENSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;GPL&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/figure&gt;
 
 &lt;h2 id=&quot;2-driver-with-device-tree-and-platform&quot;&gt;2. Driver with device tree and platform&lt;/h2&gt;
 &lt;p&gt;Platform bus can be seen as a kind of virtual bus, and the usage of platform bus is very similar with normal &lt;b&gt;BUS&lt;/b&gt;.&lt;/p&gt;
 
-&lt;h3 id=&quot;21&quot;&gt;2.1&lt;/h3&gt;</content><author><name></name></author><category term="Linux" /><category term="kernel" /><category term="Device-tree" /></entry><entry><title type="html">linux system bug notes</title><link href="http://localhost:4000/chinese/linux_bug.html" rel="alternate" type="text/html" title=" linux system bug notes" /><published>2020-06-23T10:51:36-04:00</published><updated>2020-06-23T10:51:36-04:00</updated><id>http://localhost:4000/chinese/chinese_bug_linux</id><content type="html" xml:base="http://localhost:4000/chinese/linux_bug.html">&lt;h2 id=&quot;目录&quot;&gt;目录&lt;/h2&gt;
+&lt;h3 id=&quot;21&quot;&gt;2.1&lt;/h3&gt;</content><author><name></name></author><category term="Linux" /><category term="kernel" /><category term="Device-tree" /></entry><entry><title type="html">linux system bug notes</title><link href="http://localhost:4000/chinese/linux_bug.html" rel="alternate" type="text/html" title=" linux system bug notes" /><published>2020-06-23T07:51:36-07:00</published><updated>2020-06-23T07:51:36-07:00</updated><id>http://localhost:4000/chinese/chinese_bug_linux</id><content type="html" xml:base="http://localhost:4000/chinese/linux_bug.html">&lt;h2 id=&quot;目录&quot;&gt;目录&lt;/h2&gt;
 &lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#目录&quot; id=&quot;markdown-toc-目录&quot;&gt;目录&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#cant-find-a-valid-fat-filesystem&quot; id=&quot;markdown-toc-cant-find-a-valid-fat-filesystem&quot;&gt;Can’t find a valid FAT filesystem&lt;/a&gt;&lt;/li&gt;
@@ -608,7 +754,7 @@ E: Unmet dependencies. Try ‘apt –fix-broken install’ with no packages (or 
 Using aptitude managment software&lt;/p&gt;
 
 &lt;p&gt;sudo apt-get install aptitude
-sudo aptitude install &lt;confilct package=&quot;&quot;&gt;&lt;/confilct&gt;&lt;/p&gt;</content><author><name></name></author><category term="Notes" /><summary type="html">目录 目录</summary></entry><entry><title type="html">关于Device tree的一些笔记</title><link href="http://localhost:4000/chinese/dts.html" rel="alternate" type="text/html" title=" 关于Device tree的一些笔记" /><published>2020-06-23T10:51:36-04:00</published><updated>2020-06-23T10:51:36-04:00</updated><id>http://localhost:4000/chinese/chinese_dts</id><content type="html" xml:base="http://localhost:4000/chinese/dts.html">&lt;h2 id=&quot;目录&quot;&gt;目录&lt;/h2&gt;
+sudo aptitude install &lt;confilct package=&quot;&quot;&gt;&lt;/confilct&gt;&lt;/p&gt;</content><author><name></name></author><category term="Notes" /><summary type="html">目录 目录</summary></entry><entry><title type="html">关于Device tree的一些笔记</title><link href="http://localhost:4000/chinese/dts.html" rel="alternate" type="text/html" title=" 关于Device tree的一些笔记" /><published>2020-06-23T07:51:36-07:00</published><updated>2020-06-23T07:51:36-07:00</updated><id>http://localhost:4000/chinese/chinese_dts</id><content type="html" xml:base="http://localhost:4000/chinese/dts.html">&lt;h2 id=&quot;目录&quot;&gt;目录&lt;/h2&gt;
 &lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#目录&quot; id=&quot;markdown-toc-目录&quot;&gt;目录&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#设备树的主要作用&quot; id=&quot;markdown-toc-设备树的主要作用&quot;&gt;设备树的主要作用&lt;/a&gt;&lt;/li&gt;
@@ -630,7 +776,7 @@ sudo aptitude install &lt;confilct package=&quot;&quot;&gt;&lt;/confilct&gt;&lt;
 &lt;ul&gt;
   &lt;li&gt;设备树中的”/”{ } 代表其为根节点， 所有根节点下的主节点均可在/proc/device-tree下查看。&lt;/li&gt;
   &lt;li&gt;在linux系统库中提供了一系列的of函数用于获取设备树中的信息&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><category term="中文" /><category term="Notes" /><summary type="html">目录 目录</summary></entry><entry><title type="html">linux command</title><link href="http://localhost:4000/chinese/linux_command.html" rel="alternate" type="text/html" title=" linux command " /><published>2020-06-23T10:51:36-04:00</published><updated>2020-06-23T10:51:36-04:00</updated><id>http://localhost:4000/chinese/chinese_linux_command</id><content type="html" xml:base="http://localhost:4000/chinese/linux_command.html">&lt;h2 id=&quot;目录&quot;&gt;目录&lt;/h2&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="中文" /><category term="Notes" /><summary type="html">目录 目录</summary></entry><entry><title type="html">linux command</title><link href="http://localhost:4000/chinese/linux_command.html" rel="alternate" type="text/html" title=" linux command " /><published>2020-06-23T07:51:36-07:00</published><updated>2020-06-23T07:51:36-07:00</updated><id>http://localhost:4000/chinese/chinese_linux_command</id><content type="html" xml:base="http://localhost:4000/chinese/linux_command.html">&lt;h2 id=&quot;目录&quot;&gt;目录&lt;/h2&gt;
 &lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#目录&quot; id=&quot;markdown-toc-目录&quot;&gt;目录&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#linux-配置网络&quot; id=&quot;markdown-toc-linux-配置网络&quot;&gt;linux 配置网络&lt;/a&gt;        &lt;ul&gt;
@@ -688,7 +834,7 @@ sudo cp -r /rootfs/* /mnt&lt;/your_sd_blk&gt;&lt;/your_sd_blk&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;linux-查询操作&quot;&gt;linux 查询操作&lt;/h3&gt;</content><author><name></name></author><category term="Notes" /><summary type="html">目录 目录</summary></entry><entry><title type="html">Framework of FreeRTOS</title><link href="http://localhost:4000/2020/06/12/FreeRTOS.html" rel="alternate" type="text/html" title="Framework of FreeRTOS" /><published>2020-06-12T10:51:36-04:00</published><updated>2020-06-12T10:51:36-04:00</updated><id>http://localhost:4000/2020/06/12/FreeRTOS</id><content type="html" xml:base="http://localhost:4000/2020/06/12/FreeRTOS.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
+&lt;h3 id=&quot;linux-查询操作&quot;&gt;linux 查询操作&lt;/h3&gt;</content><author><name></name></author><category term="Notes" /><summary type="html">目录 目录</summary></entry><entry><title type="html">Framework of FreeRTOS</title><link href="http://localhost:4000/2020/06/12/FreeRTOS.html" rel="alternate" type="text/html" title="Framework of FreeRTOS" /><published>2020-06-12T07:51:36-07:00</published><updated>2020-06-12T07:51:36-07:00</updated><id>http://localhost:4000/2020/06/12/FreeRTOS</id><content type="html" xml:base="http://localhost:4000/2020/06/12/FreeRTOS.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#task&quot; id=&quot;markdown-toc-task&quot;&gt;Task&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#task-create&quot; id=&quot;markdown-toc-task-create&quot;&gt;Task Create&lt;/a&gt;        &lt;ul&gt;
           &lt;li&gt;&lt;a href=&quot;#create-function-of-a-task&quot; id=&quot;markdown-toc-create-function-of-a-task&quot;&gt;Create function of a task&lt;/a&gt;&lt;/li&gt;
@@ -834,7 +980,7 @@ implementation.*/&lt;/span&gt;
 The task are identified by TaskHandles.
 void vTaskSuspend( TaskHandle_t xTaskToSuspend)&lt;/p&gt;
 
-&lt;p&gt;void vTaskResume( TaskHandle_t xTaskToSuspend)&lt;/p&gt;</content><author><name></name></author><category term="RTOS" /><category term="FreeRTOS" /></entry><entry><title type="html">Uboot porting with NXP MX serie</title><link href="http://localhost:4000/2020/06/12/Uboot.html" rel="alternate" type="text/html" title="Uboot porting with NXP MX serie" /><published>2020-06-12T10:51:36-04:00</published><updated>2020-06-12T10:51:36-04:00</updated><id>http://localhost:4000/2020/06/12/Uboot</id><content type="html" xml:base="http://localhost:4000/2020/06/12/Uboot.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
+&lt;p&gt;void vTaskResume( TaskHandle_t xTaskToSuspend)&lt;/p&gt;</content><author><name></name></author><category term="RTOS" /><category term="FreeRTOS" /></entry><entry><title type="html">Uboot porting with NXP MX serie</title><link href="http://localhost:4000/2020/06/12/Uboot.html" rel="alternate" type="text/html" title="Uboot porting with NXP MX serie" /><published>2020-06-12T07:51:36-07:00</published><updated>2020-06-12T07:51:36-07:00</updated><id>http://localhost:4000/2020/06/12/Uboot</id><content type="html" xml:base="http://localhost:4000/2020/06/12/Uboot.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#1-files-need-to-be-configured&quot; id=&quot;markdown-toc-1-files-need-to-be-configured&quot;&gt;1. Files need to be configured&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#2-add-or-modify-devices-support&quot; id=&quot;markdown-toc-2-add-or-modify-devices-support&quot;&gt;2. Add or modify devices support&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#21-add-lcd-support&quot; id=&quot;markdown-toc-21-add-lcd-support&quot;&gt;2.1 Add LCD support&lt;/a&gt;&lt;/li&gt;
@@ -985,18 +1131,18 @@ go 87800000
   &lt;/li&gt;
   &lt;li&gt;bootcmd can save those default command and execute it when bringup.&lt;/li&gt;
   &lt;li&gt;bootargs is one of the crucial arguments which save environment features&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><category term="Linux" /><category term="Uboot" /></entry><entry><title type="html">Embedded linux system architecture</title><link href="http://localhost:4000/2020/05/25/embedded_linux.html" rel="alternate" type="text/html" title="Embedded linux system architecture" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/embedded_linux</id><content type="html" xml:base="http://localhost:4000/2020/05/25/embedded_linux.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="Linux" /><category term="Uboot" /></entry><entry><title type="html">Embedded linux system architecture</title><link href="http://localhost:4000/2020/05/25/embedded_linux.html" rel="alternate" type="text/html" title="Embedded linux system architecture" /><published>2020-05-25T07:51:36-07:00</published><updated>2020-05-25T07:51:36-07:00</updated><id>http://localhost:4000/2020/05/25/embedded_linux</id><content type="html" xml:base="http://localhost:4000/2020/05/25/embedded_linux.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#1-u-boot&quot; id=&quot;markdown-toc-1-u-boot&quot;&gt;1. U-boot&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#11-basic-of-uboot-and-flashing&quot; id=&quot;markdown-toc-11-basic-of-uboot-and-flashing&quot;&gt;1.1 basic of uboot and flashing&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#12-porting-uboot-to-hardware&quot; id=&quot;markdown-toc-12-porting-uboot-to-hardware&quot;&gt;1.2 porting uboot to hardware&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#2-linux-kernel&quot; id=&quot;markdown-toc-2-linux-kernel&quot;&gt;2. Linux kernel&lt;/a&gt;        &lt;ul&gt;
-          &lt;li&gt;&lt;a href=&quot;#21-compile-the-official-kernel&quot; id=&quot;markdown-toc-21-compile-the-official-kernel&quot;&gt;2.1 Compile the official kernel&lt;/a&gt;&lt;/li&gt;
-          &lt;li&gt;&lt;a href=&quot;#22-customize-our-linux-kernel&quot; id=&quot;markdown-toc-22-customize-our-linux-kernel&quot;&gt;2.2 Customize our linux kernel&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#porting-uboot-to-hardware&quot; id=&quot;markdown-toc-porting-uboot-to-hardware&quot;&gt;1.2 porting uboot to hardware&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#linux-kernel&quot; id=&quot;markdown-toc-linux-kernel&quot;&gt;2. Linux kernel&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#compile-the-official-kernel&quot; id=&quot;markdown-toc-compile-the-official-kernel&quot;&gt;2.1 Compile the official kernel&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#customize-our-linux-kernel&quot; id=&quot;markdown-toc-customize-our-linux-kernel&quot;&gt;2.2 Customize our linux kernel&lt;/a&gt;&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#3-rootfs&quot; id=&quot;markdown-toc-3-rootfs&quot;&gt;3. Rootfs&lt;/a&gt;        &lt;ul&gt;
-          &lt;li&gt;&lt;a href=&quot;#31-roofts-make&quot; id=&quot;markdown-toc-31-roofts-make&quot;&gt;3.1 Roofts make&lt;/a&gt;&lt;/li&gt;
-          &lt;li&gt;&lt;a href=&quot;#32-mount-rootfs-from-nfs-server&quot; id=&quot;markdown-toc-32-mount-rootfs-from-nfs-server&quot;&gt;3.2 mount rootfs from nfs server&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#rootfs&quot; id=&quot;markdown-toc-rootfs&quot;&gt;3. Rootfs&lt;/a&gt;        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#roofts-make&quot; id=&quot;markdown-toc-roofts-make&quot;&gt;3.1 Roofts make&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#mount-rootfs-from-nfs-server&quot; id=&quot;markdown-toc-mount-rootfs-from-nfs-server&quot;&gt;3.2 mount rootfs from nfs server&lt;/a&gt;&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
@@ -1033,51 +1179,54 @@ Here we use the &lt;code class=&quot;highlighter-rouge&quot;&gt;dd&lt;/code&gt; 
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo dd if=u-boot.imx of=/dev/sdb bs=512 seek=2 conv=fsync&lt;/code&gt;&lt;/p&gt;
 
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;80%&quot; height=&quot;80%&quot; src=&quot;/blog_photos/MPU/IVT_table.png&quot; /&gt;&lt;p&gt;Table. IVT of nxp i.mx6ull&lt;/p&gt;&lt;/div&gt;
+&lt;div align=&quot;center&quot;&gt;
+  &lt;p&gt;&lt;img width=&quot;80%&quot; height=&quot;80%&quot; src=&quot;/blog_photos/MPU/IVT_table.png&quot; /&gt;&amp;lt;p&amp;gt;Table. IVT of nxp i.mx6ull&amp;lt;/p&amp;gt;&amp;lt;/div&amp;gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;12-porting-uboot-to-hardware&quot;&gt;1.2 porting uboot to hardware&lt;/h3&gt;
+  &lt;h3 id=&quot;porting-uboot-to-hardware&quot;&gt;1.2 porting uboot to hardware&lt;/h3&gt;
 
-&lt;p&gt;To adding support of our customized board, most of the time, we only need the modify the U-boot from soc manufacture. There are three important path we need modify(take imx6u as example, U-boot version&amp;gt;2018):&lt;/p&gt;
+  &lt;p&gt;To adding support of our customized board, most of the time, we only need the modify the U-boot from soc manufacture. There are three important path we need modify(take imx6u as example, U-boot version&amp;gt;2018):&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/configs/&amp;lt;board_name&amp;gt;
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/configs/&amp;lt;board_name&amp;gt;
 /include/configs/&amp;lt;board_name&amp;gt;
 /arch/arm/cpu/armv7/mash-imx/mx6/Kconfig   //adding config TARGET and source &quot;board/&amp;lt;vendor&amp;gt;/&amp;lt;board_name&amp;gt;
 /board/&amp;lt;vendor&amp;gt;/&amp;lt;board_name&amp;gt;
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;The above configuration is the basic structure for a customized board. For the detailed configuration, I will write in &lt;a href=&quot;../../../2020/06/12/Uboot.html&quot;&gt;another blog&lt;/a&gt; about adding support of LCD, ethernet, and other devices.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+  &lt;p&gt;The above configuration is the basic structure for a customized board. For the detailed configuration, I will write in &lt;a href=&quot;../../../2020/06/12/Uboot.html&quot;&gt;another blog&lt;/a&gt; about adding support of LCD, ethernet, and other devices.&lt;/p&gt;
 
-&lt;h3 id=&quot;2-linux-kernel&quot;&gt;2. Linux kernel&lt;/h3&gt;
+  &lt;h3 id=&quot;linux-kernel&quot;&gt;2. Linux kernel&lt;/h3&gt;
 
-&lt;h4 id=&quot;21-compile-the-official-kernel&quot;&gt;2.1 Compile the official kernel&lt;/h4&gt;
-&lt;p&gt;The structure of Linux kernel is very similar with U-boot project. Also, we can use &lt;a href=&quot;https://github.com/Freescale/linux-fslc&quot;&gt;nxp offical linux kernel&lt;/a&gt; as our template to customize our kernel (git switch x.xx.x–imx:using the branch with –imx).&lt;/p&gt;
+  &lt;h4 id=&quot;compile-the-official-kernel&quot;&gt;2.1 Compile the official kernel&lt;/h4&gt;
+  &lt;p&gt;The structure of Linux kernel is very similar with U-boot project. Also, we can use &lt;a href=&quot;https://github.com/Freescale/linux-fslc&quot;&gt;nxp offical linux kernel&lt;/a&gt; as our template to customize our kernel (git switch x.xx.x–imx:using the branch with –imx).&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;make ARCH=arm clean &lt;/code&gt;&lt;br /&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;make ARCH=arm clean &lt;/code&gt;&lt;br /&gt;
 &lt;code class=&quot;highlighter-rouge&quot;&gt;make ARCH=arm XXX_defconfig&lt;/code&gt; (imx_v7_defconfig for nxp offical imx6)&lt;br /&gt;
 &lt;code class=&quot;highlighter-rouge&quot;&gt;make menuconfig&lt;/code&gt;(&lt;span style=&quot;color:red;&quot;&gt;optional&lt;/span&gt; if dont need config just esc)&lt;br /&gt;
 &lt;code class=&quot;highlighter-rouge&quot;&gt;make ARCH=arm -j10 CROSS_COMPILE= arm-linux-gnueabihf-&lt;/code&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;span style=&quot;color:red;&quot;&gt;Note:&lt;/span&gt; Sometimes make cannot go through due to gcc version. In that case using older arm-linux-nueabihf- from source with &lt;code class=&quot;highlighter-rouge&quot;&gt;export PATH=/{your gcc address}/bin:$PATH&lt;/code&gt; &lt;br /&gt;&lt;/p&gt;
+  &lt;p&gt;&lt;span style=&quot;color:red;&quot;&gt;Note:&lt;/span&gt; Sometimes make cannot go through due to gcc version. In that case using older arm-linux-nueabihf- from source with &lt;code class=&quot;highlighter-rouge&quot;&gt;export PATH=/{your gcc address}/bin:$PATH&lt;/code&gt; &lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;22-customize-our-linux-kernel&quot;&gt;2.2 Customize our linux kernel&lt;/h4&gt;
+  &lt;h4 id=&quot;customize-our-linux-kernel&quot;&gt;2.2 Customize our linux kernel&lt;/h4&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;To customize a linux kernel, two important file are needed:
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;To customize a linux kernel, two important file are needed:
 - xxx_defconfig   (in arch/arm/configs/)
 - xxx.dts (in arch/arm/boot/dts ) 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
 
-&lt;p&gt;####&lt;/p&gt;
+  &lt;p&gt;####&lt;/p&gt;
 
-&lt;h3 id=&quot;3-rootfs&quot;&gt;3. Rootfs&lt;/h3&gt;
+  &lt;h3 id=&quot;rootfs&quot;&gt;3. Rootfs&lt;/h3&gt;
 
-&lt;p&gt;rootfs can be understand as the container files  of linux environment, configuration, and programs in the mpu.&lt;/p&gt;
+  &lt;p&gt;rootfs can be understand as the container files  of linux environment, configuration, and programs in the mpu.&lt;/p&gt;
 
-&lt;h4 id=&quot;31-roofts-make&quot;&gt;3.1 Roofts make&lt;/h4&gt;
+  &lt;h4 id=&quot;roofts-make&quot;&gt;3.1 Roofts make&lt;/h4&gt;
 
-&lt;p&gt;Rootfs can be made from various sources, busybox, buildroot, yocto, openembedded.&lt;/p&gt;
+  &lt;p&gt;Rootfs can be made from various sources, busybox, buildroot, yocto, openembedded.&lt;/p&gt;
 
-&lt;h4 id=&quot;32-mount-rootfs-from-nfs-server&quot;&gt;3.2 mount rootfs from nfs server&lt;/h4&gt;
-&lt;p&gt;setenv bootargs ‘console=ttymxc0,115200 nfsvers=4 root=/dev/nfs nfsroot=192.168.0.188:/home/jie/workdir/rootfs ip=192.168.0.16:192.168.0.188:192.168.0.1:255.255.255.0::eth1:off’&lt;/p&gt;</content><author><name></name></author><category term="Linux" /><category term="Uboot" /><category term="Dirver" /></entry><entry><title type="html">Linux kernel module beginning (I)</title><link href="http://localhost:4000/2020/05/25/kernel.html" rel="alternate" type="text/html" title="Linux kernel module beginning (I)" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/kernel</id><content type="html" xml:base="http://localhost:4000/2020/05/25/kernel.html">&lt;h2 id=&quot;1envirnoment-prepare--module-insert&quot;&gt;(1).Envirnoment prepare &amp;amp; module insert&lt;/h2&gt;
+  &lt;h4 id=&quot;mount-rootfs-from-nfs-server&quot;&gt;3.2 mount rootfs from nfs server&lt;/h4&gt;
+  &lt;p&gt;setenv bootargs ‘console=ttymxc0,115200 nfsvers=4 root=/dev/nfs nfsroot=192.168.0.188:/home/jie/workdir/rootfs ip=192.168.0.16:192.168.0.188:192.168.0.1:255.255.255.0::eth1:off’&lt;/p&gt;
+
+&lt;/div&gt;</content><author><name></name></author><category term="Linux" /><category term="Uboot" /><category term="Dirver" /></entry><entry><title type="html">Linux kernel module beginning (I)</title><link href="http://localhost:4000/2020/05/25/kernel.html" rel="alternate" type="text/html" title="Linux kernel module beginning (I)" /><published>2020-05-25T07:51:36-07:00</published><updated>2020-05-25T07:51:36-07:00</updated><id>http://localhost:4000/2020/05/25/kernel</id><content type="html" xml:base="http://localhost:4000/2020/05/25/kernel.html">&lt;h2 id=&quot;1envirnoment-prepare--module-insert&quot;&gt;(1).Envirnoment prepare &amp;amp; module insert&lt;/h2&gt;
 
 &lt;p&gt;Linux concerns kernel module version critically and it refuses to load kernel drivers that do not match. So at least the Minor version we use to do cross-compiling should match with the target platform. The download address can be find &lt;a href=&quot;https://www.kernel.org/&quot;&gt;linux kernel download&lt;/a&gt;. Or using following command to get history version&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-x.x.xx.tar.xz
@@ -1180,404 +1329,12 @@ Inside the structure, the corresponding operations can be configured by using fu
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;After inserting kernel module, the kernel module name and it major id can be seen under &lt;code class=&quot;highlighter-rouge&quot;&gt;/proc/devices&lt;/code&gt;.&lt;br /&gt;
 &lt;code class=&quot;highlighter-rouge&quot;&gt;cat /proc/devices &lt;/code&gt;&lt;/p&gt;
-&lt;div align=&quot;center&quot;&gt;&lt;img width=&quot;30%&quot; height=&quot;30%&quot; src=&quot;/blog_photos/MPU/deviceid.jpg&quot; /&gt;&lt;p&gt;Figure. Major deive ID &lt;/p&gt;
+&lt;div align=&quot;center&quot;&gt;
+  &lt;p&gt;&lt;img width=&quot;30%&quot; height=&quot;30%&quot; src=&quot;/blog_photos/MPU/deviceid.jpg&quot; /&gt;&amp;lt;p&amp;gt;Figure. Major deive ID &amp;lt;/p&amp;gt;&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;p&gt;Using &lt;code class=&quot;highlighter-rouge&quot;&gt;mknod /dev/&amp;lt;name&amp;gt; c major_id minor_id&lt;/code&gt; to creat a device, the deivce will be show at &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev&lt;/code&gt; &lt;br /&gt;
 &lt;code class=&quot;highlighter-rouge&quot;&gt;mknod /dev/chrdev1 c 248 0&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;Or using &lt;code class=&quot;highlighter-rouge&quot;&gt;device_create&lt;/code&gt; automatically creat a device inside dirver.
-` device = device_create(class, NULL, devid, NULL, DEV_NAME); `&lt;/p&gt;</content><author><name></name></author><category term="Linux" /><category term="kernel" /><category term="Dirver" /><summary type="html">(1).Envirnoment prepare &amp;amp; module insert</summary></entry><entry><title type="html">Linux DTB – device tree</title><link href="http://localhost:4000/2020/05/25/kernel-dts.html" rel="alternate" type="text/html" title="Linux DTB -- device tree" /><published>2020-05-25T10:51:36-04:00</published><updated>2020-05-25T10:51:36-04:00</updated><id>http://localhost:4000/2020/05/25/kernel-dts</id><content type="html" xml:base="http://localhost:4000/2020/05/25/kernel-dts.html">&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#1-device-build&quot; id=&quot;markdown-toc-1-device-build&quot;&gt;1. Device Build&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#2-device-tree-grammar&quot; id=&quot;markdown-toc-2-device-tree-grammar&quot;&gt;2. Device tree grammar&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#3-some-specical-node&quot; id=&quot;markdown-toc-3-some-specical-node&quot;&gt;3. Some specical node&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#4-property&quot; id=&quot;markdown-toc-4-property&quot;&gt;4. Property&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#5-of-function&quot; id=&quot;markdown-toc-5-of-function&quot;&gt;5. “of” function&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#6-match-between-device-and-drive&quot; id=&quot;markdown-toc-6-match-between-device-and-drive&quot;&gt;6. Match between device and drive&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#61-device-tree-device-match-with-driver&quot; id=&quot;markdown-toc-61-device-tree-device-match-with-driver&quot;&gt;6.1 Device tree device match with driver&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#7-pinctrl--giop-subsystem&quot; id=&quot;markdown-toc-7-pinctrl--giop-subsystem&quot;&gt;7. Pinctrl &amp;amp; GIOP subsystem&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#71-pinctrl&quot; id=&quot;markdown-toc-71-pinctrl&quot;&gt;7.1. Pinctrl:&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#72-pinctrl-driver&quot; id=&quot;markdown-toc-72-pinctrl-driver&quot;&gt;7.2 pinctrl driver:&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#73-gpio-subsystem&quot; id=&quot;markdown-toc-73-gpio-subsystem&quot;&gt;7.3. GPIO subsystem&lt;/a&gt;        &lt;ul&gt;
-          &lt;li&gt;&lt;a href=&quot;#gpio-ranges&quot; id=&quot;markdown-toc-gpio-ranges&quot;&gt;gpio-ranges&lt;/a&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;1-device-build&quot;&gt;1. Device Build&lt;/h2&gt;
-
-&lt;p&gt;At &lt;code class=&quot;highlighter-rouge&quot;&gt;/linux-x.x.xx&lt;/code&gt; file path using &lt;code class=&quot;highlighter-rouge&quot;&gt;make xxx.dtb&lt;/code&gt; to compile device tree binary only.&lt;br /&gt;
-To build customized dts adding the corresponding name in &lt;code class=&quot;highlighter-rouge&quot;&gt;/linux-x.x.xx/arch/arm/boot/dts/Makefile&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;2-device-tree-grammar&quot;&gt;2. Device tree grammar&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;dts beginning from &lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;dts may include header &lt;code class=&quot;highlighter-rouge&quot;&gt;dtsi&lt;/code&gt; which means some common device feature shared with certain SOC.&lt;/li&gt;
-  &lt;li&gt;Using &lt;code class=&quot;highlighter-rouge&quot;&gt;$&lt;/code&gt; symbol to append device in configured dts file.&lt;/li&gt;
-  &lt;li&gt;node defination format: 
-label: node-name@reg-address 
-  we can use &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;amp;label &lt;/code&gt; to quick acess the node to append some devices.
-  Most of the time the reg-address is the start address of register. It might also be device nums or some thing also, etc: like i2c device number:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i2c1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;clock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;frequency&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;pinctrl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;names&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;default&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;pinctrl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pinctrl_i2c1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;status&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;okay&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-	&lt;span class=&quot;n&quot;&gt;mag3110&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;compatible&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;fsl,mag3110&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;reg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-
-	&lt;span class=&quot;n&quot;&gt;fxls8471&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;compatible&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;fsl,fxls8471&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;reg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x1e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;interrupt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gpio5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;interrupts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;3-some-specical-node&quot;&gt;3. Some specical node&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;aliases&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;chosen
- Uboot bootargs&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;4-property&quot;&gt;4. Property&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;compatible: The compatible board module can use
-&lt;code class=&quot;highlighter-rouge&quot;&gt;compatible&lt;/code&gt; will compare the property with ‘arch/xxx/mash-xxx’
-and see if any label match with DT_MACHINE_START().&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imx53_dt_board_compat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__initconst&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;s&quot;&gt;&quot;fsl,imx53&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-	&lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;DT_MACHINE_START&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IMX53_DT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Freescale i.MX53 (Device Tree Support)&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init_early&lt;/span&gt;	&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imx53_init_early&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init_machine&lt;/span&gt;	&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imx53_dt_init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;init_late&lt;/span&gt;	&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imx53_init_late&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dt_compat&lt;/span&gt;	&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imx53_dt_board_compat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;MACHINE_END&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;model: exactly name of the module&lt;/li&gt;
-  &lt;li&gt;#address-cells  &amp;amp; #size-cells 
-This two properties will influence the format of &lt;reg&gt; in subnodes:
-For example:&lt;/reg&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;n&quot;&gt;spi4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;cp&quot;&gt;#address-cells = &amp;lt;1&amp;gt;; 
-&lt;/span&gt;	&lt;span class=&quot;cp&quot;&gt;#size-cells = &amp;lt;1&amp;gt;;
-&lt;/span&gt;	
-	&lt;span class=&quot;n&quot;&gt;xxx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;reg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x10000000&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x1000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;i2c4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;cp&quot;&gt;#address-cells = &amp;lt;1&amp;gt;; 
-&lt;/span&gt;	&lt;span class=&quot;cp&quot;&gt;#size-cells = &amp;lt;0&amp;gt;;
-&lt;/span&gt;	
-	&lt;span class=&quot;n&quot;&gt;mag3110&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;reg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x1e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
-	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; 
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;ul&gt;
-  &lt;li&gt;ranges: address mapping
-blank when there is no address mapping from child-bus-address to parent-bus-address
-For example:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;n&quot;&gt;soc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;ranges&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x0&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0xe0000000&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x00100000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-
-	&lt;span class=&quot;n&quot;&gt;serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
-		&lt;span class=&quot;n&quot;&gt;reg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x4600&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x100&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-		&lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;With this mapping serial device node would be remapped at address 0xe0004600.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;name:&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;device_type: mostly in “cpu”,”mem”&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Tips: Reference document: 
-Document/devicetree/bindings/xxx&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;5-of-function&quot;&gt;5. “of” function&lt;/h2&gt;
-
-&lt;p&gt;In linux system lib, a series “of” function are provided to obtain the node information from the device tree.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;struct device_node *of_find_node_by_path(const char *path);&lt;/li&gt;
-  &lt;li&gt;struct device_node *of_find_node_by_name(struct device_node *from,const char *name);&lt;/li&gt;
-  &lt;li&gt;struct device_node *of_find_node_by_type(struct device_node *from,const char *type);
-……&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The return structure &lt;code class=&quot;highlighter-rouge&quot;&gt;device_node&lt;/code&gt; is defined in the following:&lt;/p&gt;
-
-&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;device_node&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// node name&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// device type&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;phandle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;phandle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;full_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// full name&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fwnode_handle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fwnode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;properties&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// property&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;deadprops&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;    &lt;span class=&quot;cm&quot;&gt;/* removed properties */&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;device_node&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// parent node &lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;device_node&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;child&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// child node&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;device_node&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sibling&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;#if defined(CONFIG_OF_KOBJ)
-&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;kobject&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kobj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;#endif
-&lt;/span&gt;    &lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_flags&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;#if defined(CONFIG_SPARC)
-&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path_component_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;unique_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;of_irq_controller&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;irq_trans&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;#endif
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;struct property *of_find_property(const struct device_node *np,const char *name,int *lenp)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Properties node is listed :&lt;/p&gt;
-
-&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// property name&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// property length&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// property value&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
-&lt;span class=&quot;cp&quot;&gt;#if defined(CONFIG_OF_DYNAMIC) || defined(CONFIG_SPARC)
-&lt;/span&gt;    &lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_flags&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;#endif
-#if defined(CONFIG_OF_PROMTREE)
-&lt;/span&gt;    &lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;unique_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;#endif
-#if defined(CONFIG_OF_KOBJ)
-&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bin_attribute&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;#endif
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;For reading the properties linux provide the function:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;if the property is a array:&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;int of_property_read_uXX_array(const struct device_node *np, const char *propname, u32 *out_values, size_t sz) (XX = 8 16 32 64)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;if the property is int:&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;int of_property_read_uXX (const struct device_node *np, const char *propname,u8 *out_values)(XX = 8 16 32 64)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;if the string:&lt;/li&gt;
-  &lt;li&gt;int of_property_read_string(const struct device_node *np,const char *propname, const char **out_string)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;6-match-between-device-and-drive&quot;&gt;6. Match between device and drive&lt;/h2&gt;
-
-&lt;h3 id=&quot;61-device-tree-device-match-with-driver&quot;&gt;6.1 Device tree device match with driver&lt;/h3&gt;
-&lt;p&gt;device tree matching driver will use of_match_table. The of_match_table should be define inside other structure.&lt;/p&gt;
-
-&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;of_device_id&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb_led&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;{.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compatible&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;fire,rgb_led&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;cm&quot;&gt;/* sentinel */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}};&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;platform_driver&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;led_platform_driver&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;driver&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;rgb-leds-platform&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-		&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;owner&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;THIS_MODULE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-		&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;of_match_table&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb_led&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;7-pinctrl--giop-subsystem&quot;&gt;7. Pinctrl &amp;amp; GIOP subsystem&lt;/h2&gt;
-
-&lt;h3 id=&quot;71-pinctrl&quot;&gt;7.1. Pinctrl:&lt;/h3&gt;
-
-&lt;p&gt;Pinctrl system is just other device tree nodes but under iomuxc node.&lt;/p&gt;
-
-&lt;p&gt;For example create a rgb led device tree using GPIO1_IO04, GPIO4_IO20, GPIO4_IO19:&lt;/p&gt;
-
-&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iomuxc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;pinctrl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;names&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;default&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;pinctrl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pinctrl_hog_1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;nl&quot;&gt;pinctrl_rgb_led:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rgb_led&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                    &lt;span class=&quot;n&quot;&gt;fsl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pins&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;
-                            &lt;span class=&quot;n&quot;&gt;MX6UL_PAD_GPIO1_IO04__GPIO1_IO04&lt;/span&gt;        &lt;span class=&quot;mh&quot;&gt;0x000010B1&lt;/span&gt;
-                            &lt;span class=&quot;n&quot;&gt;MX6UL_PAD_CSI_HSYNC__GPIO4_IO20&lt;/span&gt;         &lt;span class=&quot;mh&quot;&gt;0x000010B1&lt;/span&gt;
-                            &lt;span class=&quot;n&quot;&gt;MX6UL_PAD_CSI_VSYNC__GPIO4_IO19&lt;/span&gt;         &lt;span class=&quot;mh&quot;&gt;0x000010B1&lt;/span&gt;
-                    &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Here the &lt;code class=&quot;highlighter-rouge&quot;&gt;MX6UL_PAD_GPIO1_IO04__GPIO1_IO04&lt;/code&gt; refers the register(MUX,PAD,INPUT) address related with GPIO1_IO04, and 0x00010B1 is the value written into PAD_CTL register.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Macro definition of Pin property:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Some marco definition of IO-Pin property can be find in &lt;code class=&quot;highlighter-rouge&quot;&gt;/arch/arm/boot/dts/xxx-pinfun.h&lt;/code&gt; 
- For example:&lt;/p&gt;
-
-&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;cm&quot;&gt;/*
- * The pin function ID is a tuple of
- * &amp;lt;mux_reg conf_reg input_reg mux_mode input_val&amp;gt;
- */&lt;/span&gt;
-
- &lt;span class=&quot;cp&quot;&gt;#define MX6UL_PAD_GPIO1_IO04__ENET1_REF_CLK1		0x006c 0x02f8 0x0574 0 1
-&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#define MX6UL_PAD_GPIO1_IO04__PWM3_OUT			    0x006c 0x02f8 0x0000 1 0
-&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#define MX6UL_PAD_GPIO1_IO04__USB_OTG1_PWR		    0x006c 0x02f8 0x0000 2 0
-&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#define MX6UL_PAD_GPIO1_IO04__REF_CLK_24M		    0x006c 0x02f8 0x0000 3 0
-&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#define MX6UL_PAD_GPIO1_IO04__USDHC1_RESET_B		0x006c 0x02f8 0x0000 4 0
-&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#define MX6UL_PAD_GPIO1_IO04__GPIO1_IO04		    0x006c 0x02f8 0x0000 5 0
-&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#define MX6UL_PAD_GPIO1_IO04__ENET2_1588_EVENT0_IN	0x006c 0x02f8 0x0000 6 0
-&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#define MX6UL_PAD_GPIO1_IO04__UART5_DCE_TX		    0x006c 0x02f8 0x0000 8 0
-&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#define MX6UL_PAD_GPIO1_IO04__UART5_DTE_RX		    0x006c 0x02f8 0x0644 8 2
-&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Combining the iomuxc root node inside the &lt;code class=&quot;highlighter-rouge&quot;&gt;xxxx.dtsi&lt;/code&gt; in the following:&lt;/p&gt;
-
-&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-	&lt;span class=&quot;n&quot;&gt;iomuxc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iomuxc&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;20e0000&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-				&lt;span class=&quot;n&quot;&gt;compatible&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;fsl,imx6ul-iomuxc&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-				&lt;span class=&quot;n&quot;&gt;reg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x20e0000&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x4000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-			&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;The explanation of following field: &lt;br /&gt;
- &amp;lt;mux_reg conf_reg input_reg mux_mode input_val&amp;gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;mux_reg:
-This field indicated the offset of SW_MUX_CTL Register (multiplexer)&lt;br /&gt;
-Address: 20E_0000h base + 6Ch offset = 20E_006Ch&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;conf_reg:
-This field indicated the offset of SW_PAD_CTL Register (pads)&lt;br /&gt;
-Address: 20E_0000h base + 2F8h offset = 20E_02F8h&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;input_reg:
-This field indicated the offset of DATA_SELECT_INPUT DAISY Register.&lt;br /&gt;
-Take UART5_DTE_RX for example:
-Address: 20E_0000h base + 644h offset = 20E_0644h&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;mux_mode:
-the value configured in MUX_CTL register 
-0101 ALT5 — Select mux mode: ALT5 mux port: GPIO1_IO04 of instance: gpio&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;input_val:
-the value will be written into input_reg.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;72-pinctrl-driver&quot;&gt;7.2 pinctrl driver:&lt;/h3&gt;
-
-&lt;p&gt;When pinctrl node compatible property match with the compatible member of platform device structure `  const struct of_device_id ` the .probe function which inside platform_device will be executed.&lt;/p&gt;
-
-&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-	&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;of_device_id&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imx6ul_pinctrl_of_match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compatible&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;fsl,imx6ul-iomuxc&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imx6ul_pinctrl_info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-		&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compatible&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;fsl,imx6ull-iomuxc-snvs&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imx6ull_snvs_pinctrl_info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-		&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* sentinel */&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-
-
-   &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;platform_driver&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imx6ul_pinctrl_driver&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	 &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;driver&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;imx6ul-pinctrl&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-		&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;of_match_table&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;of_match_ptr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imx6ul_pinctrl_of_match&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-	 &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-	 &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;probe&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imx6ul_pinctrl_probe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-   &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;inside &lt;code class=&quot;highlighter-rouge&quot;&gt;imx_pinctrl_probe&lt;/code&gt; a pinctrl_register function will register a pinctrl_desc structure.
- The pinctrl_desc contains all operations to configure the properties of ‘cpu’ or ‘mpu’ chips.
- like :&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;pinconf_set : set the Pads of pins.&lt;/li&gt;
-  &lt;li&gt;pmx_set : set the multiplex of pins.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;73-gpio-subsystem&quot;&gt;7.3. GPIO subsystem&lt;/h3&gt;
-
-&lt;p&gt;After we configured the pins as GPIO. The next step is setting some properties of our GPIO pins. Here the GPIO subsystem can be used to do this work.&lt;/p&gt;
-
-&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-
-
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;gpio-ranges&quot;&gt;gpio-ranges&lt;/h4&gt;
-&lt;p&gt;The first number is the index of first pin in this range,&lt;br /&gt;
-The second number, when multiplied by 4 is the offset to the iomuxc control register (starting at 20E_0000h) &lt;br /&gt;
-the third number is the number of pins in this range.&lt;/p&gt;
-
-&lt;p&gt;Take gpio1 for example:&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gpio-ranges = &amp;lt;&amp;amp;iomuxc  0 23 10&amp;gt;, &amp;lt;&amp;amp;iomuxc 10 17 6&amp;gt;, &amp;lt;&amp;amp;iomuxc 16 33 16&amp;gt;;&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Now the GPIO1 registers aren’t contiguous, pins are in 3 ranges.&lt;/p&gt;
-
-&lt;p&gt;First group is GPIO1.0 - GPIO1.9 (10pins), base offset = 23 * 4 = 0x5c which is IOMUXC_SW_MUX_CTL_PAD_GPIO1_IO00&lt;br /&gt;
-Second group is GPIO1.10 - GPIO1.15 (6pins), base offset = 17 * 4 = 0x44 which is IOMUXC_SW_MUX_CTL_PAD_JTAG_MOD&lt;br /&gt;
-Third group is GPIO1.16 - GPIO1.31 (16pins), base offset = 33 * 4 = 0x84 which is IOMUXC_SW_MUX_CTL_PAD_UART1_TX_DATA&lt;/p&gt;
-
-&lt;p&gt;&lt;span style=&quot;color:red;&quot;&gt;Tips:&lt;/span&gt;&lt;/p&gt;</content><author><name></name></author><category term="Linux" /><category term="kernel" /><category term="Device-tree" /></entry></feed>
+` device = device_create(class, NULL, devid, NULL, DEV_NAME); `&lt;/p&gt;</content><author><name></name></author><category term="Linux" /><category term="kernel" /><category term="Dirver" /><summary type="html">(1).Envirnoment prepare &amp;amp; module insert</summary></entry></feed>
